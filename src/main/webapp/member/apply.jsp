@@ -24,19 +24,15 @@
 <script>
 	function idCheck()
 	{
-		if(id.equals(dto.getId()))
-		{
-			alert("닉네임 중복");	
-		}
+		idv=document.getElementsByName("id")[0].value;
+		open("confirm.jsp?id='+idv, 'idCheck', 'width=500,height=500');
 	}
 </script>
 <script>
 	function eCheck()
 	{
-		if(email.equals(dto.getEmail()))
-		{
-			alert("이메일 중복");
-		}
+		emailv=document.getElementsByName("email")[0].value;
+		open("confirm.jsp?id='+emailv, 'eCheck', 'width=500,height=500');
 	}
 </script>
 
@@ -50,11 +46,12 @@
 			<tr>
 				<td align="center">i   d : </td>
 				<td><input type="text" name="id" placeholder="nickname" /></td>
-				<td align="center"><a href="confirmID.jsp">ID중복확인</a></td>
+				<td align="center"><a href="confirm.jsp">ID중복확인</a></td>
 			</tr>
 			<tr>
 				<td align="center">email : </td>
 				<td><input type="text" name="email" placeholder="example@goworker.com" /></td>
+				<td align="center"><a href="confirm.jsp">email중복확인</a></td>
 			</tr>
 			<tr>
 				<td align="center">password : </td>
