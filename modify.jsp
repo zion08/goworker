@@ -24,7 +24,7 @@
 		 <input type="submit" value="정보 수정" /> 
 </form>
 	<%}%>
-
+희원수정
 
 
 
