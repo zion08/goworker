@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="goworker.been.MemberDAO" %>
 <%@ page import="goworker.been.MemberDTO" %>
-<%
+<%llllllllllllllllllllllllllll
 	String id = (String)session.getAttribute("id");
 	if(id == null){
 %>		<script>
