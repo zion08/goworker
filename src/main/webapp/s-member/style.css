@@ -1,21 +1,113 @@
 @charset "UTF-8";
-	
-	header {
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+header {
 	display: flex;
 	justify-content: space-between;
 	padding: var(--padding);
-	}
-	
-	.sign {
+}
+
+h1 {
+	text-align: center;
+	margin: 20px 0;
+}
+
+section {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	height: 120%;
+}
+
+form {
+	width: 65%;
+	height: 100%;
+	border: 1px solid black;
+	padding: 15px 20px;
+}
+
+form div {
+	display: inline-block;
+}
+
+span {	
+	display: inline-block;
+	width: 160px;
+}
+
+.logo {
+	width: 80px;
+	height: 80px;
+	background-image: url('image/logo.png');
+	background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-left: 40px;
+}       
+
+.wrapper-sideicon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 400px;
+	height: 80px;
+}
+
+.sideicon1 {
+	margin: 0  10px;
+}
+
+.sideicon2 {
 	width : 90px;
 	height : 30px;
 	border-style : groove;
 	border-radius : 10%;
-	}
-	.login {
-	width : 90px;
-	height : 30px;
-	border-style : groove;
-	border-radius : 10%;
+	margin: 0  10px;
+}
+
+.wrapper {
+	height: 100%;
+}
+
+.wrapper-submit {
+		width: 100%;
+		text-align: center;
+		margin: 10px 0 50px 0;
 	}
 	
+		.wrapper-submit > input {
+			width: 20%;
+			margin: 20px 30px;
+		}
+		
+#id, #email, #field, #worktype,
+#location, #pay, #period {
+	width: 400px;
+}
+
+		
+#lang div  {
+	width: 530px
+}
+
+#lang label  {
+	margin-right: 15px;
+	width: 120px;
+} 
+
+#pfdetail input, #introduce input{
+	width:500px;
+    height:150px;
+}
+
+#employtype, #projecttype {
+	width: 100%;
+}
+
+#introduce {
+	margin-bottom: 30px;
+}
