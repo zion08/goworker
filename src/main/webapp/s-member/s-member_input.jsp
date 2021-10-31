@@ -18,7 +18,7 @@
 
 <h1>멤버 등록</h1>
 
-<section>
+<section id="smember_input">
 	<form action="s-member_inputPro.jsp" method="post" enctype="multipart/form-data">
 		<div class="wrapper">
 			<div id="id">	

@@ -16,7 +16,7 @@ h1 {
 	margin: 20px 0;
 }
 
-section {
+#smember_input{
 	display: flex;
 	align-items: center;
     justify-content: center;
