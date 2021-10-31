@@ -14,12 +14,13 @@ public class SmemberDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	
 	public int smemberInsert(SmemberDTO dto) {
 		int result = 0;
 		try {
 			conn = OracleDB.getConnection();
 			String sql ="insert into s_member values("
-					+ "s_member_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+					+ "s_member_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
 					+ "0,0,0,sysdate)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
@@ -36,19 +37,19 @@ public class SmemberDAO {
 			pstmt.setString(12, dto.getPhone());
 			pstmt.setString(13, dto.getKakao());
 			pstmt.setString(14, dto.getPortfolio());
-			pstmt.setString(15, dto.getPeriod());
-			pstmt.setInt(16, dto.getAvailable());
-			
-			result = pstmt.executeUpdate();
-			
+			pstmt.setString(15, dto.getPfdetail());
+			pstmt.setString(16, dto.getPeriod());
+			pstmt.setInt(17, dto.getAvailable());			
+			result = pstmt.executeUpdate();			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
-		
 	}
+	
+	
 	public List<SmemberDTO> getAllList(int start , int end) {
 		List<SmemberDTO> list = null;
 		try {

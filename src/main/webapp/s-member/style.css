@@ -85,7 +85,7 @@ span {
 		}
 		
 #id, #email, #field, #worktype,
-#location, #pay, #period {
+#period, #available {
 	width: 400px;
 }
 

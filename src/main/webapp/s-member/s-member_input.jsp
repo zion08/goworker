@@ -19,7 +19,7 @@
 <h1>멤버 등록</h1>
 
 <section>
-	<form action="s-member_inputPro.jsp" method="post" enctype="myltypart/form-date">
+	<form action="s-member_inputPro.jsp" method="post" enctype="multipart/form-data">
 		<div class="wrapper">
 			<div id="id">	
 				<span>아이디</span>

@@ -7,7 +7,7 @@
 <%@ page import="java.sql.Timestamp" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!-- 
-	multopart/form-data 전송 
+	multipart/form-data 전송 
 		> 액션태그 사용 못함
 		> request.getParameter() 사용 못함 
 		> MultipartRequest를 대신 사용
@@ -44,8 +44,7 @@
 	int avail = Integer.parseInt(available);
 
 	SmemberDTO dto = new SmemberDTO();
-	
-	dto.setId(id);
+	dto.setId(id);	
 	dto.setPhone(phone);
 	dto.setEmail(email);
 	dto.setKakao(kakao);
@@ -65,19 +64,19 @@
 	
 	
 	SmemberDAO dao = new SmemberDAO();
-	
 	int result = dao.smemberInsert(dto);
 	
 	System.out.println(result);
-	if(result ==1) {%>
-		 <script type="text/javascript">
+	
+	if(result == 1) {
+%>		<script type="text/javascript">
 			alert("등록되었습니다.");
 			window.location = 's-member.jsp';
-			
-</script>
-<%}else {%>
-	<script type="text/javascript">
-			alert("잘못된 입력이 있습니다 , 확인하세요.");
+		</script>
+<%	} else {
+%>		<script type="text/javascript">
+			alert("잘못된 입력이 있습니다, 확인하세요.");
 			history.go(-1);
-			</script>
-	<%} %> 
+		</script>
+<%	}
+%> 
