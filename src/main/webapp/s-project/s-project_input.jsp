@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="../s-member/style.css" rel="stylesheet" type="text/css">
 
-<title>멤버 등록</title>
+<title>프로젝트 등록</title>
 
 <header>
 	<div class="logo" onclick="window.location='/goworker/main/index.jsp'"></div>
@@ -16,10 +16,10 @@
 </header>
 <hr color="skyblue" size="2"  align="center" />
 
-<h1>멤버 등록</h1>
+<h1>프로젝트 등록</h1>
 
 <section id="content_input">
-	<form action="s-member_inputPro.jsp" method="post" enctype="multipart/form-data">
+	<form action="s-project_inputPro.jsp" method="post" enctype="multipart/form-data">
 		<div class="wrapper">
 			<div id="id">	
 				<span>아이디</span>
@@ -52,7 +52,7 @@
 			</div>
 			
 			<div id="career">
-				<span>경력</span>
+				<span>희망 경력</span>
 					<select name="career">
 						<option>신입</option>
 						<option>1년차</option>
@@ -66,7 +66,7 @@
 			</div>
 			
 			<div id="lang">
-				<span>보유 기술</span>
+				<span>사용 기술</span>
 					<div>
 						<label><input type="checkbox" name="lang" value="Python">Python</label>
 						<label><input type="checkbox" name="lang" value="Django">Django</label>
@@ -85,18 +85,18 @@
 			</div>
 			
 			<div>
-				<span>포트폴리오</span>
+				<span>프로젝트 대표 이미지</span>
 					<input type="file" name="portfolio" multiple="multiple">
 			</div>
 			
 			<div id="pfdetail">
-				<span>포트폴리오 설명</span>
+				<span>프로젝트 설명</span>
 					<input type="text" name="pfdetail" >
 			</div>
 			
 			
 			<div id="employtype">
-				<span>활동 유형</span>
+				<span>찾는 활동 유형</span>
 					<label><input type="checkbox" name="employtype" value="개인">개인 프리랜서</label>
 					<label><input type="checkbox" name="employtype" value="팀">팀 프리랜서</label>
 					<label><input type="checkbox" name="employtype" value="개인사업">개인 사업자</label>
@@ -104,7 +104,7 @@
 			</div>
 			
 			<div id="projecttype">
-				<span>찾는 프로젝트 유형</span>
+				<span>프로젝트 진행 유형</span>
 					<label><input type="checkbox" name="projecttype" value="사이드">사이드 프로젝트</label>
 					<label><input type="checkbox" name="projecttype" value="메인">메인 프로젝트</label>
 			</div>            
@@ -141,17 +141,17 @@
 			</div>
 			
 			<div id="pay">
-				<span>희망 계약금</span>
+				<span>계약금</span>
 					<input type="text" name="pay"  placeholder=", 없이 입력">만원
 			</div>
 			
 			<div id="period">
-				<span>근무가능일자</span>
+				<span>업무 시작 일자</span>
 					<input type="date" name="period">
 			</div>
 			
 			<div id="available">
-				<span>구직활동여부</span>
+				<span>구인활동여부</span>
 				<select name="available">
 					<option value="1">on</option>
 					<option value="0">off</option>
@@ -159,7 +159,7 @@
 			</div>
 			
 			<div id="introduce">
-				<span>소개</span>
+				<span>상세 설명</span>
 					<input type="text" name="introduce" >
 			</div>
 			

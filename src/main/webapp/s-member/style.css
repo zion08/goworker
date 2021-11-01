@@ -16,7 +16,7 @@ h1 {
 	margin: 20px 0;
 }
 
-#smember_input{
+#content_input{
 	display: flex;
 	align-items: center;
     justify-content: center;
@@ -85,7 +85,7 @@ span {
 		}
 		
 #id, #email, #field, #worktype,
-#period, #available {
+#pay, #available {
 	width: 400px;
 }
 
