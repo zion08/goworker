@@ -32,7 +32,7 @@
 
 
 <html>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="../style.css" rel="stylesheet" type="text/css">
 <title>멤버 찾기</title>
 <style>
 	aside{display: flex;

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<link href="../s-member/style.css" rel="stylesheet" type="text/css">
+<link href="../style.css" rel="stylesheet" type="text/css">
 
 <title>프로젝트 등록</title>
 
@@ -86,21 +86,21 @@
 			
 			<div>
 				<span>프로젝트 대표 이미지</span>
-					<input type="file" name="portfolio" multiple="multiple">
+					<input type="file" name="projectimg" multiple="multiple">
 			</div>
 			
-			<div id="pfdetail">
+			<div id="projectdetail">
 				<span>프로젝트 설명</span>
-					<input type="text" name="pfdetail" >
+					<input type="text" name="projectdetail" >
 			</div>
 			
 			
 			<div id="employtype">
 				<span>찾는 활동 유형</span>
-					<label><input type="checkbox" name="employtype" value="개인">개인 프리랜서</label>
-					<label><input type="checkbox" name="employtype" value="팀">팀 프리랜서</label>
-					<label><input type="checkbox" name="employtype" value="개인사업">개인 사업자</label>
-					<label><input type="checkbox" name="employtype" value="법인사업">법인 사업자</label>
+					<label><input type="radio" name="employtype" value="개인">개인 프리랜서</label>
+					<label><input type="radio" name="employtype" value="팀">팀 프리랜서</label>
+					<label><input type="radio" name="employtype" value="개인사업">개인 사업자</label>
+					<label><input type="radio" name="employtype" value="법인사업">법인 사업자</label>
 			</div>
 			
 			<div id="projecttype">
@@ -159,7 +159,7 @@
 			</div>
 			
 			<div id="introduce">
-				<span>상세 설명</span>
+				<span>소개</span>
 					<input type="text" name="introduce" >
 			</div>
 			
