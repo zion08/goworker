@@ -6,15 +6,7 @@
 <%@ page import="bean.SmemberDTO" %>
 <%@ page import="java.sql.Timestamp" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<!-- 
-	multipart/form-data 전송 
-		> 액션태그 사용 못함
-		> request.getParameter() 사용 못함 
-		> MultipartRequest를 대신 사용
-	DefaultFileRenamePolicy > 파일이름 중복 방지
--->
 
-    
 <% 	
 	String path = request.getRealPath("portfolioFile"); //실제 경로
 	String encoding = "UTF-8"; //한글 파일명 인코딩
