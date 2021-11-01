@@ -4,10 +4,12 @@
 <%@ page import = "smember.comment.bean.Comment_SmemberDAO"%>
 <%@ page import = "java.sql.Timestamp"%>
 
+<%request.setCharacterEncoding("UTF-8"); %>
+
 <jsp:useBean id="cdto"  class="smember.comment.bean.Comment_SmemberDTO"/>
 <jsp:setProperty property="*" name="cdto" />
 
-<% request.setCharacterEncoding("UTF-8");
+<% 
 	
 	String comment_writerid = request.getParameter("comment_writerid");
 	String comment_content = request.getParameter("comment_content");
@@ -34,6 +36,4 @@ if(result == 1){%>
 	history.go(-1);
 </script> 
 	<%}%> 
-
-	
 	

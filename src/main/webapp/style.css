@@ -42,7 +42,7 @@ span {
 .logo {
 	width: 80px;
 	height: 80px;
-	background-image: url('image/logo.png');
+	background-image: url('s-member/image/logo.png');
 	background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -99,7 +99,8 @@ span {
 	width: 120px;
 } 
 
-#pfdetail input, #introduce input{
+#pfdetail input, #introduce input,
+#projectdetail input {
 	width:500px;
     height:150px;
 }
