@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-    <title>탈퇴 화면-테스트</title>
+    <title>탈퇴 화면</title>
     
     <style type="text/css">
         table{

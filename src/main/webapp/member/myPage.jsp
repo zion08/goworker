@@ -39,7 +39,7 @@
 <html>
 <title>마이페이지</title>
    <header>마이페이지 </header>
-    <img src = "C:\Users\seohyeon\eclipse-workspace\goworker\src\main\webapp\img\profile.jpg"
+    <img src = "fileSave"
     width="100" height="100"/>
 <%
 	String id = (String)session.getAttribute("id");
