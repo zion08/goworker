@@ -32,7 +32,7 @@
 
 
 <html>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="../style.css" rel="stylesheet" type="text/css">
 <title>멤버 찾기</title>
 <style>
 	aside{display: flex;
@@ -54,6 +54,8 @@
 	border-radius : 7%;
 	}
 </style>
+
+
 <script type="text/javascript">
 var bDisplay = true;
 function doDisplay(){
@@ -95,12 +97,13 @@ function doDisplay(){
 <a href="javascript:doDisplay();"> 검색조건 보기</a><br/><br/>
 
 <div id="checkboard">
-	
+	<form action="s-member_search.jsp" method= "post" >
 	<table border=1>
 		<tr>
 			<th>경력</th>	
 			<td>
 			<select name="career">
+				<option value="all">전체</option>
 				<option value="신입">신입</option>
 				<option value="1년차">1년차</option>
 				<option value="2년차">2년차</option>
@@ -115,11 +118,11 @@ function doDisplay(){
 		<tr>
 		<th>분야</th>
 		<td><select name="field">
-				<option value="전체">전체</option>
+				<option value="all">전체</option>
 				<option value="개발">개발</option>
 				<option value="기획">기획</option>
 				<option value="디자인">디자인</option>
-				<option value="etc">기타</option>
+				<option value="기타">기타</option>
 		</select>
 			
 		</td>
@@ -127,16 +130,18 @@ function doDisplay(){
 	
 		<tr>
 			<th>업무방식</th>	
-			<th><input type="checkbox" name="worktype" value="상관없음">상관없음
-				<input type="checkbox" name="worktype" value="온라인">온라인
-				<input type="checkbox" name="worktype" value="사무실">사무실
-				<input type="checkbox" name="worktype" value="의견조율">의견조율
-			</th>
+			<td><select name="worktype">
+			<option value="all">전체</option>
+				<option value="온라인">온라인</option>
+				<option value="사무실">사무실</option>
+				<option value="의견조율">의견조율</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 		<th>지역</th>
 		<td><select name="location">
-			<option value="전체">상관없음</option>
+			<option value="all">상관없음</option>
 			<option value="서울">서울</option>
 			<option value="경기">경기</option>
 			<option value="인천">인천</option>
@@ -159,16 +164,13 @@ function doDisplay(){
 	<tr>
 		<th>고용타입</th>
 		<td><select name="employtype">
-			<option value="null">전체</option>
-			<option value="토이/사이드">토이/사이드</option>
+			<option value="all">전체</option>
+			<option value="토이">토이/사이드</option>
 			<option value="계약직">계약직</option>
 			<option value="정규직">정규직</option>
 		</select></td>	
 	</tr>
-	<tr>
-		<th>시작가능일자</th>
-		<td><input type="date" name="period"/></td>	
-	</tr>
+	
 	<tr>
 		<th>구직활동여부</th>
 		<td><select name="available">
@@ -178,11 +180,12 @@ function doDisplay(){
 			
 		</td>
 	<tr>
-		<td colspan=2 align="center"> <img src="image/search.png" width="30px" height="30px"/>
+		<td colspan=2 align="center"> <input type="submit" value="검색" />
 		</td>
 	</tr>	
 	
 	</table>
+	</form>
 </div>
 
 </section><br/>
@@ -212,7 +215,10 @@ function doDisplay(){
 
 </section>
 <section>
-	<% for(SmemberDTO dto : list) { %>
+	
+	<% 
+	
+	for(SmemberDTO dto : list) { %>
 	<div>
 		<table class="mboard" >
 			<tr>
