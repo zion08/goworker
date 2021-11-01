@@ -5,11 +5,25 @@
 <%@ page import="java.util.List" %>
 
 
+
 <%	
+		
+
+
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
 	String my = request.getParameter("my");
-	int pageSize = 5;
+	String num = request.getParameter("num");
+	String career = request.getParameter("career");
+	String field = request.getParameter("field");
+	String worktype = request.getParameter("worktype");
+	String location = request.getParameter("location");
+	String employtype = request.getParameter("employtype");
+	String period = request.getParameter("period");
+	String avail = request.getParameter("available");
+	int available = Integer.parseInt(avail);
+	String all = "all";
+	int pageSize = 10;
 	if(pageNum==null) {
 		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
 	}
@@ -17,15 +31,72 @@
 	int start = (currentPage - 1) * pageSize + 1;		
 	int end = currentPage * pageSize;
 	
+	
+	
+	
+	
+	SmemberDTO dto = new SmemberDTO();
+	/*if (career.equals(all)) {
+		dto.setCareer("'신입','1년차','2년차','3년차','4년차','5년차','6년차','7년차 이상'");
+	} else {
+		dto.setCareer(career);
+	}
+	
+	if (field.equals(all)) {
+		dto.setField("'개발','기획','디자인','기타'");
+	} else {
+		dto.setField(field);
+	}
+	
+	if (worktype.equals(all)) {
+		dto.setWorktype("'온라인','사무실','의견조율'");
+	} else {
+		dto.setWorktype(worktype);	
+	}
+	
+	if (location.equals(all)) {
+		dto.setLocation("'서울','경기','인천','강원','충북','충남','대전','세종','전북','전남','광주','경북','경남','대구','울산','부산','제주'");	
+	} else {
+		dto.setLocation(location);
+	}
+	
+	if (employtype.equals(all)) {
+		dto.setEmploytype("'토이','계약직','정규직'");
+	} else {
+		dto.setEmploytype(employtype);	
+	}*/
+	
+	dto.setCareer(career);
+	dto.setField(field);
+	dto.setWorktype(worktype);
+	dto.setLocation(location);
+	dto.setEmploytype(employtype);	
+	dto.setAvailable(available);
+	
+	System.out.println(dto.getCareer());
+	System.out.println(dto.getWorktype());
+	System.out.println(dto.getLocation()  );
+	System.out.println(dto.getEmploytype());
+	System.out.println(start);
+	System.out.println(end);
+	System.out.println(period);
+	
+	
+	
+
+			
+	
+	
 	SmemberDAO dao = new SmemberDAO();
 	int count = 0; 
 	List<SmemberDTO> list = null;	
 	if(my == null) {		
-		count = dao.getCount(); // 전체 글의 갯수
+		count = dao.getSearchCount(career,field,worktype,location,employtype,available); // 전체 글의 갯수
 		if(count > 0) {
-			list = dao.getAllList( start, end );	
+			list = dao.getSearchList( career,field,worktype,location,employtype,available, start, end );	
 		}	
-		
+		System.out.println(count);
+		System.out.println(list);
 		
 	
 %>
@@ -54,8 +125,6 @@
 	border-radius : 7%;
 	}
 </style>
-
-
 <script type="text/javascript">
 var bDisplay = true;
 function doDisplay(){
@@ -215,10 +284,9 @@ function doDisplay(){
 
 </section>
 <section>
-	
-	<% 
-	
-	for(SmemberDTO dto : list) { %>
+	<%if(count > 0) { 
+		for(SmemberDTO sdto : list) { 
+		%>
 	<div>
 		<table class="mboard" >
 			<tr>
@@ -245,7 +313,8 @@ function doDisplay(){
 		</table><br/>
 	</div>
 	
-<%}
+<%		}
+	}		
 }%>
 	
 
