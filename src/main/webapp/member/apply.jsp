@@ -6,33 +6,52 @@
 <script>
 	function blankCheck()
 	{
-		if(id=="")
+		idv=document.getElementsByName("id")[0].value;
+		emv=document.getElementsByName("email")[0].value;
+		passwordv=document.getElementsByName("password")[0].value;
+		if(idv=="")
 		{
 			alert("닉네임을 입력하세요.");	
+			return false;
 		}
-		if(email=="")
+		if(emv=="")
 		{
 			alert("이메일을 입력하세요.");	
+			return false;
 		}
-		if(password=="")
+		if(passwordv=="")
 		{
 			alert("비밀번호를 입력하세요.");	
+			return false;
 		}
 	}
 </script>
-
 <script>
-	function idCheck()
+	function confirmId()
 	{
 		idv=document.getElementsByName("id")[0].value;
-		open("confirm.jsp?id='+idv, 'idCheck', 'width=500,height=500');
+		if(idv=="")
+		{
+			alert("닉네임을 입력하세요.");
+			return false;
+		}else
+		{
+			open('confirmId.jsp?id='+idv,'checkId','width=500,height=500');	
+		}
 	}
 </script>
 <script>
-	function eCheck()
+	function confirmEm()
 	{
-		emailv=document.getElementsByName("email")[0].value;
-		open("confirm.jsp?id='+emailv, 'eCheck', 'width=500,height=500');
+		emv=document.getElementsByName("email")[0].value;
+		if(emv=="")
+		{
+			alert("닉네임을 입력하세요.");
+			return false;
+		}else
+		{
+			open('confirmEm.jsp?email='+emv, 'checkEmail', 'width=500,height=500');
+		}
 	}
 </script>
 
@@ -45,13 +64,13 @@
 		<table border="1">
 			<tr>
 				<td align="center">i   d : </td>
-				<td><input type="text" name="id" placeholder="nickname" /></td>
-				<td align="center"><a href="confirm.jsp">ID중복확인</a></td>
+				<td><input type="text" name="id" placeholder="nickname"  /></td>
+				<td align="center"><input type="button" value="id중복확인" onclick="return confirmId();"/><label id="idCheck"></label></td>
 			</tr>
 			<tr>
 				<td align="center">email : </td>
-				<td><input type="text" name="email" placeholder="example@goworker.com" /></td>
-				<td align="center"><a href="confirm.jsp">email중복확인</a></td>
+				<td><input type="email" name="email" placeholder="example@goworker.com" /></td>
+				<td align="center"><input type="button" value="email중복확인" onclick="return confirmEm();"/><label id="emCheck"></label></td>
 			</tr>
 			<tr>
 				<td align="center">password : </td>
