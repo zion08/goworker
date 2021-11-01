@@ -14,7 +14,6 @@
 	DefaultFileRenamePolicy > 파일이름 중복 방지
 -->
 
-    
 <% 	
 	String path = request.getRealPath("portfolioFile"); //실제 경로
 	String encoding = "UTF-8"; //한글 파일명 인코딩
@@ -28,12 +27,12 @@
 	String kakao = mr.getParameter("kakao");
 	String field = mr.getParameter("field");
 	String career = mr.getParameter("career");
-	String lang = mr.getParameter("lang");
+	String lang[] = mr.getParameterValues("lang");
 	String portfolio = mr.getFilesystemName("portfolio");
 	String pfdetail = mr.getParameter("pfdetail");
 	String employtype = mr.getParameter("employtype");
-	String projecttype = mr.getParameter("projecttype");
-	String worktype = mr.getParameter("worktype");
+	String projecttype[] = mr.getParameterValues("projecttype");
+	String worktype[] = mr.getParameterValues("worktype");
 	String location = mr.getParameter("location");
 	String pay = mr.getParameter("pay");
 	String period = mr.getParameter("period");
@@ -42,6 +41,19 @@
 		
 	int payi = Integer.parseInt(pay);
 	int avail = Integer.parseInt(available);
+	String langStr = new String();
+	String projecttypeStr = new String();
+	String worktypeStr = new String();
+	
+	for ( String langName : lang) {
+		langStr += langName +" ";
+	}
+	for ( String projecttypeName : worktype) {
+		projecttypeStr += projecttypeName +" ";
+	}
+	for ( String worktypeName : worktype) {
+		worktypeStr += worktypeName +" ";
+	}
 
 	SmemberDTO dto = new SmemberDTO();
 	dto.setId(id);	
@@ -50,23 +62,21 @@
 	dto.setKakao(kakao);
 	dto.setField(field);
 	dto.setCareer(career);
-	dto.setLang(lang);
+	dto.setLang(langStr);
 	dto.setPortfolio(portfolio);
 	dto.setPfdetail(pfdetail);
 	dto.setEmploytype(employtype);
-	dto.setProjecttype(projecttype);
-	dto.setWorktype(worktype);
+	dto.setProjecttype(projecttypeStr);
+	dto.setWorktype(worktypeStr);
 	dto.setLocation(location);
 	dto.setPay(payi);
 	dto.setPeriod(period);
 	dto.setAvailable(avail);
 	dto.setIntroduce(introduce);
 	
-	
 	SmemberDAO dao = new SmemberDAO();
 	int result = dao.smemberInsert(dto);
 	
-	System.out.println(lang);
 	
 	if(result == 1) {
 %>		<script type="text/javascript">

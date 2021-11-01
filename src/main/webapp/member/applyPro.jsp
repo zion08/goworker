@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="member.bean.DAO" %>
-<title>М ▄Л⌡░Й╟─Л·┘М≥∙Л²╦Л╟╫</title>
+<title>х╦©Ь╟║ютх╝юнц╒</title>
 
 <jsp:useBean id="dto" class="member.bean.DTO" />
 <jsp:setProperty name="dto" property="*" />
@@ -14,12 +14,12 @@
 <%
 	if(result==1){ %>
 		<script>
-			alert("М ▄Л⌡░Й╟─Л·┘ Л└╠ЙЁ╣");
+			alert("х╦©Ь╟║ют ╪╨╟Ь");
 			window.location="/member/login/login.jsp";
 		</script>
 <%	}else{ %>
 		<script>
-			alert("Л·≤К╙╩Л·┘К═╔");
+			alert("юъ╦Ьют╥б");
 			history.go(-1);
 		</script>
 <%	} %>

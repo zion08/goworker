@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="../style.css" rel="stylesheet" type="text/css">
 
 <title>멤버 등록</title>
 
@@ -97,10 +97,10 @@
 			
 			<div id="employtype">
 				<span>활동 유형</span>
-					<label><input type="checkbox" name="employtype" value="개인">개인 프리랜서</label>
-					<label><input type="checkbox" name="employtype" value="팀">팀 프리랜서</label>
-					<label><input type="checkbox" name="employtype" value="개인사업">개인 사업자</label>
-					<label><input type="checkbox" name="employtype" value="법인사업">법인 사업자</label>
+					<label><input type="radio" name="employtype" value="개인">개인 프리랜서</label>
+					<label><input type="radio" name="employtype" value="팀">팀 프리랜서</label>
+					<label><input type="radio" name="employtype" value="개인사업">개인 사업자</label>
+					<label><input type="radio" name="employtype" value="법인사업">법인 사업자</label>
 			</div>
 			
 			<div id="projecttype">
