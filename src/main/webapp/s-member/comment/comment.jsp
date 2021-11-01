@@ -35,6 +35,8 @@
 		<textarea class="form-control" cols="100" rows="5" name="comment_content" placeholder="댓글을 입력하세요." required></textarea><br/>		
 		<input type="submit" value="댓글 쓰기"/>
 		<input type="reset" value="다시 쓰기"/>
+		<input type="button" value="수정" onclick="window.location='commentUpdate.jsp?'"/>
+		<input type="button" value="삭제" onclick="window.location='commentDelete.jsp?'"/>
  </form>
  
  
