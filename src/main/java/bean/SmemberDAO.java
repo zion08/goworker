@@ -284,29 +284,30 @@ public class SmemberDAO {
 		}
 		return result;
 	}
-}	
-/*	public List<SmamberDTO> getSearchList(String colum, String search, int start , int end) {
+	
+	public List<SmemberDTO> getSearchList(String career,String field,String worktype, String location, String employtype, int available , int start , int end) {
 		List<SmemberDTO> list = null;
 		try {
-			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("select * from "
-					+ " (select num,writer,subject,content,filename,reg,readcount,good,rownum r from "
-					+ " (select * from studyBoard where "+colum +" like '%"+search+"%' order by num desc)) "
-					+ " where r >=? and r <=?");
-		
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select * from where  career in(case when career =all  then '신입','1년차','2년차','3년차','4년차','5년차','6년차','7년차이상'  else "+career+" end) or  field in (case when field= 'all' then '개발','기획','디자인','기타' else"+field+" end) or worktype in (case when worktype='all' then '온라인','사무실','의견조율' else "+worktype+" end) or location in (case when location='all' then '서울','경기','인천','강원','충북','충남','대전','세종','전북','전남','광주','경북','경남','대구','울산','부산','제주' else "+location+" end) or employtype in (case when employtype ='all' then '토이','계약직','정규직' else "+employtype+" end)   and available ="+available+" ");
+			
+			
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
 			
 			rs = pstmt.executeQuery();
 			list = new ArrayList();
 			while(rs.next()) {
-				StudyBoardDTO dto = new StudyBoardDTO();
+				SmemberDTO dto = new SmemberDTO();
 				dto.setNum(rs.getInt("num"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("content"));
-				dto.setWriter(rs.getString("writer"));
-				dto.setFilename(rs.getString("filename"));
-				dto.setReg(rs.getTimestamp("reg"));
+				dto.setId(rs.getString("id"));
+				dto.setField(rs.getString("field"));
+				dto.setCareer(rs.getString("career"));
+				dto.setEmploytype(rs.getString("employtype"));
+				dto.setLocation(rs.getString("location"));
+				dto.setWorktype(rs.getString("worktype"));
+				dto.setIntroduce(rs.getString("introduce"));
+				dto.setAvailable(rs.getInt("available"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setGood(rs.getInt("good"));
 				list.add(dto);
@@ -320,11 +321,11 @@ public class SmemberDAO {
 		}
 		return list;
 	}
-	public int getSearchCount(String colum , String search) {
+	public int getSearchCount(String career,String field,String worktype, String location, String employtype, int available ) {
 		int result = 0; 
 		try {
-			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("select count(*) from soloBoard where "+colum +" like '%"+search+"%'");
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select count(*) from s_member where where  career in("+career+") and  field in ("+field+") and worktype in ("+worktype+") and location in ("+location+") and employtype in ("+employtype+")   and available ="+available+"");
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
@@ -338,4 +339,4 @@ public class SmemberDAO {
 		}
 		return result;
 	}
-} */
+} 
