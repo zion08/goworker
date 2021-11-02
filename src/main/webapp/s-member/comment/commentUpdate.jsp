@@ -23,7 +23,25 @@
 		<input type="hidden" name="board_num" value="<%=cdto.getBoard_num() %>"/>
 		<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 		
-	  작성자: <input type="text" size="20"  name="comment_writerid" value="<%=cdto.getComment_writerid() %>" > <br/><br/>
-	  내 용: <input type="text" size="150" name="comment_content" value="<%=cdto.getComment_content() %>" required><br/>
-			<input type="submit" value="수정완료"/>
+			<table class="comments" border=1>
+		<tr>
+			<th width="50" align="center">작성자</th>
+			<th width="300px" colspan=3 align="center"><input type="text" size="70" value="<%=cdto.getComment_content() %>"  name="comment_writerid" id="comment_writerid"  > </th>
+		
+		</tr>
+		<tr>	
+			<td width="50px" align="center">내 용</td>
+			<td width="300px" colspan=3 align="center">
+			<input type="text" size="100" name="comment_content" id="comment_content" style="width:500px;height:100px;" value="<%=cdto.getComment_writerid() %>"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align="center">
+				<input type="submit" value="수정완료"/>
+				<input type="reset" value="다시 작성"/>
+			</td>
+		</tr>
+		</table><br/>
+			
+			
+			
 </form>
