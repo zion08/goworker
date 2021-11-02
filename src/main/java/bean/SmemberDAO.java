@@ -291,30 +291,35 @@ public class SmemberDAO {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("select * from "
 					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,period,available,favor,good,readcount,regdate,rownum r from "
-					+ " (select * from s_member where career in ("+career+") and field in ("+field+")  and worktype in ("+worktype+") and location in ("+location+") and employtype in ("+employtype+") and  available = ("+available+") order by num desc)) "
+					+ " (select * from s_member where career= ? and field= ?  and worktype= ? and location= ? and employtype= ? and  available = ? order by num desc)) "
 					+ " where  r >=? and r <=?");
 			
-			
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			pstmt.setString(1, career);
+			pstmt.setString(2, field);
+			pstmt.setString(3, worktype);
+			pstmt.setString(4, location);
+			pstmt.setString(5, employtype);
+			pstmt.setInt(6, available);
+			pstmt.setInt(7, start);
+			pstmt.setInt(8, end);
 			
 			
 			rs = pstmt.executeQuery();
 			list = new ArrayList();
 			while(rs.next()) {
-				SmemberDTO dto = new SmemberDTO();
-				dto.setNum(rs.getInt("num"));
-				dto.setId(rs.getString("id"));
-				dto.setField(rs.getString("field"));
-				dto.setCareer(rs.getString("career"));
-				dto.setEmploytype(rs.getString("employtype"));
-				dto.setLocation(rs.getString("location"));
-				dto.setWorktype(rs.getString("worktype"));
-				dto.setIntroduce(rs.getString("introduce"));
-				dto.setAvailable(rs.getInt("available"));
-				dto.setReadcount(rs.getInt("readcount"));
-				dto.setGood(rs.getInt("good"));
-				list.add(dto);
+				SmemberDTO sdto = new SmemberDTO();
+				sdto.setNum(rs.getInt("num"));
+				sdto.setId(rs.getString("id"));
+				sdto.setField(rs.getString("field"));
+				sdto.setCareer(rs.getString("career"));
+				sdto.setEmploytype(rs.getString("employtype"));
+				sdto.setLocation(rs.getString("location"));
+				sdto.setWorktype(rs.getString("worktype"));
+				sdto.setIntroduce(rs.getString("introduce"));
+				sdto.setAvailable(rs.getInt("available"));
+				sdto.setReadcount(rs.getInt("readcount"));
+				sdto.setGood(rs.getInt("good"));
+				list.add(sdto);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -329,7 +334,13 @@ public class SmemberDAO {
 		int result = 0; 
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select count(*) from s_member where career in ("+career+") and field in ("+field+")  and worktype in ("+worktype+") and location in ("+location+") and employtype in ("+employtype+") and  available = "+available+"");
+			pstmt = conn.prepareStatement("select * from s_member where career= ? and field= ?  and worktype= ? and location= ? and employtype= ? and  available = ? ");
+			pstmt.setString(1, career);
+			pstmt.setString(2, field);
+			pstmt.setString(3, worktype);
+			pstmt.setString(4, location);
+			pstmt.setString(5, employtype);
+			pstmt.setInt(6, available);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);

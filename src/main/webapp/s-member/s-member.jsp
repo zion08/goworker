@@ -101,8 +101,7 @@ function doDisplay(){
 			<th>경력</th>	
 			<td>
 			<select name="career">
-				<option value="all">전체</option>
-				<option value="신입">신입</option>
+				<option value="new">신입</option>
 				<option value="1년차">1년차</option>
 				<option value="2년차">2년차</option>
 				<option value="3년차">3년차</option>
@@ -116,8 +115,7 @@ function doDisplay(){
 		<tr>
 		<th>분야</th>
 		<td><select name="field">
-				<option value="all">전체</option>
-				<option value="개발">개발</option>
+				<option value="dev">개발</option>
 				<option value="기획">기획</option>
 				<option value="디자인">디자인</option>
 				<option value="기타">기타</option>
@@ -129,8 +127,7 @@ function doDisplay(){
 		<tr>
 			<th>업무방식</th>	
 			<td><select name="worktype">
-			<option value="all">전체</option>
-				<option value="온라인">온라인</option>
+				<option value="online">온라인</option>
 				<option value="사무실">사무실</option>
 				<option value="의견조율">의견조율</option>
 				</select>
@@ -139,8 +136,7 @@ function doDisplay(){
 		<tr>
 		<th>지역</th>
 		<td><select name="location">
-			<option value="all">상관없음</option>
-			<option value="서울">서울</option>
+			<option value="seoul">서울</option>
 			<option value="경기">경기</option>
 			<option value="인천">인천</option>
 			<option value="강원">강원</option>
@@ -162,8 +158,7 @@ function doDisplay(){
 	<tr>
 		<th>고용타입</th>
 		<td><select name="employtype">
-			<option value="all">전체</option>
-			<option value="토이">토이/사이드</option>
+			<option value="toy">토이/사이드</option>
 			<option value="계약직">계약직</option>
 			<option value="정규직">정규직</option>
 		</select></td>	
