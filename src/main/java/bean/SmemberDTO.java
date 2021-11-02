@@ -18,6 +18,7 @@ public class SmemberDTO {
 	private String phone;
 	private String kakao;
 	private String portfolio;
+	private String pfdetail;
 	private String period;
 	private int available;
 	private int favor;
@@ -114,6 +115,12 @@ public class SmemberDTO {
 	}
 	public void setPortfolio(String portfolio) {
 		this.portfolio = portfolio;
+	}
+	public String getPfdetail() {
+		return pfdetail;
+	}
+	public void setPfdetail(String pfdetail) {
+		this.pfdetail = pfdetail;
 	}
 	public String getPeriod() {
 		return period;
