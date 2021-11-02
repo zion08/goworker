@@ -13,7 +13,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
 	String my = request.getParameter("my");
-	String num = request.getParameter("num");
+	
 	String career = request.getParameter("career");
 	String field = request.getParameter("field");
 	String worktype = request.getParameter("worktype");
@@ -22,12 +22,8 @@
 	String period = request.getParameter("period");
 	String avail = request.getParameter("available");
 	int available = Integer.parseInt(avail);
-	String all = "all";
-	String call = "'신입','1년차','2년차','3년차','4년차','5년차','6년차','7년차이상'";
-	String fall = "'개발','기획','디자인','기타'";
-	String wall = "'온라인','사무실','의견조율'";
-	String lall = "'서울','경기','인천','강원','충북','충남','대전','세종','경북','경남','대구','울산','부산','전북','전남','광주','제주'";
-	String eall = "'토이','정규직','계약직'";
+	
+	
 	int pageSize = 20;
 	if(pageNum==null) {
 		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
@@ -41,47 +37,24 @@
 	
 	
 	SmemberDTO dto = new SmemberDTO();
-	if (career.equals(all)) {
-		dto.setCareer(call);
-		career = dto.getCareer();
-	} else {
+	
 		dto.setCareer(career);
-		career = dto.getCareer();
-	}
+		//career = dto.getCareer();
 	
-	if (field.equals(all)) {
-		dto.setField(fall);
-		field = dto.getField();
-	} else {
 		dto.setField(field);
-		field = dto.getField();
-	}
+		//field = dto.getField();
 	
-	if (worktype.equals(all)) {
-		dto.setWorktype(wall);
-		worktype = dto.getWorktype();
-	} else {
 		dto.setWorktype(worktype);
-		worktype = dto.getWorktype();
-	}
-	
-	if (location.equals(all)) {
-		dto.setLocation(lall);
-		location = dto.getLocation();
-	} else {
+		//worktype = dto.getWorktype();
+
 		dto.setLocation(location);
-		location = dto.getLocation();
-	}
-	
-	if (employtype.equals(all)) {
-		dto.setEmploytype(eall);
-		employtype = dto.getEmploytype();
-	} else {
+		//location = dto.getLocation();
+
 		dto.setEmploytype(employtype);
-		employtype = dto.getEmploytype();
-	}
+		//employtype = dto.getEmploytype();
 	
-	dto.setAvailable(available);
+		dto.setAvailable(available);
+		//available = dto.getAvailable();
 	
 	System.out.println(dto.getCareer());
 	System.out.println(dto.getWorktype());
@@ -99,15 +72,14 @@
 	
 	
 	SmemberDAO dao = new SmemberDAO();
-	int count = 0; 
+	int scount = 0; 
 	List<SmemberDTO> list = null;	
-	if(my == null) {		
-		count = dao.getSearchCount( career ,field, worktype, location,employtype ,available); // 전체 글의 갯수
-		if(count > 0) {
+			
+		scount = dao.getSearchCount( career ,field, worktype, location,employtype ,available); // 전체 글의 갯수
+		if(scount > 0) {
 			list = dao.getSearchList( career ,field, worktype, location,employtype ,available, start, end );	
 		}
-	}
-		System.out.println(count);
+		System.out.println(scount);
 		System.out.println(list);
 		
 	
@@ -184,8 +156,8 @@ function doDisplay(){
 			<th>경력</th>	
 			<td>
 			<select name="career">
-				<option value="all">전체</option>
-				<option value="신입">신입</option>
+				
+				<option value="new">신입</option>
 				<option value="1년차">1년차</option>
 				<option value="2년차">2년차</option>
 				<option value="3년차">3년차</option>
@@ -199,8 +171,8 @@ function doDisplay(){
 		<tr>
 		<th>분야</th>
 		<td><select name="field">
-				<option value="all">전체</option>
-				<option value="개발">개발</option>
+				
+				<option value="dev">개발</option>
 				<option value="기획">기획</option>
 				<option value="디자인">디자인</option>
 				<option value="기타">기타</option>
@@ -212,8 +184,7 @@ function doDisplay(){
 		<tr>
 			<th>업무방식</th>	
 			<td><select name="worktype">
-			<option value="all">전체</option>
-				<option value="온라인">온라인</option>
+				<option value="online">온라인</option>
 				<option value="사무실">사무실</option>
 				<option value="의견조율">의견조율</option>
 				</select>
@@ -222,8 +193,7 @@ function doDisplay(){
 		<tr>
 		<th>지역</th>
 		<td><select name="location">
-			<option value="all">상관없음</option>
-			<option value="서울">서울</option>
+			<option value="seoul">서울</option>
 			<option value="경기">경기</option>
 			<option value="인천">인천</option>
 			<option value="강원">강원</option>
@@ -245,8 +215,7 @@ function doDisplay(){
 	<tr>
 		<th>고용타입</th>
 		<td><select name="employtype">
-			<option value="all">전체</option>
-			<option value="토이">토이/사이드</option>
+			<option value="toy">토이/사이드</option>
 			<option value="계약직">계약직</option>
 			<option value="정규직">정규직</option>
 		</select></td>	
@@ -296,30 +265,30 @@ function doDisplay(){
 
 </section>
 <section>
-	<%if(count > 0) { 
+	<%if(scount > 0) { 
 		for(SmemberDTO sdto : list) { 
 		%>
 	<div>
 		<table class="mboard" >
 			<tr>
-				<th><a href="s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
+				<th><a href="s-member_detail.jsp?num=<%=sdto.getNum()%>&pageNum=<%=pageNum%>"><%=sdto.getId() %></a></th>
 				<th>
-				<%if(dto.getAvailable() == 1) { %>
+				<%if(sdto.getAvailable() == 1) { %>
 				<img src="image/switch-on.png" width="40px" height="36px"> 
 				<%} else{ %>
 				<img src="image/switch-off.png" width="40px" height="36px">
 				<%} %>
 				</th>
-				<th><%=dto.getField() %></th>
+				<th><%=sdto.getField() %></th>
 			</tr>
 			<tr>
-				<th><%=dto.getCareer() %></th>
-				<th><%=dto.getEmploytype() %></th>
-				<th><%=dto.getLocation() %></th>
-				<th><%=dto.getWorktype() %></th>
+				<th><%=sdto.getCareer() %></th>
+				<th><%=sdto.getEmploytype() %></th>
+				<th><%=sdto.getLocation() %></th>
+				<th><%=sdto.getWorktype() %></th>
 			</tr>
 			<tr>
-			<td colspan="4"> <%=dto.getIntroduce() %>
+			<td colspan="4"> <%=sdto.getIntroduce() %>
 			</td>
 			</tr>
 		</table><br/>
