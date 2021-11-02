@@ -260,7 +260,7 @@ public class SmemberDAO {
 	public List<SmemberDTO> getSearchList(String career,String field,String worktype, String location, String employtype, int available , int start , int end) {
 		List<SmemberDTO> list = null;
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select * from "
 					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,period,available,favor,good,readcount,regdate,rownum r from "
 					+ " (select * from s_member where career in ("+career+") and field in ("+field+")  and worktype in ("+worktype+") and location in ("+location+") and employtype in ("+employtype+") and  available = ("+available+") order by num desc)) "
@@ -300,7 +300,7 @@ public class SmemberDAO {
 	public int getSearchCount(String career,String field,String worktype, String location, String employtype, int available ) {
 		int result = 0; 
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select count(*) from s_member where career in ("+career+") and field in ("+field+")  and worktype in ("+worktype+") and location in ("+location+") and employtype in ("+employtype+") and  available = "+available+"");
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
