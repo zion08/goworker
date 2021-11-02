@@ -16,20 +16,6 @@ h1 {
 	margin: 20px 0;
 }
 
-#content_input{
-	display: flex;
-	align-items: center;
-    justify-content: center;
-	height: 120%;
-}
-
-form {
-	width: 65%;
-	height: 100%;
-	border: 1px solid black;
-	padding: 15px 20px;
-}
-
 form div {
 	display: inline-block;
 }
@@ -37,6 +23,59 @@ form div {
 span {	
 	display: inline-block;
 	width: 160px;
+}
+
+aside {
+	display: flex;
+}
+
+.section1 {
+	display: table; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.section2 {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	height: 100%;
+	border: 1px solid black;
+	padding: 15px 20px;
+}
+
+.section3 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    justify-content: center;
+	height: 100%;
+	border: 1px solid black;
+	padding: 15px 20px;
+}
+
+.section4 {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	height: 10%;
+	border: 1px solid black;
+	padding: 15px 20px;
+}
+
+
+.form-box1 {
+	width: 100%;
+	height: 35%;
+	border: 1px solid blue;
+	padding: 15px 20px;
+}
+
+.form-box2 {
+	width: 65%;
+	height: 100%;
+	border: 1px solid blue;
+	padding: 15px 20px;
 }
 
 .logo {
@@ -69,8 +108,25 @@ span {
 	margin: 0  10px;
 }
 
+.mInputButton {
+	text-align : center;
+	width : 150px;
+	height : 70px;
+	border-style : groove;
+	border-radius : 7%;
+}
+
+.mboard{ 
+	border-style : groove;
+	width: 400px;
+	height : 120px;
+	text-align : center;
+	border-radius : 5%;
+}
+
 .wrapper {
 	height: 100%;
+	widdth: 90%;
 }
 
 .wrapper-submit {
@@ -84,12 +140,12 @@ span {
 			margin: 20px 30px;
 		}
 		
-#id, #email, #field, #worktype,
-#pay, #available {
+#id, #phone, #email, #kakao, #field, #career,
+#worktype, #locateion, #pay, #period,
+#available {
 	width: 400px;
 }
 
-		
 #lang div  {
 	width: 530px
 }
@@ -105,7 +161,7 @@ span {
     height:150px;
 }
 
-#employtype, #projecttype {
+#portfolio, #employtype, #projecttype {
 	width: 100%;
 }
 

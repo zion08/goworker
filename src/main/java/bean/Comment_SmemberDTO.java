@@ -1,4 +1,4 @@
-package smember.comment.bean;
+package bean;
 
 import java.sql.Timestamp;
 

@@ -1,11 +1,12 @@
-package Member.bean;
+package bean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import oracle.OracleDB;
+import oracle.DisconnDB;
 
 public class MemberDAO {
 	private Connection conn = null;
@@ -31,9 +32,7 @@ public class MemberDAO {
 	      }catch(Exception e) {
 	         e.printStackTrace();
 	      }finally {
-	         if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-	         if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-	         if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+	         DisconnDB.close(conn, pstmt, rs);
 	      }
 	      return list;
 	   }
@@ -51,9 +50,7 @@ public class MemberDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-				if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-				if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+				DisconnDB.close(conn, pstmt, rs);
 			}
 			return result;
 		}
@@ -70,9 +67,7 @@ public class MemberDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-				if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-				if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+				DisconnDB.close(conn, pstmt, rs);
 			}
 			return result;
 		}
@@ -95,9 +90,7 @@ public class MemberDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-				if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-				if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+				DisconnDB.close(conn, pstmt, rs);
 			}
 			return dto;
 		}
@@ -115,9 +108,7 @@ public class MemberDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-				if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-				if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+				DisconnDB.close(conn, pstmt, rs);
 			}
 			return result;
 		}
@@ -134,12 +125,11 @@ public class MemberDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-				if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-				if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+				DisconnDB.close(conn, pstmt, rs);
 			}
 			return result;
 		}
+		
 		public boolean IdCheck(MemberDTO dto) {
 			boolean result = false;
 			try {
@@ -153,11 +143,8 @@ public class MemberDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-				if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-				if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+				DisconnDB.close(conn, pstmt, rs);
 			}
 			return result;
 		}
 }
-
