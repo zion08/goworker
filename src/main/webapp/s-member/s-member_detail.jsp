@@ -1,9 +1,13 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="bean.SmemberDAO" %> 
 <%@ page import = "smember.comment.bean.Comment_SmemberDAO" %>
 <%@ page import = "smember.comment.bean.Comment_SmemberDTO" %>
-<%@ page import="java.util.List" %>    
+<%@ page import="java.util.List" %> 
+<%@ page import = "java.text.SimpleDateFormat" %>
+
+   
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
 <html>
@@ -176,6 +180,7 @@
 <section class="commentList">
 
 <% 	
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
 
 	Comment_SmemberDAO cdao = new Comment_SmemberDAO();
 	int count = 0; 
@@ -193,7 +198,8 @@
 	<table class="comments" border=1>
 		<tr>
 			<th width="60px">작성자</th>
-			<td width="450px" align="center">내 용</td>
+			<td width="370px" align="center">내 용</td>
+			<td width="70px" align="center" >작성일</td>
 			<td width="40px" align="center">버튼</td>
 		</tr>
 		<% 
@@ -201,7 +207,10 @@
 			for(Comment_SmemberDTO cdto : list)  {%>
 		
 		<tr>	
-			<th><%=cdto.getComment_writerid() %></th>
+			<td align="center">
+				<img src="image/image.jpg" width="50" height="50"><br/>
+					<%=cdto.getComment_writerid() %>
+			</td>
 			 <td>
 		<%
 	      int wid=0; 
@@ -210,13 +219,16 @@
 	        wid=10*(cdto.getComment_level());
 	     // 답글 들여쓰기 사이즈(width의 값으로 넣을 변수와 값 저장해서 아래에 대입)
 		%>
-	 	<img src="image/white.jpg" width="<%=wid%>" height="16">
-	  	<img src="image/re.gif">
+	 		<img src="image/white.jpg" width="<%=wid%>" height="16">
+	  		<img src="image/re.gif">
 	  	<%}else{%>
-	  	 <img src="image/white.jpg" width="<%=wid%>" height="16">	  	 
+	  		 <img src="image/white.jpg" width="<%=wid%>" height="16">	  	 
 	  	 <%} %>
 	  	 		<%=cdto.getComment_content() %>
 	  	 
+			</td>
+			<td align="center">
+				<%=sdf.format(cdto.getComment_regdate()) %>
 			</td>
 			<td  align="center">
 				<input type="button" value="수정" onclick="window.location='/goworker/s-member/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&pageNum=<%=pageNum%>'"/>
@@ -236,7 +248,7 @@
 
 
 <footer>
-<hr color="skyblue" size="2"  align="center" />
+	<hr color="skyblue" size="2"  align="center" />
 
 
 
