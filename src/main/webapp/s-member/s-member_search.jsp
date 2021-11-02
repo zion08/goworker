@@ -23,7 +23,12 @@
 	String avail = request.getParameter("available");
 	int available = Integer.parseInt(avail);
 	String all = "all";
-	int pageSize = 10;
+	String call = "'신입','1년차','2년차','3년차','4년차','5년차','6년차','7년차이상'";
+	String fall = "'개발','기획','디자인','기타'";
+	String wall = "'온라인','사무실','의견조율'";
+	String lall = "'서울','경기','인천','강원','충북','충남','대전','세종','경북','경남','대구','울산','부산','전북','전남','광주','제주'";
+	String eall = "'토이','정규직','계약직'";
+	int pageSize = 20;
 	if(pageNum==null) {
 		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
 	}
@@ -36,50 +41,56 @@
 	
 	
 	SmemberDTO dto = new SmemberDTO();
-	/*if (career.equals(all)) {
-		dto.setCareer("'신입','1년차','2년차','3년차','4년차','5년차','6년차','7년차 이상'");
+	if (career.equals(all)) {
+		dto.setCareer(call);
+		career = dto.getCareer();
 	} else {
 		dto.setCareer(career);
+		career = dto.getCareer();
 	}
 	
 	if (field.equals(all)) {
-		dto.setField("'개발','기획','디자인','기타'");
+		dto.setField(fall);
+		field = dto.getField();
 	} else {
 		dto.setField(field);
+		field = dto.getField();
 	}
 	
 	if (worktype.equals(all)) {
-		dto.setWorktype("'온라인','사무실','의견조율'");
+		dto.setWorktype(wall);
+		worktype = dto.getWorktype();
 	} else {
-		dto.setWorktype(worktype);	
+		dto.setWorktype(worktype);
+		worktype = dto.getWorktype();
 	}
 	
 	if (location.equals(all)) {
-		dto.setLocation("'서울','경기','인천','강원','충북','충남','대전','세종','전북','전남','광주','경북','경남','대구','울산','부산','제주'");	
+		dto.setLocation(lall);
+		location = dto.getLocation();
 	} else {
 		dto.setLocation(location);
+		location = dto.getLocation();
 	}
 	
 	if (employtype.equals(all)) {
-		dto.setEmploytype("'토이','계약직','정규직'");
+		dto.setEmploytype(eall);
+		employtype = dto.getEmploytype();
 	} else {
-		dto.setEmploytype(employtype);	
-	}*/
+		dto.setEmploytype(employtype);
+		employtype = dto.getEmploytype();
+	}
 	
-	dto.setCareer(career);
-	dto.setField(field);
-	dto.setWorktype(worktype);
-	dto.setLocation(location);
-	dto.setEmploytype(employtype);	
 	dto.setAvailable(available);
 	
 	System.out.println(dto.getCareer());
 	System.out.println(dto.getWorktype());
-	System.out.println(dto.getLocation()  );
+	System.out.println(dto.getLocation());
 	System.out.println(dto.getEmploytype());
+	System.out.println(dto.getAvailable());
 	System.out.println(start);
 	System.out.println(end);
-	System.out.println(period);
+
 	
 	
 	
@@ -91,10 +102,11 @@
 	int count = 0; 
 	List<SmemberDTO> list = null;	
 	if(my == null) {		
-		count = dao.getSearchCount(career,field,worktype,location,employtype,available); // 전체 글의 갯수
+		count = dao.getSearchCount( career ,field, worktype, location,employtype ,available); // 전체 글의 갯수
 		if(count > 0) {
-			list = dao.getSearchList( career,field,worktype,location,employtype,available, start, end );	
-		}	
+			list = dao.getSearchList( career ,field, worktype, location,employtype ,available, start, end );	
+		}
+	}
 		System.out.println(count);
 		System.out.println(list);
 		
@@ -311,42 +323,23 @@ function doDisplay(){
 			</td>
 			</tr>
 		</table><br/>
+		
 	</div>
-	
-<%		}
-	}		
-}%>
+		<%} 
+			
+		
+		}else {%> 
+		검색결과가 없습니다...!!
+		
+		<%}%>	
+
 	
 
 
 
 </section>
 <section>
-<%
-	if(count > 0){
-	int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-	
-	int startPage = (currentPage / 10)* 10 +1;
-	int pageBlock = 10;
-	int endPage = startPage + pageBlock -1;
-	if(endPage > pageCount) {
-		endPage = pageCount;
-	}
-	if(startPage >10) { %>
-		<a href="s-member.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
-	<%}
-	
-	for(int i = startPage ; i <= endPage ; i++) {
-		%> <a href="s-member.jsp?pageNum=<%=i%>">[<%=i %>] </a>
-	<%}
-	
-	if(endPage < pageCount) {%>
-		<a href="s-member.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-	<%}
-	
-	
-}
-%>
+
 </section>
 
 <footer>
