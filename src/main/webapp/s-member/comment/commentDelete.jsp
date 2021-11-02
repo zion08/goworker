@@ -16,6 +16,7 @@
 
 <form action="commentDeletePro.jsp" method="post">
 	<input type="hidden" name="comment_num" value="<%=cdto.getComment_num() %>" />
+	<input type="hidden" name="board_num" value="<%=cdto.getBoard_num() %>"/>
 	<input type="hidden" name="pageNum" value="<%=pageNum%>" />
 	<input type="submit" value="삭 제" />
 </form>
