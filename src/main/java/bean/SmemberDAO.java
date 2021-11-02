@@ -233,7 +233,7 @@ public class SmemberDAO {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("select * from "
 					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,pfdetail,period,available,favor,good,readcount,regdate,rownum r from "
-					+ " (select * from studyBoard where id=? order by num desc)) "
+					+ " (select * from s_member where id=? order by num desc)) "
 					+ " where r >=? and r <=?");
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start);
@@ -291,7 +291,7 @@ public class SmemberDAO {
 			conn = getConnection();
 			pstmt = conn.prepareStatement("select * from "
 					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,period,available,favor,good,readcount,regdate,rownum r from "
-					+ " (select * from s_member where career= ? and field= ?  and worktype= ? and location= ? and employtype= ? and  available = ? order by num desc)) "
+					+ " (select * from s_member where career=? and field=?  and worktype= ? and location= ? and employtype= ? and  available = ? order by num desc)) "
 					+ " where  r >=? and r <=?");
 			
 			pstmt.setString(1, career);
@@ -334,7 +334,7 @@ public class SmemberDAO {
 		int result = 0; 
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select * from s_member where career= ? and field= ?  and worktype= ? and location= ? and employtype= ? and  available = ? ");
+			pstmt = conn.prepareStatement("select count(*) from s_member where career= ? and field= ?  and worktype= ? and location= ? and employtype= ? and  available = ? ");
 			pstmt.setString(1, career);
 			pstmt.setString(2, field);
 			pstmt.setString(3, worktype);

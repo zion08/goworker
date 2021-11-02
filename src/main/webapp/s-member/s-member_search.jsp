@@ -72,14 +72,14 @@
 	
 	
 	SmemberDAO dao = new SmemberDAO();
-	int count = 0; 
+	int scount = 0; 
 	List<SmemberDTO> list = null;	
 			
-		count = dao.getSearchCount( career ,field, worktype, location,employtype ,available); // 전체 글의 갯수
-		if(count > 0) {
+		scount = dao.getSearchCount( career ,field, worktype, location,employtype ,available); // 전체 글의 갯수
+		if(scount > 0) {
 			list = dao.getSearchList( career ,field, worktype, location,employtype ,available, start, end );	
 		}
-		System.out.println(count);
+		System.out.println(scount);
 		System.out.println(list);
 		
 	
@@ -265,7 +265,7 @@ function doDisplay(){
 
 </section>
 <section>
-	<%if(count > 0) { 
+	<%if(scount > 0) { 
 		for(SmemberDTO sdto : list) { 
 		%>
 	<div>
