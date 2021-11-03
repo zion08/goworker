@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="sproject.bean.SprojectDTO" %>
-<%@ page import="sproject.bean.SprojectDAO" %>
+<%@ page import="bean.SprojectDTO" %>
+<%@ page import="bean.SprojectDAO" %>
 
-<jsp:useBean class="sproject.bean.SprojectDTO" id="dto" />
+<jsp:useBean class="bean.SprojectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
 
 <%

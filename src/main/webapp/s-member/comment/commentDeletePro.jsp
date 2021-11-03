@@ -11,12 +11,12 @@
 <%
 	String pageNum = request.getParameter("pageNum");
 	Comment_SmemberDAO dao = new Comment_SmemberDAO();
-	dao.deleteComment(cdto.getComment_num());
+	String result = dao.deleteComment(cdto.getComment_num());
 	
 	
 %>
 
 <script>
 	alert("삭제되었습니다.");
-	window.location="/goworker/s-member/s-member_detail.jsp?num=<%=cdto.getBoard_num()%>&pageNum=<%=pageNum%>";
+	window.location='/goworker/s-member/s-member_detail.jsp?num=<%=cdto.getBoard_num()%>&pageNum=<%=pageNum%>';
 </script>

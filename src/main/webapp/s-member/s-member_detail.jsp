@@ -48,19 +48,19 @@
 <title>멤버 상세정보</title>
 
 
-<section class="section1">
+<section>
 	<table class="mDetail" border=1>
 		<tr>
 			<th>아이디</th>
 			<td><%=dto.getId() %></td>
 		</tr>
-		
 		<tr>
 			<th>분야</th>
 			<td><%=dto.getField() %></td>
 		</tr>
-		
+		<%--if (field의 값 == dev){--%>
 		<tr>
+
 			<th>경력</th>
 			<td><%=dto.getCareer() %></td>
 		</tr>
@@ -70,46 +70,39 @@
 			<td><%=dto.getLang() %></td>
 		</tr>
 		
+		<%-- }--%>
 		<tr>
 			<th>가능한 업무 방식</th>		
 			<td><%=dto.getWorktype() %> </td>
 		</tr>
-		
 		<tr>
 			<th>지역</th>		
 			<td><%=dto.getLocation() %> </td>
 		</tr>
-		
 		<tr>
 			<th>활동 유형</th>		
 			<td><%=dto.getEmploytype()%></td>
 		</tr>
-		
 		<tr>
 			<th>근무 가능 일자</th>		
 			<td><%=dto.getPeriod() %></td>
 		</tr>
-		
 		<tr>
 			<th>희망 계약금</th>		
 			<td><%=dto.getPay() %>만원 선</td>
 		</tr>
-		
 		<tr>
 			<th><img src="image/phone.png" width="25px" height="25px" ></th>		
 			<td><%=dto.getPhone() %></td>
 		</tr>
-		
 		<tr>
 			<th><img src="image/kakao-talk.png" width="25px" height="25px" ></th>		
 			<td><%=dto.getKakao() %></td>
 		</tr>
-		
 		<tr>
 			<th><img src="image/email.png" width="25px" height="25px" ></th>		
 			<td><a href="mailto:﻿"<%=dto.getEmail() %>"><%=dto.getEmail() %></a></td>
 		</tr>
-		
 		<tr>
 			<th>포트폴리오</th>		
 			<%if(dto.getPortfolio() != null) { %>
@@ -118,7 +111,6 @@
 			<td> 등록된 포트폴리오가 없습니다. </td>
 			<%} %>
 		</tr>
-		
 		<tr>
 			<th>포트폴리오 설명</th>		
 			<td><%=dto.getPfdetail()%> </td>
@@ -128,10 +120,9 @@
 		<tr>
 			<th>자기소개</th>		
 			<td width="400px"><%=dto.getIntroduce() %></td>
-		</tr>	
-	</table>
-	<br/>
-	
+		</tr>
+		
+	</table><br/>
 	<form align="center">
 		<input type="button" value="쪽지 보내기" />
 		<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
