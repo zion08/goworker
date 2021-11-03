@@ -7,31 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-
-
+import oracle.DisconnDB;
+import oracle.OracleDB;
 
 public class SmemberDAO {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	private Connection getConnection() throws Exception {
-		Class.forName("oracle.jdbc.driver.OracleDriver"); 
-		String url = "jdbc:oracle:thin:@masternull.iptime.org:1521:orcl";
-		String user ="team01";
-		String pw = "team01";
-		Connection conn = DriverManager.getConnection(url,user,pw);  
-		return conn;
-	}
 	
 	public int smemberInsert(SmemberDTO dto) {
 		int result = 0;
 		try {
-			conn = getConnection();
-			
+			conn = OracleDB.getConnection();		
 			pstmt = conn.prepareStatement("insert into s_member values(s_member_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,0,0,sysdate)");
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getLang());
@@ -49,31 +37,27 @@ public class SmemberDAO {
 			pstmt.setString(14, dto.getPortfolio());
 			pstmt.setString(15, dto.getPeriod());
 			pstmt.setInt(16, dto.getAvailable());
-			
-			result = pstmt.executeUpdate();
-			
-		}catch(Exception e) {
+			result = pstmt.executeUpdate();			
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
-		return result;
-		
+		return result;	
 	}
+	
+	
 	public List<SmemberDTO> getAllList(int start , int end) {
 		List<SmemberDTO> list = null;
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select * from "
 					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,period,available,favor,good,readcount,regdate,rownum r from "
 					+ " (select * from s_member order by num desc)) "
 					+ " where r >=? and r <=?");
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);
-			
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();			
 			list = new ArrayList();
 			while(rs.next()) {
 				SmemberDTO dto = new SmemberDTO();
@@ -90,18 +74,18 @@ public class SmemberDAO {
 				dto.setGood(rs.getInt("good"));
 				list.add(dto);
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return list;
 	}
+	
+	
 	public SmemberDTO getContent(SmemberDTO dto) {
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select * from s_member where num=?");
 			pstmt.setInt(1, dto.getNum());
 			rs = pstmt.executeQuery();
@@ -128,58 +112,53 @@ public class SmemberDAO {
 				dto.setGood(rs.getInt("good"));
 				dto.setRegdate(rs.getTimestamp("regdate"));
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return dto;
 	}
 	
+	
 	public void readCountUp(SmemberDTO dto) {
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			String sql = "update  s_member  set  readcount=readcount+1  where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getNum());
-			
-			pstmt.executeUpdate();
-			
-		}catch(Exception e) {
+			pstmt.executeUpdate();		
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 	}
+	
 	
 	public int getCount() {
 		int result = 0; 
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select count(*) from s_member");
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
 	}
+	
+	
 	public int sMemberUpdate(SmemberDTO dto) {
 		int result = 0;
 		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement("update s_member set lang=?, career=? ,worktype=? ,field=? ,pay=? , location=?, employtype=?, projecttype=?, introduce=?, email=?, phone=? , kakao=?, portfolio=? period=?, available=? where num=?");
-			
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("update s_member set lang=?, career=? ,worktype=? ,field=? ,pay=? , location=?, employtype=?, projecttype=?, introduce=?, email=?, phone=? , kakao=?, portfolio=? period=?, available=? where num=?");			
 			pstmt.setString(1, dto.getLang());
 			pstmt.setString(2, dto.getCareer());
 			pstmt.setString(3, dto.getWorktype());
@@ -196,49 +175,43 @@ public class SmemberDAO {
 			pstmt.setString(14, dto.getPeriod());
 			pstmt.setInt(15, dto.getAvailable());
 			pstmt.setInt(16, dto.getNum());
-			result = pstmt.executeUpdate();
-
-			
-		}catch (Exception e) {
+			result = pstmt.executeUpdate();		
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-	        if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-	        if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
 	}
 
+	
 	public int sMemberDelete(SmemberDTO dto) {
 		int result = 0;
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("delete from s_member where num=?");
 			pstmt.setInt(1, dto.getNum());
-			result = pstmt.executeUpdate();
-
-			
-		}catch (Exception e) {
+			result = pstmt.executeUpdate();	
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-	        if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-	        if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
 	}
+	
+	
 	public List<SmemberDTO> getMyList(String id , int start , int end) {
 		List<SmemberDTO> list = null;
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select * from "
 					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,pfdetail,period,available,favor,good,readcount,regdate,rownum r from "
 					+ " (select * from s_member where id=? order by num desc)) "
 					+ " where r >=? and r <=?");
 			pstmt.setString(1, id);
 			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
-			
+			pstmt.setInt(3, end);			
 			rs = pstmt.executeQuery();
 			list = new ArrayList();
 			while(rs.next()) {
@@ -256,34 +229,33 @@ public class SmemberDAO {
 				dto.setGood(rs.getInt("good"));
 				list.add(dto);
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return list;
 	}
+	
+	
 	public int getMyCount(String id) {
 		int result = 0; 
 		try {
-			conn = getConnection();
+			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select count(*) from s_member where id=?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
 	}
+	
 	
 	public List<SmemberDTO> getSearchList(String career,String field,String worktype, String location, String employtype, int available , int start , int end) {
 		List<SmemberDTO> list = null;
@@ -292,8 +264,7 @@ public class SmemberDAO {
 			pstmt = conn.prepareStatement("select * from "
 					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,period,available,favor,good,readcount,regdate,rownum r from "
 					+ " (select * from s_member where career=? and field=?  and worktype= ? and location= ? and employtype= ? and  available = ? order by num desc)) "
-					+ " where  r >=? and r <=?");
-			
+					+ " where  r >=? and r <=?");			
 			pstmt.setString(1, career);
 			pstmt.setString(2, field);
 			pstmt.setString(3, worktype);
@@ -301,9 +272,7 @@ public class SmemberDAO {
 			pstmt.setString(5, employtype);
 			pstmt.setInt(6, available);
 			pstmt.setInt(7, start);
-			pstmt.setInt(8, end);
-			
-			
+			pstmt.setInt(8, end);		
 			rs = pstmt.executeQuery();
 			list = new ArrayList();
 			while(rs.next()) {
@@ -321,19 +290,18 @@ public class SmemberDAO {
 				sdto.setGood(rs.getInt("good"));
 				list.add(sdto);
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return list;
 	}
+	
+	
 	public int getSearchCount(String career,String field,String worktype, String location, String employtype, int available ) {
 		int result = 0; 
 		try {
-
 			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select count(*) from s_member where career in ("+career+") and field in ("+field+")  and worktype in ("+worktype+") and location in ("+location+") and employtype in ("+employtype+") and  available = "+available+"");
 			pstmt = conn.prepareStatement("select count(*) from s_member where career= ? and field= ?  and worktype= ? and location= ? and employtype= ? and  available = ? ");
@@ -347,12 +315,10 @@ public class SmemberDAO {
 			if(rs.next()) {
 				result = rs.getInt(1);
 			}
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-			if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
 	}

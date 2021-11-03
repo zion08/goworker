@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="bean.SmemberDAO" %> 
-<%@ page import = "smember.comment.bean.Comment_SmemberDAO" %>
-<%@ page import = "smember.comment.bean.Comment_SmemberDTO" %>
+<%@ page import = "bean.Comment_SmemberDAO" %>
+<%@ page import = "bean.Comment_SmemberDTO" %>
 <%@ page import="java.util.List" %> 
 <%@ page import = "java.text.SimpleDateFormat" %>
 
