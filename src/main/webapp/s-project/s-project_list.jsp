@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="sproject.bean.SprojectDTO" %>
-<%@ page import="sproject.bean.SprojectDAO" %>
+<%@ page import="bean.SprojectDTO" %>
+<%@ page import="bean.SprojectDAO" %>
 <%@ page import ="java.util.List" %>
 <%
 	int pageSize = 20;
@@ -26,7 +26,7 @@
 	}
 	
 	//if(id != null){
-		%>		<input type="button"  value="프로젝트 등록" onclick="window.location='writeForm.jsp' "/>
+		%>		<input type="button"  value="프로젝트 등록" onclick="window.location='s-project_input.jsp' "/>
 		<%//}  %>
 	<%=count %>
 <table border="1">
@@ -42,7 +42,7 @@
 <% 		for(SprojectDTO dto : list){%>
 	<tr>
 		<td><%=dto.getNum() %></td>
-		<td><a href="sprojectContent.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getProjectName()%></a></td>
+		<td><a href="s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getId() %></a></td>
 		<td><%=dto.getId() %></td>
 		<td><%=dto.getCareer() %></td>
 		<td><%=dto.getPeriod() %></td>
@@ -74,10 +74,3 @@
 	  <%}
 	} 
 %>
-
-
-
-
-
-
-
