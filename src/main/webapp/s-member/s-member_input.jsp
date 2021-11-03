@@ -3,8 +3,6 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <link href="../style.css" rel="stylesheet" type="text/css">
 
-<title>멤버 등록</title>
-
 <header>
 	<div class="logo" onclick="window.location='/goworker/main/index.jsp'"></div>
 
@@ -16,10 +14,12 @@
 </header>
 <hr color="skyblue" size="2"  align="center" />
 
+
+<title>멤버 등록</title>
 <h1>멤버 등록</h1>
 
-<section id="content_input">
-	<form action="s-member_inputPro.jsp" method="post" enctype="multipart/form-data">
+<section class="section2">
+	<form action="s-member_inputPro.jsp" method="post" enctype="multipart/form-data" class="form-box2">
 		<div class="wrapper">
 			<div id="id">	
 				<span>아이디</span>
@@ -47,7 +47,7 @@
 						<option value="개발">개발</option>
 						<option value="기획">기획</option>
 						<option value="디자인">디자인</option>
-						<option value="전체">전체<option>
+						<option value="all">전체<option>
 					</select>			
 			</div>
 			
@@ -84,7 +84,7 @@
 					</div>
 			</div>
 			
-			<div>
+			<div id="portfolio">
 				<span>포트폴리오</span>
 					<input type="file" name="portfolio" multiple="multiple">
 			</div>
@@ -119,7 +119,7 @@
 			<div id="location"> <!--  업무 방식이 사무실 또는 협의인 경우  -->
 				<span>선호 업무 지역</span>
 					<select name="location">
-						<option>상관없음</option>
+						<option value="all">상관없음</option>
 						<option>서울</option>
 						<option>경기</option>
 						<option>인천</option>
@@ -139,12 +139,7 @@
 						<option>제주</option>
 				</select>
 			</div>
-			
-			<div id="pay">
-				<span>희망 계약금</span>
-					<input type="text" name="pay"  placeholder=", 없이 입력">만원
-			</div>
-			
+				
 			<div id="period">
 				<span>근무가능일자</span>
 					<input type="date" name="period">
@@ -156,6 +151,11 @@
 					<option value="1">on</option>
 					<option value="0">off</option>
 				</select>
+			</div>
+			
+			<div id="pay">
+				<span>희망 계약금</span>
+					<input type="text" name="pay"  placeholder=", 없이 입력">만원
 			</div>
 			
 			<div id="introduce">
