@@ -70,6 +70,7 @@
 	dto.setPeriod(period);
 	dto.setAvailable(avail);
 	dto.setIntroduce(introduce);
+	
 	SmemberDAO dao = new SmemberDAO();
 	
 	int result = dao.sMemberUpdate(dto);

@@ -19,6 +19,7 @@
 	String worktype = request.getParameter("worktype");
 	String location = request.getParameter("location");
 	String employtype = request.getParameter("employtype");
+	String projecttype = request.getParameter("projecttype");
 	String period = request.getParameter("period");
 	String avail = request.getParameter("available");
 	int available = Integer.parseInt(avail);
@@ -52,14 +53,18 @@
 
 		dto.setEmploytype(employtype);
 		//employtype = dto.getEmploytype();
+		dto.setProjecttype(projecttype);
 	
 		dto.setAvailable(available);
 		//available = dto.getAvailable();
 	
 	System.out.println(dto.getCareer());
+	System.out.println(dto.getField());
 	System.out.println(dto.getWorktype());
 	System.out.println(dto.getLocation());
 	System.out.println(dto.getEmploytype());
+	System.out.println(dto.getProjecttype());
+	
 	System.out.println(dto.getAvailable());
 	System.out.println(start);
 	System.out.println(end);
@@ -75,9 +80,9 @@
 	int scount = 0; 
 	List<SmemberDTO> list = null;	
 			
-		scount = dao.getSearchCount( career ,field, worktype, location,employtype ,available); // 전체 글의 갯수
+		scount = dao.getSearchCount( career ,field, worktype, location,employtype,projecttype ,available); // 전체 글의 갯수
 		if(scount > 0) {
-			list = dao.getSearchList( career ,field, worktype, location,employtype ,available, start, end );	
+			list = dao.getSearchList( career ,field, worktype, location,employtype,projecttype ,available, start, end );	
 		}
 		System.out.println(scount);
 		System.out.println(list);
@@ -150,35 +155,31 @@ function doDisplay(){
 		<a href="javascript:doDisplay();">검색조건 보기</a><br/>
 	</div>
 
-
 	<form action="s-member_search.jsp" method= "post" class="form-box1">
 		<table border=1>
 			<tr>
 				<th>경력</th>	
 				<td>
 					<select name="career">
-						
-						<option>신입</option>
-						<option>1년차</option>
-						<option>2년차</option>
-						<option>3년차</option>
-						<option>4년차</option>
-						<option>5년차</option>
-						<option>6년차</option>
-						<option>7년차이상</option>
+						<option value="new">신입</option>
+						<option value="1">1년차</option>
+						<option value="2">2년차</option>
+						<option value="3">3년차</option>
+						<option value="4">4년차</option>
+						<option value="5">5년차</option>
+						<option value="6">6년차</option>
+						<option value="7">7년차이상</option>
 					</select>
 				</td>
 			</tr>
-
 			
 			<tr>
 				<th>분야</th>
 				<td>
 					<select name="field">
-					
-						<option>개발</option>
-						<option>기획</option>
-						<option>디자인</option>
+						<option value="dev">개발</option>
+						<option value="plan">기획</option>
+						<option value="design">디자인</option>
 					</select>
 				</td>
 			</tr>
@@ -187,9 +188,9 @@ function doDisplay(){
 				<th>업무 방식</th>	
 				<td>
 					<select name="worktype">
-						<option>원격</option>
-						<option>상주</option>
-						<option>협의</option>
+						<option value="online">원격</option>
+						<option value="office">상주</option>
+						<option value="discuss">협의</option>
 					</select>
 				</td>
 			</tr>
@@ -198,24 +199,24 @@ function doDisplay(){
 				<th>지역</th>
 				<td>
 					<select name="location">
-						<option>원격</option>
-						<option>서울</option>
-						<option>경기</option>
-						<option>인천</option>
-						<option>강원</option>
-						<option>충북</option>
-						<option>충남</option>
-						<option>대전</option>
-						<option>세종</option>
-						<option>전북</option>
-						<option>전남</option>
-						<option>광주</option>
-						<option>경북</option>
-						<option>경남</option>
-						<option>대구</option>
-						<option>울산</option>
-						<option>부산</option>
-						<option>제주</option>
+						<option value="online">원격</option>
+						<option value="seoul">서울</option>
+						<option value="gyunggi">경기</option>
+						<option value="incheon">인천</option>
+						<option value="gangwon">강원</option>
+						<option value="chungbuk">충북</option>
+						<option value="chungnam">충남</option>
+						<option value="daejeon">대전</option>
+						<option value="sejong">세종</option>
+						<option value="jeonbuk">전북</option>
+						<option value="jeonnam">전남</option>
+						<option value="gwangju">광주</option>
+						<option value="gyungbuk">경북</option>
+						<option value="gyungnam">경남</option>
+						<option value="daegu">대구</option>
+						<option value="ulsan">울산</option>
+						<option value="busan">부산</option>
+						<option value="jeju">제주</option>
 					</select>
 				</td>	
 			</tr>
@@ -224,11 +225,10 @@ function doDisplay(){
 			<th>활동 유형</th>
 				<td>
 					<select name="employtype">
-					
-						<option value="개인">개인 프리랜서</option>
-						<option value="팀">팀 프리랜서드</option>
-						<option value="개인사업">개인 사업자</option>
-						<option value="법인사업">법인 사업자</option>
+						<option value="sfree">개인 프리랜서</option>
+						<option value="tfree">팀 프리랜서드</option>
+						<option value="sbusiness">개인 사업자</option>
+						<option value="cbusiness">법인 사업자</option>
 					</select>
 				</td>	
 			</tr>
@@ -237,8 +237,8 @@ function doDisplay(){
 			<th>프로젝트 유형</th>
 				<td>
 					<select name="projecttype">
-						<option value="사이드">사이드 프로젝트</option>
-						<option value="메인">메인 프로젝트</option>
+						<option value="side">사이드 프로젝트</option>
+						<option value="main">메인 프로젝트</option>
 					</select>
 				</td>	
 			</tr>
@@ -262,7 +262,8 @@ function doDisplay(){
 		</table>
 	</form>
 </section>
-<section class="section3">
+
+<section>
 	<%if(scount > 0) { 
 		for(SmemberDTO sdto : list) { 
 		%>
@@ -309,30 +310,32 @@ function doDisplay(){
 
 </section>
 <section class="section4">
-<%
-	if (scount > 0) {
-		int pageCount = scount / pageSize + (scount % pageSize == 0 ? 0 : 1);
-		int startPage = (currentPage / 10)* 10 +1;
-		int pageBlock = 10;
-		int endPage = startPage + pageBlock -1;
-			if(endPage > pageCount) {
-				endPage = pageCount;
-			}
+	<%
+		if (scount > 0) {
+			int pageCount = scount / pageSize + (scount % pageSize == 0 ? 0 : 1);
+			int startPage = (currentPage / 10)* 10 +1;
+			int pageBlock = 10;
+			int endPage = startPage + pageBlock -1;
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+			
+			if (startPage >10) {
+	%>			<a href="s-member.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+	<%		}
 		
-		if (startPage >10) {
-%>			<a href="s-member_search.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
-<%		}
-	
-		for (int i = startPage ; i <= endPage ; i++) {
-%> 			<a href="s-member_search.jsp?pageNum=<%=i%>">[<%=i %>] </a>
-<%		}
-	
-		if(endPage < pageCount) {
-%>		<a href="s-member_search.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-<%		}
-	}
-%>
+			for (int i = startPage ; i <= endPage ; i++) {
+	%> 			<a href="s-member.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+	<%		}
+		
+			if(endPage < pageCount) {
+	%>		<a href="s-member.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+	<%		}
+		}
+	%>
 </section>
+
+
 
 <footer>
 <hr color="skyblue" size="2"  align="center" />
