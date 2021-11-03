@@ -7,6 +7,7 @@
 <%@ page import="java.util.List" %> 
 <%@ page import = "java.text.SimpleDateFormat" %>
 
+
    
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
@@ -52,7 +53,7 @@
 	<table class="mDetail" border=1>
 		<tr>
 			<th>아이디</th>
-			<td><%=dto.getId() %></td>
+			<td><%=dto.getId() %><input type="hidden" name="num" value="<%=dto.getNum() %>"></td>
 		</tr>
 		
 		<tr>
@@ -113,7 +114,7 @@
 		<tr>
 			<th>포트폴리오</th>		
 			<%if(dto.getPortfolio() != null) { %>
-			<td><img src = "/goworker/portfolioFile/"<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
+			<td><img src = "/goworker/portfolioFile/<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
 			<%} else { %>
 			<td> 등록된 포트폴리오가 없습니다. </td>
 			<%} %>
@@ -128,9 +129,27 @@
 		<tr>
 			<th>자기소개</th>		
 			<td width="400px"><%=dto.getIntroduce() %></td>
+		</tr>
+		<tr>
+				
+		
+			<th colspan="2">
+			<img src="image/view.png" width="25px" height="25px" ><%=dto.getReadcount()%> &emsp;
+			<img src="image/thumbs.png" width="25px" height="25px" ><%=dto.getGood() %>
+			</th>		
+			
+		
 		</tr>	
 	</table>
 	<br/>
+	
+	
+	
+	<form align="center">
+		<input type="button" value="좋아요" onclick= "window.open('s-member_goodUp.jsp?num=<%=dto.getNum() %>','GoodUp','width=300,height=150'); window.location.reload();" />
+		<input type="button" value="싫어요" onclick= "window.open('s-member_goodDown.jsp?num=<%=dto.getNum() %>','GoodDown','width=300,height=150'); window.location.reload();" />
+	</form>
+	
 	
 	<form align="center">
 		<input type="button" value="쪽지 보내기" />
@@ -138,6 +157,8 @@
 	</form>
 
 </section>
+
+
 	<body>
 
 

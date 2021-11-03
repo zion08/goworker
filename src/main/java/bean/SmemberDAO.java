@@ -328,4 +328,30 @@ public class SmemberDAO {
 		}
 		return result;
 	}
+	public void goodUp(SmemberDTO dto) {
+		try {
+			conn = OracleDB.getConnection();
+			String sql = "update  s_member  set  good = good+1  where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			pstmt.executeUpdate();		
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+	}
+	public void goodDown(SmemberDTO dto) {
+		try {
+			conn = OracleDB.getConnection();
+			String sql = "update  s_member  set  good = good-1  where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			pstmt.executeUpdate();		
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+	}
 } 
