@@ -2,8 +2,10 @@ package bean;
 
 import java.sql.Timestamp;
 
-public class Comment_SmemberDTO {
+public class Comment_SprojectDTO {
 
+	
+	
 	private int comment_num;
 	private int board_num;
 	private String comment_writerid;
@@ -12,7 +14,6 @@ public class Comment_SmemberDTO {
 	private int comment_ref;
 	private int comment_step;
 	private int comment_level;
-	
 	public int getComment_num() {
 		return comment_num;
 	}
@@ -61,5 +62,6 @@ public class Comment_SmemberDTO {
 	public void setComment_level(int comment_level) {
 		this.comment_level = comment_level;
 	}
+	
 	
 }

@@ -20,6 +20,7 @@ public class SmemberDAO {
 		int result = 0;
 		try {
 			conn = OracleDB.getConnection();		
+
 			pstmt = conn.prepareStatement(
 					"insert into s_member values(s_member_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,0,0,sysdate)");
 			pstmt.setString(1, dto.getId());
@@ -262,7 +263,9 @@ public class SmemberDAO {
 	}
 	
 	
+
 	public List<SmemberDTO> getSearchList(String career,String field,String worktype, String location, String employtype, String projecttype, int available , int start , int end) {
+
 		List<SmemberDTO> list = null;
 		try {
 			conn = OracleDB.getConnection();
