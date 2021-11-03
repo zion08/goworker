@@ -5,13 +5,13 @@
 <jsp:useBean class="bean.SmemberDTO" id="dto" />   
 <% String num= request.getParameter("num");
 	String pageNum = request.getParameter("pageNum");
-	/* String id = (String)session.getAttribute("id"); */
+	 String id = (String)session.getAttribute("id"); 
 	SmemberDAO dao = new SmemberDAO();
 	dto = dao.getContent(dto);
 
 %>
 
-<html>
+
 <link href="style.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>멤버등록</title>
@@ -30,142 +30,158 @@
 
 </header>
 <hr color="skyblue" size="2"  align="center" />
-<br/>
-<center>
-<div class="input" >
-	<form action="s-member_updatePro.jsp" method="post" >
-	<table border="1" width="70%" class="input_board">
-	<tr>
-		<th>아이디</th>
-		<td><%=dto.getId()%> 
-    			 <input type="hidden" name="writer" value="<%=dto.getId()%>" />	
-	</tr>
-	<tr>
-			<th>경력</th>	
-			<td>
-			<select name="career">
-				<option value="신입">신입</option>
-				<option value="1년차">1년차</option>
-				<option value="2년차">2년차</option>
-				<option value="3년차">3년차</option>
-				<option value="4년차">4년차</option>
-				<option value="5년차">5년차</option>
-				<option value="6년차">6년차</option>
-				<option value="7년차이상">7년차이상</option>
-			</select>
-			</td>
-		</tr>
-	<tr>
-		<th>분야</th>
-		<td><select name="field">
-				<option value="개발">개발</option>
-				<option value="기획">기획</option>
-				<option value="디자인">디자인</option>
-				<option value="기타">기타</option>
-		</select>
+<section class="section2">
+	<form action="s-member_inputPro.jsp" method="post" enctype="multipart/form-data" class="form-box2">
+		<div class="wrapper">
+			<div id="id">	
+				<span>아이디</span>
+					<%=id%>
+					<input type="hidden" name="writer" value="<%=id%>" />
+			</div>
 			
-		</td>
-	</tr>
-	<tr>
-		<th>개발언어</th>
-		<td><input type="text" name="lang" /></td>	
-	</tr>
-	<tr>
-			<th>업무방식</th>	
-			<td><select name="worktype">
-				<option value="전체">상관없음</option>
-				<option value="온라인">온라인</option>
-				<option value="사무실">사무실</option>
-				<option value="의견조율">의견조율</option>
+			<div id=phone>
+				<span>전화번호</span>
+					<input type="text" name="phone" placeholder="-없이 입력">
+			</div>
+			
+			<div id=email>
+				<span>이메일</span>
+					<input type="email" name="email">
+			</div>
+			
+			<div id=kakao>
+				<span>카카오톡</span>
+					<input type="text" name="kakao">
+			</div>
+			
+			<div id="field">
+				<span>분야</span>
+					<select name="field">
+						<option value="dev">개발</option>
+						<option value="plan">기획</option>
+						<option value="design">디자인</option>
+						
+					</select>			
+			</div>
+			
+			<div id="career">
+				<span>경력</span>
+					<select name="career">
+						<option value="new">신입</option>
+						<option value="1">1년차</option>
+						<option value="2">2년차</option>
+						<option value="3">3년차</option>
+						<option value="4">4년차</option>
+						<option value="5">5년차</option>
+						<option value="6">6년차</option>
+						<option value="7">7년차이상</option>
+					</select>
+			</div>
+			
+			<div id="lang">
+				<span>보유 기술</span>
+					<div>
+						<label><input type="checkbox" name="lang" value="Python">Python</label>
+						<label><input type="checkbox" name="lang" value="Django">Django</label>
+						<label><input type="checkbox" name="lang" value="Java">Java</label>
+						<label><input type="checkbox" name="lang" value="JavaServerPage">JavaServerPage</label>
+						<label><input type="checkbox" name="lang" value="Spring">Spring</label>
+						<label><input type="checkbox" name="lang" value="Html">Html</label>
+						<label><input type="checkbox" name="lang" value="JavaScript">JavaScript</label>
+						<label><input type="checkbox" name="lang" value="React">React</label>
+						<label><input type="checkbox" name="lang" value="C">C</label>
+						<label><input type="checkbox" name="lang" value="C++">C++</label>
+						<label><input type="checkbox" name="lang" value="C#">C#</label>
+						<label><input type="checkbox" name="lang" value="SQL">SQL</label>				
+						<label><input type="checkbox" name="lang" value="R">R</label>
+					</div>
+			</div>
+			
+			<div id="portfolio">
+				<span>포트폴리오</span>
+					<input type="file" name="portfolio" multiple="multiple">
+			</div>
+			
+			<div id="pfdetail">
+				<span>포트폴리오 설명</span>
+					<input type="text" name="pfdetail" >
+			</div>
+			
+			
+			<div id="employtype">
+				<span>활동 유형</span>
+					<label><input type="radio" name="employtype" value="sfree">개인 프리랜서</label>
+					<label><input type="radio" name="employtype" value="tfree">팀 프리랜서</label>
+					<label><input type="radio" name="employtype" value="sbusiness">개인 사업자</label>
+					<label><input type="radio" name="employtype" value="cbusiness">법인 사업자</label>
+			</div>
+			
+			<div id="projecttype">
+				<span>찾는 프로젝트 유형</span>
+					<label><input type="checkbox" name="projecttype" value="side">사이드 프로젝트</label>
+					<label><input type="checkbox" name="projecttype" value="main">메인 프로젝트</label>
+			</div>            
+					
+			<div id="worktype">
+				<span>가능한 업무 방식</span>
+					<label><input type="checkbox" name="worktype" value="online">원격</label>
+					<label><input type="checkbox" name="worktype" value="office">상주</label>
+					<label><input type="checkbox" name="worktype" value="discuss">협의</label>
+			</div>
+			
+			<div id="location"> <!--  업무 방식이 사무실 또는 협의인 경우  -->
+				<span>선호 업무 지역</span>
+					<select name="location">
+						<option value="online">원격</option>
+						<option value="seoul">서울</option>
+						<option value="gyunggi">경기</option>
+						<option value="incheon">인천</option>
+						<option value="gangwon">강원</option>
+						<option value="chungbuk">충북</option>
+						<option value="chungnam">충남</option>
+						<option value="daejeon">대전</option>
+						<option value="sejong">세종</option>
+						<option value="jeonbuk">전북</option>
+						<option value="jeonnam">전남</option>
+						<option value="gwangju">광주</option>
+						<option value="gyungbuk">경북</option>
+						<option value="gyungnam">경남</option>
+						<option value="daegu">대구</option>
+						<option value="ulsan">울산</option>
+						<option value="busan">부산</option>
+						<option value="jeju">제주</option>
+					</select>
+			</div>
+				
+			<div id="period">
+				<span>근무가능일자</span>
+					<input type="date" name="period">
+			</div>
+			
+			<div id="available">
+				<span>구직활동여부</span>
+				<select name="available">
+					<option value="1">on</option>
+					<option value="0">off</option>
 				</select>
-			</td>
-		</tr>
-	<tr>
-		<th>지역</th>
-		<td><select name="location">
-			<option value="전체">상관없음</option>
-			<option value="서울">서울</option>
-			<option value="경기">경기</option>
-			<option value="인천">인천</option>
-			<option value="강원">강원</option>
-			<option value="충북">충북</option>
-			<option value="충남">충남</option>
-			<option value="대전">대전</option>
-			<option value="세종">세종</option>
-			<option value="전북">전북</option>
-			<option value="전남">전남</option>
-			<option value="광주">광주</option>
-			<option value="경북">경북</option>
-			<option value="경남">경남</option>
-			<option value="대구">대구</option>
-			<option value="울산">울산</option>
-			<option value="부산">부산</option>
-			<option value="제주">제주</option>
-		</select></td>	
-	</tr>
-	<tr>
-		<th>고용타입</th>
-		<td><select name="employtype">
-			<option value="토이/사이드">토이/사이드</option>
-			<option value="계약직">계약직</option>
-			<option value="정규직">정규직</option>
-			<option value="기타">기타</option>
-		</select></td>	
-	</tr>
-	<tr>
-		<th>프로젝트타입</th>
-		<td><select name="projecttype">
-			<option value="토이/사이드">토이/사이드프로젝트</option>
-			<option value="메인프로젝트">메인프로젝트</option>
-		</select></td>	
-	</tr>
-	
-	<tr>
-		<th>희망급여</th>
-		<td><input type="text" name="pay" placeholder="단위는 만원">
-		</td>		
-	</tr>
-	<tr>
-		<th>근무가능일자</th>
-		<td><input type="text" name="period" placeholder="년/월/일 부터"/></td>	
-	</tr>
-	<tr>
-		<th>전화번호</th>
-		<td><input type="text" name="phone" placeholder="기존정보 불러오기"/></td>	
-	</tr>
-	<tr>
-		<th>이메일주소</th>
-		<td><input type="text" name="email" placeholder="기존정보 불러오기"/></td>	
-	</tr>
-	<tr>
-		<th>카카오톡</th>
-		<td><input type="text" name="kakao" placeholder="카카오톡 아이디"/></td>	
-	</tr>
-	<tr>
-		<th>포트폴리오</th>
-		<td><input type="text" name="portfolio"/></td>	
-	</tr>
-	<tr>
-		<th>소개</th>
-		<td><textarea rows="10" cols="40" name="introduce"></textarea></td>	
-	</tr>
-	<tr>
-		<th>구직활동여부</th>
-		<td><select name="available">
-				<option value="1">on</option>
-				<option value="0">off</option>
-		</select> 
+			</div>
 			
-		</td>
-	</tr>
-	</table> <br/>
-	<hr color="skyblue" size="2" width="600" align="center"><br/>
-		<input type="submit" value="작성하기"/>
-	
-	</form>
-
-
-</div>
-</center>
-
-</html>
+			<div id="pay">
+				<span>희망 계약금</span>
+					<input type="text" name="pay"  placeholder=", 없이 입력">만원
+			</div>
+			
+			<div id="introduce">
+				<span>소개</span>
+					<input type="text" name="introduce" >
+			</div>
+			
+			
+			
+			<hr color="skyblue" size="2" width="750" align="center">
+			<div class="wrapper-submit">
+				<input type="submit" value="등록하기" />
+			</div>
+		</div>
+	</form>	
+</section>

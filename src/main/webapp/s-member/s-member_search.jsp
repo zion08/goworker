@@ -19,6 +19,7 @@
 	String worktype = request.getParameter("worktype");
 	String location = request.getParameter("location");
 	String employtype = request.getParameter("employtype");
+	String projecttype = request.getParameter("projecttype");
 	String period = request.getParameter("period");
 	String avail = request.getParameter("available");
 	int available = Integer.parseInt(avail);
@@ -52,14 +53,18 @@
 
 		dto.setEmploytype(employtype);
 		//employtype = dto.getEmploytype();
+		dto.setProjecttype(projecttype);
 	
 		dto.setAvailable(available);
 		//available = dto.getAvailable();
 	
 	System.out.println(dto.getCareer());
+	System.out.println(dto.getField());
 	System.out.println(dto.getWorktype());
 	System.out.println(dto.getLocation());
 	System.out.println(dto.getEmploytype());
+	System.out.println(dto.getProjecttype());
+	
 	System.out.println(dto.getAvailable());
 	System.out.println(start);
 	System.out.println(end);
@@ -75,9 +80,9 @@
 	int scount = 0; 
 	List<SmemberDTO> list = null;	
 			
-		scount = dao.getSearchCount( career ,field, worktype, location,employtype ,available); // 전체 글의 갯수
+		scount = dao.getSearchCount( career ,field, worktype, location,employtype,projecttype ,available); // 전체 글의 갯수
 		if(scount > 0) {
-			list = dao.getSearchList( career ,field, worktype, location,employtype ,available, start, end );	
+			list = dao.getSearchList( career ,field, worktype, location,employtype,projecttype ,available, start, end );	
 		}
 		System.out.println(scount);
 		System.out.println(list);
@@ -145,125 +150,119 @@ function doDisplay(){
 <a href ="s-member_input.jsp"><input type="button" class=mInputButton value="멤버 등록하기"></a><br/><br/>
 
 </aside>
-<section>
-
-<a href="javascript:doDisplay();"> 검색조건 보기</a><br/><br/>
-
-<div id="checkboard">
-	<form action="s-member_search.jsp" method= "post" >
-	<table border=1>
-		<tr>
-			<th>경력</th>	
-			<td>
-			<select name="career">
-				
-				<option value="new">신입</option>
-				<option value="1년차">1년차</option>
-				<option value="2년차">2년차</option>
-				<option value="3년차">3년차</option>
-				<option value="4년차">4년차</option>
-				<option value="5년차">5년차</option>
-				<option value="6년차">6년차</option>
-				<option value="7년차이상">7년차이상</option>
-			</select>
-			</td>
-		</tr>
-		<tr>
-		<th>분야</th>
-		<td><select name="field">
-				
-				<option value="dev">개발</option>
-				<option value="기획">기획</option>
-				<option value="디자인">디자인</option>
-				<option value="기타">기타</option>
-		</select>
-			
-		</td>
-	</tr>
-	
-		<tr>
-			<th>업무방식</th>	
-			<td><select name="worktype">
-				<option value="online">온라인</option>
-				<option value="사무실">사무실</option>
-				<option value="의견조율">의견조율</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-		<th>지역</th>
-		<td><select name="location">
-			<option value="seoul">서울</option>
-			<option value="경기">경기</option>
-			<option value="인천">인천</option>
-			<option value="강원">강원</option>
-			<option value="충북">충북</option>
-			<option value="충남">충남</option>
-			<option value="대전">대전</option>
-			<option value="세종">세종</option>
-			<option value="전북">전북</option>
-			<option value="전남">전남</option>
-			<option value="광주">광주</option>
-			<option value="경북">경북</option>
-			<option value="경남">경남</option>
-			<option value="대구">대구</option>
-			<option value="울산">울산</option>
-			<option value="부산">부산</option>
-			<option value="제주">제주</option>
-		</select></td>	
-	</tr>
-	<tr>
-		<th>고용타입</th>
-		<td><select name="employtype">
-			<option value="toy">토이/사이드</option>
-			<option value="계약직">계약직</option>
-			<option value="정규직">정규직</option>
-		</select></td>	
-	</tr>
-	
-	<tr>
-		<th>구직활동여부</th>
-		<td><select name="available">
-				<option value="1">on</option>
-				<option value="2">off</option>
-		</select> 
-			
-		</td>
-	<tr>
-		<td colspan=2 align="center"> <input type="submit" value="검색" />
-		</td>
-	</tr>	
-	
-	</table>
-	</form>
-</div>
-
-</section><br/>
-<section>
+<section class="section1">
 	<div>
-		<table class="mboard" >
-			<tr>
-				<th><a href="s-member_detail.jsp">Limtaehoon</a></th>
-				<td><img src="image/switch-on.png" width="40px" height="36px">
-				</td>
-				<th>개발</th>
-			</tr>
-			<tr>
-				<th>신입</th>
-				<th>상관없음</th>
-				<th>경기</th>
-				<th>온라인</th>
-			</tr>
-			<tr>
-			<td colspan="4"> 간단한 소개글 자리 이지만 간단하진 않고  <br/>
-					그렇다고 안간단하면 보기 힘듬  
-			</td>
-			</tr>
-		</table>
+		<a href="javascript:doDisplay();">검색조건 보기</a><br/>
 	</div>
 
-
+	<form action="s-member_search.jsp" method= "post" class="form-box1">
+		<table border=1>
+			<tr>
+				<th>경력</th>	
+				<td>
+					<select name="career">
+						<option value="new">신입</option>
+						<option value="1">1년차</option>
+						<option value="2">2년차</option>
+						<option value="3">3년차</option>
+						<option value="4">4년차</option>
+						<option value="5">5년차</option>
+						<option value="6">6년차</option>
+						<option value="7">7년차이상</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>분야</th>
+				<td>
+					<select name="field">
+						<option value="dev">개발</option>
+						<option value="plan">기획</option>
+						<option value="design">디자인</option>
+					</select>
+				</td>
+			</tr>
+		
+			<tr>
+				<th>업무 방식</th>	
+				<td>
+					<select name="worktype">
+						<option value="online">원격</option>
+						<option value="office">상주</option>
+						<option value="discuss">협의</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>지역</th>
+				<td>
+					<select name="location">
+						<option value="online">원격</option>
+						<option value="seoul">서울</option>
+						<option value="gyunggi">경기</option>
+						<option value="incheon">인천</option>
+						<option value="gangwon">강원</option>
+						<option value="chungbuk">충북</option>
+						<option value="chungnam">충남</option>
+						<option value="daejeon">대전</option>
+						<option value="sejong">세종</option>
+						<option value="jeonbuk">전북</option>
+						<option value="jeonnam">전남</option>
+						<option value="gwangju">광주</option>
+						<option value="gyungbuk">경북</option>
+						<option value="gyungnam">경남</option>
+						<option value="daegu">대구</option>
+						<option value="ulsan">울산</option>
+						<option value="busan">부산</option>
+						<option value="jeju">제주</option>
+					</select>
+				</td>	
+			</tr>
+			
+			<tr>
+			<th>활동 유형</th>
+				<td>
+					<select name="employtype">
+						<option value="sfree">개인 프리랜서</option>
+						<option value="tfree">팀 프리랜서드</option>
+						<option value="sbusiness">개인 사업자</option>
+						<option value="cbusiness">법인 사업자</option>
+					</select>
+				</td>	
+			</tr>
+			
+			<tr>
+			<th>프로젝트 유형</th>
+				<td>
+					<select name="projecttype">
+						<option value="side">사이드 프로젝트</option>
+						<option value="main">메인 프로젝트</option>
+					</select>
+				</td>	
+			</tr>
+			
+			<tr>
+			<th>구직활동여부</th>
+				<td>
+					<select name="available">
+						<option value="1">on</option>
+						<option value="0">off</option>
+					</select> 
+				</td>
+			</tr>
+		
+			<tr>
+				<td colspan=2 align="center">
+					<input type="submit" value="검색" />
+				</td>
+			</tr>	
+			
+		</table>
+	</form>
 </section>
+
 <section>
 	<%if(scount > 0) { 
 		for(SmemberDTO sdto : list) { 
@@ -280,6 +279,9 @@ function doDisplay(){
 				<%} %>
 				</th>
 				<th><%=sdto.getField() %></th>
+				<td><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
+					<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+				</td>
 			</tr>
 			<tr>
 				<th><%=sdto.getCareer() %></th>
@@ -307,9 +309,33 @@ function doDisplay(){
 
 
 </section>
-<section>
-
+<section class="section4">
+	<%
+		if (scount > 0) {
+			int pageCount = scount / pageSize + (scount % pageSize == 0 ? 0 : 1);
+			int startPage = (currentPage / 10)* 10 +1;
+			int pageBlock = 10;
+			int endPage = startPage + pageBlock -1;
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+			
+			if (startPage >10) {
+	%>			<a href="s-member.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+	<%		}
+		
+			for (int i = startPage ; i <= endPage ; i++) {
+	%> 			<a href="s-member.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+	<%		}
+		
+			if(endPage < pageCount) {
+	%>		<a href="s-member.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+	<%		}
+		}
+	%>
 </section>
+
+
 
 <footer>
 <hr color="skyblue" size="2"  align="center" />
