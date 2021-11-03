@@ -119,7 +119,7 @@
 			<div id="location"> <!--  업무 방식이 사무실 또는 협의인 경우  -->
 				<span>선호 업무 지역</span>
 					<select name="location">
-						<option value="all">상관없음</option>
+						<option>원격</option>
 						<option>서울</option>
 						<option>경기</option>
 						<option>인천</option>
@@ -141,7 +141,7 @@
 			</div>
 				
 			<div id="period">
-				<span>근무가능일자</span>
+				<span>근무 가능 일자</span>
 					<input type="date" name="period">
 			</div>
 			

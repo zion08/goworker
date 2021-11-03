@@ -65,7 +65,7 @@
 				<th>경력</th>	
 				<td>
 					<select name="career">
-						<option value="all">전체</option>
+						
 						<option>신입</option>
 						<option>1년차</option>
 						<option>2년차</option>
@@ -83,7 +83,6 @@
 				<th>분야</th>
 				<td>
 					<select name="field">
-						<option value="all">전체</option>
 						<option>개발</option>
 						<option>기획</option>
 						<option>디자인</option>
@@ -106,7 +105,7 @@
 				<th>지역</th>
 				<td>
 					<select name="location">
-						<option value="all">상관없음</option>
+						<option>원격</option>
 						<option>서울</option>
 						<option>경기</option>
 						<option>인천</option>
@@ -132,7 +131,7 @@
 			<th>활동 유형</th>
 				<td>
 					<select name="employtype">
-						<option value="all">상관없음</option>
+					
 						<option value="개인">개인 프리랜서</option>
 						<option value="팀">팀 프리랜서드</option>
 						<option value="개인사업">개인 사업자</option>
@@ -186,6 +185,9 @@
 				<%} %>
 				</th>
 				<th><%=dto.getField() %></th>
+				<td><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
+					<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+				</td>
 			</tr>
 			<tr>
 				<th><%=dto.getCareer() %></th>

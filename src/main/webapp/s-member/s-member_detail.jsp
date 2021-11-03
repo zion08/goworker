@@ -40,12 +40,17 @@
 		</tr>
 		
 		<tr>
-			<th>사용 기술</th>
+			<th>경력</th>
+			<td><%=dto.getCareer() %></td>
+		</tr>
+		
+		<tr>
+			<th>보유 기술</th>
 			<td><%=dto.getLang() %></td>
 		</tr>
 		
 		<tr>
-			<th>근무형태</th>		
+			<th>가능한 업무 방식</th>		
 			<td><%=dto.getWorktype() %> </td>
 		</tr>
 		
@@ -55,17 +60,17 @@
 		</tr>
 		
 		<tr>
-			<th>고용타입</th>		
+			<th>활동 유형</th>		
 			<td><%=dto.getEmploytype()%></td>
 		</tr>
 		
 		<tr>
-			<th>시작가능 일자</th>		
+			<th>근무 가능 일자</th>		
 			<td><%=dto.getPeriod() %></td>
 		</tr>
 		
 		<tr>
-			<th>희망급여</th>		
+			<th>희망 계약금</th>		
 			<td><%=dto.getPay() %>만원 선</td>
 		</tr>
 		
@@ -81,13 +86,22 @@
 		
 		<tr>
 			<th><img src="image/email.png" width="25px" height="25px" ></th>		
-			<td><a href="mailto:﻿"<%=dto.getEmail() %>">메일보내기</a></td>
+			<td><a href="mailto:﻿"<%=dto.getEmail() %>"><%=dto.getEmail() %></a></td>
 		</tr>
 		
 		<tr>
 			<th>포트폴리오</th>		
-			<td><a href="<%=dto.getPortfolio() %>">포트폴리오 주소</a></td>
+			<%if(dto.getPortfolio() != null) { %>
+			<td><a href = "/goworker/portfolioFile/"<%=dto.getPortfolio() %>"><%=dto.getPortfolio() %></a></td>
+			<%} else { %>
+			<td> 등록된 포트폴리오가 없습니다. </td>
 		</tr>
+		
+		<tr>
+			<th>포트폴리오 설명</th>		
+			<td><%=dto.getPfdetail()%> </td>
+		</tr>
+		
 		
 		<tr>
 			<th>자기소개</th>		

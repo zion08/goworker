@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import oracle.OracleDB;
 
 public class SmemberDAO {
 	private Connection conn = null;
@@ -28,7 +29,7 @@ public class SmemberDAO {
 			conn = getConnection();
 
 			pstmt = conn.prepareStatement(
-					"insert into s_member values(s_member_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,0,0,sysdate)");
+					"insert into s_member values(s_member_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,0,0,sysdate)");
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getLang());
 			pstmt.setString(3, dto.getCareer());
@@ -43,8 +44,9 @@ public class SmemberDAO {
 			pstmt.setString(12, dto.getPhone());
 			pstmt.setString(13, dto.getKakao());
 			pstmt.setString(14, dto.getPortfolio());
-			pstmt.setString(15, dto.getPeriod());
-			pstmt.setInt(16, dto.getAvailable());
+			pstmt.setString(15, dto.getPfdetail());
+			pstmt.setString(16, dto.getPeriod());
+			pstmt.setInt(17, dto.getAvailable());
 
 			result = pstmt.executeUpdate();
 
@@ -148,6 +150,7 @@ public class SmemberDAO {
 				dto.setPhone(rs.getString("phone"));
 				dto.setKakao(rs.getString("kakao"));
 				dto.setPortfolio(rs.getString("portfolio"));
+				dto.setPfdetail(rs.getString("pfdetail"));
 				dto.setPeriod(rs.getString("period"));
 				dto.setAvailable(rs.getInt("available"));
 				dto.setReadcount(rs.getInt("readcount"));
@@ -252,7 +255,7 @@ public class SmemberDAO {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(
-					"update s_member set lang=?, career=? ,worktype=? ,field=? ,pay=? , location=?, employtype=?, projecttype=?, introduce=?, email=?, phone=? , kakao=?, portfolio=? period=?, available=? where num=?");
+					"update s_member set lang=?, career=? ,worktype=? ,field=? ,pay=? , location=?, employtype=?, projecttype=?, introduce=?, email=?, phone=? , kakao=?, portfolio=? ,pfdetail=?, period=?, available=? where num=?");
 
 			pstmt.setString(1, dto.getLang());
 			pstmt.setString(2, dto.getCareer());
@@ -267,9 +270,10 @@ public class SmemberDAO {
 			pstmt.setString(11, dto.getPhone());
 			pstmt.setString(12, dto.getKakao());
 			pstmt.setString(13, dto.getPortfolio());
-			pstmt.setString(14, dto.getPeriod());
-			pstmt.setInt(15, dto.getAvailable());
-			pstmt.setInt(16, dto.getNum());
+			pstmt.setString(14, dto.getPfdetail());
+			pstmt.setString(15, dto.getPeriod());
+			pstmt.setInt(16, dto.getAvailable());
+			pstmt.setInt(17, dto.getNum());
 			result = pstmt.executeUpdate();
 
 		} catch (Exception e) {
