@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>
+<% request.setCharacterEncoding("UTF-8"); 
+	String id = (String)session.getAttribute("id");%>
 <link href="../style.css" rel="stylesheet" type="text/css">
 
 <header>
@@ -23,7 +24,8 @@
 		<div class="wrapper">
 			<div id="id">	
 				<span>아이디</span>
-					<input type="text" name="id" placeholder="아이디는 파라미터">
+					<%=id%>
+					<input type="hidden" name="writer" value="<%=id%>" />
 			</div>
 			
 			<div id=phone>
@@ -44,24 +46,24 @@
 			<div id="field">
 				<span>분야</span>
 					<select name="field">
-						<option value="개발">개발</option>
-						<option value="기획">기획</option>
-						<option value="디자인">디자인</option>
-						<option value="all">전체<option>
+						<option value="dev">개발</option>
+						<option value="plan">기획</option>
+						<option value="design">디자인</option>
+						
 					</select>			
 			</div>
 			
 			<div id="career">
 				<span>경력</span>
 					<select name="career">
-						<option>신입</option>
-						<option>1년차</option>
-						<option>2년차</option>
-						<option>3년차</option>
-						<option>4년차</option>
-						<option>5년차</option>
-						<option>6년차</option>
-						<option>7년차이상</option>
+						<option value="new">신입</option>
+						<option value="1">1년차</option>
+						<option value="2">2년차</option>
+						<option value="3">3년차</option>
+						<option value="4">4년차</option>
+						<option value="5">5년차</option>
+						<option value="6">6년차</option>
+						<option value="7">7년차이상</option>
 					</select>
 			</div>
 			
@@ -97,47 +99,47 @@
 			
 			<div id="employtype">
 				<span>활동 유형</span>
-					<label><input type="radio" name="employtype" value="개인">개인 프리랜서</label>
-					<label><input type="radio" name="employtype" value="팀">팀 프리랜서</label>
-					<label><input type="radio" name="employtype" value="개인사업">개인 사업자</label>
-					<label><input type="radio" name="employtype" value="법인사업">법인 사업자</label>
+					<label><input type="radio" name="employtype" value="sfree">개인 프리랜서</label>
+					<label><input type="radio" name="employtype" value="tfree">팀 프리랜서</label>
+					<label><input type="radio" name="employtype" value="sbusiness">개인 사업자</label>
+					<label><input type="radio" name="employtype" value="cbusiness">법인 사업자</label>
 			</div>
 			
 			<div id="projecttype">
 				<span>찾는 프로젝트 유형</span>
-					<label><input type="checkbox" name="projecttype" value="사이드">사이드 프로젝트</label>
-					<label><input type="checkbox" name="projecttype" value="메인">메인 프로젝트</label>
+					<label><input type="checkbox" name="projecttype" value="side">사이드 프로젝트</label>
+					<label><input type="checkbox" name="projecttype" value="main">메인 프로젝트</label>
 			</div>            
 					
 			<div id="worktype">
 				<span>가능한 업무 방식</span>
-					<label><input type="checkbox" name="worktype" value="원격">원격</label>
-					<label><input type="checkbox" name="worktype" value="상주">상주</label>
-					<label><input type="checkbox" name="worktype" value="협의">협의</label>
+					<label><input type="checkbox" name="worktype" value="online">원격</label>
+					<label><input type="checkbox" name="worktype" value="office">상주</label>
+					<label><input type="checkbox" name="worktype" value="discuss">협의</label>
 			</div>
 			
 			<div id="location"> <!--  업무 방식이 사무실 또는 협의인 경우  -->
 				<span>선호 업무 지역</span>
 					<select name="location">
-						<option value="all">상관없음</option>
-						<option>서울</option>
-						<option>경기</option>
-						<option>인천</option>
-						<option>강원</option>
-						<option>충북</option>
-						<option>충남</option>
-						<option>대전</option>
-						<option>세종</option>
-						<option>전북</option>
-						<option>전남</option>
-						<option>광주</option>
-						<option>경북</option>
-						<option>경남</option>
-						<option>대구</option>
-						<option>울산</option>
-						<option>부산</option>
-						<option>제주</option>
-				</select>
+						<option value="online">원격</option>
+						<option value="seoul">서울</option>
+						<option value="gyunggi">경기</option>
+						<option value="incheon">인천</option>
+						<option value="gangwon">강원</option>
+						<option value="chungbuk">충북</option>
+						<option value="chungnam">충남</option>
+						<option value="daejeon">대전</option>
+						<option value="sejong">세종</option>
+						<option value="jeonbuk">전북</option>
+						<option value="jeonnam">전남</option>
+						<option value="gwangju">광주</option>
+						<option value="gyungbuk">경북</option>
+						<option value="gyungnam">경남</option>
+						<option value="daegu">대구</option>
+						<option value="ulsan">울산</option>
+						<option value="busan">부산</option>
+						<option value="jeju">제주</option>
+					</select>
 			</div>
 				
 			<div id="period">

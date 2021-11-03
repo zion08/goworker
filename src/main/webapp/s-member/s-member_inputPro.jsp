@@ -48,7 +48,7 @@
 	for ( String langName : lang) {
 		langStr += langName +" ";
 	}
-	for ( String projecttypeName : worktype) {
+	for ( String projecttypeName : projecttype) {
 		projecttypeStr += projecttypeName +" ";
 	}
 	for ( String worktypeName : worktype) {
