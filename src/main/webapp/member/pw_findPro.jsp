@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <title>pw_findPro.jsp 이메일 가입된 여부확인</title>
-<%@ page import="member.bean.DAO" %>
+<%@ page import="bean.DAO" %>
 
-<jsp:useBean id="dto" class="member.bean.DTO"/>
+<jsp:useBean id="dto" class="bean.DTO"/>
 <jsp:setProperty property="email" name="dto" />
 
 <%
