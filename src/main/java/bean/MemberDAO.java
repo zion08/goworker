@@ -3,8 +3,11 @@ package bean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import bean.MemberDTO;
 import oracle.OracleDB;
 import oracle.DisconnDB;
 
@@ -24,8 +27,7 @@ public class MemberDAO {
 	        	 MemberDTO dto = new MemberDTO();
 	            dto.setId(rs.getString("id"));
 	            dto.setEmail(rs.getString("email"));
-	            dto.setPw(rs.getString("pw"));
-	            dto.setFilename(rs.getString("file"));
+	            dto.setPassword(rs.getString("password"));
 	            dto.setReg(rs.getString("reg"));
 	            list.add(dto);  // 리스트에 추가!!
 	         }
@@ -40,10 +42,11 @@ public class MemberDAO {
 			boolean result = false;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("select * from member where id=? and pw=?");
+				pstmt = conn.prepareStatement("select * from member where id=? and password=?");
 				pstmt.setString(1, dto.getId());
-				pstmt.setString(2, dto.getPw());
+				pstmt.setString(2, dto.getPassword());
 				rs = pstmt.executeQuery();
+				
 				if(rs.next()) {
 					result = true;
 				}
@@ -54,15 +57,14 @@ public class MemberDAO {
 			}
 			return result;
 		}
-		public int memberInsert(MemberDTO dto) {
+		public int memberInput(MemberDTO dto) {  // 데이터베이스에 회원정보 등록(회원가입)
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,?,sysdate)");
+				pstmt = conn.prepareStatement("insert into member values(?,?,?,sysdate)");
 				pstmt.setString(1, dto.getId());
 				pstmt.setString(2, dto.getEmail());
-				pstmt.setString(3, dto.getPw());
-				pstmt.setString(4, dto.getFilename());
+				pstmt.setString(3, dto.getPassword());
 				result = pstmt.executeUpdate();
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -80,11 +82,10 @@ public class MemberDAO {
 				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
-					dto = new MemberDTO();
+				    dto = new MemberDTO();
 					dto.setId(rs.getString("id"));
 					dto.setEmail(rs.getString("email"));
-					dto.setPw(rs.getString("pw"));
-					dto.setFilename(rs.getString("filename"));
+					dto.setPassword(rs.getString("password"));
 					dto.setReg(rs.getTimestamp("reg").toString());
 				}
 			}catch(Exception e) {
@@ -99,11 +100,10 @@ public class MemberDAO {
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("update member set email=?,pw=?,filename=? where id=?"); 
+				pstmt = conn.prepareStatement("update member set email=?,password=? where id=?"); 
 				pstmt.setString(1, dto.getEmail());
-				pstmt.setString(2, dto.getPw());
-				pstmt.setString(3, dto.getFilename());
-				pstmt.setString(4, dto.getId());
+				pstmt.setString(2, dto.getPassword());
+				pstmt.setString(3, dto.getId());
 				result = pstmt.executeUpdate();
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -117,9 +117,9 @@ public class MemberDAO {
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("delete from member where id=? and pw=?"); 
+				pstmt = conn.prepareStatement("delete from member where id=? and password=?"); 
 				pstmt.setString(1, dto.getId());
-				pstmt.setString(2, dto.getPw());
+				pstmt.setString(2, dto.getPassword());
 				result = pstmt.executeUpdate();
 				
 			}catch(Exception e) {
@@ -147,4 +147,25 @@ public class MemberDAO {
 			}
 			return result;
 		}
+		public boolean emailCheck(MemberDTO dto) {
+			boolean result=false;
+			try {
+				conn = OracleDB.getConnection();
+				pstmt=conn.prepareStatement("select * from member where email=?");
+				pstmt.setString(1, dto.getEmail());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result=true;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(pstmt!=null) {try {pstmt.close();}catch(SQLException s) {}}
+				if(rs!=null) {try {rs.close();}catch(SQLException s) {}}
+				if(conn!=null) {try {conn.close();}catch(SQLException s) {}}
+			}
+			return result;
+		}
+		
 }
