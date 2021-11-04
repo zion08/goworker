@@ -135,6 +135,7 @@ public class Comment_SmemberDAO {
 	}
 	
 		
+	
 	public Comment_SmemberDTO getComment(Comment_SmemberDTO cdto) {
 		try {
 			conn = OracleDB.getConnection();
@@ -200,7 +201,8 @@ public class Comment_SmemberDAO {
 	}
 	
 	
-	// 댓글 리스트 정렬 기능
+	
+	// 댓글 페이징 처리 기능 (현재 사용하지는 않습니다.)
 	public List getCommentReply(int start, int end) {
 		List commentReplyList = null;
 		try {
@@ -215,7 +217,7 @@ public class Comment_SmemberDAO {
 					rs = pstmt.executeQuery();
 					if(rs.next()) {
 						commentReplyList = new ArrayList(end);
-						do {
+						while (rs.next()) {
 							Comment_SmemberDTO cdto = new Comment_SmemberDTO();
 							cdto.setComment_num(rs.getInt("comment_num"));
 							cdto.setBoard_num(rs.getInt("board_num"));
@@ -225,9 +227,8 @@ public class Comment_SmemberDAO {
 							cdto.setComment_ref(rs.getInt("comment_ref"));
 							cdto.setComment_step(rs.getInt("comment_step"));
 							cdto.setComment_level(rs.getInt("comment_level"));
-						} while(rs.next());
-						
-						}	
+						}
+					}	
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			} finally {
@@ -236,3 +237,4 @@ public class Comment_SmemberDAO {
 			return commentReplyList;
 		}
 	}
+
