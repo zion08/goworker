@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<<<<<<< HEAD
 <%@ page import="java.net.URLDecoder" %>
 <%@ page import="member.bean.Cookies" %>
 <title>Main.jsp</title>
@@ -22,3 +23,11 @@
 	}
 %>
 
+=======
+<title>Main.jsp</title>
+<%
+String e = (String)session.getAttribute("email");
+%>
+
+<%=e%> 로그인 중.
+>>>>>>> parent of 31bd6ce (Delete main.jsp)
