@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import member.bean.DTO;
+import bean.MemberDTO;
 import oracle.OracleDB;
 import oracle.DisconnDB;
 
@@ -147,7 +147,7 @@ public class MemberDAO {
 			}
 			return result;
 		}
-		public boolean emailCheck(DTO dto) {
+		public boolean emailCheck(MemberDTO dto) {
 			boolean result=false;
 			try {
 				conn = OracleDB.getConnection();
