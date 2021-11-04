@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    <%
-    	//ì„¸ì…˜ ì‚­ì œ 
-    	// session.invalidate(); ì„¸ì…˜ ì „ì²´ ì‚­ì œ
-    	session.removeAttribute("id");
-    	response.sendRedirect("main.jsp");
-    %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import="member.bean.Cookies" %>
+	<%
+		response.addCookie(Cookies.createCookie("AUTH","","/", 0)); //ÄíÅ° »èÁ¦
+		session.invalidate();  //¼¼¼Ç »èÁ¦
+		response.sendRedirect("main.jsp");
+	%>
