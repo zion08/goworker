@@ -25,7 +25,7 @@ public class MemberDAO {
 	        	 MemberDTO dto = new MemberDTO();
 	            dto.setId(rs.getString("id"));
 	            dto.setEmail(rs.getString("email"));
-	            dto.setPassword(rs.getString("pw"));
+	            dto.setPassword(rs.getString("password"));
 	            dto.setReg(rs.getString("reg"));
 	            list.add(dto);  // 리스트에 추가!!
 	         }
@@ -83,7 +83,7 @@ public class MemberDAO {
 				    dto = new MemberDTO();
 					dto.setId(rs.getString("id"));
 					dto.setEmail(rs.getString("email"));
-					dto.setPassword(rs.getString("pw"));
+					dto.setPassword(rs.getString("password"));
 					dto.setReg(rs.getTimestamp("reg").toString());
 				}
 			}catch(Exception e) {
@@ -98,7 +98,7 @@ public class MemberDAO {
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("update member set id=?,password=? where id=?"); 
+				pstmt = conn.prepareStatement("update member set email=?,password=? where id=?"); 
 				pstmt.setString(1, dto.getEmail());
 				pstmt.setString(2, dto.getPassword());
 				pstmt.setString(3, dto.getId());
@@ -115,8 +115,8 @@ public class MemberDAO {
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("delete from member where id=? and pw=?"); 
-				pstmt.setString(1, dto.getEmail());
+				pstmt = conn.prepareStatement("delete from member where id=? and password=?"); 
+				pstmt.setString(1, dto.getId());
 				pstmt.setString(2, dto.getPassword());
 				result = pstmt.executeUpdate();
 				
