@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="bean.SmemberDTO" %>    
-<%@ page import = "smember.comment.bean.Comment_SmemberDAO"%>
+<%@ page import = "bean.Comment_SmemberDAO"%>
 <%@ page import = "java.sql.Timestamp"%>
 
 <%request.setCharacterEncoding("UTF-8"); %>
 
-<jsp:useBean id="cdto"  class="smember.comment.bean.Comment_SmemberDTO"/>
+<jsp:useBean id="cdto"  class="bean.Comment_SmemberDTO"/>
 <jsp:setProperty property="*" name="cdto" />
 
 <% 

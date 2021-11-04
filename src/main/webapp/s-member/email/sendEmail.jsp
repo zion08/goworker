@@ -1,129 +1,108 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>이메일 전송 폼</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-<style type="text/css">
-	<!--
-		td { font_family: "굴림"; font-size: 11px;}
-		
-		.box{
-			font-family:"굴림";
-			font-size:12px;
-			border-style: solid;
-			border-top-width:1px;
-			border-right-width:1px;
-			border-bott2006-08-01om-width:1px;
-			border-left-width:1px;}
-	-->
-	
-</style>
+    <!-- 플러그인 참조 -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
+    <script src="http://cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+    <style type="text/css">
+      @media (min-width: 980px) {
+        body {
+          padding-top: 60px;
+          padding-bottom: 40px;
+        }
+      }
+    </style>
+    <script type="text/javascript">
+      $(function() {
+        // submit 될 때, 유효성 검사 기능 수행
+        $("#join_form").validate({
+          // 유효성 검사 규칙
+          rules : {
+            sender : "required",
+            receiver : "required",
+            subject : "required",
+            content : "required"
+          },
+          // 사용자에게 보여질 메시지
+          messages : {
+            sender : "보내는 분의 메일 주소를 입력하세요.",
+            receiver : "받는 분의 메일 주소를 입력하세요.",
+            subject : "제목을 입력하세요.",
+            content : "내용을 입력하세요."
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <!-- 상단 고정메뉴 (검정) -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">JSP Email 발송 연습</a>
+        </div>
+      </div>
+    </div>
+    <!--// 상단 고정메뉴 (검정) -->
 
+    <!-- 내용영역 시작 -->
+    <div class="container">
 
-<!-- 작성된 애용 유효성 검사 -->
-<script language="javascript">
-<!--
-	function initForm(frm)
-	{
-  	 	frm.mailTo.value = "";
-    	frm.mailFrom.value = "";
-   		frm.fromName.value = "";
-  	 	frm.title.value = "";
-  		frm.content.value = "";
-   		frm.upfile.select();            
-   		document.selection.clear(); 
-   		frm.mailTo.focus();
-	}
+      <form class="form-horizontal" method="post" action="sendMail.jsp">
+        <fieldset>
+          <legend>
+            <strong>메일작성</strong>
+          </legend>
 
-	function checkForm(frm)
-	{
- 		 var Filter = /(\S+)@(\S+)\.(\S+)/ 
-    
-  	if( !frm.mailTo.value.match(Filter))
-  	{ 
-   	 alert("유효하지 않은 이메일주소 입니다");
-		frm.mailTo.focus();
-		return;
-  	}
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="sender">보내는주소 <font color='red'>*</font></label>
+            <div class="col-sm-10">
+              <input type="text" name="sender" id="sender" class="form-control" placeholder="보내는 분의 이메일 주소를 입력하세요."/>
+            </div>
+          </div>
 
-  	if( !frm.mailFrom.value.match(Filter))
-   { 
-		alert("유효하지 않은 이메일주소 입니다");
-		frm.mailFrom.focus();
-		return;
-   }
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="receiver">받는주소 <font color='red'>*</font></label>
+            <div class="col-sm-10">
+              <input type="text" name="receiver" id="receiver" class="form-control" placeholder="받는 분의 이메일 주소를 입력하세요." />
+            </div>
+          </div>
 
-  if( !frm.fromName.value )
-  {
-    alert("보내는 분의 이름 또는 정보를 입력해 주세요");
-	frm.fromName.focus();
-	return;
-  }
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="subject">메일 제목<font color='red'>*</font></label>
+            <div class="col-sm-10">
+              <input type="text" name="subject" id="subject" class="form-control" placeholder="이메일의 제목을 입력하세요." />
+            </div>
+          </div>
 
-  if( !frm.title.value )
-  {
-    alert("메일의 제목을 입력해 주세요");
-	frm.title.focus();
-	return;
-  }
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="content">내용입력</label>
+            <div class="col-sm-10">
+              <textarea name="content" id="content" class="ckeditor"></textarea>
+            </div>
+          </div>
 
-  if( !frm.content.value )
-  {
-    alert("메일의 내용을 입력해 주세요");
-	frm.content.focus();
-	return;
-  }
+          <!-- 버튼 영역 -->
+          <div class="form-actions text-right">
+            <input type="submit" class="btn btn-primary" value="메일보내기" />
+            <input type="reset" class="btn" value="다시작성" />
+          </div>
 
+        </fieldset>
+      </form>
 
-  	frm.action = "mail.php";
- 	 frm.submit();
-
-	}
-//-->
-</script>
-</head>
-<body>
-
-	<form name="form" method="post" enctype="multipart/form-data">
-		<table width="600" border="1" cellspacing="1" cellpadding="0">
-			<tr>
-				<td width="150" align="center" >보내는사람 이름(name)</td>
-				<td width="350"><input type="text" name="name" size="60"></td>
-			</tr>
-			<tr>
-				<td width="134" align="center">보내는사람(from Email)</td>
-				<td width="350"><input type="text" name="email" size="60"></td>
-			</tr>
-			<tr>
-				<td align="center" >제목(subject)</td>
-				<td><input type="text" name="subject" size="60"></td>
-			</tr>
-			<tr>
-				<td align="center" >내용(content)</td>
-				<td><textarea name="content" cols="62" rows="10"></textarea></td>
-			</tr>
-			<tr>
-				<td align="center">파일(upfile)</td>
-				<td align="center" ><input type="file" name="upfile" size="50"></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-      				<button type="button" class="btn btn-primary btn-lg btn-block" onclick="send_mail()">보내기</button>&nbsp;
-					<input type="button" name="init" value="초기화" onClick="initForm(this.form);">
-				</td>
-			</tr>
-		</table>
-	</form>
-	
-	<script type="text/javascript">
-		function send_mail(){
-   			 window.open("./test_mail.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
-		}
-</script>
-
-
-</body>
+    </div>
+    <!--// 내용영역 끝 -->
+  </body>
 </html>
