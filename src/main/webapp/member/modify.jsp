@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="Member.bean.MemberDAO" %>
-<%@ page import="Member.bean.MemberDTO" %>
+<%@ page import="bean.MemberDAO" %>
+<%@ page import="bean.MemberDTO" %>
 <%
 	String id = (String)session.getAttribute("id");
 	if(id == null){

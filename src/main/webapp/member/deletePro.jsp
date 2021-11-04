@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="Member.bean.MemberDAO" %>
-<jsp:useBean class="Member.bean.MemberDTO" id="dto" />
+<%@ page import="bean.MemberDAO" %>
+<jsp:useBean class="bean.MemberDTO" id="dto" />
 <jsp:setProperty property="*" name="dto"/>
 <%
     MemberDAO dao = new MemberDAO();

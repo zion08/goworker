@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="member.bean.DAO" %>
+<%@ page import="bean.DAO" %>
 <title>회원가입확인창</title>
 
-<jsp:useBean id="dto" class="member.bean.DTO" />
+<jsp:useBean id="dto" class="bean.DTO" />
 <jsp:setProperty name="dto" property="*" />
 
 <%
