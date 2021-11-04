@@ -64,6 +64,7 @@
 				<th>경력</th>	
 				<td>
 					<select name="career">
+						<option value="%">전체</option>
 						<option value="new">신입</option>
 						<option value="1">1년차</option>
 						<option value="2">2년차</option>
@@ -80,6 +81,7 @@
 				<th>분야</th>
 				<td>
 					<select name="field">
+						<option value="%">전체</option>
 						<option value="dev">개발</option>
 						<option value="plan">기획</option>
 						<option value="design">디자인</option>
@@ -91,6 +93,7 @@
 				<th>업무 방식</th>	
 				<td>
 					<select name="worktype">
+						<option value="%">전체</option>
 						<option value="online">원격</option>
 						<option value="office">상주</option>
 						<option value="discuss">협의</option>
@@ -102,7 +105,7 @@
 				<th>지역</th>
 				<td>
 					<select name="location">
-						<option value="online">원격</option>
+						<option value="%">원격</option>
 						<option value="seoul">서울</option>
 						<option value="gyunggi">경기</option>
 						<option value="incheon">인천</option>
@@ -128,6 +131,7 @@
 			<th>활동 유형</th>
 				<td>
 					<select name="employtype">
+						<option value="%">전체</option>
 						<option value="sfree">개인 프리랜서</option>
 						<option value="tfree">팀 프리랜서드</option>
 						<option value="sbusiness">개인 사업자</option>
@@ -140,6 +144,7 @@
 			<th>프로젝트 유형</th>
 				<td>
 					<select name="projecttype">
+						<option value="%">전체</option>
 						<option value="side">사이드 프로젝트</option>
 						<option value="main">메인 프로젝트</option>
 					</select>
