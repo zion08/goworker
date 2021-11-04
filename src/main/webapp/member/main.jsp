@@ -6,4 +6,3 @@ String e = (String)session.getAttribute("email");
 %>
 
 <%=e%> 로그인 중.
->>>>>>> parent of 31bd6ce (Delete main.jsp)
