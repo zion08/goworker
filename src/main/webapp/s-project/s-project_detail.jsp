@@ -58,8 +58,8 @@
 %>
 
 
-<div class="comment_title"><b>서비스 평가</b><br/></div>
-  <div class="comment_smalltitle">실제 Go-Worker 이용자들이 남긴 평가입니다.</div>
+<div class="comment_title"><b>프로젝트 관련 문의</b><br/></div>
+  <div class="comment_smalltitle">프로젝트에 대한 문의사항을 남겨주세요.</div>
 <br>
 
 <form action="comment/commentPro.jsp" name="writeform" method="get" >
