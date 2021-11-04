@@ -1,19 +1,12 @@
-package bean;
+package member.bean;
 
 import java.sql.Timestamp;
 
 public class MemberDTO {
 	private String id;
 	private String email;
-	private String pw;
+	private String password;
 	private String reg;
-	private String filename;
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
 	public String getId() {
 		return id;
 	}
@@ -26,11 +19,11 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getReg() {
 		return reg;
