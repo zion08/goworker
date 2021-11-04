@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
- <%@ page import = "bean.Comment_SmemberDAO" %>
+<%@ page import = "bean.Comment_SmemberDAO" %>
 <%@ page import = "bean.Comment_SmemberDTO" %>
     
 <%request.setCharacterEncoding("UTF-8"); %>

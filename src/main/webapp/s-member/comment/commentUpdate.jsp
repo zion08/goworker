@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
  <%@ page import = "bean.Comment_SmemberDAO" %>
-    <%@ page import = "bean.Comment_SmemberDTO" %>
+ <%@ page import = "bean.Comment_SmemberDTO" %>
     
 <%request.setCharacterEncoding("UTF-8"); %>
     

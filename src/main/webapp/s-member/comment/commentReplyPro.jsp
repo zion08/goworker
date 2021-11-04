@@ -16,6 +16,6 @@
 	int result = dao.insertComment(cdto);
  %>
 <script>
-	alert("댓글이 작성되었습니다.");
+	alert("답글이 작성되었습니다.");
 	window.location="/goworker/s-member/s-member_detail.jsp?num=<%=cdto.getBoard_num()%>&pageNum=<%=pageNum%>";
 </script>
