@@ -60,19 +60,13 @@
 		</tr>
 		<%--if (field의 값 == dev){--%>
 		<tr>
-
-			<th>경력</th>
-			<td><%=dto.getCareer() %></td>
-		</tr>
-		
-		<tr>
-			<th>보유 기술</th>
+			<th>개발언어</th>
 			<td><%=dto.getLang() %></td>
 		</tr>
 		
 		<%-- }--%>
 		<tr>
-			<th>가능한 업무 방식</th>		
+			<th>근무형태</th>		
 			<td><%=dto.getWorktype() %> </td>
 		</tr>
 		<tr>
@@ -80,15 +74,15 @@
 			<td><%=dto.getLocation() %> </td>
 		</tr>
 		<tr>
-			<th>활동 유형</th>		
+			<th>고용타입</th>		
 			<td><%=dto.getEmploytype()%></td>
 		</tr>
 		<tr>
-			<th>근무 가능 일자</th>		
+			<th>시작가능 일자</th>		
 			<td><%=dto.getPeriod() %></td>
 		</tr>
 		<tr>
-			<th>희망 계약금</th>		
+			<th>희망급여</th>		
 			<td><%=dto.getPay() %>만원 선</td>
 		</tr>
 		<tr>
@@ -101,22 +95,12 @@
 		</tr>
 		<tr>
 			<th><img src="image/email.png" width="25px" height="25px" ></th>		
-			<td><a href="mailto:﻿"<%=dto.getEmail() %>"><%=dto.getEmail() %></a></td>
+			<td><a href="mailto:﻿"<%=dto.getEmail() %>">메일보내기</a></td>
 		</tr>
 		<tr>
 			<th>포트폴리오</th>		
-			<%if(dto.getPortfolio() != null) { %>
-			<td><img src = "/goworker/portfolioFile/"<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
-			<%} else { %>
-			<td> 등록된 포트폴리오가 없습니다. </td>
-			<%} %>
+			<td><a href="<%=dto.getPortfolio() %>">포트폴리오 주소</a></td>
 		</tr>
-		<tr>
-			<th>포트폴리오 설명</th>		
-			<td><%=dto.getPfdetail()%> </td>
-		</tr>
-		
-		
 		<tr>
 			<th>자기소개</th>		
 			<td width="400px"><%=dto.getIntroduce() %></td>
@@ -124,6 +108,7 @@
 		
 	</table><br/>
 	<form align="center">
+		<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 		<input type="button" value="쪽지 보내기" />
 		<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
 	</form>
@@ -135,7 +120,6 @@
 
 
  <!-- 댓글 작성 폼 -->
-
 
 <section class="commentForm">
 
@@ -172,7 +156,6 @@
 		<tr>	
 			<td width="50px" align="center">내 용</td>
 			<td width="300px" colspan=3 align="center">
-			<% if(request.getParameter("comment_num")==null){ %>
 			<input type="text" size="100" name="comment_content" id="comment_content" style="width:500px;height:100px;" placeholder="댓글을 입력해주세요."></td>
 		</tr>
 		<tr>
@@ -255,8 +238,7 @@
  		<%} %>
  </table><br/>
 	
-<%} 
-} %>
+<%}  %>
 </section>
 
 
