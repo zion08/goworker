@@ -124,6 +124,7 @@
 
 
 	<form align="center">
+		<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 		<input type="button" value="쪽지 보내기" />
 		<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
 	</form>
@@ -177,7 +178,6 @@
 			
 			<tr>
 				<td colspan=2 align="center">
-					<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 					<input type="submit" value="댓글 쓰기"/>
 					<input type="reset" value="다시 작성"/>
 				</td>
