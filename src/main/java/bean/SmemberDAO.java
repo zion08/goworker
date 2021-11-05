@@ -263,16 +263,26 @@ public class SmemberDAO {
 	}
 	
 	
-
-	public List<SmemberDTO> getSearchList(String career,String field,String worktype, String location, String employtype, String projecttype, int available , int start , int end) {
-
+	public List<SmemberDTO> getSearchList(String career, String field, String worktype,
+											String location, String employtype, 
+											String projecttype, int available , 
+											int start , int end) {
 		List<SmemberDTO> list = null;
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("select * from "
-					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,pfdetail,period,available,favor,good,readcount,regdate,rownum r from "
-					+ " (select * from s_member where career=? and field=?  and worktype= ? and location= ? and employtype= ? and projecttype=? and available = ? order by num desc)) "
-					+ " where  r >=? and r <=?");			
+			String sql = "select * from "
+							+ "(select rownum r, num, id, lang, career, worktype, field, pay, location, employtype, projecttype, introduce, email, phone, kakao, portfolio, period, available, favor, good, readcount, regdate "
+								+ "from (select  * from s_member "
+								+ "where career like ? "
+								+ "and field like ? "
+								+ "and worktype like ? "
+								+ "and location like ? "
+								+ "and employtype like ? "
+								+ "and projecttype like ? "
+								+ "and available like ?  "
+								+ "order by num desc )) "
+						+ "where  r >= ? and r <= ?";
+			pstmt = conn.prepareStatement(sql);	
 			pstmt.setString(1, career);
 			pstmt.setString(2, field);
 			pstmt.setString(3, worktype);
@@ -308,11 +318,21 @@ public class SmemberDAO {
 	}
 	
 	
-	public int getSearchCount(String career,String field,String worktype, String location, String employtype,String projecttype, int available ) {
+	public int getSearchCount(String career, String field, String worktype,
+								String location, String employtype,
+								String projecttype, int available) {
 		int result = 0; 
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("select count(*) from s_member where career= ? and field= ?  and worktype= ? and location= ? and employtype= ? and projecttype=? and  available = ? ");
+			String sql = "select count(*) from s_member "
+							+ "where career like ? "
+							+ "and field like ? "
+							+ "and worktype like ? "
+							+ "and location like ? "
+							+ "and employtype like ?"
+							+ "and projecttype like ?"
+							+ "and available like ?";
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, career);
 			pstmt.setString(2, field);
 			pstmt.setString(3, worktype);
@@ -330,5 +350,35 @@ public class SmemberDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
+	}
+	
+	
+	public void goodUp(SmemberDTO dto) {
+		try {
+			conn = OracleDB.getConnection();
+			String sql = "update  s_member  set  good = good+1  where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			pstmt.executeUpdate();		
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+	}
+	
+	
+	public void goodDown(SmemberDTO dto) {
+		try {
+			conn = OracleDB.getConnection();
+			String sql = "update  s_member  set  good = good-1  where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			pstmt.executeUpdate();		
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
 	}
 } 

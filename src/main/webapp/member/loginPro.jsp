@@ -1,27 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="member.bean.DAO" %>
-<title>·Î±×ÀÎÈ®ÀÎ</title>
+<%@ page import="bean.DAO" %>
 
-<jsp:useBean id="dto" class="member.bean.DTO"/>
+<title>ï¿½Î±ï¿½ï¿½ï¿½È®ï¿½ï¿½</title>
+
+<jsp:useBean id="dto" class="bean.DTO"/>
 <jsp:setProperty property="*" name="dto" />
 
 <%
+	String chkbox=request.getParameter("logining"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ú½ï¿½ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+	
 	DAO dao = new DAO();
-	boolean result = dao.loginCheck(dto);
-	String chkbox=request.getParameter("logining");
-	if(result==true)
+	boolean result = dao.loginCheck(dto); // ï¿½Î±ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½.
+	if(result==true) // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½.
 	{	
-		if(chkbox!=null)
+		if(chkbox==null)
 		{
-			session.setAttribute("email", dto.getEmail());
+			session.setAttribute("email", dto.getEmail()); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½=ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			session.setMaxInactiveInterval(60*60*3); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ 3ï¿½Ã°ï¿½
 			response.sendRedirect("main.jsp");
-			System.out.println(chkbox);
 		}
-    }else
+		else if(chkbox.equals("yes")) // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. (ï¿½ï¿½ï¿½ï¿½ï¿½)
+		{
+			
+			response.addCookie(Cookies.createCookie("AUTH", dto.getEmail(), "/", 60*60*24*30)); // ï¿½Ì¸ï¿½ï¿½ï¿½ AUTHï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.->ï¿½Î±ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½Ç´Ü½ï¿½ ï¿½ï¿½ï¿½
+			response.sendRedirect("main.jsp");
+		}
+	}else
   	{%>
 		<script>
-			alert("¾ÆÀÌµð/ºñ¹Ð¹øÈ£ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+			alert("ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½Ð¹ï¿½È£ ï¿½Ù½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 			history.go(-1);
 		</script>  
   <%}%>
+  
