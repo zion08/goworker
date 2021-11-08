@@ -61,28 +61,29 @@
 		<h2>회원가입</h2>
 </div>
 
-<form action="applyPro.jsp" method="post" onsubmit="return blankCheck()">
-	<div align="center">
-		<table border="1">
-			<tr>
-				<td align="center">i   d : </td>
-				<td><input type="text" name="id" placeholder="nickname"  /></td>
-				<td align="center"><input type="button" value="id중복확인" onclick="return confirmId();"/><label id="idCheck"></label></td>
-			</tr>
-			<tr>
-				<td align="center">email : </td>
-				<td><input type="email" name="email" placeholder="example@goworker.com" /></td>
-				<td align="center"><input type="button" value="email중복확인" onclick="return confirmEm();"/><label id="emCheck"></label></td>
-			</tr>
-			<tr>
-				<td align="center">password : </td>
-				<td><input type="password" name="password" placeholder="영문+숫자 조합 6자리 이상 입력해주세요." /></td>
-			</tr>
-		</table>
-			<input type="submit" value="회원가입" onclick="applyPro.jsp"/>	
-	</div>
-</form>
-
+<section class="section1">
+	<form action="applyPro.jsp" method="post" onsubmit="return blankCheck()">
+		<div align="center">
+			<table border="1">
+				<tr>
+					<td align="center">i   d : </td>
+					<td><input type="text" name="id" placeholder="nickname"  /></td>
+					<td align="center"><input type="button" value="id중복확인" onclick="return confirmId();"/><label id="idCheck"></label></td>
+				</tr>
+				<tr>
+					<td align="center">email : </td>
+					<td><input type="email" name="email" placeholder="example@goworker.com" /></td>
+					<td align="center"><input type="button" value="email중복확인" onclick="return confirmEm();"/><label id="emCheck"></label></td>
+				</tr>
+				<tr>
+					<td align="center">password : </td>
+					<td><input type="password" name="password" placeholder="영문+숫자 조합 6자리 이상 입력해주세요." /></td>
+				</tr>
+			</table>
+				<input type="submit" value="회원가입" onclick="applyPro.jsp"/>	
+		</div>
+	</form>
+</section>
 
 
 

@@ -52,13 +52,14 @@
 		dto.setAvailable(available);
 		//available = dto.getAvailable();
 	
-	System.out.println(dto.getCareer());
-	System.out.println(dto.getField());
-	System.out.println(dto.getWorktype());
-	System.out.println(dto.getLocation());
-	System.out.println(dto.getEmploytype());
-	System.out.println(dto.getProjecttype());
-	System.out.println(dto.getAvailable());
+	
+	System.out.println("career: " + dto.getCareer());
+	System.out.println("field: " + dto.getField());	
+	System.out.println("worktype: " + dto.getWorktype());
+	System.out.println("location: " + dto.getLocation());
+	System.out.println("employtype: " + dto.getEmploytype());
+	System.out.println("projecttype: " + dto.getProjecttype());
+	System.out.println("available: " + dto.getAvailable());
 	System.out.println(start);
 	System.out.println(end);
 
@@ -76,8 +77,7 @@
 								available, start, end );	
 	}
 	
-	System.out.println("career: " + dto.getCareer());
-	System.out.println("field: " + dto.getField());
+	
 	System.out.println("갯수: " + scount);
 	System.out.println(list);
 %>
