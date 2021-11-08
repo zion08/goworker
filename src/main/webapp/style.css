@@ -5,6 +5,10 @@
 	margin: 0;
 }
 
+body{
+	/* background-color: #FFF8E5; */
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -22,11 +26,14 @@ form div {
 
 span {	
 	display: inline-block;
-	width: 160px;
 }
 
 aside {
 	display: flex;
+}
+
+a {
+	text-decoration: none;
 }
 
 .section1 {
@@ -95,18 +102,39 @@ aside {
 	align-items: center;
 	width: 400px;
 	height: 80px;
+	text-align: center;
 }
 
 .sideicon1 {
 	margin: 0  10px;
+	border-radius: 10px;
+	color:#00A19D;
+}
+
+.sideicon1 img {
+	width: 25px;
+	height: 25px;
+	position: relative;
+    top: 6px;
+}
+
+.sideicon1 p {
+	display: inline-block;
+	margin: auto;
+	color: #00A19D;
 }
 
 .sideicon2 {
 	width : 90px;
-	height : 30px;
-	border-style : groove;
-	border-radius : 10%;
-	margin: 0  10px;
+	height : 30px;	
+	border-radius : 10px;
+	margin: 0  5px;
+	background-color:#00A19D;
+	padding: 3px;
+}
+
+.sideicon2 a {
+	color: #FFFFFF;
 }
 
 .mInputButton {
@@ -127,7 +155,7 @@ aside {
 
 .wrapper {
 	height: 100%;
-	widdth: 90%;
+	width: 90%;
 }
 
 .wrapper-submit {
