@@ -20,8 +20,7 @@
 	String period = request.getParameter("period");
 	String avail = request.getParameter("available");
 	int available = Integer.parseInt(avail);
-	
-	
+		
 	int pageSize = 20;
 	if(pageNum==null) {
 		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
@@ -33,25 +32,13 @@
 	
 	SmemberDTO dto = new SmemberDTO();
 	
-		dto.setCareer(career);
-		//career = dto.getCareer();
-	
-		dto.setField(field);
-		//field = dto.getField();
-	
-		dto.setWorktype(worktype);
-		//worktype = dto.getWorktype();
-
-		dto.setLocation(location);
-		//location = dto.getLocation();
-
-		dto.setEmploytype(employtype);
-		//employtype = dto.getEmploytype();
-		dto.setProjecttype(projecttype);
-	
-		dto.setAvailable(available);
-		//available = dto.getAvailable();
-	
+	dto.setCareer(career);
+	dto.setField(field);
+	dto.setWorktype(worktype);
+	dto.setLocation(location);
+	dto.setEmploytype(employtype);
+	dto.setProjecttype(projecttype);	
+	dto.setAvailable(available);	
 	
 	System.out.println("career: " + dto.getCareer());
 	System.out.println("field: " + dto.getField());	
@@ -85,23 +72,23 @@
 <title>멤버 찾기</title>
 
 <script type="text/javascript">
-var bDisplay = true;
-function doDisplay(){
-	var con = document.getElementById("checkboard");
-	if(con.style.display=='none'){
-		con.style.display = 'block';
-	}else{
-		con.style.display = 'none';
+	var bDisplay = true;
+	function doDisplay(){
+		var con = document.getElementById("checkboard");
+		if(con.style.display=='none'){
+			con.style.display = 'block';
+		}else{
+			con.style.display = 'none';
+		}
 	}
-}
-	function viewMine() {
-		value = document.getElementsByName("id")[0].value;
-		open('s-member_detail.jsp?id='+value,'confirm','width=500,height=500');
-	}
+		function viewMine() {
+			value = document.getElementsByName("id")[0].value;
+			open('s-member_detail.jsp?id='+value,'confirm','width=500,height=500');
+		}
 </script>
 
 <aside>
-<a href ="s-member_input.jsp"><input type="button" class=mInputButton value="멤버 등록하기"></a><br/><br/>
+	<a href ="s-member_input.jsp"><input type="button" class=mInputButton value="멤버 등록하기"></a><br/><br/>
 </aside>
 
 <section class="section1">
@@ -222,52 +209,57 @@ function doDisplay(){
 	</form>
 </section>
 
-<section>
-	<%if(scount > 0) { 
+<section class="section1">
+<%	if(scount > 0) { 
 		for(SmemberDTO sdto : list) { 
-		%>
-	<div>
-		<table class="mboard" >
-			<tr>
-				<th><a href="s-member_detail.jsp?num=<%=sdto.getNum()%>&pageNum=<%=pageNum%>"><%=sdto.getId() %></a></th>
-				<th>
-				<%if(sdto.getAvailable() == 1) { %>
-				<img src="image/switch-on.png" width="40px" height="36px"> 
-				<%} else{ %>
-				<img src="image/switch-off.png" width="40px" height="36px">
-				<%} %>
-				</th>
-				<th><%=sdto.getField() %></th>
-				<td><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
-					<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
-				</td>
-			</tr>
-			<tr>
-				<th><%=sdto.getCareer() %></th>
-				<th><%=sdto.getEmploytype() %></th>
-				<th><%=sdto.getLocation() %></th>
-				<th><%=sdto.getWorktype() %></th>
-			</tr>
-			<tr>
-			<td colspan="4"> <%=sdto.getIntroduce() %>
-			</td>
-			</tr>
-		</table><br/>
-		
-	</div>
-		<%} 
-			
-		
-		}else {%> 
-		검색결과가 없습니다...!!
-		
-		<%}%>	
-
-	
-
-
-
+%>			<div>
+				<form action="test.jsp" method= "post">
+				<input type="submit" value="연락하기">
+				<input type="checkbox" name="num" value="<%=sdto.getNum()%>">
+					<table class="mboard" onclick="window.open('test.jsp')">
+						<tr>
+							<th>
+								<a href="s-member_detail.jsp?num=<%=sdto.getNum()%>&pageNum=<%=pageNum%>"><%=sdto.getId() %>
+								</a>
+							</th>
+							<th>
+<%								if( sdto.getAvailable() == 1) { 
+%>										<img src="image/switch-on.png" width="40px" height="36px"> 
+<%									} else { 
+%>										<img src="image/switch-off.png" width="40px" height="36px">
+<%									} 
+%>							</th>
+							<th>
+								<%=sdto.getField() %>
+							</th>
+							<td>
+								<img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
+								<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+							</td>
+						</tr>
+						
+						<tr>
+							<th><%=sdto.getCareer() %></th>
+							<th><%=sdto.getEmploytype() %></th>
+							<th><%=sdto.getLocation() %></th>
+							<th><%=sdto.getWorktype() %></th>
+						</tr>
+						
+						<tr>
+							<td colspan="4"> <%=sdto.getIntroduce() %>
+							</td>
+						</tr>
+					</table>
+					</form>
+				<br/>
+			</div>
+<%		} 	
+	} else {
+%> 		검색결과가 없습니다...!!		
+<%	}
+%>	
 </section>
+
 <section class="section4">
 	<%
 		if (scount > 0) {
