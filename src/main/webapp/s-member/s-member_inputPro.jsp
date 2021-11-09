@@ -31,8 +31,8 @@
 	String portfolio = mr.getFilesystemName("portfolio");
 	String pfdetail = mr.getParameter("pfdetail");
 	String employtype = mr.getParameter("employtype");
-	String projecttype[] = mr.getParameterValues("projecttype");
-	String worktype[] = mr.getParameterValues("worktype");
+	String projecttype = mr.getParameter("projecttype");
+	String worktype = mr.getParameter("worktype");
 	String location = mr.getParameter("location");
 	String pay = mr.getParameter("pay");
 	String period = mr.getParameter("period");
@@ -43,33 +43,15 @@
 		pay = String.valueOf('0');
 	}	
 	int payi = Integer.parseInt(pay);
+	
 	int avail = Integer.parseInt(available);
 	
 	String langStr = new String();
-	String projecttypeStr = new String();
-	String worktypeStr = new String();
-	
 	if (lang == null) {
 		langStr = null;
 	} else {
 		for ( String langName : lang) {
 			langStr += langName +" ";
-		}
-	}
-	
-	if(projecttype == null) {
-		projecttypeStr = null;
-	} else {
-		for ( String projecttypeName : projecttype) {
-			projecttypeStr += projecttypeName +" ";
-		}
-	}
-	
-	if (worktype == null) {
-		worktypeStr = null;
-	} else {
-		for ( String worktypeName : worktype) {
-			worktypeStr += worktypeName +" ";
 		}
 	}
 	
@@ -85,8 +67,8 @@
 	dto.setPortfolio(portfolio);
 	dto.setPfdetail(pfdetail);
 	dto.setEmploytype(employtype);
-	dto.setProjecttype(projecttypeStr);
-	dto.setWorktype(worktypeStr);
+	dto.setProjecttype(projecttype);
+	dto.setWorktype(worktype);
 	dto.setLocation(location);
 	dto.setPay(payi);
 	dto.setPeriod(period);

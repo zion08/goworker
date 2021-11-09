@@ -217,7 +217,7 @@ hr {
 	width: 100%;
 }
 
-.career-info {
+.skill-info {
 	margin: 10px 30px;
 	padding: 0;
  	display: grid;
@@ -227,7 +227,7 @@ hr {
   	row-gap: 1vh;
 }
 
-.career-info select{
+.skill-info select{
 	width: 100%;
 	height: 50%;
 }

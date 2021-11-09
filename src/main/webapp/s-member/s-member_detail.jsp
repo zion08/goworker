@@ -80,7 +80,7 @@
 		</tr>
 		<tr>
 			<th><img src="image/email.png" width="25px" height="25px" ></th>		
-			<td><a href="mailto:﻿"<%=dto.getEmail() %>"><%=dto.getEmail() %></a></td>
+			<td><a href="mailto:﻿"<%=dto.getEmail() %>><%=dto.getEmail() %></a></td>
 		</tr>
 		<tr>
 			<th>포트폴리오</th>		
