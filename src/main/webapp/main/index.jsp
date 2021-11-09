@@ -1,72 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ include file = "../include/header.jsp" %>
+<% request.setCharacterEncoding("UTF-8"); %>
+
+
 <title>메인페이지</title>
-<style type="text/css">
-	html{width:100%;, 
-		height:100%;,
-		
-	}
-	header {
-	display: flex;
-	justify-content: space-between;
-	padding: var(--padding);
-	}
-	section {
-	padding : 30px;
-	}
-	.sign {
-	width : 90px;
-	height : 30px;
-	border-style : groove;
-	border-radius : 10%;
-	}
-	.login {
-	width : 90px;
-	height : 30px;
-	border-style : groove;
-	border-radius : 10%;
-	}
-</style>
-<header>
-	<div class="logo">
-		<a href="/goworker/main/index.jsp"><img src="image/logo.png" width= "80" height="80"/></a>
-		
-	</div>
-	<div class="sideicon" align="right" width="400" height="70">
-		<br/>
-		<a href="">쪽지함</a>&emsp;
-		<input type="button" name="signin" value="가입하기" class="sign"/>&emsp;
-		<input type="button" name="login" value="로그인" class="login"/>&emsp;
-	</div>
 
-
-</header>
-<hr color="skyblue" size="2"  align="center" />
-
-<meta charset="UTF-8">
-
-
-<section class="main">
-<center>
-<form>
-	<input type="search"  name="searchmain" placeholder="원하는 분야를 검색하세요"
-	style= "width:400px; height:70px; font-size=40px;"/>
-	<input type="image" src="/web/saveFile/search.png" width="50" height="50"/>
+<section class="section3 section3-height">	
+	<form>
+		<input type="search"  name="searchmain" placeholder="원하는 분야를 검색하세요" class="search"/>
+		<input type="image" src="/web/saveFile/search.png" width="50" height="50"/>
 	</form>
-<br/><br/>
-<table width="90%">
-	<tr>
-		<td align="center"><a href="/goworker/s-member/s-member.jsp"><img src="image/find.png" width= "60%" height="60%"style=" display:block;"></a>팀원찾기 </td>
-		<td align="center"><img src="image/project.png" width= "60%" height="60%" style=" display:block;">프로젝트찾기</td>
-		<td align="center"><img src="image/make.png" width= "60%" height="60%" style=" display:block;">프로젝트만들기</td>
-		<td align="center"><img src="image/info.png" width= "60%" height="60%" style=" display:block;">취업정보</td>
-		<td align="center"><img src="image/commu.png" width= "60%" height="60%" style=" display:block;">커뮤니티</td>
-</table><br/>
+	<br/><br/>
+	<div class="category-box">
+		<div id="smember" onclick="window.location='../s-member/s-member.jsp'">
+			<span>멤버 찾기</span>
+		</div>
+
+		<div id="sproject" onclick="window.location='../s-project/s-project.jsp'">
+			<span>프로젝트 찾기</span>
+		</div>
+		<div id="mproject">
+			<span>프로젝트 생성</span>
+		</div>
+		<div id="jobinfo">
+			<span>취업 정보</span>
+		</div>
+		<div id="community">
+			<span>커뮤니티</span>
+		</div>
+	</div>
 </section>
 
-</center>
 <footer>
 <hr color="skyblue" size="2"  align="center" />
 <table width="500" align="right">
@@ -115,5 +80,3 @@
       
     </table>
 </footer>
-
-</html>

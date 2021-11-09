@@ -1,32 +1,22 @@
-<% request.setCharacterEncoding("UTF-8"); %>
-<link href="../style.css" rel="stylesheet" type="text/css">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file = "../include/header.jsp" %>
 
-<title>프로젝트 리스트</title>
+<title>프로젝트 찾기</title>
+
+<h1>íë¡ì í¸ ë¦¬ì¤í¸</h1>
     
-<header>
-	<div class="logo" onclick="window.location='/goworker/main/index.jsp'"></div>
-
-	<div class="wrapper-sideicon">		
-		<a href="" class="sideicon1">쪽지함</a>
-		<input type="button" name="signin" value="가입하기" class="sideicon2"/>
-		<input type="button" name="login" value="로그인" class="sideicon2"/>
-	</div>
-</header>
-<hr color="skyblue" size="2"  align="center" />
-
-<h1>프로젝트 리스트</h1>
-    
-프로젝트 명<input type="text" name="projectName">
+íë¡ì í¸ ëª<input type="text" name="projectName">
 <input type="text" name="">
 <form action=s-projectPro.jsp method="post">
-	경력<br />
-	<input type=radio name="career" checked>신입
-	<input type=radio name="career">1년이하
-	<input type=radio name="career">1년~2년
-	<input type=radio name="career">2년~3년
-	<input type=radio name="career">4년이상<br />
+	ê²½ë ¥<br />
+	<input type=radio name="career" checked>ì ì
+	<input type=radio name="career">1ëì´í
+	<input type=radio name="career">1ë~2ë
+	<input type=radio name="career">2ë~3ë
+	<input type=radio name="career">4ëì´ì<br />
 	
-	사용기술<br />
+	ì¬ì©ê¸°ì <br />
 	<input type=checkbox name="lang" value="Python">Python
 	<input type=checkbox name="lang" value="Java">Java
 	<input type=checkbox name="lang" value="JavaScript">JavaScript
@@ -41,58 +31,58 @@
 	<input type=checkbox name="lang" value="Django">Django
 	<input type=checkbox name="lang" value="React">React<br />
 	
-	업무 방식<br />
-	<input type=checkbox name="worktype" value="">원격
-	<input type=checkbox name="worktype" value="">상주
-	<input type=checkbox name="worktype" value="">협의<br />
+	ìë¬´ ë°©ì<br />
+	<input type=checkbox name="worktype" value="">ìê²©
+	<input type=checkbox name="worktype" value="">ìì£¼
+	<input type=checkbox name="worktype" value="">íì<br />
 	
-	프로젝트 유형<br />
-	<input type=checkbox name="projecttype" value="메인 프로젝트">메인 프로젝트
-	<input type=checkbox name="projecttype" value="사이드 프로젝트">사이드 프로젝트
+	íë¡ì í¸ ì í<br />
+	<input type=checkbox name="projecttype" value="ë©ì¸ íë¡ì í¸">ë©ì¸ íë¡ì í¸
+	<input type=checkbox name="projecttype" value="ì¬ì´ë íë¡ì í¸">ì¬ì´ë íë¡ì í¸
 	<br />
 	
-	계약<br />
-	<input type=radio name="employtype">정규직
-	<input type=radio name="employtype">계약직<br />
+	ê³ì½<br />
+	<input type=radio name="employtype">ì ê·ì§
+	<input type=radio name="employtype">ê³ì½ì§<br />
 	
-	프로젝트 예상기간
+	íë¡ì í¸ ììê¸°ê°
 	<SELECT multuple size="1" name="period">
-		<option>프로젝트 예상기간</option>
-		<option>7일</option>
-		<option>15일</option>
-		<option>30일</option>
-		<option>60일</option>
-		<option>90일</option>
-		<option>180일</option>
-		<option>365일 이상</option>
+		<option>íë¡ì í¸ ììê¸°ê°</option>
+		<option>7ì¼</option>
+		<option>15ì¼</option>
+		<option>30ì¼</option>
+		<option>60ì¼</option>
+		<option>90ì¼</option>
+		<option>180ì¼</option>
+		<option>365ì¼ ì´ì</option>
 	</SELECT><br />
 	
-	지역
-	<input type="text" name="location" value="시,군,구"><br />
+	ì§ì­
+	<input type="text" name="location" value="ì,êµ°,êµ¬"><br />
 	
-	예상금액
+	ììê¸ì¡
 	<SELECT multuple size="1" name="pay">
-		<option>프로젝트 예상금액</option>
-		<option>100만 원</option>
-		<option>200만 원</option>
-		<option>300만 원</option>
-		<option>400만 원</option>
-		<option>500만 원</option>
-		<option>600만 원</option>
-		<option>700만 원</option>
-		<option>800만 원</option>
-		<option>900만 원</option>
-		<option>1000만 원</option>
-		<option>2000만 원</option>
-		<option>3000만 원</option>
-		<option>4000만 원</option>
-		<option>5000만 원</option>
-		<option>5000만 원 이상</option>
+		<option>íë¡ì í¸ ììê¸ì¡</option>
+		<option>100ë§ ì</option>
+		<option>200ë§ ì</option>
+		<option>300ë§ ì</option>
+		<option>400ë§ ì</option>
+		<option>500ë§ ì</option>
+		<option>600ë§ ì</option>
+		<option>700ë§ ì</option>
+		<option>800ë§ ì</option>
+		<option>900ë§ ì</option>
+		<option>1000ë§ ì</option>
+		<option>2000ë§ ì</option>
+		<option>3000ë§ ì</option>
+		<option>4000ë§ ì</option>
+		<option>5000ë§ ì</option>
+		<option>5000ë§ ì ì´ì</option>
 	</SELECT><br />
 	
-	<input type=checkbox name="endProject">모집 마감 프로젝트 숨기기<br />
+	<input type=checkbox name="endProject">ëª¨ì§ ë§ê° íë¡ì í¸ ì¨ê¸°ê¸°<br />
 	
-	<input type=checkbox name="sent">이력서 보낸 프로젝트 숨기기<br />
+	<input type=checkbox name="sent">ì´ë ¥ì ë³´ë¸ íë¡ì í¸ ì¨ê¸°ê¸°<br />
 	
-	<input type="submit" value="검색">
+	<input type="submit" value="ê²ì">
 </form>

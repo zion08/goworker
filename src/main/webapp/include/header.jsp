@@ -1,15 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <link href="../style.css" rel="stylesheet" type="text/css">
 
-<header>
-	<div class="logo" onclick="window.location='/goworker/main/index.jsp'"></div>
+<%	String sid = (String)session.getAttribute("sid"); %>
+	
+	<header>
+			<div class="logo" onclick="window.location='/goworker/main/index.jsp'">
+			</div>	
+<%	if (sid == null) {
+%>			<div class="wrapper-sideicon">			
+				<span class="sideicon2" >
+					<a href="/goworker/member/apply.jsp">가입하기
+					</a>
+				</span>
+				
+				<span class="sideicon2">
+					<a href="/goworker/member/login.jsp">로그인
+					</a>
+				</span>
+			</div>
+<%	} else {
+%>			<div class="wrapper-sideicon">		
+				<span class="sideicon1">
+					<a href="" >
+						<img src="../s-member/image/note.png"><p>쪽지함</p>
+					</a>
+				</span>
+				
+				<span class="sideicon2">
+					<p><%=sid%></p>
+				</span>				
+			</div>
 
-	<div class="wrapper-sideicon">		
-		<a href="" class="sideicon1">쪽지함</a>
-		<input type="button" name="signin" value="가입하기" class="sideicon2"/>
-		<input type="button" name="login" value="로그인" class="sideicon2"/>
-	</div>
-</header>
+<%	}
+%>	</header>
+
+
 <hr color="skyblue" size="2"  align="center" />
