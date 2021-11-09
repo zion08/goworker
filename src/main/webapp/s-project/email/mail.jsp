@@ -9,7 +9,7 @@
 <body>
     <div>
         <form action="mailSend.jsp" method="post" >
-            <table border="1" >
+            <table border="1"  align="center">
                 <tr>
                 	<th colspan="2">메일 문의</th>
                 </tr>
@@ -23,7 +23,7 @@
                 </tr>
                 <tr>
                 	<td align="center">보내는 사람 E-mail</td>
-                	<td><input type="text" name="from" style="width:300px;height:15px;" required/></td>
+                	<td><input type="text" name="from" style="width:300px;height:15px;" value="goworker123@gmail.com" required/></td>
                 </tr>
                 <tr>
                 	<td align="center">받는 사람 E-mail</td>
