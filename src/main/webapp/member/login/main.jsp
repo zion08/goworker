@@ -13,7 +13,7 @@
 %>
 	이메일 "<%= sid %>"로 로그인 한 상태 <br/>
 	세션id "<%= session.getId() %>"<br/>
-	<a class="button success" href="/member/apply/apply.jsp">회원가입</a>
+	<a class="button success" href="/goworker/member/apply/apply.jsp">회원가입</a>
 	<a class="button success" href="logout.jsp">로그아웃</a>
 <%
 	}/*쿠키 로그인*/
@@ -23,14 +23,14 @@
 		이메일 "<%= sid %>"로 로그인 한 상태 <br/>
 		세션쿠키id "<%= cookies.getValue("cid") %>"로 로그인 한 상태(쿠키) <br/> 
 		jsessionid "<%= session.getId() %>"<br/>
-		<a class="button success" href="/member/apply/apply.jsp">회원가입</a>
+		<a class="button success" href="/goworker/member/apply/apply.jsp">회원가입</a>
 		<a class="button success" href="logout.jsp">로그아웃</a>
 <%
 	}
 	else
 	{
 %>		
-		<a class="button success" href="/member/apply/apply.jsp">회원가입</a>
+		<a class="button success" href="/goworker/member/apply/apply.jsp">회원가입</a>
 		<a class="button success" href="login.jsp">로그인</a>
 <%
 	}

@@ -4,23 +4,22 @@
 <title>check</title>
 
 <jsp:useBean id="dto" class="bean.MemberDTO" />
-
 <jsp:setProperty name="dto" property="*" />
 
 <%
 	MemberDAO dao = new MemberDAO();
 	boolean result= dao.IdCheck(dto);
-	String str="ï¿½ï¿½ë°¡ï¿½ï¿½";
+	String str="»ç¿ë°¡´É";
 	if(result==true)
 	{	
-		str="ï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½";
+		str="»ç¿ëºÒ°¡´É";
 	%>
 	<script>
-		alert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ô´Ï´ï¿½.");
+		alert("»ç¿ëÁßÀÎ ¾ÆÀÌµðÀÔ´Ï´Ù.");
 	</script>
   <%}else{%>
   	<script>
-	 	alert("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½."); 
+	 	alert("»ç¿ë °¡´ÉÇÕ´Ï´Ù."); 
 	 </script>
   <%}
 	%>
@@ -31,5 +30,5 @@
 		self.close();
 	}
 </script>
-	<input type="button" value="ï¿½Ý±ï¿½" onclick="returnClose();"/>
+	<input type="button" value="´Ý±â" onclick="returnClose();"/>
 	

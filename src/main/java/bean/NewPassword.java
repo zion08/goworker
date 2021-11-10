@@ -5,12 +5,15 @@ import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 import java.util.Date;
 
+public class NewPassword {
+	static SecureRandom secureRandomGenerator;
+		
 	public String getSecureRandomPassword(int size){
 		char[] charSet=new char[size];
 		StringBuffer sb = new StringBuffer();
 		try
 		{ 
-			secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG", "SUN"); // secureRandom ¼ıÀÚ »ı¼º.
+			secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG", "SUN"); // secureRandom ìˆ«ì ìƒì„±.
 		} 
 		catch (NoSuchAlgorithmException | NoSuchProviderException e ) 
 		{	
@@ -18,7 +21,8 @@ import java.util.Date;
 		}	
 		int random = 0;
 		int len = charSet.length;
-		for(int i=0; i<size;i++) {
+		for(int i=0; i<size;i++) 
+		{
 			random = secureRandomGenerator.nextInt(len);
 			sb.append(random);
 		}

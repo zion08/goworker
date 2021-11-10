@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="bean.MemberDAO" %>
-<title>È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È®ï¿½ï¿½Ã¢</title>
+<title>È¸¿ø°¡ÀÔÈ®ÀÎÃ¢</title>
 
 <jsp:useBean id="dto" class="bean.MemberDTO" />
 <jsp:setProperty name="dto" property="*" />
@@ -14,12 +14,12 @@
 <%
 	if(result==1){ %>
 		<script>
-			alert("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
-			window.location="/member/login/login.jsp";
+			alert("È¸¿ø°¡ÀÔ ¼º°ø");
+			window.location="/goworker/member/login/login.jsp";
 		</script>
 <%	}else{ %>
 		<script>
-			alert("ï¿½ß¸ï¿½ï¿½Ô·ï¿½");
+			alert("Àß¸øÀÔ·Â");
 			history.go(-1);
 		</script>
 <%	} %>

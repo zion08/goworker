@@ -30,7 +30,6 @@
 		{
 			response.addCookie(Cookies.createCookie("cid", session.getId(), "/", 60*60*24*30)); //쿠키에 기본쿠키세션id 저장
 			response.sendRedirect("main.jsp");
-			
 		}
 	}else
   	{%>
@@ -39,3 +38,4 @@
 			history.go(-1);
 		</script>  
   <%}%>
+  

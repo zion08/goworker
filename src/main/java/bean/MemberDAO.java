@@ -27,7 +27,7 @@ public class MemberDAO {
 	            dto.setEmail(rs.getString("email"));
 	            dto.setPassword(rs.getString("password"));
 	            dto.setReg(rs.getTimestamp("reg"));
-	            list.add(dto);  // ¸®½ºÆ®¿¡ Ãß°¡!!
+	            list.add(dto);  // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½!!
 	         }
 	      }catch(Exception e) {
 	         e.printStackTrace();
@@ -55,7 +55,7 @@ public class MemberDAO {
 			}
 			return result;
 		}
-		public int memberInput(MemberDTO dto) {  // µ¥ÀÌÅÍº£ÀÌ½º¿¡ È¸¿øÁ¤º¸ µî·Ï(È¸¿ø°¡ÀÔ)
+		public int memberInput(MemberDTO dto) {  // ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
@@ -179,5 +179,7 @@ public class MemberDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
-	}		
+	}
+		
+		
 }

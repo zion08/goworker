@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file = "../include/header.jsp" %>
-<% request.setCharacterEncoding("UTF-8"); %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 
-<title>íšŒì›ê°€ì…</title>
+<title>È¸¿ø°¡ÀÔ</title>
 
 <script>
 	function blankCheck()
@@ -13,18 +11,17 @@
 		passwordv=document.getElementsByName("password")[0].value;
 		if(idv=="")
 		{
-		 HEAD:src/main/webapp/member/apply/apply.jsp
-			alert("idï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");	
+			alert("id¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");	
 			return false;
 		}
 		if(emv=="")
 		{
-			alert("ì´ë©”ì¼ì„ ì…ë ¥í•˜ì„¸ìš”.");	
+			alert("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä.");	
 			return false;
 		}
 		if(passwordv=="")
 		{
-			alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");	
+			alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");	
 			return false;
 		}
 	}
@@ -35,7 +32,7 @@
 		idv=document.getElementsByName("id")[0].value;
 		if(idv=="")
 		{
-			alert("ë‹‰ë„¤ì„ì„ ì…ë ¥í•˜ì„¸ìš”.");
+			alert("´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
 			return false;
 		}else
 		{
@@ -49,7 +46,7 @@
 		emv=document.getElementsByName("email")[0].value;
 		if(emv=="")
 		{
-			alert("ë‹‰ë„¤ì„ì„ ì…ë ¥í•˜ì„¸ìš”.");
+			alert("´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
 			return false;
 		}else
 		{
@@ -59,32 +56,31 @@
 </script>
 
 <div class="apply-page" align="center">
-		<h2>íšŒì›ê°€ì…</h2>
+		<h2>È¸¿ø°¡ÀÔ</h2>
 </div>
 
-<section class="section1">
-	<form action="applyPro.jsp" method="post" onsubmit="return blankCheck()">
-		<div align="center">
-			<table border="1">
-				<tr>
-					<td align="center">i   d : </td>
-					<td><input type="text" name="id" placeholder="nickname"  /></td>
-					<td align="center"><input type="button" value="idì¤‘ë³µí™•ì¸" onclick="return confirmId();"/><label id="idCheck"></label></td>
-				</tr>
-				<tr>
-					<td align="center">email : </td>
-					<td><input type="email" name="email" placeholder="example@goworker.com" /></td>
-					<td align="center"><input type="button" value="emailì¤‘ë³µí™•ì¸" onclick="return confirmEm();"/><label id="emCheck"></label></td>
-				</tr>
-				<tr>
-					<td align="center">password : </td>
-					<td><input type="password" name="password" placeholder="ì˜ë¬¸+ìˆ«ì ì¡°í•© 6ìë¦¬ ì´ìƒ ì…ë ¥í•´ì£¼ì„¸ìš”." /></td>
-				</tr>
-			</table>
-				<input type="submit" value="íšŒì›ê°€ì…" onclick="applyPro.jsp"/>	
-		</div>
-	</form>
-</section>
+<form action="applyPro.jsp" method="post" onsubmit="return blankCheck()">
+	<div align="center">
+		<table border="1">
+			<tr>
+				<td align="center">i   d : </td>
+				<td><input type="text" name="id" placeholder="nickname"  /></td>
+				<td align="center"><input type="button" value="idÁßº¹È®ÀÎ" onclick="return confirmId();"/><label id="idCheck"></label></td>
+			</tr>
+			<tr>
+				<td align="center">email : </td>
+				<td><input type="email" name="email" placeholder="example@goworker.com" /></td>
+				<td align="center"><input type="button" value="emailÁßº¹È®ÀÎ" onclick="return confirmEm();"/><label id="emCheck"></label></td>
+			</tr>
+			<tr>
+				<td align="center">password : </td>
+				<td><input type="password" name="password" placeholder="¿µ¹®+¼ıÀÚ Á¶ÇÕ 6ÀÚ¸® ÀÌ»ó ÀÔ·ÂÇØÁÖ¼¼¿ä." /></td>
+			</tr>
+		</table>
+			<input type="submit" value="È¸¿ø°¡ÀÔ" onclick="applyPro.jsp"/>	
+	</div>
+</form>
+
 
 
 
