@@ -9,7 +9,7 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
-
+<link href="../style.css" rel="stylesheet" type="text/css">
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
@@ -24,50 +24,14 @@
 	String id = dto.getId();
 %>
 
-<style>
 
-	.box1{
-		border:1px solid black;
-		width:200px;
-		height:50px;
-		position:absolute;
-		top:100px;
-		left:185px;
-	}
-	.box2{
-		border:1px solid black;
-		width:200px;
-		height:50px;
-		position:absolute;
-		top:100px;
-		left:385px;
-		
-	}
-	.box3{
-		border:1px solid black;
-		width:200px;
-		height:50px;
-		position:absolute;
-		top:100px;
-		left:585px;
-		
-	}
-	.box4{
-		border:1px solid black;
-		width:500px;
-		height:50px;
-		position:absolute;
-		top:200px;
-		left:240px;		
-	}
-</style>
 <title><%=dto.getSubject() %></title>
 <body>
 	<B>
 	
-		<div class="box1"><br /><center>예상 급여 : <%=dto.getPay() %></center><br /> </div>
-		<div class="box2"><br /><center>요구 경력 : <%=dto.getCareer() %></center><br /> </div>
-		<div class="box3"><br /><center>예상 기간 : <%=dto.getPeriod() %></center><br /> </div>
+		<div class="detailbox1" id="detailallbox"><br /><center>예상 급여 : <%=dto.getPay() %></center><br /> </div>
+		<div class="detailbox2" id="detailallbox"><br /><center>요구 경력 : <%=dto.getCareer() %></center><br /> </div>
+		<div class="detailbox3" id="detailallbox"><br /><center>예상 기간 : <%=dto.getPeriod() %></center><br /> </div>
 	
 	</B>
 </body>
@@ -75,7 +39,7 @@
 <center>
 작성자 : <%=dto.getId() %><br />
 <br />
-<div class="box4"><br /><center><%=dto.getLang() %></center></div><br />
+<div class="detailbox4" id="detailallbox"><br /><center><%=dto.getLang() %></center></div><br />
 <br /><br />
 위치 : <%=dto.getLocation() %><br />
 프로젝트 종류 :<%=dto.getProjecttype() %><br />

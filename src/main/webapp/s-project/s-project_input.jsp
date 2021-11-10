@@ -21,10 +21,10 @@
 						<li id="id">	
 							<label>아이디</label>
 								<span><%=sid%></span>
+				
 						<li id=subject>
 							<label>프로젝트 명</label>
 								<input type="text" name="subject" >
-								<input type="hidden" name="writer" value="<%=sid%>"/>
 						</li>
 						
 						<li id=phone>
