@@ -40,7 +40,7 @@
 						</li>
 					</ul>
 					
-					<ul class="career-info">
+					<ul class="skill-info">
 						<li id="field">
 							<label>분야</label>
 								<select name="field">
@@ -103,15 +103,16 @@
 						
 						<li id="projecttype">
 							<label>찾는 프로젝트 유형</label>
-								<label><input type="checkbox" name="projecttype" value="side">사이드 프로젝트</label>
-								<label><input type="checkbox" name="projecttype" value="main">메인 프로젝트</label>
+								<label><input type="radio" name="projecttype" value="side">사이드 프로젝트</label>
+								<label><input type="radio" name="projecttype" value="main">메인 프로젝트</label>
+								<label><input type="radio" name="projecttype" value="sidemain">둘 다</label>
 						</li>            
 								
 						<li id="worktype">
 							<label>가능한 업무 방식</label>
-								<label><input type="checkbox" name="worktype" value="online">원격</label>
-								<label><input type="checkbox" name="worktype" value="office">상주</label>
-								<label><input type="checkbox" name="worktype" value="discuss">협의</label>
+								<label><input type="radio" name="worktype" value="online">원격</label>
+								<label><input type="radio" name="worktype" value="office">상주</label>
+								<label><input type="radio" name="worktype" value="discuss">협의</label>
 						</li>	
 						
 						<li id="location">
