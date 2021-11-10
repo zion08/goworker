@@ -11,3 +11,4 @@ src/main/webapp/META-INF/MANIFEST.MF
 *.zip
 *.class
 bin/.DS_Store
+/bin/
