@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import member.oracle.OracleDB;
-import member.oracle.DisconnDB;
+import java.util.function.DoubleToLongFunction;
+
+import bean.NewPassword;
+import oracle.OracleDB;
+import oracle.DisconnDB;
 
 public class MemberDAO {
 	private Connection conn = null;
@@ -162,5 +165,23 @@ public class MemberDAO {
 			}
 			return result;
 		}
+	public int newPassword(MemberDTO dto) {
+		int result=0;
+		try	{
+			NewPassword np = new NewPassword();
+			conn=OracleDB.getConnection();
+			pstmt=conn.prepareStatement("update member set password=? where email=?");
+			pstmt.setString(1, np.getSecureRandomPassword(10) );
+			pstmt.setString(2, dto.getEmail());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+		
 		
 }
