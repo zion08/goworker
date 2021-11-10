@@ -61,7 +61,7 @@
 		<td align="center">첨부파일</td>
 		<%if(dto.getProjectfile() != null){ %>
 			<td colspan="2" align="center">
-			<img src="/goworker/project/<%=dto.getProjectfile() %>"width="500px"height="500px">
+			<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="500px"height="500px">
 		<%}else{ %>
 			<td colspan="2">등록된 첨부파일이 없습니다.</td>
 		<%} %>
@@ -70,9 +70,9 @@
 		<td align="center" colspan="3">
 			<input type="button" value="추천합니다!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
 			<input type="button" value="메일보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
-			<input type="button" value="수정" onclick="window.location='/goworker/project/project_update.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
-			<input type="button" value="삭제" onclick="window.location='/goworker/project/project_delete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
-			<input type="button" value="목록" onclick="window.location='/goworker/project/project_list.jsp'"/>
+			<input type="button" value="수정" onclick="window.location='/goworker/makeproject/project_update.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
+			<input type="button" value="삭제" onclick="window.location='/goworker/makeproject/project_delete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
+			<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
 		</td>
 		
 	</tr>
@@ -104,7 +104,7 @@
 		위 프로젝트에 관심있는 분은 댓글을 남겨주세요.<br/>
 	</div>
 	
-	<form action="/goworker/project/comment/commentPro.jsp" name="commentform" method="post">
+	<form action="/goworker/makeproject/comment/commentPro.jsp" name="commentform" method="post">
 		<input type="hidden" name="num" value="<%=dto.getNum()%>"/>
 		<input type="hidden" name="comment_num" value="<%=comment_num %>"/>
 		<input type="hidden" name="ref" value="<%=ref %>" />
@@ -123,7 +123,7 @@
 			<tr>
 				<td width="150px" align="center">내 용</td>
 				<td width="400px" colspan="3" >
-					<input type="text" size="120" name="pcomment" style="width:570px;height:100px;" placeholder="댓글을 입력해주세요."></td>
+					<input type="text" size="120" name="comment_content" style="width:570px;height:100px;" placeholder="댓글을 입력해주세요."></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -151,7 +151,8 @@
  
  <table class="comments" border="1" width="700px" align="center">
  	<tr>
- 		<td width="80px" align="center">아이디</td>
+ 		<td width="30px" align="center"><img src="/goworker/makeprojet/image/bestcomment.png" ></td>
+ 		<td width="100px" align="center">아이디</td>
  		<td width="300px" align="center">내용</td>
  		<td width="80px" align="center">작성일</td>
  		<td width="50px" align="center">버튼</td>
@@ -165,7 +166,7 @@
 	<tr>
 		<td align="center">
 			<img src="/goworker/s-member/image/image.jpg" width="50" height="50"><br/>
-			<%=id %>
+				<%=id %>
 		</td>
 		
 		<td>
@@ -178,16 +179,16 @@
 <%		}else{
 %>			<img src="/goworker/s-member/image/white.jpg" width="<%=wid %>" height="16">
 <%		}
-%>		<%=cdto.getComment_content() %>	
+%>			<%=cdto.getComment_content() %>	
 		</td>
 		
 		<td align="center">
 			<%=sdf.format(cdto.getComment_regdate()) %>
 		</td>
 		<td align="center">
-			<input type="button" value="수정" onclick="window.location='/goworker/project/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&pageNum=<%=pageNum %>'" />
-			<input type="button" value="삭제" onclick="window.location='/goworker/project/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&pageNum=<%=pageNum %>'" /> 
-			<input type="button" value="답글" onclick="window.location='/goworker/project/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&Ref=<%=cdto.getRef()%>&re_step=<%=cdto.getRe_step()%>&re_level=<%=cdto.getRe_level()%>&pageNum=<%=pageNum%>'" />
+			<input type="button" value="수정" onclick="window.location='/goworker/makeproject/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&pageNum=<%=pageNum %>'" />
+			<input type="button" value="삭제" onclick="window.location='/goworker/makeproject/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&pageNum=<%=pageNum %>'" /> 
+			<input type="button" value="답글" onclick="window.location='/goworker/makeproject/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&Ref=<%=cdto.getRef()%>&re_step=<%=cdto.getRe_step()%>&re_level=<%=cdto.getRe_level()%>&pageNum=<%=pageNum%>'" />
 		</td>
 	</tr>
 	<%}
