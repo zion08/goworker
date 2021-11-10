@@ -124,6 +124,7 @@
 
 
 	<form align="center">
+		<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 		<input type="button" value="쪽지 보내기" />
 		<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
 	</form>
@@ -134,7 +135,6 @@
 <!-- 댓글 작성 폼 -->
 <%
 	int comment_num=0, comment_ref=1, comment_step=0, comment_level=0;
-
 	if(request.getParameter("comment_num") != null){
 		comment_num=Integer.parseInt(request.getParameter("comment_num"));
 		comment_ref=Integer.parseInt(request.getParameter("comment_ref"));
@@ -191,7 +191,6 @@
 <!-- 댓글 리스트 -->
 <% 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
-
 	Comment_SmemberDAO cdao = new Comment_SmemberDAO();
 	int count = 0; 
 	List<Comment_SmemberDTO> list = null;	
