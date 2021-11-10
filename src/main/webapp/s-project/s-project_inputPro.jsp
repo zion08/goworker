@@ -22,6 +22,7 @@
 	MultipartRequest mr = new MultipartRequest(request,path,size,encoding,dp); //파라미터 받기 및 파일 업로드
 
 	String id = mr.getParameter("id");
+	String subject = mr.getParameter("subject");
 	String phone = mr.getParameter("phone");
 	String email = mr.getParameter("email");
 	String kakao = mr.getParameter("kakao");
@@ -58,6 +59,7 @@
 	
 	SprojectDTO dto = new SprojectDTO();
 	dto.setId(id);	
+	dto.setSubject(subject);
 	dto.setPhone(phone);
 	dto.setEmail(email);
 	dto.setKakao(kakao);
