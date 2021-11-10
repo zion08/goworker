@@ -12,3 +12,4 @@ src/main/webapp/META-INF/MANIFEST.MF
 *.class
 bin/.DS_Store
 /bin/
+.settings/org.eclipse.core.resources.prefs
