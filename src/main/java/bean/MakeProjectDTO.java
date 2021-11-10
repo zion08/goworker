@@ -12,6 +12,7 @@ public class MakeProjectDTO {
 	private Timestamp reg_date;
 	private int readcount;
 	private int good;
+	private int down;
 	
 	public int getNum() {
 		return num;
@@ -60,6 +61,12 @@ public class MakeProjectDTO {
 	}
 	public void setGood(int good) {
 		this.good = good;
+	}
+	public int getDown() {
+		return down;
+	}
+	public void setDown(int down) {
+		this.down = down;
 	}
 		
 }

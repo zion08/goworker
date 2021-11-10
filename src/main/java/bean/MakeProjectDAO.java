@@ -22,7 +22,7 @@ public class MakeProjectDAO {
 		int result = 0;
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("insert into makeproject values(makeproject_seq.nextval,?,?,?,?,sysdate,0,0)");
+			pstmt = conn.prepareStatement("insert into makeproject values(makeproject_seq.nextval,?,?,?,?,sysdate,0,0,0)");
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getSubject());
 			pstmt.setString(3,dto.getContent());
@@ -43,7 +43,7 @@ public class MakeProjectDAO {
 		try {
 			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select * from "
-					+ " (select num, id, subject, content, projectfile, reg_date, readcount, good, rownum r from "
+					+ " (select num, id, subject, content, projectfile, reg_date, readcount, good,down, rownum r from "
 					+ " (select * from makeproject order by num desc))"		
 					+ " where r >= ? and r <= ?");
 			pstmt.setInt(1, start);
@@ -60,6 +60,7 @@ public class MakeProjectDAO {
 				dto.setReg_date(rs.getTimestamp("reg_date"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setGood(rs.getInt("good"));
+				dto.setDown(rs.getInt("down"));
 				list.add(dto);
 			}
 	}catch(Exception e) {
@@ -122,6 +123,7 @@ public class MakeProjectDAO {
 				dto.setReg_date(rs.getTimestamp("reg_date"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setGood(rs.getInt("good"));
+				dto.setDown(rs.getInt("down"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -130,6 +132,10 @@ public class MakeProjectDAO {
 		}
 		return dto;
 	}
+	
+	
+	
+	
 	public MakeProjectDTO getMakeProject(MakeProjectDTO dto) {
 		try {
 			conn = OracleDB.getConnection();
@@ -144,6 +150,7 @@ public class MakeProjectDAO {
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setGood(rs.getInt("good"));
+				dto.setDown(rs.getInt("down"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setProjectfile(rs.getString("projectfile"));
 			}
@@ -154,6 +161,7 @@ public class MakeProjectDAO {
 		}
 		return dto;
 	}
+	
 	
 	// makeproject 수정 메서드
 	public int  makeProjectUpdate(MakeProjectDTO dto) {
@@ -214,6 +222,20 @@ public class MakeProjectDAO {
 			}
 		}
 		
+		public void projectDown(MakeProjectDTO dto) {
+			try {
+				conn = OracleDB.getConnection();
+				String sql = "update makeproject set down = down-1 where num=? ";
+				pstmt = conn.prepareCall(sql);
+				pstmt.setInt(1, dto.getNum());
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+		}
+		
 		
 		// 검색 글 갯수 메서드
 		public  int getSearchCount(String colum, String search) {
@@ -242,7 +264,7 @@ public class MakeProjectDAO {
 			try {
 				conn = OracleDB.getConnection();
 				pstmt = conn.prepareStatement("select * from "
-						+ " (select num, id, subject, content, projectfile, reg_date, readcount, good, rownum r from "
+						+ " (select num, id, subject, content, projectfile, reg_date, readcount, good, down, rownum r from "
 						+ " (select * from makeproject where "+colum+" like '%"+search+"%' order by num desc)) "
 						+ " where r >= ? and r <= ?" );
 				pstmt.setInt(1, start);
@@ -260,6 +282,7 @@ public class MakeProjectDAO {
 					dto.setReg_date(rs.getTimestamp("reg_date"));
 					dto.setReadcount(rs.getInt("readcount"));
 					dto.setGood(rs.getInt("good"));
+					dto.setDown(rs.getInt("down"));
 					list.add(dto);
 				}
 			}catch(Exception e) {
