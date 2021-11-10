@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script src="http://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	/* accounts.kakao.com/weblogin/account/info 로그아웃*/
+	// JavaScript 키	34c487936b056d6bc84f846298084a16
+	window.Kakao.init("34c487936b056d6bc84f846298084a16");
+	function kakaoLogin(){
+		window.Kakao.Auth.login({  // 로그인 함수 사용 , 사용할 정보 가져오기
+			scope: 'profile_nickname, account_email',
+			success: function(response){ //로그인 일어나면 success콜백 함수
+				console.log(response);  // 받아온 오브젝트 데이타 출력
+				alert(JSON.stringify(response));
+				window.Kakao.API.request({ // 유저정보 호출
+					url:'/v2/user/me', 
+					success: res => {  
+						const kakao_account = res.kakao_account; // 정보받아옴
+						console.log(kakao_account);
+					}
+				});
+			}
+		});
+	}
+	function kakaoLogout(){
+		if (Kakao.Auth.getAccessToken()){
+			Kakao.API.request({
+				url:'/v1/user/unlink',
+				success: function(response){
+					console.log(response)
+				},
+				fail:function(error){
+					console.log(error)
+				},
+			})
+			Kakao.Auth.setAccessToken(undefined)
+		}
+	}
+</script>
+</body>
+</html>

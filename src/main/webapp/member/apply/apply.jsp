@@ -11,7 +11,7 @@
 		passwordv=document.getElementsByName("password")[0].value;
 		if(idv=="")
 		{
-			alert("닉네임을 입력하세요.");	
+			alert("id를 입력하세요.");	
 			return false;
 		}
 		if(emv=="")

@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="member.bean.DAO" %>
+<%@ page import="bean.MemberDAO" %>
 <title>check</title>
 
-<jsp:useBean id="dto" class="member.bean.DTO" />
+<jsp:useBean id="dto" class="bean.MemberDTO" />
 <jsp:setProperty name="dto" property="*" />
 
 <%
-	DAO dao = new DAO();
-	boolean result= dao.idCheck(dto);
+	MemberDAO dao = new MemberDAO();
+	boolean result= dao.IdCheck(dto);
 	String str="사용가능";
 	if(result==true)
 	{	
