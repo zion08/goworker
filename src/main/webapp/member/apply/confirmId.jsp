@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ page import="bean.MemberDAO" %>
 <title>check</title>
 
@@ -9,17 +9,17 @@
 <%
 	MemberDAO dao = new MemberDAO();
 	boolean result= dao.IdCheck(dto);
-	String str="��밡��";
+	String str="사용가능";
 	if(result==true)
 	{	
-		str="���Ұ���";
+		str="사용불가능";
 	%>
 	<script>
-		alert("������� ���̵��Դϴ�.");
+		alert("사용중인 아이디입니다.");
 	</script>
   <%}else{%>
   	<script>
-	 	alert("��� �����մϴ�."); 
+	 	alert("사용 가능합니다."); 
 	 </script>
   <%}
 	%>
@@ -30,5 +30,5 @@
 		self.close();
 	}
 </script>
-	<input type="button" value="�ݱ�" onclick="returnClose();"/>
+	<input type="button" value="닫기" onclick="returnClose();"/>
 	

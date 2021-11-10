@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ page import="bean.MemberDAO" %>
 <title>check</title>
 
@@ -9,18 +9,18 @@
 <%	
 	MemberDAO dao = new MemberDAO();
 	boolean result= dao.emailCheck(dto);
-	String str="╩Г©К╟║╢и";
+	String str="Л┌╛Л ╘Й╟─К┼╔";
 	if(result==true)
 	{		
-		str="╩Г©К╨р╟║╢и";
+		str="Л┌╛Л ╘К╤┬Й╟─К┼╔";
 	%>
 	<script>
-		alert("╩Г©Каъюн юл╦чюоют╢о╢ы.");
+		alert("Л┌╛Л ╘Л╓▒Л²╦ Л²╢К╘■Л²╪Л·┘К▀┬К▀╓.");
 		
 	</script>
   <%}else{%>
 	<script>
-	 	alert("╩Г©К ╟║╢игу╢о╢ы."); 
+	 	alert("Л┌╛Л ╘ Й╟─К┼╔М∙╘К▀┬К▀╓."); 
 	 	
 	</script>
 <%}%>
@@ -32,4 +32,4 @@
 		}
 	
 	</script>
-	<input type="button" value="╢щ╠Б" onclick="returnClose();"/>
+	<input type="button" value="К▀╚Й╦╟" onclick="returnClose();"/>
