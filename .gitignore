@@ -9,3 +9,5 @@ src/main/webapp/META-INF/MANIFEST.MF
 .settings/org.eclipse.wst.jsdt.ui.superType.container
 .settings/org.eclipse.wst.jsdt.ui.superType.name
 *.zip
+*.class
+bin/.DS_Store
