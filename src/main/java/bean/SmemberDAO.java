@@ -75,6 +75,7 @@ public class SmemberDAO {
 				dto.setAvailable(rs.getInt("available"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setGood(rs.getInt("good"));
+				dto.setRegdate(rs.getTimestamp("regdate"));
 				list.add(dto);
 			}
 		} catch(Exception e) {
@@ -381,6 +382,41 @@ public class SmemberDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 	}
-	
+
+	public List<SmemberDTO> getHotList(int start , int end) {
+		List<SmemberDTO> list = null;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select * from "
+					+ " (select num,id,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,period,available,favor,good,readcount,regdate,rownum r from "
+					+ " (select * from s_member order by good desc)) "
+					+ " where r >=? and r <=?");
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();			
+			list = new ArrayList();
+			while(rs.next()) {
+				SmemberDTO dto = new SmemberDTO();
+				dto.setNum(rs.getInt("num"));
+				dto.setId(rs.getString("id"));
+				dto.setField(rs.getString("field"));
+				dto.setCareer(rs.getString("career"));
+				dto.setEmploytype(rs.getString("employtype"));
+				dto.setLocation(rs.getString("location"));
+				dto.setWorktype(rs.getString("worktype"));
+				dto.setIntroduce(rs.getString("introduce"));
+				dto.setAvailable(rs.getInt("available"));
+				dto.setReadcount(rs.getInt("readcount"));
+				dto.setGood(rs.getInt("good"));
+				dto.setRegdate(rs.getTimestamp("regdate"));
+				list.add(dto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return list;
+	}
 
 } 
