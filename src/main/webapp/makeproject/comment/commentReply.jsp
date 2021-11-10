@@ -28,7 +28,7 @@
 			<th colspan="2">대댓글 작성</th>
 		</tr>
 		<tr>
-			<td width="50" align="center">아이디</td>
+			<td width="50" align="center">작성자</td>
 			<td width="300px" colspan="2" >
 				<%=id %>
 			</td>

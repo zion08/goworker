@@ -19,7 +19,9 @@
 	if(result == 1){%>
 		<script>
 			alert("댓글이 수정되었습니다");
-			window.location="/goworker/makeproject/project_detail.jsp?num=<%=cdto.getNum()%>&pageNum=<%=pageNum%>";
+			opener.document.location.reload();
+			self.close();
+			
 		</script>
 	<%}else{%>
 		<script>

@@ -159,7 +159,7 @@ public class MakeProject_CommentDAO {
 		return cdto;
 	}
 	
-	
+	// 댓글 수정 메서드
 	public int updateComment(MakeProject_CommentDTO cdto) {
 		int result = 0;
 		try {
@@ -176,6 +176,22 @@ public class MakeProject_CommentDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
+	}
+	
+	
+	// 댓글 추천 기능 메서드
+	public  void commentGood(MakeProject_CommentDTO cdto) {
+		try {
+			conn = OracleDB.getConnection();
+			String sql = "update makeproject_comment set comment_good = comment_good+1 where comment_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cdto.getComment_num());
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
 	}
 }
 

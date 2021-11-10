@@ -9,56 +9,38 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
-<link href="../style.css" rel="stylesheet" type="text/css">
+
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
 
 <%
-	String sid = (String)session.getAttribute("id");
 	String pageNum = request.getParameter("pageNum");
 	SprojectDAO dao = new SprojectDAO();
 	dao.readCountUp(dto);
 	dto = dao.getContent(dto);
 	session.setAttribute("num", dto.getNum());
-	String id = dto.getId();
 %>
-
-
-<title><%=dto.getSubject() %></title>
-<body>
-	<B>
-	
-		<div class="detailbox1" id="detailallbox"><br /><center>예상 급여 : <%=dto.getPay() %></center><br /> </div>
-		<div class="detailbox2" id="detailallbox"><br /><center>요구 경력 : <%=dto.getCareer() %></center><br /> </div>
-		<div class="detailbox3" id="detailallbox"><br /><center>예상 기간 : <%=dto.getPeriod() %></center><br /> </div>
-	
-	</B>
-</body>
-<br /><br /><br /><br /><br /><br /><br /><br /><br />
-<center>
 작성자 : <%=dto.getId() %><br />
-<br />
-<div class="detailbox4" id="detailallbox"><br /><center><%=dto.getLang() %></center></div><br />
-<br /><br />
+언어 : <%=dto.getLang() %><br />
 위치 : <%=dto.getLocation() %><br />
 프로젝트 종류 :<%=dto.getProjecttype() %><br />
+요구 경력 : <%=dto.getCareer() %><br />
+예상 기간 : <%=dto.getPeriod() %><br />
+예상 급여 : <%=dto.getPay() %><br />
 근무 형태 : <%=dto.getWorktype() %><br />
 게시 날짜 : <%=dto.getRegdate() %><br />
 조회 : <%=dto.getReadcount() %><br />
-<br />
 <input type="button" value="좋아요">
-
 <input type="button" value="목록" 
 	onclick="window.location='s-project_list.jsp?pageNum=<%=pageNum%>'" />
-
-<%if( sid == id ) { %>	
-<input type="button" value="수정하기" 
-	onclick="window.location='s-project_update.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum() %>&id=<%=id %>'" />	
-<%} %>
+	
+<%
+//글 수정은 못하게 만들고 프로젝트는 따로 작성할때 점검과정을 통해 만들어지게
+%>
 
 <input type="button" value="메일 보내기" onclick="window.location='/goworker/s-project/email/mail.jsp?pageNum=<%=pageNum%>'"/>
-<br /><br />
+
 
 <!-- 댓글 작성 폼 -->
 
@@ -73,6 +55,8 @@
 			comment_step=Integer.parseInt(request.getParameter("comment_step"));
 			comment_level=Integer.parseInt(request.getParameter("comment_level"));
 		}
+		String id = (String)session.getAttribute("id");
+
 
 %>
 
@@ -91,7 +75,9 @@
 		<table class="comments" border=1>
 		<tr>
 			<th width="50" align="center">작성자</th>
-			<th width="300px" colspan=3 align="center"><input type="text" size="70"  name="comment_writerid" id="comment_writerid"  > </th>
+			<th width="300px" colspan=3 align="center">
+				<%=id %>
+			</th>
 		
 		</tr>
 		<tr>	
@@ -149,7 +135,7 @@
 		<tr>	
 			<td align="center">
 				<img src="/goworker/s-project/image/image.jpg" width="50" height="50"><br/>
-					<%=cdto.getComment_writerid() %>
+					<%=id %>
 			</td>
 			 <td>
 		<%
@@ -171,14 +157,29 @@
 				<%=sdf.format(cdto.getComment_regdate()) %>
 			</td>
 			<td  align="center">
-				<input type="button" value="수정" onclick="window.location='/goworker/s-project/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&pageNum=<%=pageNum%>'"/>
-				<input type="button" value="삭제" onclick="window.location='/goworker/s-project/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&pageNum=<%=pageNum%>'"/>
- 				<input type="button" value="답글" onclick="window.location='/goworker/s-project/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>'" />
+				<form action="/goworker/s-project/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>"  method="post">
+					<input type="button" value="수정" onclick="window.open('/goworker/s-project/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>','update','width=800,height=300');"/>
+					<input type="submit" value="삭제" onclick="comment_removeChek()"/>
+ 					<input type="button" value="답글" onclick="window.open('/goworker/s-project/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>','reply','width=600,height=300');" />
+ 				</form>
  			</td>
  		</tr>
- 		<%} %>
+ 		<%} 
+ 	}%>
+ 		
  </table><br/>
 	
-<%}  %>
+
 </section>
-</center>
+
+
+
+<script>
+	function comment_removeChek(){
+		if(confirm("정말로 삭제하시겠습니까?") == true) {
+			document.form.submit;
+			window.location='/goworker/s-project/comment/commentDelete.jsp';
+		}
+	}
+</script>
+ 

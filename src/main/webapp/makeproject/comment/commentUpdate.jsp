@@ -31,7 +31,7 @@
 				<th colspan="2">댓글 수정</th>
 			</tr>
 			<tr>
-				<td width="150px" align="center">아이디</td>
+				<td width="150px" align="center">작성자</td>
 				<td width="400px" colspan="2">
 					<%=id %>
 				</td>	

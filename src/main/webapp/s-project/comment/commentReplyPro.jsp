@@ -19,5 +19,7 @@
 
 	<script>
 		alert("답글이 작성되었습니다.");
-		window.location="/goworker/s-project/s-project_detail.jsp?num=<%=cdto.getBoard_num()%>&pageNum=<%=pageNum%>";
+		opener.document.location.reload();
+		self.close();
 	</script>
+	

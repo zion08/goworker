@@ -21,8 +21,9 @@
  if(result == 1){%>
  <script>
  	alert("수정되었습니다.");
- 	window.location="/goworker/s-member/s-member_detail.jsp?num=<%=cdto.getBoard_num()%>&pageNum=<%=pageNum%>";
- </script>
+ 	opener.document.location.reload();
+	self.close();
+</script>
  <%}else{ %>
  <script>
  	alert("입력이 잘못 되었습니다. 확인부탁드립니다.");

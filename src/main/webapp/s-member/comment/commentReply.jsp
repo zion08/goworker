@@ -11,6 +11,8 @@
     
 <%	
 	String pageNum = request.getParameter("pageNum");
+	
+	String id = (String)session.getAttribute("id");
 
 %>
 
@@ -27,8 +29,8 @@
 		<tr>
 			<th width="50" align="center">작성자</th>
 			<th width="300px" colspan=3 align="center">
-			<input type="text" size="70"  name="comment_writerid" id="comment_writerid"  > </th>
-		
+				<%=id %>
+			</th>
 		</tr>
 		<tr>	
 			<td width="50px" align="center">내 용</td>

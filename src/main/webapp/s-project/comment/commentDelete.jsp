@@ -11,14 +11,14 @@
 <jsp:useBean class= "bean.Comment_SprojectDTO"  id="cdto" />
 <jsp:setProperty property="*" name="cdto" /> 
  
+
 <%
 	String pageNum = request.getParameter("pageNum");
+	Comment_SprojectDAO dao = new Comment_SprojectDAO();
+	String result = dao.deleteComment(cdto.getComment_num());
 %>
 
-
-<form action="commentDeletePro.jsp" method="post">
-	<input type="hidden" name="comment_num" value="<%=cdto.getComment_num() %>" />
-	<input type="hidden" name="board_num" value="<%=cdto.getBoard_num() %>"/>
-	<input type="hidden" name="pageNum" value="<%=pageNum%>" />
-	<input type="submit" value="삭 제" />
-</form>
+	<script>
+		alert("삭제되었습니다.");
+		window.location='/goworker/s-project/s-project_detail.jsp?num=<%=cdto.getBoard_num()%>&pageNum=<%=pageNum%>';
+	</script>
