@@ -75,9 +75,9 @@ public class MakeProject_CommentDAO {
 			pstmt.setInt(1, cdto.getNum());
 			pstmt.setString(2, cdto.getId());
 			pstmt.setString(3, cdto.getComment_content());
-			pstmt.setInt(4, cdto.getRef());
-			pstmt.setInt(5, cdto.getRe_step());
-			pstmt.setInt(6, cdto.getRe_level());
+			pstmt.setInt(4, ref);
+			pstmt.setInt(5, re_step);
+			pstmt.setInt(6, re_level);
 			result = pstmt.executeUpdate();
 			}catch (Exception e) {
 				e.printStackTrace();		
@@ -98,6 +98,7 @@ public class MakeProject_CommentDAO {
 				list = new ArrayList();
 				while (rs.next()) {
 					MakeProject_CommentDTO dto = new MakeProject_CommentDTO();
+					dto.setComment_num(rs.getInt("comment_num"));
 					dto.setId(rs.getString("id"));
 					dto.setComment_content(rs.getString("comment_content"));
 					dto.setComment_regdate(rs.getTimestamp("comment_regdate"));
@@ -114,5 +115,68 @@ public class MakeProject_CommentDAO {
 		}
 		return list;
 	}
+		
+		
+	// 댓글 삭제 기능 메서드
+	public String deleteComment(int comment_num) {
+		String result = null;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select id from makeproject_comment where comment_num=? ");
+			pstmt.setInt(1,comment_num);
+			rs = pstmt.executeQuery(); 
+			if(rs.next()) {
+				result = rs.getString("id");
+			}
+			pstmt = conn.prepareStatement("delete from makeproject_comment where comment_num=? ");
+			pstmt.setInt(1, comment_num);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+	
+	// 댓글 수정 기능 메서드
+	public MakeProject_CommentDTO getComment(MakeProject_CommentDTO cdto) {
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select * from makeproject_comment where comment_num=?");
+			pstmt.setInt(1, cdto.getComment_num());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cdto.setComment_num(rs.getInt("comment_num"));
+				cdto.setId(rs.getString("id"));
+				cdto.setComment_content(rs.getString("comment_content"));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return cdto;
+	}
+	
+	
+	public int updateComment(MakeProject_CommentDTO cdto) {
+		int result = 0;
+		try {
+			conn = OracleDB.getConnection();
+			String sql = ("update makeproject_comment set id=?, comment_content=? where comment_num=?");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cdto.getId());
+			pstmt.setString(2, cdto.getComment_content());
+			pstmt.setInt(3, cdto.getComment_num());
+			result =pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return result;
+	}
 }
+
 
