@@ -46,7 +46,8 @@
 		</td>
 		<td align="right" width="100px">
 				<img src="/goworker/makeproject/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
-        		<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px" /><%=dto.getGood() %>
+        		<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px" /><%=dto.getGood() %>&emsp;
+        		<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px" /><%=dto.getDown() %>
         </td>
 	</tr>
 	<tr>
@@ -68,10 +69,12 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="3">
-			<input type="button" value="추천합니다!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
-			<input type="button" value="메일보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/><br/>
+			<input type="button" value="추천!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
+			<input type="button" value="비추천!" onclick="window.open('project_Down.jsp?num=<%=dto.getNum()%>','Down','width=300,height=150');window.location.reload();"/><br/>
 			<form action="/goworker/makeproject/project_delete.jsp?num=<%=dto.getNum()%>"  method="post" >
 				<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
+				
+				<input type="button" value="메일보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/><br/>
 				<input type="button" value="수정" onclick="window.location='/goworker/makeproject/project_update.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
 				<input type="submit" value="삭제" onclick="project_removeCheck()"/>
 				<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
