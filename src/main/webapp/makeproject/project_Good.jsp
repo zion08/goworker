@@ -6,7 +6,7 @@
 <jsp:useBean class="bean.MakeProjectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />    
 
-<h2>추천을 눌러주셔서 감사합니다!</h2>
+<center><h3>추천을 눌러주셔서 감사합니다!</h3></center>
 
 <% 
 	MakeProjectDAO dao = new MakeProjectDAO();

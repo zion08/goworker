@@ -40,7 +40,8 @@
 	if(result == 1){%>
 		<script>
 			alert("수정되었습니다.");
-			window.location = "/goworker/makeproject/project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>";
+			opener.document.location.reload();
+			self.close();
 		</script>
 	<%}else{%>
 		<script>

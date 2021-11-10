@@ -13,6 +13,9 @@
 	
 	Comment_SprojectDAO dao = new Comment_SprojectDAO();
 	cdto = dao.getComment(cdto);
+	
+	String id = (String)session.getAttribute("id");
+
 %>
 
 <form action="commentUpdatePro.jsp" method="post" >
@@ -23,13 +26,15 @@
 			<table class="comments" border=1>
 		<tr>
 			<th width="50" align="center">작성자</th>
-			<th width="300px" colspan=3 align="center"><input type="text" size="70" value="<%=cdto.getComment_content() %>"  name="comment_writerid" id="comment_writerid"  > </th>
+			<th width="300px" colspan=3 align="center">
+				<%=id %>
+			</th>
 		
 		</tr>
 		<tr>	
 			<td width="50px" align="center">내 용</td>
 			<td width="300px" colspan=3 align="center">
-			<input type="text" size="100" name="comment_content" id="comment_content" style="width:500px;height:100px;" value="<%=cdto.getComment_writerid() %>"></td>
+			<input type="text" size="100" name="comment_content" id="comment_content" style="width:500px;height:100px;" value="<%=cdto.getComment_content() %>"></td>
 		</tr>
 		<tr>
 			<td colspan=2 align="center">

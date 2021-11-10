@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%@ page import = "bean.MakeProjectDAO" %>
 <%@ page import = "bean.MakeProjectDTO" %>
     
@@ -12,11 +12,11 @@
     
 <%
 	String pageNum = request.getParameter("pageNum");
-%>
 
-<form action="project_deletePro.jsp" method="post">
-	<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
-	<input type="hidden" name="pageNum" value="<%=pageNum %>" />
-	
-	<input type="submit" value="삭제"/>
-</form>
+	MakeProjectDAO dao = new MakeProjectDAO();
+	String result  = dao.deleteProject(dto.getNum());
+%>
+	<script>
+		alert("삭제되었습니다.");
+		window.location='/goworker/makeproject/project_list.jsp';
+	</script>
