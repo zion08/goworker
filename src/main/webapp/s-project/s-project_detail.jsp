@@ -39,6 +39,7 @@
 //글 수정은 못하게 만들고 프로젝트는 따로 작성할때 점검과정을 통해 만들어지게
 %>
 
+<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-project/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 
 
 <!-- 댓글 작성 폼 -->

@@ -3,13 +3,10 @@
 <%@ page import="bean.SmemberDAO" %> 
 <%@ page import="bean.SmemberDTO" %>  
 <%@ page import="java.util.List" %>
-
+<%@ include file = "../include/header.jsp" %>
 
 
 <%	
-		
-
-
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
 	String my = request.getParameter("my");
@@ -23,8 +20,7 @@
 	String period = request.getParameter("period");
 	String avail = request.getParameter("available");
 	int available = Integer.parseInt(avail);
-	
-	
+		
 	int pageSize = 20;
 	if(pageNum==null) {
 		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
@@ -34,122 +30,67 @@
 	int end = currentPage * pageSize;
 	
 	
-	
-	
-	
 	SmemberDTO dto = new SmemberDTO();
 	
-		dto.setCareer(career);
-		//career = dto.getCareer();
+	dto.setCareer(career);
+	dto.setField(field);
+	dto.setWorktype(worktype);
+	dto.setLocation(location);
+	dto.setEmploytype(employtype);
+	dto.setProjecttype(projecttype);	
+	dto.setAvailable(available);	
 	
-		dto.setField(field);
-		//field = dto.getField();
-	
-		dto.setWorktype(worktype);
-		//worktype = dto.getWorktype();
-
-		dto.setLocation(location);
-		//location = dto.getLocation();
-
-		dto.setEmploytype(employtype);
-		//employtype = dto.getEmploytype();
-		dto.setProjecttype(projecttype);
-	
-		dto.setAvailable(available);
-		//available = dto.getAvailable();
-	
-	System.out.println(dto.getCareer());
-	System.out.println(dto.getField());
-	System.out.println(dto.getWorktype());
-	System.out.println(dto.getLocation());
-	System.out.println(dto.getEmploytype());
-	System.out.println(dto.getProjecttype());
-	
-	System.out.println(dto.getAvailable());
+	System.out.println("career: " + dto.getCareer());
+	System.out.println("field: " + dto.getField());	
+	System.out.println("worktype: " + dto.getWorktype());
+	System.out.println("location: " + dto.getLocation());
+	System.out.println("employtype: " + dto.getEmploytype());
+	System.out.println("projecttype: " + dto.getProjecttype());
+	System.out.println("available: " + dto.getAvailable());
 	System.out.println(start);
 	System.out.println(end);
 
-	
-	
-	
-
-			
-	
 	
 	SmemberDAO dao = new SmemberDAO();
 	int scount = 0; 
 	List<SmemberDTO> list = null;	
 			
-		scount = dao.getSearchCount( career ,field, worktype, location,employtype,projecttype ,available); // 전체 글의 갯수
-		if(scount > 0) {
-			list = dao.getSearchList( career ,field, worktype, location,employtype,projecttype ,available, start, end );	
-		}
-		System.out.println(scount);
-		System.out.println(list);
-		
+	scount = dao.getSearchCount(career, field, worktype,
+								location, employtype, projecttype,
+								available); // 전체 글의 갯수
+	if(scount > 0) {
+		list = dao.getSearchList(career, field, worktype, 
+								location, employtype, projecttype,
+								available, start, end );	
+	}
 	
+	
+	System.out.println("갯수: " + scount);
+	System.out.println(list);
 %>
 
-
-<html>
-<link href="style.css" rel="stylesheet" type="text/css">
 <title>멤버 찾기</title>
-<style>
-	aside{display: flex;
-	}
-	section {
-			 display: table; margin-left: auto; margin-right: auto;
-	}
-	.mboard{ border-style : groove;
-			width: 400px;
-			height : 120px;
-			text-align : center;
-			border-radius : 5%;
-	}
-	.mInputButton {
-	text-align : center;
-	width : 150px;
-	height : 70px;
-	border-style : groove;
-	border-radius : 7%;
-	}
-</style>
+
 <script type="text/javascript">
-var bDisplay = true;
-function doDisplay(){
-	var con = document.getElementById("checkboard");
-	if(con.style.display=='none'){
-		con.style.display = 'block';
-	}else{
-		con.style.display = 'none';
+	var bDisplay = true;
+	function doDisplay(){
+		var con = document.getElementById("checkboard");
+		if(con.style.display=='none'){
+			con.style.display = 'block';
+		}else{
+			con.style.display = 'none';
+		}
 	}
-}
-	function viewMine() {
-		value = document.getElementsByName("id")[0].value;
-		open('s-member_detail.jsp?id='+value,'confirm','width=500,height=500');
-	}
+		function viewMine() {
+			value = document.getElementsByName("id")[0].value;
+			open('s-member_detail.jsp?id='+value,'confirm','width=500,height=500');
+		}
 </script>
-<header>
-	<div class="logo">
-		<a href="/goworker/main/index.jsp"><img src="image/logo.png" width= "80" height="80"/></a>
-		
-	</div>
-	<div class="sideicon" align="right" width="400" height="70">
-		<br/>
-		<a href="">쪽지함</a>&emsp;
-		<input type="button" name="signin" value="가입하기" class="sign"/>&emsp;
-		<input type="button" name="login" value="로그인" class="login"/>&emsp;
-	</div>
-
-
-</header>
-<hr color="skyblue" size="2"  align="center" />
-
 
 <aside>
-<a href ="s-member_input.jsp"><input type="button" class=mInputButton value="멤버 등록하기"></a><br/><br/>
-
+	<a href ="s-member_input.jsp"><input type="button" class=mInputButton value="멤버 등록하기"></a><br/><br/>
 </aside>
+
 <section class="section1">
 	<div>
 		<a href="javascript:doDisplay();">검색조건 보기</a><br/>
@@ -161,6 +102,7 @@ function doDisplay(){
 				<th>경력</th>	
 				<td>
 					<select name="career">
+						<option value="%">전체</option>
 						<option value="new">신입</option>
 						<option value="1">1년차</option>
 						<option value="2">2년차</option>
@@ -177,6 +119,7 @@ function doDisplay(){
 				<th>분야</th>
 				<td>
 					<select name="field">
+						<option value="%">전체</option>
 						<option value="dev">개발</option>
 						<option value="plan">기획</option>
 						<option value="design">디자인</option>
@@ -188,6 +131,7 @@ function doDisplay(){
 				<th>업무 방식</th>	
 				<td>
 					<select name="worktype">
+						<option value="%">전체</option>
 						<option value="online">원격</option>
 						<option value="office">상주</option>
 						<option value="discuss">협의</option>
@@ -199,7 +143,7 @@ function doDisplay(){
 				<th>지역</th>
 				<td>
 					<select name="location">
-						<option value="online">원격</option>
+						<option value="%">원격</option>
 						<option value="seoul">서울</option>
 						<option value="gyunggi">경기</option>
 						<option value="incheon">인천</option>
@@ -225,6 +169,7 @@ function doDisplay(){
 			<th>활동 유형</th>
 				<td>
 					<select name="employtype">
+						<option value="%">전체</option>
 						<option value="sfree">개인 프리랜서</option>
 						<option value="tfree">팀 프리랜서드</option>
 						<option value="sbusiness">개인 사업자</option>
@@ -237,6 +182,7 @@ function doDisplay(){
 			<th>프로젝트 유형</th>
 				<td>
 					<select name="projecttype">
+						<option value="%">전체</option>
 						<option value="side">사이드 프로젝트</option>
 						<option value="main">메인 프로젝트</option>
 					</select>
@@ -263,52 +209,57 @@ function doDisplay(){
 	</form>
 </section>
 
-<section>
-	<%if(scount > 0) { 
+<section class="section1">
+<%	if(scount > 0) { 
 		for(SmemberDTO sdto : list) { 
-		%>
-	<div>
-		<table class="mboard" >
-			<tr>
-				<th><a href="s-member_detail.jsp?num=<%=sdto.getNum()%>&pageNum=<%=pageNum%>"><%=sdto.getId() %></a></th>
-				<th>
-				<%if(sdto.getAvailable() == 1) { %>
-				<img src="image/switch-on.png" width="40px" height="36px"> 
-				<%} else{ %>
-				<img src="image/switch-off.png" width="40px" height="36px">
-				<%} %>
-				</th>
-				<th><%=sdto.getField() %></th>
-				<td><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
-					<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
-				</td>
-			</tr>
-			<tr>
-				<th><%=sdto.getCareer() %></th>
-				<th><%=sdto.getEmploytype() %></th>
-				<th><%=sdto.getLocation() %></th>
-				<th><%=sdto.getWorktype() %></th>
-			</tr>
-			<tr>
-			<td colspan="4"> <%=sdto.getIntroduce() %>
-			</td>
-			</tr>
-		</table><br/>
-		
-	</div>
-		<%} 
-			
-		
-		}else {%> 
-		검색결과가 없습니다...!!
-		
-		<%}%>	
-
-	
-
-
-
+%>			<div>
+				<form action="test.jsp" method= "post">
+				<input type="submit" value="연락하기">
+				<input type="checkbox" name="num" value="<%=sdto.getNum()%>">
+					<table class="mboard" onclick="window.open('test.jsp')">
+						<tr>
+							<th>
+								<a href="s-member_detail.jsp?num=<%=sdto.getNum()%>&pageNum=<%=pageNum%>"><%=sdto.getId() %>
+								</a>
+							</th>
+							<th>
+<%								if( sdto.getAvailable() == 1) { 
+%>										<img src="image/switch-on.png" width="40px" height="36px"> 
+<%									} else { 
+%>										<img src="image/switch-off.png" width="40px" height="36px">
+<%									} 
+%>							</th>
+							<th>
+								<%=sdto.getField() %>
+							</th>
+							<td>
+								<img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
+								<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+							</td>
+						</tr>
+						
+						<tr>
+							<th><%=sdto.getCareer() %></th>
+							<th><%=sdto.getEmploytype() %></th>
+							<th><%=sdto.getLocation() %></th>
+							<th><%=sdto.getWorktype() %></th>
+						</tr>
+						
+						<tr>
+							<td colspan="4"> <%=sdto.getIntroduce() %>
+							</td>
+						</tr>
+					</table>
+					</form>
+				<br/>
+			</div>
+<%		} 	
+	} else {
+%> 		검색결과가 없습니다...!!		
+<%	}
+%>	
 </section>
+
 <section class="section4">
 	<%
 		if (scount > 0) {

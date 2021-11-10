@@ -1,4 +1,4 @@
-package member.bean;
+package bean;
 
 import java.io.IOException;
 import java.net.URLDecoder;

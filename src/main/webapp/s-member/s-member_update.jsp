@@ -1,61 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "bean.SmemberDAO" %>
+<%@ include file = "../include/header.jsp" %>
 
 <jsp:useBean class="bean.SmemberDTO" id="dto" />   
-<% String num= request.getParameter("num");
+<%	String num= request.getParameter("num");
 	String pageNum = request.getParameter("pageNum");
-	 String id = (String)session.getAttribute("id"); 
+	String sid = (String)session.getAttribute("sid"); 
 	SmemberDAO dao = new SmemberDAO();
 	dto = dao.getContent(dto);
-
 %>
 
-
-<link href="style.css" rel="stylesheet" type="text/css">
-<meta charset="UTF-8">
-<title>멤버등록</title>
-<header>
-	<div class="logo">
-		<a href="/goworker/main/index.jsp"><img src="image/logo.png" width= "80" height="80"/></a>
-		
-	</div>
-	<div class="sideicon" align="right" width="400" height="70">
-		<br/>
-		<a href="">쪽지함</a>&emsp;
-		<input type="button" name="signin" value="가입하기" class="sign"/>&emsp;
-		<input type="button" name="login" value="로그인" class="login"/>&emsp;
-	</div>
-
-
-</header>
-<hr color="skyblue" size="2"  align="center" />
 <section class="section2">
 	<form action="s-member_inputPro.jsp" method="post" enctype="multipart/form-data" class="form-box2">
 		<div class="wrapper">
 			<div id="id">	
-				<span>아이디</span>
-					<%=id%>
-					<input type="hidden" name="writer" value="<%=id%>" />
+				<label>아이디</label>
+					<span><%=sid%></span>
+					<input type="hidden" name="writer" value="<%=sid%>" />
 			</div>
 			
 			<div id=phone>
-				<span>전화번호</span>
+				<label>전화번호</label>
 					<input type="text" name="phone" placeholder="-없이 입력">
 			</div>
 			
 			<div id=email>
-				<span>이메일</span>
+				<label>이메일</label>
 					<input type="email" name="email">
 			</div>
 			
 			<div id=kakao>
-				<span>카카오톡</span>
+				<label>카카오톡</label>
 					<input type="text" name="kakao">
 			</div>
 			
 			<div id="field">
-				<span>분야</span>
+				<label>분야</label>
 					<select name="field">
 						<option value="dev">개발</option>
 						<option value="plan">기획</option>
@@ -65,7 +46,7 @@
 			</div>
 			
 			<div id="career">
-				<span>경력</span>
+				<label>경력</label>
 					<select name="career">
 						<option value="new">신입</option>
 						<option value="1">1년차</option>
@@ -79,7 +60,7 @@
 			</div>
 			
 			<div id="lang">
-				<span>보유 기술</span>
+				<label>보유 기술</label>
 					<div>
 						<label><input type="checkbox" name="lang" value="Python">Python</label>
 						<label><input type="checkbox" name="lang" value="Django">Django</label>
@@ -98,18 +79,18 @@
 			</div>
 			
 			<div id="portfolio">
-				<span>포트폴리오</span>
+				<label>포트폴리오</label>
 					<input type="file" name="portfolio" multiple="multiple">
 			</div>
 			
 			<div id="pfdetail">
-				<span>포트폴리오 설명</span>
+				<label>포트폴리오 설명</label>
 					<input type="text" name="pfdetail" >
 			</div>
 			
 			
 			<div id="employtype">
-				<span>활동 유형</span>
+				<label>활동 유형</label>
 					<label><input type="radio" name="employtype" value="sfree">개인 프리랜서</label>
 					<label><input type="radio" name="employtype" value="tfree">팀 프리랜서</label>
 					<label><input type="radio" name="employtype" value="sbusiness">개인 사업자</label>
@@ -117,20 +98,20 @@
 			</div>
 			
 			<div id="projecttype">
-				<span>찾는 프로젝트 유형</span>
+				<label>찾는 프로젝트 유형</label>
 					<label><input type="checkbox" name="projecttype" value="side">사이드 프로젝트</label>
 					<label><input type="checkbox" name="projecttype" value="main">메인 프로젝트</label>
 			</div>            
 					
 			<div id="worktype">
-				<span>가능한 업무 방식</span>
+				<label>가능한 업무 방식</label>
 					<label><input type="checkbox" name="worktype" value="online">원격</label>
 					<label><input type="checkbox" name="worktype" value="office">상주</label>
 					<label><input type="checkbox" name="worktype" value="discuss">협의</label>
 			</div>
 			
 			<div id="location"> <!--  업무 방식이 사무실 또는 협의인 경우  -->
-				<span>선호 업무 지역</span>
+				<label>선호 업무 지역</label>
 					<select name="location">
 						<option value="online">원격</option>
 						<option value="seoul">서울</option>
@@ -154,12 +135,12 @@
 			</div>
 				
 			<div id="period">
-				<span>근무가능일자</span>
+				<label>근무가능일자</label>
 					<input type="date" name="period">
 			</div>
 			
 			<div id="available">
-				<span>구직활동여부</span>
+				<label>구직활동여부</label>
 				<select name="available">
 					<option value="1">on</option>
 					<option value="0">off</option>
@@ -167,12 +148,12 @@
 			</div>
 			
 			<div id="pay">
-				<span>희망 계약금</span>
+				<label>희망 계약금</label>
 					<input type="text" name="pay"  placeholder=", 없이 입력">만원
 			</div>
 			
 			<div id="introduce">
-				<span>소개</span>
+				<label>소개</label>
 					<input type="text" name="introduce" >
 			</div>
 			

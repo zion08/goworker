@@ -4,23 +4,24 @@
 <title>check</title>
 
 <jsp:useBean id="dto" class="bean.MemberDTO" />
+
 <jsp:setProperty name="dto" property="*" />
 
 <%	
 	MemberDAO dao = new MemberDAO();
 	boolean result= dao.emailCheck(dto);
-	String str="»ç¿ë°¡´É";
+	String str="ï¿½ï¿½ë°¡ï¿½ï¿½";
 	if(result==true)
 	{		
-		str="»ç¿ëºÒ°¡´É";
+		str="ï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½";
 	%>
 	<script>
-		alert("»ç¿ëÁßÀÎ ÀÌ¸ÞÀÏÀÔ´Ï´Ù.");
+		alert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
 		
 	</script>
   <%}else{%>
 	<script>
-	 	alert("»ç¿ë °¡´ÉÇÕ´Ï´Ù."); 
+	 	alert("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½."); 
 	 	
 	</script>
 <%}%>
@@ -32,4 +33,4 @@
 		}
 	
 	</script>
-	<input type="button" value="´Ý±â" onclick="returnClose();"/>
+	<input type="button" value="ï¿½Ý±ï¿½" onclick="returnClose();"/>
