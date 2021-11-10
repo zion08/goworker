@@ -179,7 +179,5 @@ public class MemberDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 		return result;
-	}
-		
-		
+	}		
 }
