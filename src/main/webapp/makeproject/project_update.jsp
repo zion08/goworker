@@ -51,7 +51,7 @@
 				<td align="center">첨부파일</td>
 			<%if(dto.getProjectfile() != null){ %>
 				<td colspan="2">
-					<img src="/goworker/project/<%=dto.getProjectfile() %>"width="500px"height="500px"/><br/>
+					<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="500px"height="500px"/><br/>
 					<input type="file" name="projectfile"/>
 				</td>
 			<%}else{ %>

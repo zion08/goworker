@@ -16,7 +16,7 @@
 
 	String encoding = "UTF-8"; //한글 파일명 인코딩
 	
-	String path = request.getRealPath("project"); //실제 경로
+	String path = request.getRealPath("makeproject"); //실제 경로
 	int size = 1024*1024*10; //파일 사이즈
 	DefaultFileRenamePolicy dp = new DefaultFileRenamePolicy();	//파일명 중복방지 클래스
 	MultipartRequest mr = new MultipartRequest(request,path,size,encoding,dp); //파라미터 받기 및 파일 업로드
@@ -41,7 +41,7 @@
 %>
 	<script type="text/javascript">
 		alert=("작성하신 글이 등록되었습니다.");
-		window.location='/goworker/project/project_list.jsp';
+		window.location='/goworker/makeproject/project_list.jsp';
 	</script>
 <%}else{%>
 	<script>

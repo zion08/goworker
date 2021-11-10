@@ -12,7 +12,7 @@
 
 
 <% 	
-	String path = request.getRealPath("project"); //실제 경로
+	String path = request.getRealPath("makeproject"); //실제 경로
 	
 	String encoding = "UTF-8"; //한글 파일명 인코딩
 	int size = 1024*1024*10; //파일 사이즈
@@ -40,7 +40,7 @@
 	if(result == 1){%>
 		<script>
 			alert("수정되었습니다.");
-			window.location = "/goworker/project/project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>";
+			window.location = "/goworker/makeproject/project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>";
 		</script>
 	<%}else{%>
 		<script>

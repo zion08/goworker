@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class SprojectDTO {
 	private int num;
+	private String subject;
 	private String id;
 	private String phone;
 	private String email;
@@ -29,6 +30,7 @@ public class SprojectDTO {
 	private String sent;
 	private String projectName;
 	private int pageNum;
+	private String filename;
 	
 	
 	public int getNum() {
@@ -186,5 +188,17 @@ public class SprojectDTO {
 	}
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void	setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void	setSubject(String subject) {
+		this.subject = subject;
 	}
 }
