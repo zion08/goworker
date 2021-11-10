@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.DoubleToLongFunction;
 
-import bean.NewPassword;
 import oracle.OracleDB;
 import oracle.DisconnDB;
 
