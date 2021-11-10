@@ -27,7 +27,7 @@ public class MemberDAO {
 	            dto.setEmail(rs.getString("email"));
 	            dto.setPassword(rs.getString("password"));
 	            dto.setReg(rs.getTimestamp("reg"));
-	            list.add(dto);  // ����Ʈ�� �߰�!!
+	            list.add(dto);  // 리스트에 추가
 	         }
 	      }catch(Exception e) {
 	         e.printStackTrace();
@@ -55,7 +55,7 @@ public class MemberDAO {
 			}
 			return result;
 		}
-		public int memberInput(MemberDTO dto) {  // �����ͺ��̽��� ȸ������ ���(ȸ������)
+		public int memberInput(MemberDTO dto) {  // 데이터베이스에 회원정보 등록(회원가입)
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
