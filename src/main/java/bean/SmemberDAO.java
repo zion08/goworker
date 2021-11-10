@@ -381,4 +381,6 @@ public class SmemberDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 	}
+	
+
 } 

@@ -255,6 +255,57 @@ hr {
 	height: 50%;
 }
 
+.messege-top {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: center;
+	/* background-image: url('img/profileimg_default.png');
+	background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 10vh;
+	height: 10vh;*/
+	border: 1px solid blue;	 
+}
+
+#messege-top > div {
+	background-image: url('img/profileimg_default.png');
+	background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+}
+
+#messege-top * {
+	margin-right: 10px;
+}
+
+#messege-content {
+	border: 1px solid blue;
+	margin-top: 5px;
+    height: 65vh;	
+}
+
+#messege-send {
+	display: flex;
+	justify-content: flex-start;
+	flex-flow: row nowrap;
+	align-items: center;	
+}
+
+#messege-send input:nth-child(1) {
+	width: 67vh;
+	height: 16vh;
+}
+
+#messege-send input:nth-child(2) {
+	width: 16vh;
+	height: 16vh;
+}
+
 #profile-img {
 	grid-row: 1 / 5;
 	background-image: url('img/profileimg_default.png');
@@ -331,3 +382,4 @@ hr {
 #community {
 	background-image: url('main/image/commu.png');
 }		
+
