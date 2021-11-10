@@ -20,27 +20,28 @@ public class SprojectDAO {
 		try {
 			conn = OracleDB.getConnection();
 			String sql = "insert into s_project values("
-					+ "s_project_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+					+ "s_project_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
 					+ "0,0,0,sysdate)";;
 			pstmt = conn.prepareStatement(sql);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getLang());
-			pstmt.setString(3, dto.getCareer());
-			pstmt.setString(4, dto.getWorktype());
-			pstmt.setString(5, dto.getField());
-			pstmt.setInt(6, dto.getPay());
-			pstmt.setString(7, dto.getLocation());
-			pstmt.setString(8, dto.getEmploytype());
-			pstmt.setString(9, dto.getProjecttype());
-			pstmt.setString(10, dto.getIntroduce());
-			pstmt.setString(11, dto.getEmail());
-			pstmt.setString(12, dto.getPhone());
-			pstmt.setString(13, dto.getKakao());
-			pstmt.setString(14, dto.getProjectimg());
-			pstmt.setString(15, dto.getProjectdetail());
-			pstmt.setString(16, dto.getPeriod());
-			pstmt.setInt(17, dto.getAvailable());
+			pstmt.setString(2, dto.getSubject());
+			pstmt.setString(3, dto.getLang());
+			pstmt.setString(4, dto.getCareer());
+			pstmt.setString(5, dto.getWorktype());
+			pstmt.setString(6, dto.getField());
+			pstmt.setInt(7, dto.getPay());
+			pstmt.setString(8, dto.getLocation());
+			pstmt.setString(9, dto.getEmploytype());
+			pstmt.setString(10, dto.getProjecttype());
+			pstmt.setString(11, dto.getIntroduce());
+			pstmt.setString(12, dto.getEmail());
+			pstmt.setString(13, dto.getPhone());
+			pstmt.setString(14, dto.getKakao());
+			pstmt.setString(15, dto.getProjectimg());
+			pstmt.setString(16, dto.getProjectdetail());
+			pstmt.setString(17, dto.getPeriod());
+			pstmt.setInt(18, dto.getAvailable());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +75,7 @@ public class SprojectDAO {
 		try {
 			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select * from "
-					+ " (select NUM, ID, LANG, CAREER, WORKTYPE, FIELD, PAY, LOCATION, EMPLOYTYPE, PROJECTTYPE,"
+					+ " (select NUM, ID, SUBJECT, LANG, CAREER, WORKTYPE, FIELD, PAY, LOCATION, EMPLOYTYPE, PROJECTTYPE,"
 					+ " INTRODUCE, EMAIL, PHONE, KAKAO, PROJECTIMG, PROJECTDETAIL, PERIOD, AVAILABLE, FAVOR, GOOD, READCOUNT, REGDATE, rownum r from"
 					+ " (select * from S_PROJECT order by num desc)) where r>=? and r<=?");
 			pstmt.setInt(1, start);
@@ -85,6 +86,7 @@ public class SprojectDAO {
 				SprojectDTO dto = new SprojectDTO();
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
+				dto.setSubject(rs.getString("subject"));
 				dto.setLang(rs.getString("lang"));
 				dto.setCareer(rs.getString("career"));
 				dto.setWorktype(rs.getString("worktype"));
@@ -158,6 +160,7 @@ public class SprojectDAO {
 			if(rs.next()) {
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
+				dto.setSubject(rs.getString("subject"));
 				dto.setLang(rs.getString("lang"));
 				dto.setEmail(rs.getString("email"));
 				dto.setPhone(rs.getString("phone"));
@@ -185,4 +188,59 @@ public class SprojectDAO {
 		return dto;
 	}
 	
+	public int updateBoard(SprojectDTO dto) {
+		int result = 0;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("update S_PROJECT set subject=?, lang=?, career=?, worktype=?, field=?, pay=?,"
+					+ " location=?, empoytype=?,projecttype=?, intoduce=?, email=?, phone=?, kakao=?, projectdetail=?,"
+					+ " period=?, available=? where num=?");
+			pstmt.setString(1, dto.getSubject());
+			pstmt.setString(2, dto.getLang());
+			pstmt.setString(3, dto.getCareer());
+			pstmt.setString(4, dto.getWorktype());
+			pstmt.setString(5, dto.getField());
+			pstmt.setInt(6, dto.getPay());
+			pstmt.setString(7, dto.getLocation());
+			pstmt.setString(8, dto.getEmploytype());
+			pstmt.setString(9, dto.getProjecttype());
+			pstmt.setString(10, dto.getIntroduce());
+			pstmt.setString(11, dto.getEmail());
+			pstmt.setString(12, dto.getPhone());
+			pstmt.setString(13, dto.getKakao());
+			pstmt.setString(14, dto.getProjectdetail());
+			pstmt.setString(15, dto.getPeriod());
+			pstmt.setInt(16, dto.getAvailable());
+			pstmt.setInt(17, dto.getNum());
+			
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {try {rs.close();}catch(SQLException s) {}}
+			if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
+			if(conn != null) {try {conn.close();}catch(SQLException s) {}}		
+		}
+		return result;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

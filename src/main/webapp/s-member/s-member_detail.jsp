@@ -10,6 +10,19 @@
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
 
+<script>
+function button_event(){
+
+	if (confirm("정말 삭제하시겠습니까??") == true){ 
+	    document.form.submit();
+	    window.loction='/goworker/s-member/s-member_delete.jsp?num=<%=dto.getNum() %>'
+		} else{  
+	    	return;
+			}
+	}
+
+</script>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");

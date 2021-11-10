@@ -20,7 +20,7 @@
 	if(result == 1) {%>
 		<script>
 			alert("댓글이 등록되었습니다.");
-			window.location='/goworker/project/project_detail.jsp?num=<%=cdto.getNum()%>&pageNum=<%=pageNum%>';
+			window.location='/goworker/makeproject/project_detail.jsp?num=<%=cdto.getNum()%>&pageNum=<%=pageNum%>';
 		</script>
 		<%}else{%>
 			<script>

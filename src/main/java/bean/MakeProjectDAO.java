@@ -3,6 +3,7 @@ package bean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -199,18 +200,74 @@ public class MakeProjectDAO {
 	
 	
 	// makeproject 추천 메서드
-			public void projectGood(MakeProjectDTO dto) {
-				try {
-					conn = OracleDB.getConnection();
-					String sql = "update makeproject set good = good+1 where num=? ";
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, dto.getNum());
-					pstmt.executeUpdate();
-				}catch(Exception e) {
-					e.printStackTrace();
-				} finally {
-					DisconnDB.close(conn, pstmt, rs);
+		public void projectGood(MakeProjectDTO dto) {
+			try {
+				conn = OracleDB.getConnection();
+				String sql = "update makeproject set good = good+1 where num=? ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, dto.getNum());
+				pstmt.executeUpdate();
+			}catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+		}
+		
+		
+		// 검색 글 갯수 메서드
+		public  int getSearchCount(String colum, String search) {
+			int result = 0;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select count(*) from makeproject where "+colum+" like '%"+search+"%'");
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+		
+		
+		// 검색 결과 리스트 출력 메서드
+		public List<MakeProjectDTO> getSearchList(String colum, String search, int start, int end){
+			List<MakeProjectDTO> list = null;
+			try {
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select * from "
+						+ " (select num, id, subject, content, projectfile, reg_date, readcount, good, rownum r from "
+						+ " (select * from makeproject where "+colum+" like '%"+search+"%' order by num desc)) "
+						+ " where r >= ? and r <= ?" );
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				rs = pstmt.executeQuery();
+
+				list = new ArrayList();
+				
+				while(rs.next()) {
+					MakeProjectDTO dto = new MakeProjectDTO();
+					dto.setNum(rs.getInt("num"));
+					dto.setId(rs.getString("id"));
+					dto.setSubject(rs.getString("subject"));
+					dto.setContent(rs.getString("content"));
+					dto.setReg_date(rs.getTimestamp("reg_date"));
+					dto.setReadcount(rs.getInt("readcount"));
+					dto.setGood(rs.getInt("good"));
+					list.add(dto);
 				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+		}
+			return list;
 		}
 }
 
