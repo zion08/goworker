@@ -382,6 +382,7 @@ public class SmemberDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 	}
+
 	public List<SmemberDTO> getHotList(int start , int end) {
 		List<SmemberDTO> list = null;
 		try {
@@ -417,4 +418,5 @@ public class SmemberDAO {
 		}
 		return list;
 	}
+
 } 

@@ -15,7 +15,7 @@
 				</span>
 				
 				<span class="sideicon2">
-					<a href="/goworker/member/login.jsp">로그인
+					<a href="/goworker/login-test.jsp">로그인	<!-- 로그인 완성 후, 주소 변경 할것 -->
 					</a>
 				</span>
 			</div>
@@ -23,7 +23,7 @@
 %>			<div class="wrapper-sideicon">		
 				<span class="sideicon1">
 					<a href="" >
-						<img src="../s-member/image/note.png"><p>쪽지함</p>
+						<img src="../s-member/image/note.png"><p>메세지</p>
 					</a>
 				</span>
 				
