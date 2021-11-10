@@ -1,32 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file = "../include/header.jsp" %>
-<% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="bean.SprojectDAO" %>
+<%@ page import="bean.SprojectDTO" %>
+
+<jsp:useBean class="bean.SprojectDTO" id="dto" />
+<jsp:setProperty property="num" name="dto" />
+
+<%
+	String sid = (String)session.getAttribute("id");
+	request.setCharacterEncoding("UTF-8"); 
+	String pageNum = request.getParameter("pageNum");
+	SprojectDAO dao = new SprojectDAO();
+	dto = dao.getContent(dto);
+%>
+
+<title>프로젝트 수정</title>
+
+		<h1>프로젝트 수정</h1>
+<form action="s-project_updatePro.jsp" method="post" enctype="multipart/form-data"><br />
+	<input type="hidden" name = "num" value="<%=dto.getNum() %>">
+	<input type="hidden" name = "pageNum" value="<%=pageNum %>">
 	
-<%	if (sid != null){	//로그인pro 수정 수정 후, ==으로 바꿀 것
-%>		<script>
-			location.href="../member/login.jsp";
-		</script>  		
-<%	} else {
-%>		<title>프로젝트 등록</title>
-
-		<h1>프로젝트 등록</h1>
-
-		<section class="section2">
-			<form action="s-project_inputPro.jsp" method="post" enctype="multipart/form-data" class="form-box2">
-				<div class="wrapper">
-					<ul class="profile-info">
-						<li id="profile-img">		
-						</li>
+	제목 : <input type="text" name="subject" value="<%=dto.getSubject() %>" />
+		
+		<br />
 						<li id="id">	
 							<label>아이디</label>
 								<span><%=sid%></span>
 								<input type="hidden" name="writer" value="<%=sid%>"/>						
 						</li>
 											
-						<li id=subject>
+						<li id=jubject>
 							<label>프로젝트 명</label>
-								<input type="text" name="subject" >
+								<input type="text" name="jubject" >
 						</li>
 						
 						<li id=phone>
@@ -88,7 +94,13 @@
 						
 						<li id="projectimg">
 							<label >프로젝트 대표 이미지</label>
-								<input type="file" name="projectimg" multiple="multiple">
+								첨부파일 : <input type="file" name="filename"/>
+									<%if(dto.getFilename() != null){ %>
+										[<%=dto.getFilename() %>]
+										<input type="hidden" name="org" value="<%=dto.getFilename() %>" />
+									<%}else{ %>
+										[첨부파일 없음]
+									<%} %>
 						</li>
 						
 						<li id="projectdetail">
@@ -169,10 +181,7 @@
 					
 					<hr>
 					<div class="wrapper-submit">
-						<input type="submit" value="등록하기" />
+						<input type="submit" value="수정하기" />
 					</div>
 				</div>
-			</form>	
-		</section>
-<%	}
-%>
+</form>

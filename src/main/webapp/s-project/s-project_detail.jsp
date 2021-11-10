@@ -15,32 +15,86 @@
 <jsp:setProperty property="num" name="dto" />
 
 <%
+	String sid = (String)session.getAttribute("id");
 	String pageNum = request.getParameter("pageNum");
 	SprojectDAO dao = new SprojectDAO();
 	dao.readCountUp(dto);
 	dto = dao.getContent(dto);
 	session.setAttribute("num", dto.getNum());
+	String id = dto.getId();
 %>
+
+<style>
+
+	.box1{
+		border:1px solid black;
+		width:200px;
+		height:50px;
+		position:absolute;
+		top:100px;
+		left:185px;
+	}
+	.box2{
+		border:1px solid black;
+		width:200px;
+		height:50px;
+		position:absolute;
+		top:100px;
+		left:385px;
+		
+	}
+	.box3{
+		border:1px solid black;
+		width:200px;
+		height:50px;
+		position:absolute;
+		top:100px;
+		left:585px;
+		
+	}
+	.box4{
+		border:1px solid black;
+		width:500px;
+		height:50px;
+		position:absolute;
+		top:200px;
+		left:240px;		
+	}
+</style>
+<title><%=dto.getSubject() %></title>
+<body>
+	<B>
+	
+		<div class="box1"><br /><center>예상 급여 : <%=dto.getPay() %></center><br /> </div>
+		<div class="box2"><br /><center>요구 경력 : <%=dto.getCareer() %></center><br /> </div>
+		<div class="box3"><br /><center>예상 기간 : <%=dto.getPeriod() %></center><br /> </div>
+	
+	</B>
+</body>
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+<center>
 작성자 : <%=dto.getId() %><br />
-언어 : <%=dto.getLang() %><br />
+<br />
+<div class="box4"><br /><center><%=dto.getLang() %></center></div><br />
+<br /><br />
 위치 : <%=dto.getLocation() %><br />
 프로젝트 종류 :<%=dto.getProjecttype() %><br />
-요구 경력 : <%=dto.getCareer() %><br />
-예상 기간 : <%=dto.getPeriod() %><br />
-예상 급여 : <%=dto.getPay() %><br />
 근무 형태 : <%=dto.getWorktype() %><br />
 게시 날짜 : <%=dto.getRegdate() %><br />
 조회 : <%=dto.getReadcount() %><br />
+<br />
 <input type="button" value="좋아요">
+
 <input type="button" value="목록" 
 	onclick="window.location='s-project_list.jsp?pageNum=<%=pageNum%>'" />
-	
-<%
-//글 수정은 못하게 만들고 프로젝트는 따로 작성할때 점검과정을 통해 만들어지게
-%>
+
+<%if( sid == id ) { %>	
+<input type="button" value="수정하기" 
+	onclick="window.location='s-project_update.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum() %>&id=<%=id %>'" />	
+<%} %>
 
 <input type="button" value="메일 보내기" onclick="window.location='/goworker/s-project/email/mail.jsp?pageNum=<%=pageNum%>'"/>
-
+<br /><br />
 
 <!-- 댓글 작성 폼 -->
 
@@ -163,4 +217,4 @@
 	
 <%}  %>
 </section>
- 
+</center>
