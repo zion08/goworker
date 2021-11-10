@@ -1,31 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@page import="java.util.Map"%>
-<%@page import="java.util.List"%>
-<%@page import="javax.mail.Transport"%>
-<%@page import="javax.mail.Message"%>
-<%@page import="javax.mail.Address"%>
-<%@page import="javax.mail.internet.InternetAddress"%>
-<%@page import="javax.mail.internet.MimeMessage"%>
-<%@page import="javax.mail.Session"%>
-<%@page import="bean.SMTPAuthenticatior"%>
-
-<%@page import="java.util.Properties"%>
-<%@page import="javax.mail.*" %>
-
-
-<%@page import="org.apache.commons.mail.EmailAttachment"%>
-<%@page import="org.apache.commons.mail.MultiPartEmail"%>
-
-<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="java.io.*"%>
+<%@page import="javax.mail.*" %>
+<%@page import="java.util.*" %>
+<%@page import="javax.mail.internet.*" %>
+<%@page import="org.apache.commons.mail.*" %>
 <%@page import="javax.activation.*"%>
+<%@page import="bean.SMTPAuthenticatior"%>
+<%@page	import = "com.oreilly.servlet.*"%>
+
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
+
+
+
 
 <%
 	request.setCharacterEncoding("utf-8");
-
+ 
 	
 	String project = request.getParameter("project");
 	String name = request.getParameter("name");
@@ -88,4 +81,3 @@ try{
 	out.println("<br/><br/><center><h3>메일 발송이 성공적으로 완료되었습니다!!</h3> <br/><br/> 빠른 시일내에 답변드리도록 하겠습니다. <br/><br/> 문의 남겨주셔서 감사합니다.</center>");// 성공 시
 
 %>
-
