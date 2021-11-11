@@ -7,6 +7,8 @@ public class MemberDTO {
 	private String email;
 	private String password;
 	private Timestamp reg;
+	private int warn;
+	
 	
 	public void setId(String id) {this.id=id;}
 	public String getId() {return id;}
@@ -19,5 +21,9 @@ public class MemberDTO {
 	
 	public void setReg(Timestamp reg) {this.reg=reg;}
 	public Timestamp getReg() {return reg;}
+  
+  public void setWarn(int warn) {this.warn=warn;}
+  public int getWarn() {return warn;}
+
 	
 }

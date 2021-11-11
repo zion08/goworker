@@ -28,6 +28,7 @@ public class MemberDAO {
 	            dto.setPassword(rs.getString("password"));
 	            dto.setReg(rs.getTimestamp("reg"));
 	            list.add(dto);  // 리스트에 추가
+
 	         }
 	      }catch(Exception e) {
 	         e.printStackTrace();
@@ -59,7 +60,7 @@ public class MemberDAO {
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,sysdate)");
+				pstmt = conn.prepareStatement("insert into member values(?,?,?,sysdate,0)");
 				pstmt.setString(1, dto.getId());
 				pstmt.setString(2, dto.getEmail());
 				pstmt.setString(3, dto.getPassword());
