@@ -7,6 +7,9 @@ public class MemberDTO {
 	private String email;
 	private String password;
 	private String reg;
+	private int warn;
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -30,6 +33,12 @@ public class MemberDTO {
 	}
 	public void setReg(String reg) {
 		this.reg = reg;
+	}
+	public int getWarn() {
+		return warn;
+	}
+	public void setWarn(int warn) {
+		this.warn = warn;
 	}
 	
 }
