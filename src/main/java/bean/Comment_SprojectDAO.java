@@ -70,15 +70,14 @@ public class Comment_SprojectDAO {
 				comment_level=0;
 			}
 			
-			sql = "insert into comment_sproject(comment_num,board_num,comment_writerid, comment_regdate,";
-			sql += "comment_ref,comment_step,comment_level,comment_content) values(comment_smember_seq.NEXTVAL,?,?,sysdate,?,?,?,?)";
+			sql = "insert into comment_sproject(comment_num,board_num,comment_writerid, comment_content, comment_regdate, comment_ref,comment_step,comment_level, comment_good) values(comment_smember_seq.NEXTVAL,?,?,?,sysdate,?,?,?,0)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cdto.getBoard_num());
 			pstmt.setString(2, cdto.getComment_writerid());
-			pstmt.setInt(3, comment_ref);
-			pstmt.setInt(4, comment_step);
-			pstmt.setInt(5, comment_level);
-			pstmt.setString(6, cdto.getComment_content());
+			pstmt.setString(3,cdto.getComment_content());
+			pstmt.setInt(4, comment_ref);
+			pstmt.setInt(5, comment_step);
+			pstmt.setInt(6, comment_level);
 			result = pstmt.executeUpdate();		
 		} catch (Exception e) {
 			e.printStackTrace();		
@@ -108,6 +107,7 @@ public class Comment_SprojectDAO {
 				cdto.setComment_ref(rs.getInt("comment_ref"));
 				cdto.setComment_step(rs.getInt("comment_step"));
 				cdto.setComment_level(rs.getInt("comment_level"));
+				cdto.setComment_good(rs.getInt("comment_good"));
 				list.add(cdto);
 			}
 		} catch (Exception e) {
@@ -218,9 +218,9 @@ public class Comment_SprojectDAO {
 			try {
 				conn = OracleDB.getConnection();
 				pstmt = conn.prepareStatement(
-						"select comment_num, board_num, comment_writerid, comment_content,comment_regdate,comment_ref, comment_step,comment_level,r"+
-						"from(select comment_num, board_num, comment_writerid, comment_content,comment_regdate,comment_ref, comment_step,comment_level,rownum r"+
-						"from(select comment_num, board_num, comment_writerid, comment_content,comment_regdate,comment_ref, comment_step,comment_level"+
+						"select comment_num, board_num, comment_writerid, comment_content,comment_regdate,comment_ref, comment_step,comment_level,comment_good,r"+
+						"from(select comment_num, board_num, comment_writerid, comment_content,comment_regdate,comment_ref, comment_step,comment_level,comment_good,rownum r"+
+						"from(select comment_num, board_num, comment_writerid, comment_content,comment_regdate,comment_ref, comment_step,comment_level,comment_good"+
 						"from comment_sproject order by comment_ref desc, comment_step asc) order by comment_ref desc, comment_step asc) where r >= ? and r <= ? ");
 						pstmt.setInt(1, start);
 						pstmt.setInt(2, end);					
@@ -237,6 +237,7 @@ public class Comment_SprojectDAO {
 								cdto.setComment_ref(rs.getInt("comment_ref"));
 								cdto.setComment_step(rs.getInt("comment_step"));
 								cdto.setComment_level(rs.getInt("comment_level"));
+								cdto.setComment_good(rs.getInt("comment_good"));
 							} while(rs.next());
 							
 							}	
@@ -247,5 +248,20 @@ public class Comment_SprojectDAO {
 				}
 				return commentReplyList;
 			}
+		
+			// 댓글 추천 기능 기능 구현
+			public void commentGood(Comment_SprojectDTO cdto) {
+				try {
+					conn = OracleDB.getConnection();
+					String sql = "update comment_sproject set comment_good = comment_good+1 where comment_num=? ";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, cdto.getComment_num());
+					pstmt.executeUpdate();
+				}catch(Exception e) {
+					e.printStackTrace();
+				} finally {
+					DisconnDB.close(conn, pstmt, rs);
+				}
 		}
+}
 	
