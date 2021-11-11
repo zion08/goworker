@@ -117,8 +117,8 @@ function button_event(){
 				
 		
 			<th colspan="2">
-			<img src="image/view.png" width="25px" height="25px" ><%=dto.getReadcount()%> &emsp;
-			<img src="image/thumbs.png" width="25px" height="25px" ><%=dto.getGood() %>
+				<img src="image/view.png" width="25px" height="25px" ><%=dto.getReadcount()%> &emsp;
+				<img src="image/thumbs.png" width="25px" height="25px" ><%=dto.getGood() %>
 			</th>		
 			
 		
@@ -176,14 +176,16 @@ function button_event(){
 		<table class="comments" border=1>
 		
 			<tr>
-				<th width="50" align="center">작성자</th>
-				<th width="300px" colspan=3 align="center">
-					<input type="text" size="70"  name="comment_writerid" id="comment_writerid">
-				</th>
+
+				<td width="60" align="center">작성자</td>
+				<td width="300px" colspan=3 align="center">
+					<%=id%>
+				</td>
+
 			</tr>
 			
 			<tr>	
-				<td width="50px" align="center">내 용</td>
+				<td width="60px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
 				<% if(request.getParameter("comment_num")==null){ %>
 					<input type="text" size="100" name="comment_content" id="comment_content" style="width:500px;height:100px;" placeholder="댓글을 입력해주세요."></td>
@@ -201,6 +203,7 @@ function button_event(){
  
 
 
+
 <!-- 댓글 리스트 -->
 <% 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
@@ -215,9 +218,10 @@ function button_event(){
 %>
 
 <section class="section1">
-	<table class="comments" border=1>
+
+	<table class="comments" border="1" align="center">
 		<tr>
-			<th width="60px">작성자</th>
+			<td width="60px">작성자</td>
 			<td width="370px" align="center">내 용</td>
 			<td width="70px" align="center" >작성일</td>
 			<td width="40px" align="center">버튼</td>
@@ -256,16 +260,20 @@ function button_event(){
 	 				<input type="button" value="답글" onclick="window.location='/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>'" />
 	 			</td>
 	 		</tr>
-<%			}
-		}
-	}
-%>
-	</table><br/>
+
+	 		<tr>
+ 				<td width="30px" align="center" colspan="4" style="font-size: 12px">
+ 					<img src="/goworker/s-member/image/bestcomment.png" width="30" height="30" onclick="window.open('/goworker/s-member/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();" align="center"/>
+ 					를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
+ 				</td>
+ 			</tr>
+		<%}
+	}%>
+</table><br/>
+
+
 
 </section>
-
-
-
 
 
 <footer>
