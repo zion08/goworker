@@ -3,11 +3,9 @@ package bean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.MemberDTO;
 import oracle.OracleDB;
 import oracle.DisconnDB;
 
@@ -28,8 +26,9 @@ public class MemberDAO {
 	            dto.setId(rs.getString("id"));
 	            dto.setEmail(rs.getString("email"));
 	            dto.setPassword(rs.getString("password"));
-	            dto.setReg(rs.getString("reg"));
-	            list.add(dto);  // ����Ʈ�� �߰�!!
+	            dto.setReg(rs.getTimestamp("reg"));
+	            list.add(dto);  // 리스트에 추가
+
 	         }
 	      }catch(Exception e) {
 	         e.printStackTrace();
@@ -57,7 +56,7 @@ public class MemberDAO {
 			}
 			return result;
 		}
-		public int memberInput(MemberDTO dto) {  // �����ͺ��̽��� ȸ������ ���(ȸ������)
+		public int memberInput(MemberDTO dto) {  // 데이터베이스에 회원정보 등록(회원가입)
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
@@ -86,7 +85,7 @@ public class MemberDAO {
 					dto.setId(rs.getString("id"));
 					dto.setEmail(rs.getString("email"));
 					dto.setPassword(rs.getString("password"));
-					dto.setReg(rs.getTimestamp("reg").toString());
+					dto.setReg(rs.getTimestamp("reg"));
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -161,11 +160,27 @@ public class MemberDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				if(pstmt!=null) {try {pstmt.close();}catch(SQLException s) {}}
-				if(rs!=null) {try {rs.close();}catch(SQLException s) {}}
-				if(conn!=null) {try {conn.close();}catch(SQLException s) {}}
+				DisconnDB.close(conn, pstmt, rs);
 			}
 			return result;
 		}
+	public int newPassword(MemberDTO dto) {
+		int result=0;
+		try	{
+			NewPassword np = new NewPassword();
+			conn=OracleDB.getConnection();
+			pstmt=conn.prepareStatement("update member set password=? where email=?");
+			pstmt.setString(1, np.getSecureRandomPassword(10) );
+			pstmt.setString(2, dto.getEmail());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+		
 		
 }

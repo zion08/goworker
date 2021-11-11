@@ -19,5 +19,6 @@
 
 <script>
 	alert("답글이 작성되었습니다.");
-	window.location="/goworker/makeproject/project_detail.jsp?num=<%=cdto.getNum()%>&pageNum=<%=pageNum%>";
+	opener.document.location.reload();
+	self.close();
 </script>

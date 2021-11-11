@@ -12,11 +12,12 @@
 
 <%
 	String pageNum = request.getParameter("pageNum");
+
+	MakeProject_CommentDAO cdao = new MakeProject_CommentDAO();
+	String result = cdao.deleteComment(cdto.getComment_num());
 %>
 
-<form action="/goworker/makeproject/comment/commentDeletePro.jsp" method="post">
-	<input type="hidden" name="num" value="<%=cdto.getNum() %>" />
-	<input type="hidden" name="comment_num" value="<%=cdto.getComment_num() %>" />
-	<input type="hidden" name="pageNum" value="<%=pageNum %>" />
-	<input type="submit" value="삭제" />
-</form>
+<script>
+	alert("댓글이 삭제되었습니다.");
+	window.location='/goworker/makeproject/project_detail.jsp?num=<%=cdto.getNum()%>&pageNum=<%=pageNum%>';
+</script>

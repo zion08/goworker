@@ -38,15 +38,16 @@
 		<th align="center" colspan="3" width="700px">Project 초대</th>
 	</tr>
 	<tr>
-		<td align="center" width="70px"><img src="/goworker/s-member/image/image.jpg" width="30px" height="30px"/><br/>
+		<td align="center" width="70px"><img src="/goworker/makeproject/image/image.jpg" width="30px" height="30px"/><br/>
 						<%=dto.getId() %> 
 		</td>
 		<td align="center" width="150px">
 			<%=dto.getReg_date() %>
 		</td>
 		<td align="right" width="100px">
-				<img src="/goworker/s-member/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
-        		<img src ="/goworker/s-member/image/thumbs.png" width="20px" height="20px" /><%=dto.getGood() %>
+				<img src="/goworker/makeproject/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
+        		<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px" /><%=dto.getGood() %>&emsp;
+        		<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px" /><%=dto.getDown() %>
         </td>
 	</tr>
 	<tr>
@@ -68,15 +69,21 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="3">
-			<input type="button" value="추천합니다!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
-			<input type="button" value="메일보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
-			<input type="button" value="수정" onclick="window.location='/goworker/makeproject/project_update.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
-			<input type="button" value="삭제" onclick="window.location='/goworker/makeproject/project_delete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
-			<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
+			<input type="button" value="추천!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
+			<input type="button" value="비추천!" onclick="window.open('project_Down.jsp?num=<%=dto.getNum()%>','Down','width=300,height=150');window.location.reload();"/><br/>
+			<form action="/goworker/makeproject/project_delete.jsp?num=<%=dto.getNum()%>"  method="post" >
+				<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
+				
+				<input type="button" value="메일보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/><br/>
+				<input type="button" value="수정" onclick="window.location='/goworker/makeproject/project_update.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
+				<input type="submit" value="삭제" onclick="project_removeCheck()"/>
+				<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
+			</form>
 		</td>
 		
 	</tr>
 </table><br/>
+
 
 
 
@@ -115,7 +122,7 @@
 		
 		<table class="comments" width="700px" align="center" border="1">
 			<tr>
-				<td width="150px" align="center">아이디</td>
+				<td width="150px" align="center">작성자</td>
 				<td width="400px" colspan="3">
 					<%=id %>
 				</td>	
@@ -150,22 +157,23 @@
  %>
  
  <table class="comments" border="1" width="700px" align="center">
+ 
+ 	
  	<tr>
- 		<td width="30px" align="center"><img src="/goworker/makeprojet/image/bestcomment.png" ></td>
- 		<td width="100px" align="center">아이디</td>
+ 		<td width="100px" align="center">작성자</td>
  		<td width="300px" align="center">내용</td>
  		<td width="80px" align="center">작성일</td>
- 		<td width="50px" align="center">버튼</td>
+ 		<td width="40px" align="center">버튼</td>
  	</tr>
  	
 <%
 	if(count > 0){
 		for(MakeProject_CommentDTO cdto : list) {
 %>	
-
+	
 	<tr>
 		<td align="center">
-			<img src="/goworker/s-member/image/image.jpg" width="50" height="50"><br/>
+			<img src="/goworker/makeproject/image/image.jpg" width="50" height="50"><br/>
 				<%=id %>
 		</td>
 		
@@ -174,25 +182,53 @@
 		int wid=0;
 		if(cdto.getRe_level() > 0){
 			wid=10*(cdto.getRe_level());
-%>			<img src="/goworker/s-member/image/white.jpg" width="<%=wid %>" height="16">
-			<img src="/goworker/s-member/image/re.gif">
+%>			<img src="/goworker/makeproject/image/white.jpg" width="<%=wid %>" height="16">
+			<img src="/goworker/makeproject/image/re.gif">
 <%		}else{
-%>			<img src="/goworker/s-member/image/white.jpg" width="<%=wid %>" height="16">
+%>			<img src="/goworker/makeproject/image/white.jpg" width="<%=wid %>" height="16">
 <%		}
 %>			<%=cdto.getComment_content() %>	
 		</td>
 		
-		<td align="center">
+		<td align="center" >
 			<%=sdf.format(cdto.getComment_regdate()) %>
 		</td>
-		<td align="center">
-			<input type="button" value="수정" onclick="window.location='/goworker/makeproject/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&pageNum=<%=pageNum %>'" />
-			<input type="button" value="삭제" onclick="window.location='/goworker/makeproject/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&pageNum=<%=pageNum %>'" /> 
-			<input type="button" value="답글" onclick="window.location='/goworker/makeproject/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&Ref=<%=cdto.getRef()%>&re_step=<%=cdto.getRe_step()%>&re_level=<%=cdto.getRe_level()%>&pageNum=<%=pageNum%>'" />
+		<td align="center">	
+			<form action="/goworker/makeproject/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"  method="post" >
+				<input type="button" value="수정" onclick="window.open('/goworker/makeproject/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
+				<input type="submit" value="삭제" onclick="comment_removeCheck()" /> 
+				<input type="button" value="답글" onclick="window.open('/goworker/makeproject/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&num=<%=dto.getNum() %>&Ref=<%=cdto.getRef()%>&re_step=<%=cdto.getRe_step()%>&re_level=<%=cdto.getRe_level()%>&page=<%=pageNum %>','reply','width=600,height=300');" />
+			</form>
 		</td>
 	</tr>
+	<tr>
+ 		<td width="30px" align="center" colspan="4" style="font-size: 11px">
+ 			<img src="/goworker/makeproject/image/bestcomment.png" width="30" height="30" onclick="window.open('/goworker/makeproject/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();" align="center"/>
+ 			를 꾸~욱! 눌러주세요!  [<%=cdto.getComment_good() %>]
+ 		</td>
+ 	</tr>
+
 	<%}
 }%>
  </table>
+ 
+
+ <script>
+ 	function project_removeCheck(){
+ 		if(confirm("정말로 삭제하시겠습니까??") == true){
+ 			document.form.submit();
+ 			window.location='/goworker/makeproject/project_delete.jsp';
+ 		}
+ 	}
+ 	
+ 	function comment_removeCheck(){
+ 		if(confirm("정말로 삭제하시겠습니까?") == true) {
+ 			document.form.submit;
+ 			window.location='/goworker/makeproject/comment/commentDelete.jsp';
+ 			
+ 		}
+ 	}
+ </script>
+
  
  

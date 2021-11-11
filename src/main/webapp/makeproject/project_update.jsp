@@ -35,8 +35,8 @@
 				<%=sdf.format(dto.getReg_date())%>
 			</td>
 			<td align="right" width="100px">
-				<img src="/goworker/s-member/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
-        		<img src ="/goworker/s-member/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+				<img src="/goworker/makeproject/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
+        		<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
         	</td>
 		</tr>
 		<tr>
