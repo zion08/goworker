@@ -17,7 +17,7 @@
 	Comment_SmemberDAO dao = new Comment_SmemberDAO();
 	cdto = dao.getComment(cdto);
 	
-	String id =(String)session.getAttribute("id");
+	String sid =(String)session.getAttribute("sid");
 %>
 
 <form action="commentUpdatePro.jsp" method="post">
@@ -29,7 +29,7 @@
 		<tr>
 			<th width="50" align="center">작성자</th>
 			<th width="300px" colspan=3 align="center">
-				<%=id %>
+				<%=sid %>
 			</th>
 		
 		</tr>

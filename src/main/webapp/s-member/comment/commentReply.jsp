@@ -12,7 +12,7 @@
 <%	
 	String pageNum = request.getParameter("pageNum");
 	
-	String id = (String)session.getAttribute("id");
+	String sid = (String)session.getAttribute("sid");
 
 %>
 
@@ -29,7 +29,7 @@
 		<tr>
 			<th width="50" align="center">작성자</th>
 			<th width="300px" colspan=3 align="center">
-				<%=id %>
+				<%=sid %>
 			</th>
 		</tr>
 		<tr>	

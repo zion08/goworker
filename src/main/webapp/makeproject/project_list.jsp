@@ -6,6 +6,12 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
 
+<%@ page import ="bean.MakeProject_CommentDTO" %>
+<%@ page import ="bean.MakeProject_CommentDAO" %>
+
+<%@ include file = "../include/header.jsp" %>
+
+
 
 <%
  	request.setCharacterEncoding("UTF-8");
@@ -34,6 +40,11 @@
 		list = dao.getAllList(startRow, endRow);
 	}
 	
+		
+	String id = (String)session.getAttribute("sid");
+
+		
+
 %>
 
 
@@ -49,15 +60,23 @@
 		<input type="submit" value="검색" />
 	</form>		
 	
-		
-		<table width="700" align="center">
-                <tr>
-                	<td align="right" bgcolor="pink">
-                	<a href="project_input.jsp">글쓰기</a>
-                </tr>
-        </table>
-        
+	
 <center>
+
+<%
+		if(sid != null){
+%>		
+			<table width="700" align="center">
+            	    <tr>
+                		<td align="right" bgcolor="pink">
+                		<a href="project_input.jsp">글쓰기</a>
+               		</tr>
+        	</table>
+<%} %>
+
+
+
+
 <%
 	if(count == 0){
 %>
@@ -72,19 +91,27 @@
 <%}else{ %>
 
 <% 
-	for(MakeProjectDTO dto : list) { %>
+	for(MakeProjectDTO dto : list) {
+		
+		MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
+		int comment_count = 0;
+		int board_num = dto.getNum();
+		comment_count = cd.getCommentCount(board_num);
+%>
 	
-	<table border="1" width="700" cellpadding="0" cellspacing="0" align="center"> 
+	<table border="1" width="700"  cellpadding="0" cellspacing="0" align="center"> 
         	<tr>
-        		<th width="400px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
+        		<th width="400px" height="70px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
+        			<%=dto.getSubject() %></a> [<%=comment_count %>]</th>
         		<td align="center">
-        			<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" ><%=dto.getReadcount()%><br/>
+        			<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
+        			<img src="/goworker/makeproject/image/comment.png" width="20px" height="20px" /><%=comment_count %><br/>
         			<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
         			<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
         		</td>
         		<td width="80px" align="center">
         			<img src="/goworker/s-member/image/image.jpg" width="15px" height="15px"/><br/>
-        			<%=dto.getId() %>
+        			<%=sid %>
         		</td>
         		<td width="100px" align="center" >
         			<%=sdf.format(dto.getReg_date()) %>

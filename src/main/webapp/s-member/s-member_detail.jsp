@@ -29,6 +29,8 @@ function button_event(){
 	SmemberDAO dao = new SmemberDAO();
 	dao.readCountUp(dto);
 	dto = dao.getContent(dto);
+	
+
 %>
 
 <!-- <style>
@@ -98,7 +100,7 @@ function button_event(){
 		<tr>
 			<th>포트폴리오</th>		
 			<%if(dto.getPortfolio() != null) { %>
-			<td><img src = "/goworker/portfolioFile/<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
+				<td><img src = "/goworker/portfolioFile/<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
 			<%} else { %>
 			<td> 등록된 포트폴리오가 없습니다. </td>
 			<%} %>
@@ -154,12 +156,21 @@ function button_event(){
 		comment_step=Integer.parseInt(request.getParameter("comment_step"));
 		comment_level=Integer.parseInt(request.getParameter("comment_level"));
 	}
+	String id = (String)session.getAttribute("sid");
+	
+	
+	Comment_SmemberDAO cd = new Comment_SmemberDAO();	
+	int comment_count = 0;
+	int board_num = dto.getNum();
+	comment_count = cd.getCommentCount(board_num);
+	
 %>
-
+<Br/>
 <section class="section1">	
 	<div class="titletext">
-		<b>서비스 평가</b><br/>
-	</div>
+		<b>서비스 평가 - [작성된 댓글 수: <%=comment_count %>]</b>
+	
+	</div><br/>
   	
   	<div class="smallfont">
   		실제 Go-Worker 이용자들이 남긴 평가입니다.<br/>
@@ -179,7 +190,7 @@ function button_event(){
 
 				<td width="60" align="center">작성자</td>
 				<td width="300px" colspan=3 align="center">
-					<%=id%>
+					<%=sid%>
 				</td>
 
 			</tr>
@@ -187,8 +198,7 @@ function button_event(){
 			<tr>	
 				<td width="60px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
-				<% if(request.getParameter("comment_num")==null){ %>
-					<input type="text" size="100" name="comment_content" id="comment_content" style="width:500px;height:100px;" placeholder="댓글을 입력해주세요."></td>
+					<input type="text" size="100" name="comment_content" id="comment_content" style="width:465px;height:100px;" placeholder="댓글을 입력해주세요."></td>
 			</tr>
 			
 			<tr>
@@ -233,7 +243,7 @@ function button_event(){
 			<tr>	
 				<td align="center">
 					<img src="image/image.jpg" width="50" height="50"><br/>
-						<%=cdto.getComment_writerid()%>
+						<%=sid%>
 				</td>
 				 
 				<td>
@@ -255,9 +265,11 @@ function button_event(){
 				</td>
 				
 				<td  align="center">
-					<input type="button" value="수정" onclick="window.location='/goworker/s-member/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&pageNum=<%=pageNum%>'"/>
-					<input type="button" value="삭제" onclick="window.location='/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&pageNum=<%=pageNum%>'"/>
-	 				<input type="button" value="답글" onclick="window.location='/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>'" />
+					<form action="/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
+						<input type="button" value="수정" onclick="window.open('/goworker/s-member/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
+						<input type="submit" value="삭제" onclick="comment_removeCheck()" />
+	 					<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
+	 				</form>
 	 			</td>
 	 		</tr>
 
@@ -330,4 +342,12 @@ function button_event(){
     </table>
 </footer>
 
+
+<script>
+	function comment_removeCheck(){
+		if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
+			document.form.submit;
+			window.location='/goworker/s-member/comment/commentDelete.jsp?';
+		}	
+</script>
 </html>

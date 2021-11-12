@@ -9,6 +9,9 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
+<%@ include file = "../include/header.jsp" %>
+
+
 
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
@@ -55,13 +58,17 @@
 			comment_step=Integer.parseInt(request.getParameter("comment_step"));
 			comment_level=Integer.parseInt(request.getParameter("comment_level"));
 		}
-		String id = (String)session.getAttribute("id");
 
+		
+		Comment_SprojectDAO cd = new Comment_SprojectDAO();	
+		int comment_count = 0;
+		int board_num = dto.getNum();
+		comment_count = cd.getCommentCount(board_num);
 
 %>
 
 
-<div class="comment_title"><b>프로젝트 관련 문의</b><br/></div>
+<div class="comment_title"><b>프로젝트 관련 문의  - [작성된 댓글 수: <%=comment_count %>]</b><br/></div>
   <div class="comment_smalltitle">프로젝트에 대한 문의사항을 남겨주세요.</div>
 <br>
 
@@ -74,10 +81,10 @@
 			<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 		<table class="comments" border=1>
 		<tr>
-			<th width="50" align="center">작성자</th>
-			<th width="300px" colspan=3 align="center">
-				<%=id %>
-			</th>
+			<td width="50" align="center">작성자</td>
+			<td width="300px" colspan=3 align="center">
+				<%=sid %>
+			</td>
 		
 		</tr>
 		<tr>	
@@ -130,12 +137,15 @@
 		</tr>
 		<% 
 			if(count > 0) { 
-			for(Comment_SprojectDTO cdto : list)  {%>
+			for(Comment_SprojectDTO cdto : list)  {
+			
+			
+			%>
 		
 		<tr>	
 			<td align="center">
 				<img src="/goworker/s-project/image/image.jpg" width="50" height="50"><br/>
-					<%=id %>
+					<%=sid %>
 			</td>
 			 <td>
 		<%
@@ -157,7 +167,7 @@
 				<%=sdf.format(cdto.getComment_regdate()) %>
 			</td>
 			<td  align="center">
-				<form action="/goworker/s-project/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>"  method="post">
+				<form action="/goworker/s-project/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post">
 					<input type="button" value="수정" onclick="window.open('/goworker/s-project/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>','update','width=800,height=300');"/>
 					<input type="submit" value="삭제" onclick="comment_removeChek()"/>
  					<input type="button" value="답글" onclick="window.open('/goworker/s-project/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>','reply','width=600,height=300');" />

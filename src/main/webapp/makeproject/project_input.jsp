@@ -3,24 +3,26 @@
 
 <%@ page import = "bean.MakeProjectDTO" %>
 <%@ page import = "bean.MakeProjectDAO" %>
+<%@ include file = "../include/header.jsp" %>
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	String id = (String)session.getAttribute("id");
 %>
     
 <jsp:useBean class= "bean.MakeProjectDTO"  id="dto" />
 
 
+
 <form action="project_inputPro.jsp" method="post" enctype="multipart/form-data">
 
+<center>
 	<table border="1"  cellpadding="0" cellspacing="0" align="center"> 
 		<tr>
 			<th colspan="2" align="center">프로젝트 신청 글 작성</th>
 		</tr>
 		<tr>
 			<td>아이디</td>
-			<td><%=id%></td>
+			<td><%=sid%></td>
 		</tr>
         <tr>
         	<td align="center">제목</td>	
@@ -42,4 +44,5 @@
         </tr>
         
     </table>
+</center>
 </form>
