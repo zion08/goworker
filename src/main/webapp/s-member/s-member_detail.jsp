@@ -10,6 +10,19 @@
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
 
+<script>
+function button_event(){
+
+	if (confirm("정말 삭제하시겠습니까??") == true){ 
+	    document.form.submit();
+	    window.loction='/goworker/s-member/s-member_delete.jsp?num=<%=dto.getNum() %>'
+		} else{  
+	    	return;
+			}
+	}
+
+</script>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
@@ -104,8 +117,8 @@
 				
 		
 			<th colspan="2">
-			<img src="image/view.png" width="25px" height="25px" ><%=dto.getReadcount()%> &emsp;
-			<img src="image/thumbs.png" width="25px" height="25px" ><%=dto.getGood() %>
+				<img src="image/view.png" width="25px" height="25px" ><%=dto.getReadcount()%> &emsp;
+				<img src="image/thumbs.png" width="25px" height="25px" ><%=dto.getGood() %>
 			</th>		
 			
 		
@@ -116,8 +129,8 @@
 	
 	
 	<form align="center">
-		<input type="button" value="좋아요" onclick= "window.open('s-member_goodUp.jsp?num=<%=dto.getNum() %>','GoodUp','width=300,height=150'); window.location.reload();" />
-		<input type="button" value="싫어요" onclick= "window.open('s-member_goodDown.jsp?num=<%=dto.getNum() %>','GoodDown','width=300,height=150'); window.location.reload();" />
+		<a href="s-member_goodUp.jsp?num=<%=dto.getNum() %>" onclick= "window.open(this.href,'GoodUp','width=300,height=150'); return false; window.location.reload();" >좋아요<img src="image/thumbs.png" width="25px" height="25px" ></a>&emsp;
+		<a href="s-member_goodDown.jsp?num=<%=dto.getNum() %>" onclick= "window.open(this.href,'GoodDown','width=300,height=150'); return false; window.location.reload();" >싫어요<img src="image/thumbs_down.png" width="25px" height="25px" ></a>
 	</form>
 	
 	
@@ -141,8 +154,6 @@
 		comment_step=Integer.parseInt(request.getParameter("comment_step"));
 		comment_level=Integer.parseInt(request.getParameter("comment_level"));
 	}
-	String id = (String)session.getAttribute("id");
-
 %>
 
 <section class="section1">	
@@ -165,15 +176,18 @@
 		<table class="comments" border=1>
 		
 			<tr>
-				<th width="50" align="center">작성자</th>
-				<th width="300px" colspan=3 align="center">
+
+				<td width="60" align="center">작성자</td>
+				<td width="300px" colspan=3 align="center">
 					<%=id%>
-				</th>
+				</td>
+
 			</tr>
 			
 			<tr>	
-				<td width="50px" align="center">내 용</td>
+				<td width="60px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
+				<% if(request.getParameter("comment_num")==null){ %>
 					<input type="text" size="100" name="comment_content" id="comment_content" style="width:500px;height:100px;" placeholder="댓글을 입력해주세요."></td>
 			</tr>
 			
@@ -189,6 +203,7 @@
  
 
 
+
 <!-- 댓글 리스트 -->
 <% 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
@@ -199,14 +214,14 @@
 		count = cdao.getCount(); // 전체 글의 갯수
 		if(count > 0) {
 			list = cdao.getComment( dto.getNum() );	
-		}	
-
+		}		
 %>
 
 <section class="section1">
-	<table class="comments" border=1>
+
+	<table class="comments" border="1" align="center">
 		<tr>
-			<th width="60px">작성자</th>
+			<td width="60px">작성자</td>
 			<td width="370px" align="center">내 용</td>
 			<td width="70px" align="center" >작성일</td>
 			<td width="40px" align="center">버튼</td>
@@ -218,7 +233,7 @@
 			<tr>	
 				<td align="center">
 					<img src="image/image.jpg" width="50" height="50"><br/>
-						<%=id%>
+						<%=cdto.getComment_writerid()%>
 				</td>
 				 
 				<td>
@@ -240,21 +255,25 @@
 				</td>
 				
 				<td  align="center">
-					<form action="/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>"  method="post">
-						<input type="button" value="수정" onclick="window.open('/goworker/s-member/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>','update','width=800,height=300');"/>
-						<input type="submit" value="삭제" onclick="comment_removeChek()"/>
-	 					<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>','reply','width=600,height=300');" />
-	 				</form>
+					<input type="button" value="수정" onclick="window.location='/goworker/s-member/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&pageNum=<%=pageNum%>'"/>
+					<input type="button" value="삭제" onclick="window.location='/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&pageNum=<%=pageNum%>'"/>
+	 				<input type="button" value="답글" onclick="window.location='/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>'" />
 	 			</td>
 	 		</tr>
+
+	 		<tr>
+ 				<td width="30px" align="center" colspan="4" style="font-size: 12px">
+ 					<img src="/goworker/s-member/image/bestcomment.png" width="30" height="30" onclick="window.open('/goworker/s-member/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();" align="center"/>
+ 					를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
+ 				</td>
+ 			</tr>
 		<%}
 	}%>
-	</table><br/>
+</table><br/>
+
+
 
 </section>
-
-
-
 
 
 <footer>
@@ -311,13 +330,4 @@
     </table>
 </footer>
 
-
-<script>
-	function comment_removeChek(){
-		if(confirm("정말로 삭제하시겠습니까?") == true) {
-			document.form.submit;
-			window.location='/goworker/s-member/comment/commentDelete.jsp';
-		}
-	}
-</script>
 </html>

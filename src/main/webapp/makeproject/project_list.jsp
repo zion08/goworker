@@ -78,8 +78,9 @@
         	<tr>
         		<th width="400px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
         		<td align="center">
-        			<img src="/goworker/s-member/image/view.png" width="20px" height="20px" ><%=dto.getReadcount()%>
-        			<img src ="/goworker/s-member/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+        			<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" ><%=dto.getReadcount()%><br/>
+        			<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+        			<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
         		</td>
         		<td width="80px" align="center">
         			<img src="/goworker/s-member/image/image.jpg" width="15px" height="15px"/><br/>
@@ -121,5 +122,7 @@
 %>
 
 </section >
+
+
 </body>
 </html>

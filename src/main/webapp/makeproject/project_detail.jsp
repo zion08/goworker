@@ -202,15 +202,69 @@
 		</td>
 	</tr>
 	<tr>
- 		<td width="30px" align="center" colspan="4" style="font-size: 11px">
+ 		<td width="30px" align="center" colspan="4" style="font-size: 12px">
  			<img src="/goworker/makeproject/image/bestcomment.png" width="30" height="30" onclick="window.open('/goworker/makeproject/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();" align="center"/>
- 			를 꾸~욱! 눌러주세요!  [<%=cdto.getComment_good() %>]
+ 			를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
  		</td>
  	</tr>
 
 	<%}
 }%>
- </table>
+ </table><br/>
+ 
+ <footer>
+	<hr color="skyblue" size="2"  align="center" />
+
+
+
+
+
+<table width="500" align="right">
+      
+      <thead align="center">
+        <tr>
+          <th></th>
+          <th>메인</th>
+          <th>회원</th>
+          <th>고객센터</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>사이트소개</td>
+          <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
+          <td>회원가입</td>
+          <td>공지사항</td>
+          
+        </tr>
+        <tr>
+          <td>이용방법</td>
+          <td>프로젝트찾기</td>
+          <td>회원정보수정</td>
+          <td>Q&A</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>프로젝트만들기</td>
+          <td>회원탈퇴</td>
+          <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>취업정보</td>
+            <td></td>
+            <td></td>
+          </tr>
+        <tr>
+          <td></td>
+          <td>커뮤니티</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      
+    </table>
+</footer>
  
 
  <script>
