@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Timestamp;
 
-import bean.MemberDTO;
 import oracle.OracleDB;
 import oracle.DisconnDB;
 
@@ -30,7 +28,7 @@ public class MemberDAO {
 	            dto.setEmail(rs.getString("email"));
 	            dto.setPassword(rs.getString("password"));
 	            dto.setReg(rs.getTimestamp("reg").toString());
-	            list.add(dto);  // ����Ʈ�� �߰�!!
+	            list.add(dto);  // 리스트에 추가
 	         }
 	      }catch(Exception e) {
 	         e.printStackTrace();
@@ -227,6 +225,7 @@ public class MemberDAO {
 			} finally {
 				DisconnDB.close(conn, pstmt, rs);
 			}return result;
+		}
 		public int memberKick(MemberDTO dto) {
 			int result = 0;
 			try {
@@ -271,7 +270,7 @@ public class MemberDAO {
 					dto.setId(rs.getString("id"));
 					dto.setEmail(rs.getString("email"));
 					dto.setPassword(rs.getString("password"));
-					dto.setReg(rs.getTimestamp("reg"));
+					dto.setReg(rs.getTimestamp("reg").toString());
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
