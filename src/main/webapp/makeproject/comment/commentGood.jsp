@@ -10,8 +10,8 @@
 
 
 <%
-	MakeProject_CommentDAO dao = new MakeProject_CommentDAO();
-	dao.commentGood(cdto);
+	MakeProject_CommentDAO cdao = new MakeProject_CommentDAO();
+	cdao.commentGood(cdto);
 %>
 
 <center>

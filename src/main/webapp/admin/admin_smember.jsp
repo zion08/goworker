@@ -7,6 +7,7 @@
 
 
 <h2>멤버찾기 관리</h2>
+<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
 <%	
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
@@ -59,11 +60,18 @@
 				</th>
 				<th width="80">
 				<input type="submit" value="삭제" />
+				</form>
+				<form action= "/goworker/s-member/s-member_warn.jsp?num=<%=dto.getNum()%>" method="post">
+				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
+				<input type="hidden" name="id" value="<%=dto.getId() %>" />
+				<input type="submit" value="삭제 및 경고" />
+				</form>
+				
 				</th>
 			</tr>
 			
 		</table>
-		</form>
+		
 	</div>
  
 

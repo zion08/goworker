@@ -12,6 +12,8 @@ public class Comment_SmemberDTO {
 	private int comment_ref;
 	private int comment_step;
 	private int comment_level;
+	private int comment_good;
+	
 	
 	public int getComment_num() {
 		return comment_num;
@@ -61,5 +63,13 @@ public class Comment_SmemberDTO {
 	public void setComment_level(int comment_level) {
 		this.comment_level = comment_level;
 	}
+	public int getComment_good() {
+		return comment_good;
+	}
+	public void setComment_good(int comment_good) {
+		this.comment_good = comment_good;
+	}
+	
+
 	
 }

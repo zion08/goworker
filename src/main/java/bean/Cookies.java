@@ -9,12 +9,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 public class Cookies {
-	/*ÄíÅ°¸¦ <ÄíÅ°ÀÌ¸§, ÄíÅ°°´Ã¼>½Ö ÇüÅÂ·Î ÀúÀåÇÏ´Â ¸ÊÀ» »ı¼º */
+	/*ì¿ í‚¤ë¥¼ <ì¿ í‚¤ì´ë¦„, ì¿ í‚¤ê°ì²´>ìŒ í˜•íƒœë¡œ ì €ì¥í•˜ëŠ” ë§µì„ ìƒì„± */
 	private Map<String, Cookie> cookieMap = new HashMap<String, Cookie>();
 	
-	public Cookies(HttpServletRequest request)  // ¿äÃ» http¼­ºí¸´¸®Äù½ºÆ® Å¬·¡½º¿¡ ÆÄ¶ó¹ÌÅÍ requestÀü´Ş ¹Ş¾Æ 
+	public Cookies(HttpServletRequest request)  // ìš”ì²­ httpì„œë¸”ë¦¿ë¦¬í€˜ìŠ¤íŠ¸ í´ë˜ìŠ¤ì— íŒŒë¼ë¯¸í„° requestì „ë‹¬ ë°›ì•„  
 	{
-		Cookie[] cookies=request.getCookies(); // Cookie¹è¿­À» ÀĞ¾î¿Í °¢°¢ÀÇ Cookie°´Ã¼¸¦ CookieMap¿¡ ÀúÀåÇÑ´Ù. 
+		Cookie[] cookies=request.getCookies(); // Cookieë°°ì—´ì„ ì½ì–´ì™€ ê°ê°ì˜ Cookieê°ì²´ë¥¼ CookieMapì— ì €ì¥í•œë‹¤ 
 		if(cookies != null) 
 		{
 			for(int i=0;i<cookies.length;i++) 
@@ -24,12 +24,12 @@ public class Cookies {
 		}
 	}
 	
-	public Cookie getCookie(String name) //À§ ÄíÅ°¸Ê¿¡ ÁöÁ¤µÈ ÀÌ¸§ÀÇ ÄíÅ° °´Ã¼¸¦ ±¸ÇÑ´Ù. Á¸ÀçÇÏÁö ¾ÊÀ¸¸é nullÀ» ¸®ÅÏ.
+	public Cookie getCookie(String name)  //ìœ„ ì¿ í‚¤ë§µì— ì§€ì •ëœ ì´ë¦„ì˜ ì¿ í‚¤ ê°ì²´ë¥¼ êµ¬í•œë‹¤. ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ nullì„ ë¦¬í„´.
 	{
 		return cookieMap.get(name);
 	}
 	
-	public String getValue(String name) throws IOException // µµ¸ŞÀÎ ¼³Á¤ÇÏÁö ¾ÊÀº Äí±â Ãß°¡.?
+	public String getValue(String name) throws IOException // ë„ë©”ì¸ ì„¤ì •í•˜ì§€ ì•Šì€ ì¿ ê¸° ì¶”ê°€.?
 	{
 		Cookie cookie = cookieMap.get(name);
 		if(cookie==null)
@@ -39,18 +39,18 @@ public class Cookies {
 		return URLDecoder.decode(cookie.getValue(), "euc-kr");
 	}
 	
-	public boolean exists(String name) 	// ÁöÁ¤ ÀÌ¸§ÀÇ Cookie°¡ Á¸ÀçÇÏ¸é true, ¾Æ´Ï¸é false ¸®ÅÏ
+	public boolean exists(String name) 	// ì§€ì • ì´ë¦„ì˜ Cookieê°€ ì¡´ì¬í•˜ë©´ true, ì•„ë‹ˆë©´ false ë¦¬í„´
 	{
 		return cookieMap.get(name) != null;
 	}
 	
 	public static Cookie createCookie(String name, String value) throws IOException
-	{	// ÀÌ¸§ÀÌ name °ªÀÌ value ÀÎ ÄíÅ° °´Ã¼ »ı¼º&¸®ÅÏ
+	{	// ì´ë¦„ì´ name ê°’ì´ value ì¸ ì¿ í‚¤ ê°ì²´ ìƒì„±&ë¦¬í„´
 		return new Cookie(name, URLEncoder.encode(value, "utf-8"));
 	}
 	
 	public static Cookie createCookie(String name, String value, String path, int maxAge) throws IOException
-	{	// + °æ·Î, À¯È¿½Ã°£maxAgeÀÎ ÄíÅ° °´Ã¼ »ı¼º&¸®ÅÏ
+	{	// + ê²½ë¡œ, ìœ íš¨ì‹œê°„maxAgeì¸ ì¿ í‚¤ ê°ì²´ ìƒì„±&ë¦¬í„´
 		Cookie cookie = new Cookie(name, URLEncoder.encode(value, "utf-8"));
 		cookie.setPath(path);
 		cookie.setMaxAge(maxAge);
@@ -58,7 +58,7 @@ public class Cookies {
 	}
 	
 	public static Cookie createCookie(String name, String value, String domain, String path, int maxAge) throws IOException
-	{	// +µµ¸ŞÀÎ 
+	{	// +ë„ë©”ì¸ 
 		Cookie cookie = new Cookie(name, URLEncoder.encode(value, "utf-8"));
 		cookie.setDomain(domain);
 		cookie.setPath(path);
