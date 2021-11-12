@@ -34,7 +34,7 @@
 	<a href="admin_smember.jsp">멤버찾기 관리</a> <br/>
 	<a href="admin_sproject.jsp">프로젝트 찾기 관리</a> <br/>
 	<a href="admin_comment">댓글 관리</a> <br/>
-	<a href="admin_member">회원 관리</a> <br/>
+	<a href="admin_member.jsp">회원 관리</a> <br/>
 	
 </aside>
 <section>

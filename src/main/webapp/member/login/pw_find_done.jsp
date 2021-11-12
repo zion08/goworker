@@ -10,19 +10,8 @@
 
 <jsp:useBean id="dto" class="bean.MemberDTO"/>
 
-<%
+<% 
 String email = request.getParameter("email");
-MemberDAO dao = new MemberDAO();
-int result = dao.newPassword(dto); // 등록email에 새암호 update
-if(result==1)
-{ //  등록된 email로 메일 전송(새암호 포함)
-%>
-	<form action="SendMail.jsp" method="post">
-	<input type="hidden" name="email" value="<%=email%>"/>
-	</form>
-<%
-}
-
 %>
 	
 <div align="center">

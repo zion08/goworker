@@ -8,7 +8,7 @@
 
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
-<%@ include file = "../include/header.jsp" %>
+
 
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
@@ -164,6 +164,12 @@
  				</form>
  			</td>
  		</tr>
+ 		<tr>
+ 			<td width="30px" align="center" colspan="4" style="font-size: 12px">
+ 				<img src="/goworker/s-project/image/bestcomment.png" width="30" height="30" onclick="window.open('/goworker/s-project/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();" align="center"/>
+ 				를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
+ 			</td>
+ 	</tr>
  		<%} 
  	}%>
  		
