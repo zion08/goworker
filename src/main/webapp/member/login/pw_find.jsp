@@ -3,6 +3,9 @@
 <title>비밀번호 찾기</title>
 <div align="center">
 <h2>비밀번호 찾기</h2>
+<%
+	session.invalidate(); // email을 통해서 암호를 찾아야 하니깐 로그인된 상태가 아니므로 남아있는 session값들 삭제시켜줌
+%>
 </div>
 <form action="pw_findPro.jsp" method="post" >
 	<div align="center">
@@ -18,10 +21,6 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="hidden" name="from" />
-					<input type="hidden" name="to" />
-					<input type="hidden" name="subject" />
-					<input type="hidden" name="content" />
 					<input type="submit" value="이메일 전송하기" />
 				</td>
 			</tr>

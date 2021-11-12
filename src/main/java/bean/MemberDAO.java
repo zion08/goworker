@@ -55,7 +55,7 @@ public class MemberDAO {
 			}
 			return result;
 		}
-		public int memberInput(MemberDTO dto) {  // 데이터베이스에 회원정보 등록(회원가입)
+		public int memberInput(MemberDTO dto) {   // 데이터베이스에 회원정보 등록(회원가입)
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
@@ -163,15 +163,16 @@ public class MemberDAO {
 			}
 			return result;
 		}
-	public int newPassword(MemberDTO dto) {
+	
+		public int newPassword(MemberDTO dto) {
 		int result=0;
 		try	{
 			NewPassword np = new NewPassword();
 			conn=OracleDB.getConnection();
 			pstmt=conn.prepareStatement("update member set password=? where email=?");
-			pstmt.setString(1, np.getSecureRandomPassword(10) );
+			pstmt.setString(1, np.getSecureRandomPassword(499) );
 			pstmt.setString(2, dto.getEmail());
-			result = pstmt.executeUpdate();
+			result = pstmt.executeUpdate(); 
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,6 +181,27 @@ public class MemberDAO {
 		}
 		return result;
 	}
-		
+	
+		public MemberDTO getUserPassword(String email) {
+			MemberDTO dto = null;
+			try {			
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select * from member where email=?");
+				pstmt.setString(1, email);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+				    dto = new MemberDTO();
+					dto.setId(rs.getString("id"));
+					dto.setEmail(rs.getString("email"));
+					dto.setPassword(rs.getString("password"));
+					dto.setReg(rs.getTimestamp("reg"));
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return dto;
+		}
 		
 }
