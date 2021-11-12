@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Timestamp;
 
-import bean.MemberDTO;
 import oracle.OracleDB;
 import oracle.DisconnDB;
 
@@ -30,7 +28,7 @@ public class MemberDAO {
 	            dto.setEmail(rs.getString("email"));
 	            dto.setPassword(rs.getString("password"));
 	            dto.setReg(rs.getTimestamp("reg").toString());
-	            list.add(dto);  // ����Ʈ�� �߰�!!
+	            list.add(dto);  // 리스트에 추가
 	         }
 	      }catch(Exception e) {
 	         e.printStackTrace();
@@ -58,7 +56,8 @@ public class MemberDAO {
 			}
 			return result;
 		}
-		public int memberInput(MemberDTO dto) {  // �����ͺ��̽��� ȸ������ ���(ȸ������)
+		public int memberInput(MemberDTO dto) {   // 데이터베이스에 회원정보 등록(회원가입)
+
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
@@ -226,7 +225,6 @@ public class MemberDAO {
 			} finally {
 				DisconnDB.close(conn, pstmt, rs);
 			}return result;
-			
 		}
 		public int memberKick(MemberDTO dto) {
 			int result = 0;
@@ -235,7 +233,6 @@ public class MemberDAO {
 				pstmt = conn.prepareStatement("delete from member where id=?"); 
 				pstmt.setString(1, dto.getId());
 				result = pstmt.executeUpdate();
-				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -243,6 +240,44 @@ public class MemberDAO {
 			}
 			return result;
 		}
-		 
+		public int newPassword(MemberDTO dto) {
+			int result=0;
+			try	{
+				NewPassword np = new NewPassword();
+				conn=OracleDB.getConnection();
+				pstmt=conn.prepareStatement("update member set password=? where email=?");
+				pstmt.setString(1, np.getSecureRandomPassword(499) );
+				pstmt.setString(2, dto.getEmail());
+				result = pstmt.executeUpdate(); 
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return result;
+		}
+	
+		public MemberDTO getUserPassword(String email) {
+			MemberDTO dto = null;
+			try {			
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select * from member where email=?");
+				pstmt.setString(1, email);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+				    dto = new MemberDTO();
+					dto.setId(rs.getString("id"));
+					dto.setEmail(rs.getString("email"));
+					dto.setPassword(rs.getString("password"));
+					dto.setReg(rs.getTimestamp("reg").toString());
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return dto;
+		}
 		
 }
