@@ -227,126 +227,126 @@
 %> 		<p><%=resultNone%></p>	
 <%	} 
 
-<%  /*if(scount > 0) { 
+  	/*if (scount > 0) { 
 	
-	if((sdto.getCareer()).equals("new")) {
-		sdto.setCareer("신입"); 
-	}
-	if((sdto.getCareer()).equals("1")) {
-		sdto.setCareer("1년차"); 
-	}
-	if((sdto.getCareer()).equals("2")) {
-		sdto.setCareer("2년차"); 
-	}
-	if((sdto.getCareer()).equals("3")) {
-		sdto.setCareer("3년차"); 
-	}
-	if((sdto.getCareer()).equals("4")) {
-		sdto.setCareer("4년차"); 
-	}
-	if((sdto.getCareer()).equals("5")) {
-		sdto.setCareer("5년차"); 
-	}
-	if((sdto.getCareer()).equals("6")) {
-		sdto.setCareer("6년차"); 
-	}
-	if((sdto.getCareer()).equals("7")) {
-		sdto.setCareer("7년차 이상"); 
-	}
-	if((sdto.getField()).equals("dev")) {
-		sdto.setField("개발"); 
-	}
-	if((sdto.getField()).equals("plan")) {
-		sdto.setField("기획"); 
-	}
-	if((sdto.getField()).equals("design")) {
-		sdto.setField("디자인"); 
-	}
-	if((sdto.getEmploytype()).equals("sfree")) {
-		sdto.setEmploytype("개인 프리랜서"); 
-	}
-	if((sdto.getEmploytype()).equals("tfree")) {
-		sdto.setEmploytype("팀 프리랜서"); 
-	}
-	if((sdto.getEmploytype()).equals("sbusiness")) {
-		sdto.setEmploytype("개인 사업자"); 
-	}
-	if((sdto.getEmploytype()).equals("cbusiness")) {
-		sdto.setEmploytype("법인 사업자"); 
-	}
-	if((sdto.getProjecttype()).equals("side")) {
-		sdto.setProjecttype("사이드 프로젝트"); 
-	}
-	if((sdto.getProjecttype()).equals("main")) {
-		sdto.setProjecttype("메인 프로젝트"); 
-	}
-	if((sdto.getWorktype()).equals("online")){
-		sdto.setWorktype("원격"); 
-	}
-	if((sdto.getWorktype()).equals("office")){
-		sdto.setWorktype("상주"); 
-	}
-	if((sdto.getWorktype()).equals("discuss")){
-		sdto.setWorktype("협의"); 
-	}
+		if((sdto.getCareer()).equals("new")) {
+			sdto.setCareer("신입"); 
+		}
+		if((sdto.getCareer()).equals("1")) {
+			sdto.setCareer("1년차"); 
+		}
+		if((sdto.getCareer()).equals("2")) {
+			sdto.setCareer("2년차"); 
+		}
+		if((sdto.getCareer()).equals("3")) {
+			sdto.setCareer("3년차"); 
+		}
+		if((sdto.getCareer()).equals("4")) {
+			sdto.setCareer("4년차"); 
+		}
+		if((sdto.getCareer()).equals("5")) {
+			sdto.setCareer("5년차"); 
+		}
+		if((sdto.getCareer()).equals("6")) {
+			sdto.setCareer("6년차"); 
+		}
+		if((sdto.getCareer()).equals("7")) {
+			sdto.setCareer("7년차 이상"); 
+		}
+		if((sdto.getField()).equals("dev")) {
+			sdto.setField("개발"); 
+		}
+		if((sdto.getField()).equals("plan")) {
+			sdto.setField("기획"); 
+		}
+		if((sdto.getField()).equals("design")) {
+			sdto.setField("디자인"); 
+		}
+		if((sdto.getEmploytype()).equals("sfree")) {
+			sdto.setEmploytype("개인 프리랜서"); 
+		}
+		if((sdto.getEmploytype()).equals("tfree")) {
+			sdto.setEmploytype("팀 프리랜서"); 
+		}
+		if((sdto.getEmploytype()).equals("sbusiness")) {
+			sdto.setEmploytype("개인 사업자"); 
+		}
+		if((sdto.getEmploytype()).equals("cbusiness")) {
+			sdto.setEmploytype("법인 사업자"); 
+		}
+		if((sdto.getProjecttype()).equals("side")) {
+			sdto.setProjecttype("사이드 프로젝트"); 
+		}
+		if((sdto.getProjecttype()).equals("main")) {
+			sdto.setProjecttype("메인 프로젝트"); 
+		}
+		if((sdto.getWorktype()).equals("online")){
+			sdto.setWorktype("원격"); 
+		}
+		if((sdto.getWorktype()).equals("office")){
+			sdto.setWorktype("상주"); 
+		}
+		if((sdto.getWorktype()).equals("discuss")){
+			sdto.setWorktype("협의"); 
+		}
+	
+		if((sdto.getLocation()).equals("online")) {
+			sdto.setLocation("원격"); 
+		}
+		if((sdto.getLocation()).equals("seoul")) {
+			sdto.setLocation("서울"); 
+		}
+		if((sdto.getLocation()).equals("gyunggi")) {
+			sdto.setLocation("경기"); 
+		}
+		if((sdto.getLocation()).equals("incheon")) {
+			sdto.setLocation("인천"); 
+		}
+		if((sdto.getLocation()).equals("gangwon")) {
+			sdto.setLocation("강원"); 
+		}
+		if((sdto.getLocation()).equals("chungbuk")) {
+			sdto.setLocation("충북"); 
+		}
+		if((sdto.getLocation()).equals("chungnam")) {
+			sdto.setLocation("충남"); 
+		}
+		if((sdto.getLocation()).equals("deajeon")) {
+			sdto.setLocation("대전"); 
+		}
+		if((sdto.getLocation()).equals("sejong")) {
+			sdto.setLocation("세종"); 
+		}
+		if((sdto.getLocation()).equals("jeonbuk")) {
+			sdto.setLocation("전북"); 
+		}
+		if((sdto.getLocation()).equals("jeonnam")) {
+			sdto.setLocation("전남"); 
+		}
+		if((sdto.getLocation()).equals("gwangju")) {
+			sdto.setLocation("광주"); 
+		}
+		if((sdto.getLocation()).equals("gyungbuk")) {
+			sdto.setLocation("경북"); 
+		}
+		if((sdto.getLocation()).equals("gyungnam")) {
+			sdto.setLocation("경남"); 
+		}
+		if((sdto.getLocation()).equals("daegu")) {
+			sdto.setLocation("대구"); 
+		}
+		if((sdto.getLocation()).equals("busan")) {
+			sdto.setLocation("부산"); 
+		}
+		if((sdto.getLocation()).equals("jeju")) {
+			sdto.setLocation("제주"); 
+	} */	
 
-	if((sdto.getLocation()).equals("online")) {
-		sdto.setLocation("원격"); 
-	}
-	if((sdto.getLocation()).equals("seoul")) {
-		sdto.setLocation("서울"); 
-	}
-	if((sdto.getLocation()).equals("gyunggi")) {
-		sdto.setLocation("경기"); 
-	}
-	if((sdto.getLocation()).equals("incheon")) {
-		sdto.setLocation("인천"); 
-	}
-	if((sdto.getLocation()).equals("gangwon")) {
-		sdto.setLocation("강원"); 
-	}
-	if((sdto.getLocation()).equals("chungbuk")) {
-		sdto.setLocation("충북"); 
-	}
-	if((sdto.getLocation()).equals("chungnam")) {
-		sdto.setLocation("충남"); 
-	}
-	if((sdto.getLocation()).equals("deajeon")) {
-		sdto.setLocation("대전"); 
-	}
-	if((sdto.getLocation()).equals("sejong")) {
-		sdto.setLocation("세종"); 
-	}
-	if((sdto.getLocation()).equals("jeonbuk")) {
-		sdto.setLocation("전북"); 
-	}
-	if((sdto.getLocation()).equals("jeonnam")) {
-		sdto.setLocation("전남"); 
-	}
-	if((sdto.getLocation()).equals("gwangju")) {
-		sdto.setLocation("광주"); 
-	}
-	if((sdto.getLocation()).equals("gyungbuk")) {
-		sdto.setLocation("경북"); 
-	}
-	if((sdto.getLocation()).equals("gyungnam")) {
-		sdto.setLocation("경남"); 
-	}
-	if((sdto.getLocation()).equals("daegu")) {
-		sdto.setLocation("대구"); 
-	}
-	if((sdto.getLocation()).equals("busan")) {
-		sdto.setLocation("부산"); 
-	}
-	if((sdto.getLocation()).equals("jeju")) {
-		sdto.setLocation("제주"); 
-	}	
-	*/
-  
+		
 	if (scount > 0) {
 					
 		for(SmemberDTO sdto : list) {
-%>				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=sdto.getNum() %>','message','width=300, height=150');" >	
+%>				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=sdto.getNum() %>','message','width=355px, height=540px');" >		
 					<table class="mboard">
 						<tr>
 							<th>
