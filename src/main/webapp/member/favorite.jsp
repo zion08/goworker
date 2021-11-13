@@ -6,6 +6,7 @@
 <%@ page import="bean.FavoriteDTO"%>
 <%@ page import="bean.FavoriteDAO"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List" %>
 <%@ page import="java.lang.Math" %>
 <!DOCTYPE html>
 <html>
@@ -24,9 +25,9 @@
 		if(session.getAttribute("sid") != null){
 			sid = (String) session.getAttribute("sid");
 		}
-		int pageNumber = 1; //기본페이지
+		int pageNum = 1; //기본페이지
 		if (request.getParameter("pageNumber") != null){
-			pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
+			pageNum = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
 		}
 	%>
 	<nav class="navbar navbar-default">
@@ -92,24 +93,39 @@
 						<tr>
 							<th style="background-color: #eeeee; text-align: center;">번호</th>
 							<th style="background-color: #eeeee; text-align: center;">제목</th>
-							<th style="background-color: #eeeee; text-align: center;">작성자</th>
 							<th style="background-color: #eeeee; text-align: center;">작성일</th>
 						</tr>
 					</thead>
 					<tbody>
 						<%
-						    FavoriteDAO fdao = new FavoriteDAO();
-							ArrayList<SmemberDTO> list = fdao.getFavlist(sid, pageNumber);
-							for(int i=0; i<list.size(); i++){	
-						%>
-						<tr>
-							<td><%= list.get(i).getNum() %></td>
-							<td><a href="s-member_detail.jsp?num=<%=list.get(i).getNum()%>"></a></td>
-							<td><%= list.get(i).getId() %></td>
-						</tr>
-						<%
-							}
-						%>
+						request.setCharacterEncoding("UTF-8");
+						String my = request.getParameter("my");
+						int pageSize = 5;
+						
+					int currentPage = pageNum;
+					/*	int start = (currentPage - 1) * pageSize + 1;		
+						int end = currentPage * pageSize; */
+						
+						FavoriteDAO fdao = new FavoriteDAO();
+						int count = 0;
+						List<SmemberDTO> list = null;
+						count = fdao.getfavCount(sid);
+						
+			
+				
+				System.out.println(count);
+				
+				list= fdao.getFavlist(sid);	
+				
+			for(SmemberDTO dto : list){
+				System.out.println(dto);%>
+			<tr>
+				<td><%= dto.getNum() %></td>
+				<td><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></td>
+				<td><%= dto.getRegdate() %></td>
+			</tr>
+				<%}%>
+				
 					</tbody>
 				</table>
 				<form name = "p_search">
@@ -118,6 +134,29 @@
 			</div>
 		</div>
 	</div>	
+	<%
+	if (count > 0) {
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (currentPage / 10)* 10 +1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock -1;
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+		
+		if (startPage >10) {
+%>			<a href="favorite.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+<%		}
+	
+		for (int i = startPage ; i <= endPage ; i++) {
+%> 			<a href="favorite.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+<%		}
+	
+		if(endPage < pageCount) {
+%>		<a href="favorite.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+<%		}
+	}
+%>
 	<script>
 	function nwindow(boardID){
 		window.name = "parant";
