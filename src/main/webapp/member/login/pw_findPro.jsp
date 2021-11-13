@@ -17,7 +17,7 @@
 		dto = dao.getUserPassword(em); // 바뀐 암호 dto에 저장
 		session.setAttribute("password", dto.getPassword()); // 세션 등록
 	%>
-		<%@ include file="autoMailSending.jsp" %> // 이메일 전송
+		<%@ include file="autoMailSending.jsp"%> // 이메일 전송
 	<%
 		forwardPage = "pw_find_done.jsp";
 	}else 
