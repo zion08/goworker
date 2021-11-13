@@ -286,6 +286,7 @@ hr {
 #messege-content {
 	border: 1px solid blue;
 	margin-top: 5px;
+	width: 100%;
     height: 65vh;	
 }
 
