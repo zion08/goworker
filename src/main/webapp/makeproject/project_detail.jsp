@@ -36,7 +36,7 @@
 	int comment_count = 0;
 	int board_num = dto.getNum();
 	
-	
+	comment_count = cd.getCommentCount(board_num);
 
 	
 %>
@@ -214,7 +214,7 @@ if(sid.equals(dto.getId())) { %>
 			<img src="/goworker/makeproject/image/image.jpg" width="50" height="50"><br/>
 				<%=cdto.getId() %>
 			<input type="hidden" name="num" value="<%=cdto.getComment_num() %>">
-			<input type="hidden" name="ref" value=<%=cdto.getRef() %>">
+			<input type="hidden" name="ref" value="<%=cdto.getRef() %>">
 		</td>
 		
 		<td>
@@ -338,7 +338,7 @@ if(sid.equals(cdto.getId())) { %>
  	function comment_removeCheck(){
  		if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
  			document.form.submit;
- 			window.location='/goworker/makeproject/comment/commentDelete.jsp?';
+ 			window.location='/goworker/makeproject/comment/commentDelete.jsp';
  			
  		}
  	}
