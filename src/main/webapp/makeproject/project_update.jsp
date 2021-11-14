@@ -40,7 +40,7 @@
 		</tr>
 		<tr>
 			<td align="center" width="70px"><img src="/goworker/s-member/image/image.jpg" width="30px" height="30px"/><br/>
-						<%=sid %> 
+						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"> 
 			</td>
 			<td align="center" width="150px">
 				<%=sdf.format(dto.getReg_date())%>

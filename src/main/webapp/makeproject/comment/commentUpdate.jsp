@@ -17,7 +17,6 @@
 	MakeProject_CommentDAO cdao = new MakeProject_CommentDAO();
 	cdto = cdao.getComment(cdto);
 	
-	String sid = (String)session.getAttribute("sid");
 
 %>
 
@@ -33,7 +32,7 @@
 			<tr>
 				<td width="150px" align="center">작성자</td>
 				<td width="400px" colspan="2">
-					<%=sid %>
+					<%=cdto.getId() %><input type="hidden" name="id" value="<%=cdto.getId() %>" />
 				</td>	
 			</tr>
 			<tr>

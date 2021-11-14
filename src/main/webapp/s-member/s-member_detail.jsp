@@ -10,6 +10,8 @@
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
 
+
+
 <script>
 function button_event(){
 
@@ -156,7 +158,6 @@ function button_event(){
 		comment_step=Integer.parseInt(request.getParameter("comment_step"));
 		comment_level=Integer.parseInt(request.getParameter("comment_level"));
 	}
-	String id = (String)session.getAttribute("sid");
 	
 	
 	Comment_SmemberDAO cd = new Comment_SmemberDAO();	
@@ -185,12 +186,18 @@ function button_event(){
 			<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 				
 		<table class="comments" border=1>
-		
+		<%	if(sid == null){ %>
+		<tr>
+			<td width="520px" colspan="3" align="center">
+				댓글은 회원만 작성이 가능합니다.<br/>
+				로그인 후, 이용 부탁드립니다.</td>
+		</tr>
+		<%}else{ %>
 			<tr>
 
 				<td width="60" align="center">작성자</td>
 				<td width="300px" colspan=3 align="center">
-					<%=sid%>
+					<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
 				</td>
 
 			</tr>
@@ -243,7 +250,7 @@ function button_event(){
 			<tr>	
 				<td align="center">
 					<img src="image/image.jpg" width="50" height="50"><br/>
-						<%=sid%>
+						<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 				</td>
 				 
 				<td>
@@ -264,11 +271,19 @@ function button_event(){
 					<%=sdf.format(cdto.getComment_regdate()) %>
 				</td>
 				
+<% if(sid !=null) {
+if(sid.equals(cdto.getComment_writerid())) { %>					
+				
 				<td  align="center">
 					<form action="/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
 						<input type="button" value="수정" onclick="window.open('/goworker/s-member/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
 						<input type="submit" value="삭제" onclick="comment_removeCheck()" />
 	 					<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
+	 					<%}else{ %>
+	 					
+	 					<td algin="center">
+	 						<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
+	 					</td>
 	 				</form>
 	 			</td>
 	 		</tr>
@@ -279,7 +294,13 @@ function button_event(){
  					를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
  				</td>
  			</tr>
+ 			<%}
+}%>
+ 			
+ 			
+ 			
 		<%}
+		}
 	}%>
 </table><br/>
 

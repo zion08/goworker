@@ -41,7 +41,6 @@
 	}
 	
 		
-	String id = (String)session.getAttribute("sid");
 
 		
 
@@ -64,8 +63,8 @@
 <center>
 
 <%
-		if(sid != null){
-%>		
+	if(sid != null){
+%>	
 			<table width="700" align="center">
             	    <tr>
                 		<td align="right" bgcolor="pink">
@@ -111,7 +110,7 @@
         		</td>
         		<td width="80px" align="center">
         			<img src="/goworker/s-member/image/image.jpg" width="15px" height="15px"/><br/>
-        			<%=sid %>
+        			<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
         		</td>
         		<td width="100px" align="center" >
         			<%=sdf.format(dto.getReg_date()) %>

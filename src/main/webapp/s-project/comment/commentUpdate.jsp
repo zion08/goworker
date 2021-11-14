@@ -14,7 +14,6 @@
 	Comment_SprojectDAO dao = new Comment_SprojectDAO();
 	cdto = dao.getComment(cdto);
 	
-	String sid = (String)session.getAttribute("sid");
 
 %>
 
@@ -27,7 +26,7 @@
 		<tr>
 			<th width="50" align="center">작성자</th>
 			<th width="300px" colspan=3 align="center">
-				<%=sid %>
+				<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 			</th>
 		
 		</tr>

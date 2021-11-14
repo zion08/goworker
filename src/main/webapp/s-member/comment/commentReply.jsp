@@ -27,10 +27,10 @@
 
 <table class="comments" border=1>
 		<tr>
-			<th width="50" align="center">작성자</th>
-			<th width="300px" colspan=3 align="center">
-				<%=sid %>
-			</th>
+			<td width="50" align="center">작성자</td>
+			<td width="300px" colspan=3 align="center">
+				<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
+			</td>
 		</tr>
 		<tr>	
 			<td width="50px" align="center">내 용</td>

@@ -10,6 +10,7 @@
 %>
     
 <jsp:useBean class= "bean.MakeProjectDTO"  id="dto" />
+<jsp:setProperty property="*" name="dto" />  
 
 
 
@@ -21,8 +22,8 @@
 			<th colspan="2" align="center">프로젝트 신청 글 작성</th>
 		</tr>
 		<tr>
-			<td>아이디</td>
-			<td><%=sid%></td>
+			<td algin="center"><label>아이디</label></td>
+			<td><%=sid %><input type="hidden" name="id" value="<%=sid%>"/></td>
 		</tr>
         <tr>
         	<td align="center">제목</td>	

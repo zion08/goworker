@@ -18,5 +18,5 @@
 %>
 	<script>
 		alert("삭제되었습니다.");
-		window.location='/goworker/makeproject/project_list.jsp';
+		window.location='/goworker/makeproject/project_list.jsp?num=<%=dto.getNum()%>';
 	</script>

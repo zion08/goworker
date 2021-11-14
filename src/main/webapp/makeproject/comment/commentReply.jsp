@@ -29,8 +29,8 @@
 		</tr>
 		<tr>
 			<td width="50" align="center">작성자</td>
-			<td width="300px" colspan="2" >
-				<%=sid %>
+			<td width="300px" colspan="2" align="center" >
+				<%=sid %><input type="hidden" name="id" value="<%=sid%>"/>
 			</td>
 		
 		</tr>
