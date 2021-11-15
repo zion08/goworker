@@ -10,10 +10,9 @@
                function goUrl(url)   
                { window.location.href  = url;     }  
             </script>
-	
-	<div class="logo">
-		<a href="/goworker/member/index.jsp"><img src="../s-member/image/logo.png" width= "80" height="80"/></a>		
-	</div>
+            
+			<div class="logo" onclick="window.location='/goworker/main/index.jsp'">
+			</div>	
 <%	if (sid == null) {
 %>			<div class="wrapper-sideicon">			
 				<span class="sideicon2" >
@@ -30,7 +29,7 @@
             <div class="wrapper-sideicon">	
                 <h1> <%=sid%> 님</h1>		
 				<span class="sideicon1">
-					<a href="" >
+					<a href="../message/messageSave.jsp" >
 						<img src="../s-member/image/note.png"><p>메세지</p>
 					</a>
 				</span>
