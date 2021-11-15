@@ -87,7 +87,8 @@ public class MakeProject_CommentDAO {
 			return result;
 		}
 				
-				
+		
+	 	
 		public List<MakeProject_CommentDTO> getComment(int num){
 			List<MakeProject_CommentDTO> list = null;
 			try {
@@ -128,7 +129,7 @@ public class MakeProject_CommentDAO {
 			if(rs.next()) {
 				result = rs.getString("id");
 			}
-			pstmt = conn.prepareStatement("delete from makeproject_comment where comment_num=? ");
+			pstmt = conn.prepareStatement("delete from makeproject_comment where comment_num=?");
 			pstmt.setInt(1, comment_num);
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -138,6 +139,10 @@ public class MakeProject_CommentDAO {
 		}
 		return result;
 	}
+	
+	
+
+
 	
 	// ´ñ±Û ¼öÁ¤ ±â´É ¸Þ¼­µå
 	public MakeProject_CommentDTO getComment(MakeProject_CommentDTO cdto) {
@@ -193,6 +198,46 @@ public class MakeProject_CommentDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 	}
+	
+	
+	// ´ñ±Û °¹¼ö Ãâ·Â ¸Þ¼­µå
+	public int getCommentCount(int num) {
+		int result = 0;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select count(*) from makeproject_comment where num=?");
+			pstmt.setInt(1,  num);
+	            rs = pstmt.executeQuery();
+	            if (rs.next()) {
+	                result = rs.getInt(1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            DisconnDB.close(conn, pstmt, rs);
+	        }
+	        return result;
+	    }
+
+	
+	// ´ñ±Û °¹¼ö
+		public int getCommentCount(MakeProject_CommentDTO cdto) {
+			int result = 0;
+			try {
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select count(*) from makeproject_comment where ref=?");
+				pstmt.setInt(1,cdto.getRef());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return result;
+		}
 }
 
 
