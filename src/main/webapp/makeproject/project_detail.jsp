@@ -17,7 +17,11 @@
 <jsp:useBean class = "bean.MakeProjectDTO" id= "dto" />
 <jsp:setProperty property="*" name="dto" />  
 
-
+<style>
+	textarea {
+		font-size:17px;
+}
+</style>
 
 
 <%
@@ -54,7 +58,7 @@
 				<th align="center" colspan="3" width="700px">Project 초대</th>
 			</tr>
 			<tr>
-				<td align="center" width="70px" align="center"><img src="/goworker/makeproject/image/image.jpg" width="30px" height="30px"/><br/>
+				<td align="center" width="50px" align="center"><img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
 				</td>
 				<td align="center" width="150px">
@@ -68,15 +72,18 @@
         		</td>
 			</tr>
 			<tr>
-				<td align="center">제목</td>
+				<td align="center"  width="150px">제목</td>
 				<td  colspan="2"><%=dto.getSubject() %></td>
 			</tr>
 			<tr>
-				<td align="center">내용</td>
-				<td colspan="2" width ="180px" height="200px"><%=dto.getContent() %></td>
+				<td align="center" width="150px">내용</td>
+				<td colspan="2" >
+				<textarea name="content" id="contenet"  maxlength="2000px"  cols="60" rows="20"  style="resize: none;"  readonly><%=dto.getContent() %></textarea>
+		
+				</td>
 			</tr>
 			<tr>
-				<td align="center">첨부파일</td>
+				<td align="center" width="150px">첨부파일</td>
 					<%if(dto.getProjectfile() != null){ %>
 						<td colspan="2" align="center">
 						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="500px"height="500px">
@@ -127,13 +134,17 @@ if(sid.equals(dto.getId())) { %>
 	
 
 <section class="section1" >
-	<div class="titletext">
-		<h3>관심있어요</h3>
-	</div>
-	
-	<div class="smalltext">
-		위 프로젝트에 관심있는 분은 댓글을 남겨주세요.<br/>
-	</div>
+
+
+	<table   align="center">
+			<tr>
+				<td align="left" colspan="3" width="700px">
+				<h3>▶ 관심있어요</h3>
+				위 프로젝트에 관심있는 분은 댓글을 남겨주세요.</td>
+			</tr>
+			
+		</table>
+
 	
 	<form action="/goworker/makeproject/comment/commentPro.jsp" name="commentform" method="post">
 		<input type="hidden" name="num" value="<%=dto.getNum()%>"/>
@@ -155,15 +166,15 @@ if(sid.equals(dto.getId())) { %>
 		</tr>
 		<%}else{%>
 			<tr>
-				<td width="150px" align="center">작성자</td>
+				<td width="100px" align="center">작성자</td>
 				<td width="400px" colspan="3" align="center">
 					<%=sid %><input type="hidden" name="id" value="<%=sid%>"/>
 				</td>	
 			</tr>
 			<tr>
-				<td width="150px" align="center">내 용</td>
+				<td width="100px" align="center">내 용</td>
 				<td width="400px" colspan="3" >
-					<input type="text" size="120" name="comment_content" style="width:570px;height:100px;" placeholder="댓글을 입력해주세요."></td>
+					<input type="text" size="120" name="comment_content" style="width:590px;height:100px;" placeholder="댓글을 입력해주세요."></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -198,7 +209,7 @@ if(sid.equals(dto.getId())) { %>
  
  	
  	<tr>
- 		<td width="100px" align="center">작성자</td>
+ 		<td width="80px" align="center">작성자</td>
  		<td width="300px" align="center">내용</td>
  		<td width="80px" align="center">작성일</td>
  		<td width="40px" align="center">버튼</td>
