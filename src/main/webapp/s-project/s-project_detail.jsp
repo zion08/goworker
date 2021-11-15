@@ -9,6 +9,7 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
+<%@ include file = "../include/header.jsp" %>
 
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
@@ -23,7 +24,6 @@ SprojectDAO dao = new SprojectDAO();
 dao.readCountUp(dto);
 dto = dao.getContent(dto);
 session.setAttribute("num", dto.getNum());
-String sid = dto.getId();
 %>
 
 
@@ -90,11 +90,17 @@ String sid = dto.getId();
 	
 	%>
 	
+	<section class="section1">	
 	
-	<div class="comment_title"><b>프로젝트 관련 문의  - [작성된 댓글 수: <%=comment_count %>]</b><br/></div>
-	  <div class="comment_smalltitle">프로젝트에 대한 문의사항을 남겨주세요.</div>
-	<br>
 	
+	<table   border="1" align="center">
+			<tr>
+				<td align="left" colspan="3" width="400px" style="font-size:15px">
+				<h3>▶ 프로젝트 관련 문의 - [작성된 댓글 수: <%=comment_count %>]</h3><br/>
+				프로젝트에 대한 문의사항을 남겨주세요.</td>
+			</tr>	
+		</table>
+		
 	<form action="comment/commentPro.jsp" name="writeform" method="get" >
 				<input type="hidden" name="board_num" value="<%=dto.getNum()%>"/>
 				<input type="hidden" name="comment_num" value="<%=comment_num%>"/>
@@ -133,7 +139,7 @@ String sid = dto.getId();
 		</form>
 	 </section>
 	 
-	 </body>
+
 	 
 	 
 	 
