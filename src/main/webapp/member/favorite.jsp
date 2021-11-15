@@ -8,101 +8,29 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Math" %>
-<!DOCTYPE html>
+<%@ include file = "../include/header.jsp" %>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width", initial-scale="1">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/custom.css">
 
 <title>관심목록</title>
 </head>
 <body>
 	<%
-		String sid = null;
-		if(session.getAttribute("sid") != null){
-			sid = (String) session.getAttribute("sid");
-		}
 		int pageNum = 1; //기본페이지
 		if (request.getParameter("pageNumber") != null){
 			pageNum = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
 		}
 	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-				aria-expanded="false">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-		    <a class="navbar-brand" href="index.jsp">
-		       <img src="/goworker/s-member/image/logo.png" width="50" height="50"/><br/>
-			</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp">메인</a></li>
-				<li><a href="bbs.jsp?boardID=2&pageNumber=1">자유 게시판</a></li>
-			</ul>
-			<%
-				if(sid == null){		//로그인이 되어있지 않은 경우
-			%>
-			<ul class="nav navbar-nav navbar-right">
-         		<li class="dropdown">
-           			<a href="#" class="dropdown-toggle" 
-            		data-toggle="dropdown" role="button" aria-haspopup="true" 
-            		aria-expanded="false">접속하기<span class="caret"></span></a>
-        		<ul class="dropdown-menu">
-              		<li><a href="login.jsp">로그인</a></li>
-              		<li><a href="join.jsp">회원가입</a></li>
-            		</ul>    
-         		</li>
-       		</ul>
-			<% 
-				} else {
-			%>
-			<ul class="nav navbar-nav navbar-right">
-         		<li class="dropdown">
-           			<a href="#" class="dropdown-toggle" 
-            		data-toggle="dropdown" role="button" aria-haspopup="true" 
-            		aria-expanded="false">회원관리<span class="caret"></span></a>
-        		<ul class="dropdown-menu">
-        			<li><a href="modify.jsp">비밀번호수정</a></li>
-        			<li><a href="logout.jsp">로그아웃</a></li>
-              		<li><a href="delect.jsp">회원탈퇴</a></li>
-            	</ul>    
-         		</li>
-       		</ul>
-			<%
-				}
-			%>
-		</div>
-	</nav>
 	<div class="container">
 		<h1>관심목록<br></h1>
-		<p><%=sid %>님이 하신 좋아요목록입니다.<br><br></p>
 
-		<div class="container">
-			<div class="row">
-				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-					<thead>
-						<tr>
-							<th style="background-color: #eeeee; text-align: center;">번호</th>
-							<th style="background-color: #eeeee; text-align: center;">제목</th>
-							<th style="background-color: #eeeee; text-align: center;">작성일</th>
-						</tr>
-					</thead>
-					<tbody>
+		<p><%=sid %>님이 하신 좋아요목록입니다.<br><br></p>
+			<div>
 						<%
 						request.setCharacterEncoding("UTF-8");
-						String my = request.getParameter("my");
-						int pageSize = 5;
+						int pageSize = 10;
 						
-					int currentPage = pageNum;
+					    int currentPage = pageNum;
 					/*	int start = (currentPage - 1) * pageSize + 1;		
 						int end = currentPage * pageSize; */
 						
@@ -110,30 +38,32 @@
 						int count = 0;
 						List<SmemberDTO> list = null;
 						count = fdao.getfavCount(sid);
-						
+						if(count > 0){
+				        list= fdao.getFavlist(sid);	
+						} %>
+				<table border="1">	
 			
+			    <tr>
+					<th>번호</th>
+					<th>멤버</th>
+					<th>작성일</th>
+				</tr>
 				
-				System.out.println(count);
-				
-				list= fdao.getFavlist(sid);	
-				
-			for(SmemberDTO dto : list){
-				System.out.println(dto);%>
-			<tr>
+			       <% if(count == 0){%>
+			    <tr>
+				    <th colspan="6">저장된 글이 없습니다...!!</th>
+				</tr>	
+				    <%}else{%>
+				    <%for(SmemberDTO dto : list){%>
+			 <tr>
 				<td><%= dto.getNum() %></td>
 				<td><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></td>
 				<td><%= dto.getRegdate() %></td>
-			</tr>
-				<%}%>
-				
-					</tbody>
-				</table>
-				<form name = "p_search">
-					<input type="button" value="검색" onclick="nwindow()"/>
-				</form>				
+			 </tr>
+				 <%}%>
+				</table>			
 			</div>
-		</div>
-	</div>	
+		</div>	
 	<%
 	if (count > 0) {
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -155,16 +85,54 @@
 		if(endPage < pageCount) {
 %>		<a href="favorite.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
 <%		}
+	   }
 	}
 %>
-	<script>
-	function nwindow(boardID){
-		window.name = "parant";
-		var url= "search.jsp?boardID="+boardID;
-		window.open(url,"","width=250,height=200,left=300");
-	}
-</script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script> 
+<footer>
+<hr color="skyblue" size="2"  align="center" />
+<table  align="right">     
+      <thead align="center">
+        <tr>
+          <th></th>
+          <th>메인</th>
+          <th>회원</th>
+          <th>고객센터</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="">사이트소개</a></td>
+          <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
+          <td>회원가입</td>
+          <td><a href="/goworker/member/notice.jsp">공지사항</a></td>
+          
+        </tr>
+        <tr>
+          <td>이용방법</td>
+          <td>프로젝트찾기</td>
+          <td>회원정보수정</td>
+          <td><a href="/goworker/member/cs.jsp">Q&A</a></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>프로젝트만들기</td>
+          <td>회원탈퇴</td>
+          <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>취업정보</td>
+            <td></td>
+            <td></td>
+          </tr>
+        <tr>
+          <td></td>
+          <td>커뮤니티</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>      
+    </table>
+ </footer>
 </body>
 </html>
