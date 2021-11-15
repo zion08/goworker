@@ -9,7 +9,7 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
-
+<%@ include file = "../include/header.jsp" %>
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
