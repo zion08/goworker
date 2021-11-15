@@ -1,13 +1,13 @@
 package bean;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import bean.FavoriteDTO;
+import bean.SmemberDTO;
 import oracle.OracleDB;
 import oracle.DisconnDB;
 
@@ -17,26 +17,19 @@ import oracle.DisconnDB;
 		private ResultSet rs = null;
 		
 		   public ArrayList<SmemberDTO> getFavlist(String sid) {
-		      ArrayList<SmemberDTO> list = new ArrayList<SmemberDTO>();
+		      ArrayList<SmemberDTO> list =null;
 		      try {
 		    	  conn = OracleDB.getConnection();
 				  pstmt = conn.prepareStatement
-				("select * from s_member where num = (select smember_num from favorite where userid = ?)");
+				("select * from  (select s_member.num,s_member.id, s_member.regdate, favorite.userid  from s_member , favorite where s_member.num = favorite.smember_num) where userid=?");
 		          pstmt.setString(1, sid);
 				  rs = pstmt.executeQuery();
+				  list = new ArrayList();
 		         while(rs.next()) {
 		        	 SmemberDTO dto = new SmemberDTO();
-		        	 dto.setNum(rs.getInt("num"));
+		        	 	dto.setNum(rs.getInt("num"));
 						dto.setId(rs.getString("id"));
-						dto.setField(rs.getString("field"));
-						dto.setCareer(rs.getString("career"));
-						dto.setEmploytype(rs.getString("employtype"));
-						dto.setLocation(rs.getString("location"));
-						dto.setWorktype(rs.getString("worktype"));
-						dto.setIntroduce(rs.getString("introduce"));
-						dto.setAvailable(rs.getInt("available"));
-						dto.setReadcount(rs.getInt("readcount"));
-						dto.setGood(rs.getInt("good"));
+						dto.setRegdate(rs.getTimestamp("regdate"));
 						list.add(dto);
 		         }
 		      }catch(Exception e) {
@@ -51,11 +44,11 @@ import oracle.DisconnDB;
 		   public int write(String sid, int smember_num) {
 				try {
 					conn = OracleDB.getConnection();
-					pstmt = conn.prepareStatement("insert into favorite values(?,?)");
-					pstmt.setInt(1, smember_num);
-					pstmt.setString(2, sid);
+					pstmt = conn.prepareStatement("insert into favorite values(?,?,0)");
+					pstmt.setString(1, sid);
+					pstmt.setInt(2, smember_num);
 					pstmt.executeUpdate();
-					return 1;
+					
 				}catch(Exception e) {
 					e.printStackTrace();
 				}finally {
@@ -63,15 +56,15 @@ import oracle.DisconnDB;
 					if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
 					if(conn != null) {try {conn.close();}catch(SQLException s) {}}
 				}
-				return -1; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+				return 1; //ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			}
-		   public ArrayList<FavoriteDTO> getfavorite(String sid, int smember_num) {
+		   public ArrayList<FavoriteDTO> getfavorite(String sid) {
 				ArrayList<FavoriteDTO> list = new ArrayList<FavoriteDTO>();
 				try {
 					conn = OracleDB.getConnection();
-					pstmt = conn.prepareStatement("select * from favorite where userid=? and smemeber_num = ?");
+					pstmt = conn.prepareStatement("select * from favorite where userid=?" );
 					pstmt.setString(1,  sid);
-					pstmt.setInt(2,  smember_num);
+					
 					rs = pstmt.executeQuery();
 					while (rs.next()) {
 						FavoriteDTO fdto = new FavoriteDTO();
@@ -92,10 +85,10 @@ import oracle.DisconnDB;
 			public int delete(String sid,int smember_num) {
 				try {
 					conn = OracleDB.getConnection();
-					pstmt = conn.prepareStatement("delect from favorite where smember_num =? and userid = ? ");
+					pstmt = conn.prepareStatement("delete from favorite where smember_num =? and userid = ? ");
 					pstmt.setInt(1, smember_num);
 					pstmt.setString(2, sid);
-					return pstmt.executeUpdate();
+					pstmt.executeUpdate();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}finally {
@@ -103,6 +96,41 @@ import oracle.DisconnDB;
 					if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
 					if(conn != null) {try {conn.close();}catch(SQLException s) {}}
 				}
-				return -1; // µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+				return -1; // ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			}
+			public int getfavCount(String sid) {
+				int result = 0; 
+				try {
+					conn = OracleDB.getConnection();
+					pstmt = conn.prepareStatement("select count(SMEMBER_NUM) from favorite where userid = ?");
+					pstmt.setString(1, sid);
+					rs = pstmt.executeQuery();
+					if(rs.next()) {
+						result = rs.getInt(1);
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				} finally {
+					DisconnDB.close(conn, pstmt, rs);
+				}
+				return result;
+			}
+			public boolean favCheck(String sid, int smember_num) {
+				boolean result = false;
+				try {
+					conn = OracleDB.getConnection();
+					pstmt = conn.prepareStatement("select * from favorite where userid=? and smember_num=?");
+					pstmt.setString(1, sid);
+					pstmt.setInt(2, smember_num);
+					rs = pstmt.executeQuery();
+					if(rs.next()) {
+						result = true;
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					DisconnDB.close(conn, pstmt, rs);
+				}
+				return result;
 			}
 	}
