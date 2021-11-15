@@ -14,6 +14,8 @@
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
 
+
+
 <%
 String id = (String)session.getAttribute("id");
 String pageNum = request.getParameter("pageNum");
@@ -23,6 +25,9 @@ dto = dao.getContent(dto);
 session.setAttribute("num", dto.getNum());
 String sid = dto.getId();
 %>
+
+
+
 
 <title><%=dto.getSubject() %></title>
 
