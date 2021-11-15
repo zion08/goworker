@@ -3,14 +3,13 @@
 <%@ page import="bean.SmemberDAO" %> 
 <%@ page import = "bean.Comment_SmemberDAO" %>
 <%@ page import = "bean.Comment_SmemberDTO" %>
+<%@ page import = "bean.FavoriteDAO" %>
 <%@ page import="java.util.List" %> 
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ include file = "../include/header.jsp" %>
    
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
-
-
 
 <script>
 function button_event(){
@@ -31,8 +30,6 @@ function button_event(){
 	SmemberDAO dao = new SmemberDAO();
 	dao.readCountUp(dto);
 	dto = dao.getContent(dto);
-	
-
 %>
 
 <!-- <style>
@@ -102,7 +99,7 @@ function button_event(){
 		<tr>
 			<th>포트폴리오</th>		
 			<%if(dto.getPortfolio() != null) { %>
-				<td><img src = "/goworker/portfolioFile/<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
+			<td><img src = "/goworker/portfolioFile/<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
 			<%} else { %>
 			<td> 등록된 포트폴리오가 없습니다. </td>
 			<%} %>
@@ -129,7 +126,15 @@ function button_event(){
 		</tr>	
 	</table>
 	<br/>
-	
+	<form>
+		<% FavoriteDAO fdao = new FavoriteDAO(); 
+		boolean result = fdao.favCheck(sid, dto.getNum());
+		if(result == true) {%>
+		<a href="/goworker/member/favorite_out.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_fill.png" width="30px" height="30px"></a>
+		<%}else {%>
+		<a href="/goworker/member/favorite_in.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_empty.png" width="30px" height="30px"></a>
+		<%} %>
+	</form>
 	
 	
 	<form align="center">
@@ -158,20 +163,12 @@ function button_event(){
 		comment_step=Integer.parseInt(request.getParameter("comment_step"));
 		comment_level=Integer.parseInt(request.getParameter("comment_level"));
 	}
-	
-	
-	Comment_SmemberDAO cd = new Comment_SmemberDAO();	
-	int comment_count = 0;
-	int board_num = dto.getNum();
-	comment_count = cd.getCommentCount(board_num);
-	
 %>
-<Br/>
+
 <section class="section1">	
 	<div class="titletext">
-		<b>서비스 평가 - [작성된 댓글 수: <%=comment_count %>]</b>
-	
-	</div><br/>
+		<b>서비스 평가</b><br/>
+	</div>
   	
   	<div class="smallfont">
   		실제 Go-Worker 이용자들이 남긴 평가입니다.<br/>
@@ -186,18 +183,12 @@ function button_event(){
 			<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 				
 		<table class="comments" border=1>
-		<%	if(sid == null){ %>
-		<tr>
-			<td width="520px" colspan="3" align="center">
-				댓글은 회원만 작성이 가능합니다.<br/>
-				로그인 후, 이용 부탁드립니다.</td>
-		</tr>
-		<%}else{ %>
+		
 			<tr>
 
 				<td width="60" align="center">작성자</td>
 				<td width="300px" colspan=3 align="center">
-					<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
+					<%=sid%>
 				</td>
 
 			</tr>
@@ -250,7 +241,7 @@ function button_event(){
 			<tr>	
 				<td align="center">
 					<img src="image/image.jpg" width="50" height="50"><br/>
-						<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
+						<%=sid%>
 				</td>
 				 
 				<td>
@@ -271,20 +262,10 @@ function button_event(){
 					<%=sdf.format(cdto.getComment_regdate()) %>
 				</td>
 				
-<% if(sid !=null) {
-if(sid.equals(cdto.getComment_writerid())) { %>					
-				
 				<td  align="center">
-					<form action="/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
-						<input type="button" value="수정" onclick="window.open('/goworker/s-member/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
-						<input type="submit" value="삭제" onclick="comment_removeCheck()" />
-	 					<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
-	 					<%}else{ %>
-	 					
-	 					<td algin="center">
-	 						<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
-	 					</td>
-	 				</form>
+					<input type="button" value="수정" onclick="window.open('/goworker/s-member/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
+					<input type="button" value="삭제" onclick="window.location='/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&pageNum=<%=pageNum%>'"/>
+	 				<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
 	 			</td>
 	 		</tr>
 
@@ -294,15 +275,10 @@ if(sid.equals(cdto.getComment_writerid())) { %>
  					를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
  				</td>
  			</tr>
- 			<%}
-}%>
- 			
- 			
- 			
 		<%}
-		}
 	}%>
 </table><br/>
+
 
 
 
@@ -363,12 +339,4 @@ if(sid.equals(cdto.getComment_writerid())) { %>
     </table>
 </footer>
 
-
-<script>
-	function comment_removeCheck(){
-		if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
-			document.form.submit;
-			window.location='/goworker/s-member/comment/commentDelete.jsp?';
-		}	
-</script>
 </html>
