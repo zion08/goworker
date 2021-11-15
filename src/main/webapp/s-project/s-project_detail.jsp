@@ -15,32 +15,53 @@
 <jsp:setProperty property="num" name="dto" />
 
 <%
-	String pageNum = request.getParameter("pageNum");
-	SprojectDAO dao = new SprojectDAO();
-	dao.readCountUp(dto);
-	dto = dao.getContent(dto);
-	session.setAttribute("num", dto.getNum());
+String id = (String)session.getAttribute("id");
+String pageNum = request.getParameter("pageNum");
+SprojectDAO dao = new SprojectDAO();
+dao.readCountUp(dto);
+dto = dao.getContent(dto);
+session.setAttribute("num", dto.getNum());
+String sid = dto.getId();
 %>
-작성자 : <%=dto.getId() %><br />
-언어 : <%=dto.getLang() %><br />
-위치 : <%=dto.getLocation() %><br />
-프로젝트 종류 :<%=dto.getProjecttype() %><br />
-요구 경력 : <%=dto.getCareer() %><br />
-예상 기간 : <%=dto.getPeriod() %><br />
-예상 급여 : <%=dto.getPay() %><br />
-근무 형태 : <%=dto.getWorktype() %><br />
-게시 날짜 : <%=dto.getRegdate() %><br />
-조회 : <%=dto.getReadcount() %><br />
-<input type="button" value="좋아요">
-<input type="button" value="목록" 
-	onclick="window.location='s-project_list.jsp?pageNum=<%=pageNum%>'" />
+
+<title><%=dto.getSubject() %></title>
+
+<body>
+	<B>
 	
-<%
-//글 수정은 못하게 만들고 프로젝트는 따로 작성할때 점검과정을 통해 만들어지게
-%>
+		<div class="detailbox1" id="detailallbox"><br /><center>예상 급여 : <%=dto.getPay() %></center><br /> </div>
+		<div class="detailbox2" id="detailallbox"><br /><center>요구 경력 : <%=dto.getCareer() %></center><br /> </div>
+		<div class="detailbox3" id="detailallbox"><br /><center>예상 기간 : <%=dto.getPeriod() %></center><br /> </div>
+	
+	</B>
+</body>
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
 
-<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-project/email/mail.jsp?pageNum=<%=pageNum%>'"/>
+<center>
 
+작성자 : <%=dto.getId() %><br />
+<br />
+<div class="detailbox4" id="detailallbox"><br /><center><%=dto.getLang() %></center></div><br />
+	<br /><br />
+	위치 : <%=dto.getLocation() %><br />
+	프로젝트 종류 :<%=dto.getProjecttype() %><br />
+	근무 형태 : <%=dto.getWorktype() %><br />
+	게시 날짜 : <%=dto.getRegdate() %><br />
+	조회 : <%=dto.getReadcount() %><br />
+	<br />
+	<input type="button" value="좋아요">
+
+	<input type="button" value="목록" 
+	onclick="window.location='s-project_list.jsp?pageNum=<%=pageNum%>'" />
+
+	<%if( sid == id ) { %>	
+		<input type="button" value="수정하기" 
+		onclick="window.location='s-project_update.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum() %>&id=<%=id %>'" />	
+	<%} %>
+	<%if( sid != id ) { %>	
+		<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-project/email/mail.jsp?pageNum=<%=pageNum%>'"/>
+	<%} %>
+<br /><br />
 
 <!-- 댓글 작성 폼 -->
 
@@ -55,7 +76,6 @@
 			comment_step=Integer.parseInt(request.getParameter("comment_step"));
 			comment_level=Integer.parseInt(request.getParameter("comment_level"));
 		}
-		String id = (String)session.getAttribute("id");
 
 
 %>
