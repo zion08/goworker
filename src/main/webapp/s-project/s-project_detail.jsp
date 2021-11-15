@@ -9,10 +9,14 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
+<%@ include file = "../include/header.jsp" %>
 
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
+
+<jsp:useBean class="bean.Comment_SprojectDTO" id="commentdto" />
+<jsp:setProperty property="*" name="commentdto" />
 
 <%
 	String pageNum = request.getParameter("pageNum");
@@ -55,13 +59,17 @@
 			comment_step=Integer.parseInt(request.getParameter("comment_step"));
 			comment_level=Integer.parseInt(request.getParameter("comment_level"));
 		}
-		String id = (String)session.getAttribute("id");
 
+		
+		Comment_SprojectDAO cd = new Comment_SprojectDAO();	
+		int comment_count = 0;
+		int board_num = dto.getNum();
+		comment_count = cd.getCommentCount(board_num);
 
 %>
 
 
-<div class="comment_title"><b>프로젝트 관련 문의</b><br/></div>
+<div class="comment_title"><b>프로젝트 관련 문의  - [작성된 댓글 수: <%=comment_count %>]</b><br/></div>
   <div class="comment_smalltitle">프로젝트에 대한 문의사항을 남겨주세요.</div>
 <br>
 
@@ -73,11 +81,19 @@
 			<input type="hidden" name="comment_level" value="<%=comment_level%>"/>
 			<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 		<table class="comments" border=1>
+		
+<%	if(sid == null){ %>
 		<tr>
-			<th width="50" align="center">작성자</th>
-			<th width="300px" colspan=3 align="center">
-				<%=id %>
-			</th>
+			<td width="400px" colspan="3" align="center">
+				댓글은 회원만 작성이 가능합니다.<br/>
+				로그인 후, 이용 부탁드립니다.</td>
+		</tr>
+		<%}else{ %>
+		<tr>
+			<td width="50" align="center">작성자</td>
+			<td width="300px" colspan=3 align="center">
+				<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
+			</td>
 		
 		</tr>
 		<tr>	
@@ -130,12 +146,15 @@
 		</tr>
 		<% 
 			if(count > 0) { 
-			for(Comment_SprojectDTO cdto : list)  {%>
+			for(Comment_SprojectDTO cdto : list)  {
+			
+			
+			%>
 		
 		<tr>	
 			<td align="center">
 				<img src="/goworker/s-project/image/image.jpg" width="50" height="50"><br/>
-					<%=id %>
+					<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 			</td>
 			 <td>
 		<%
@@ -156,13 +175,24 @@
 			<td align="center">
 				<%=sdf.format(cdto.getComment_regdate()) %>
 			</td>
+			
+
+<% if(sid !=null) {
+if(sid.equals(cdto.getComment_writerid())) { %>	
+		
 			<td  align="center">
-				<form action="/goworker/s-project/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>"  method="post">
+				<form action="/goworker/s-project/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post">
 					<input type="button" value="수정" onclick="window.open('/goworker/s-project/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>','update','width=800,height=300');"/>
 					<input type="submit" value="삭제" onclick="comment_removeChek()"/>
  					<input type="button" value="답글" onclick="window.open('/goworker/s-project/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>','reply','width=600,height=300');" />
+ 					<%}else{ %>
+ 					<td algin="center">
+	 					<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
+	 				</td>
+ 					
  				</form>
  			</td>
+ 			<%} %>
  		</tr>
  		<tr>
  			<td width="30px" align="center" colspan="4" style="font-size: 12px">
@@ -171,6 +201,7 @@
  			</td>
  	</tr>
  		<%} 
+		}
  	}%>
  		
  </table><br/>
