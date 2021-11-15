@@ -263,5 +263,46 @@ public class Comment_SprojectDAO {
 					DisconnDB.close(conn, pstmt, rs);
 				}
 		}
-}
+			
+			
+			// ´ñ±Û °¹¼ö Ãâ·Â ¸Þ¼­µå
+			public int getCommentCount(int board_num) {
+				int result = 0;
+				try {
+					conn = OracleDB.getConnection();
+					pstmt = conn.prepareStatement("select count(*) from comment_sproject where board_num=?");
+					pstmt.setInt(1,  board_num);
+			            rs = pstmt.executeQuery();
+			            if (rs.next()) {
+			                result = rs.getInt(1);
+			            }
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        } finally {
+			            DisconnDB.close(conn, pstmt, rs);
+			        }
+			        return result;
+			    }
+			
+			
+			// ´ñ±Û °¹¼ö
+			public int getCommentCount(Comment_SprojectDTO cdto) {
+				int result  = 0;
+				try {
+					conn = OracleDB.getConnection();
+					pstmt = conn.prepareStatement("select count(*) from comment_sproject where comment_ref=?" );
+					pstmt.setInt(1, cdto.getComment_ref());
+					rs = pstmt.executeQuery();
+					if(rs.next()) {
+						result = rs.getInt(1);
+					}
+				}catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					DisconnDB.close(conn, pstmt, rs);
+				}
+				return result;
+			}
+			
+	}
 	

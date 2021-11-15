@@ -20,7 +20,7 @@
 		<div id="sproject" onclick="window.location='../s-project/s-project.jsp'">
 			<span>프로젝트 찾기</span>
 		</div>
-		<div id="mproject">
+		<div id="mproject" onclick="window.location='/goworker/makeproject/project_list.jsp'">
 			<span>프로젝트 생성</span>
 		</div>
 		<div id="jobinfo">

@@ -13,7 +13,7 @@
 <%
 	String pageNum = request.getParameter("pageNum");
 
-	String id = (String)session.getAttribute("id");
+	String sid = (String)session.getAttribute("sid");
 %>
 
 <form action ="commentReplyPro.jsp" name="commentreplyform" method="post">
@@ -29,8 +29,8 @@
 		</tr>
 		<tr>
 			<td width="50" align="center">작성자</td>
-			<td width="300px" colspan="2" >
-				<%=id %>
+			<td width="300px" colspan="2" align="center" >
+				<%=sid %><input type="hidden" name="id" value="<%=sid%>"/>
 			</td>
 		
 		</tr>

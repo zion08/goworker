@@ -29,41 +29,33 @@
 	 	} 
 	 	else{
 		 	int Smember_num = 0; 
-		 	if (request.getParameter("smember_num") != null){
-		 		Smember_num = Integer.parseInt(request.getParameter("smember_num"));
+		 	if (request.getParameter("num") != null){
+		 		Smember_num = Integer.parseInt(request.getParameter("num"));
 		 	}
-		 	if (Smember_num == 0){
+		 	/*if (Smember_num == 0){
 		 		PrintWriter script = response.getWriter();
 		 		script.println("<script>");
 		 		script.println("alert('유효하지 않은 글입니다.')");
 		 		script.println("location.href = 'login.jsp'");
 		 		script.println("</script>");
-		 	}
+		 	}*/
 		 	FavoriteDAO fdao = new FavoriteDAO();
 		 	SmemberDTO smdto = new SmemberDTO();
-			ArrayList<FavoriteDTO> list = fdao.getfavorite(sid, smdto.getNum());
-			int result = 0;
-			if (list.isEmpty()){
-				result = fdao.write(sid, smdto.getNum());
-			}
-			else{
-				result = fdao.delete(sid, smdto.getNum());
-			}
-	 		if (result == -1){
-		 		PrintWriter script = response.getWriter();
-		 		script.println("<script>");
-		 		script.println("alert('평가를 실패했습니다.')");
-		 		script.println("history.back()");
-		 		script.println("</script>");
-		 	}
-	 		
-	 		else{
-		 		PrintWriter script = response.getWriter();
-		 		script.println("<script>");
-		 		script.println("location.href=document.referrer;");
-		 		script.println("</script>");
-		 	}
-	 	}
-	 %>
+		 	
+	 		int result = fdao.delete(sid, Smember_num);
+	 	
+	 if(result == 1) {
+%>		<script type="text/javascript">
+			alert("등록해제 되었습니다.");
+			window.location = '/goworker/s-member/s-member_detail.jsp?num=<%=Smember_num%>';
+		</script>
+<%	} else {
+%>		<script type="text/javascript">
+			alert("잘못된 입력이 있습니다, 확인하세요.");
+			history.go(-1);
+		</script>
+<%	}
+}	 
+%> 
 </body>
 </html>

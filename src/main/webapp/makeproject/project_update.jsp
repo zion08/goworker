@@ -4,6 +4,11 @@
 <%@ page import = "bean.MakeProjectDTO" %>
 <%@ page import = "bean.MakeProjectDAO" %>
 
+<%@ page import = "bean.MakeProject_CommentDTO" %>
+<%@ page import = "bean.MakeProject_CommentDAO" %>
+
+<%@ include file = "../include/header.jsp" %>
+
 <%@ page import = "java.text.SimpleDateFormat" %>
 
 <%request.setCharacterEncoding("UTF-8"); %>
@@ -17,26 +22,34 @@
 
 	MakeProjectDAO dao = new MakeProjectDAO();
 	dto = dao.getMakeProject(dto);
+	
+	
+	MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
+	int comment_count = 0;
+	int board_num = dto.getNum();
+	comment_count = cd.getCommentCount(board_num);
 %>    
-
 	<form action="project_updatePro.jsp" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
 		<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 		
+<center>	
 	<table border = "1" align="center">
 		<tr>
 			<th colspan="3" align="center" >프로젝트 신청 글 수정</th>
 		</tr>
 		<tr>
 			<td align="center" width="70px"><img src="/goworker/s-member/image/image.jpg" width="30px" height="30px"/><br/>
-						<%=dto.getId() %> 
+						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"> 
 			</td>
 			<td align="center" width="150px">
 				<%=sdf.format(dto.getReg_date())%>
 			</td>
 			<td align="right" width="100px">
-				<img src="/goworker/makeproject/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
-        		<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+					<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>&emsp;
+        			<img src="/goworker/makeproject/image/comment.png" width="20px" height="20px" /><%=comment_count %>&emsp;
+        			<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>&emsp;
+        			<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
         	</td>
 		</tr>
 		<tr>
@@ -66,4 +79,7 @@
 		<tr>
 		</tr>
 	</table>
+</center>
+	
+	
 </form>

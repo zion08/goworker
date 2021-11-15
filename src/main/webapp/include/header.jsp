@@ -22,7 +22,7 @@
 <%	} else {
 %>			<div class="wrapper-sideicon">		
 				<span class="sideicon1">
-					<a href="" >
+					<a href="../message/messageSave.jsp" >
 						<img src="../s-member/image/note.png"><p>메세지</p>
 					</a>
 				</span>
