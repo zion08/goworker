@@ -15,7 +15,7 @@
 	if(result==1){ %>
 		<script>
 			alert("회원가입 성공");
-			window.location="/goworker/member/login/login.jsp";
+			window.location="/goworker/member/login.jsp";
 		</script>
 <%	}else{ %>
 		<script>

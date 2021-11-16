@@ -15,7 +15,7 @@
 				</span>
 				
 				<span class="sideicon2">
-					<a href="/goworker/login-test.jsp">로그인	<!-- 로그인 완성 후, 주소 변경 할것 -->
+					<a href="/goworker/member/login.jsp">로그인	<!-- 로그인 완성 후, 주소 변경 할것 -->
 					</a>
 				</span>
 			</div>
@@ -29,7 +29,12 @@
 				
 				<span class="sideicon2">
 					<p><%=sid%></p>
-				</span>				
+				</span>	
+				<span class="sideicon2">
+					<a href="../member/logout.jsp" >
+						<p>로그아웃</p>
+					</a>
+				</span>			
 			</div>
 
 <%	}
