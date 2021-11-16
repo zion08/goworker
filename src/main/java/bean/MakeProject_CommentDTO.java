@@ -3,33 +3,35 @@ package bean;
 import java.sql.Timestamp;
 
 public class MakeProject_CommentDTO {
-	private int num;
 	private int comment_num;
-	private String id;
+	private int board_num;
+	private String comment_writerid;
 	private String comment_content;
 	private Timestamp comment_regdate;
+	private int comment_ref;
+	private int comment_step;
+	private int comment_level;
 	private int comment_good;
-	private int ref;
-	private int re_step;
-	private int re_level;
+	private String board_name;
 	
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
+	
 	public int getComment_num() {
 		return comment_num;
 	}
 	public void setComment_num(int comment_num) {
 		this.comment_num = comment_num;
 	}
-	public String getId() {
-		return id;
+	public int getBoard_num() {
+		return board_num;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setBoard_num(int board_num) {
+		this.board_num = board_num;
+	}
+	public String getComment_writerid() {
+		return comment_writerid;
+	}
+	public void setComment_writerid(String comment_writerid) {
+		this.comment_writerid = comment_writerid;
 	}
 	public String getComment_content() {
 		return comment_content;
@@ -43,31 +45,35 @@ public class MakeProject_CommentDTO {
 	public void setComment_regdate(Timestamp comment_regdate) {
 		this.comment_regdate = comment_regdate;
 	}
+	public int getComment_ref() {
+		return comment_ref;
+	}
+	public void setComment_ref(int comment_ref) {
+		this.comment_ref = comment_ref;
+	}
+	public int getComment_step() {
+		return comment_step;
+	}
+	public void setComment_step(int comment_step) {
+		this.comment_step = comment_step;
+	}
+	public int getComment_level() {
+		return comment_level;
+	}
+	public void setComment_level(int comment_level) {
+		this.comment_level = comment_level;
+	}
 	public int getComment_good() {
 		return comment_good;
 	}
 	public void setComment_good(int comment_good) {
 		this.comment_good = comment_good;
 	}
-	public int getRef() {
-		return ref;
+	public String getBoard_name() {
+		return board_name;
 	}
-	public void setRef(int ref) {
-		this.ref = ref;
+	public void setBoard_name(String board_name) {
+		this.board_name = board_name;
 	}
-	public int getRe_step() {
-		return re_step;
-	}
-	public void setRe_step(int re_step) {
-		this.re_step = re_step;
-	}
-	public int getRe_level() {
-		return re_level;
-	}
-	public void setRe_level(int re_level) {
-		this.re_level = re_level;
-	}
-	
-	
 	
 }

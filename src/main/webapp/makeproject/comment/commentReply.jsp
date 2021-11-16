@@ -17,11 +17,11 @@
 %>
 
 <form action ="commentReplyPro.jsp" name="commentreplyform" method="post">
-	<input type="hidden" name="num" value="<%=cdto.getNum() %>" />
+	<input type="hidden" name="board_num" value="<%=cdto.getBoard_num() %>" />
 	<input type="hidden" name="comment_num" value="<%=cdto.getComment_num() %>" />
-	<input type="hidden" name="ref" value="<%=cdto.getRef() %>" />
-	<input type="hidden" name="re_step" value="<%=cdto.getRe_step() %>" >
-	<input type="hidden" name="re_level" value="<%=cdto.getRe_level() %>" />
+	<input type="hidden" name="comment_ref" value="<%=cdto.getComment_ref() %>" />
+	<input type="hidden" name="comment_step" value="<%=cdto.getComment_step() %>" >
+	<input type="hidden" name="comment_level" value="<%=cdto.getComment_level() %>" />
 	
 	<table class="comments" border="1" align="center">
 		<tr>
@@ -30,7 +30,7 @@
 		<tr>
 			<td width="50" align="center">작성자</td>
 			<td width="300px" colspan="2" align="center" >
-				<%=sid %><input type="hidden" name="id" value="<%=sid%>"/>
+				<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
 			</td>
 		
 		</tr>
