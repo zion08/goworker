@@ -37,15 +37,12 @@ public class MessageDAO {
 		List<MessageDTO> list = null;		
 		try {
 			conn = OracleDB.getConnection();
-			String sql = "select * from "
-					+ "(select * from message where idsender=? and idtarget=? union all "
-					+ "select * from message where idsender=? and idtarget=?) "
+			String sql = "select * from message "
+					+ "where idsender=? and idtarget=?"
 					+ "order by regdate asc";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, idsender);
 			pstmt.setString(2, idtarget);
-			pstmt.setString(3, idtarget);
-			pstmt.setString(4, idsender);
 			rs = pstmt.executeQuery();
 			list = new ArrayList();
 			while (rs.next()) {
@@ -69,10 +66,9 @@ public class MessageDAO {
 		List<MessageDTO> list = null;		
 		try {
 			conn = OracleDB.getConnection();
-			String sql = "select * from  "
-					+ "(select * from message where idtarget=?) where (idsender, regdate) "
-					+ "in(select idsender, max(regdate) from message "
-					+ "group by idsender)";
+			String sql = "select * from message "
+					+ "where idtarget=?"
+					+ "order by regdate asc";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, idtarget);
 			rs = pstmt.executeQuery();
