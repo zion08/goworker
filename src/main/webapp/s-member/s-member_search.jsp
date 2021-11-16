@@ -227,8 +227,8 @@
 %> 		<p><%=resultNone%></p>	
 <%	} 
 
-
   	/*if (scount > 0) { 
+	
 		if((sdto.getCareer()).equals("new")) {
 			sdto.setCareer("신입"); 
 		}
