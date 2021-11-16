@@ -17,11 +17,16 @@
 	session.setAttribute("sidTarget", smdto.getId());	//받는 사람(idtarget) 세션에 저장
 	
 	String sidTarget = (String)session.getAttribute("sidTarget");
+	
+	if (sidTarget == null) {	//메인 화면에서 헤더에 있는 메세지 눌렀을때 
+		sidTarget = (String)request.getParameter("sidTarget");
+	}
+	
 		
 	//보내는 사람 (내 id) 가져오기
 	String sid = (String)session.getAttribute("sid");
 	
-	/* System.out.println(sidTarget); */
+	System.out.println("타겟id :" + sidTarget);
 %>
 
 <!-- 받는 사람 -->
@@ -29,7 +34,7 @@
 <%-- <%= sidTarget %> --%>
 <div id="messege-top">
 	<div></div>
-	<span>idtarget: <b><%=smdto.getId()%></b></span>
+	<span>idtarget: <b><%=sidTarget%></b></span>
 	<span><%=smdto.getField()%></span>
 	<span><%=smdto.getLang()%></span>
 </div>

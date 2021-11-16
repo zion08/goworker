@@ -22,11 +22,10 @@
 <%	} else {
 %>			<div class="wrapper-sideicon">		
 				<span class="sideicon1">
-					<a href="../message/messageSave.jsp" >
+					<a href="#" onclick="window.open('../message/messageSave.jsp', 'message', 'width=355px, height=540px');">
 						<img src="../s-member/image/note.png"><p>메세지</p>
 					</a>
 				</span>
-				
 				<span class="sideicon2">
 					<p><%=sid%></p>
 				</span>				

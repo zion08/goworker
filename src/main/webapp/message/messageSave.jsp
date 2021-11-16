@@ -11,7 +11,7 @@
 <%
 	//내 id 가져오기
 	String sid = (String)session.getAttribute("sid");
-	
+
 	//메세지 가져오기위한 list 준비
 	List<MessageDTO> list = null;
 	
@@ -22,8 +22,10 @@
 %>		<p>메세지가 없어요:)</p>		
 <%	} else {
 		for (MessageDTO dto : list) {
-%>			<p><%= dto.getIdSender() %>: (<%=dto.getRegDate()%>)</p>
-			<p><%= dto.getMessage() %></p>
+%>			<section onclick="window.open('../message/message.jsp?sidTarget=<%=dto.getIdSender()%>','message','width=355px, height=540px');">
+				<p><%= dto.getIdSender() %>: (<%=dto.getRegDate()%>)</p>
+				<p><%= dto.getMessage() %></p>
+			</section>
 <%		}
 	}
 %>
