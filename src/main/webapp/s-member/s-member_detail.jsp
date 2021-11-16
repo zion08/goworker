@@ -248,7 +248,7 @@ function button_event(){
 
 	<table class="comments" border="1" width="535px" align="center">
 		<tr>
-			<td width="60px">작성자</td>
+			<td width="60px" align="center">작성자</td>
 			<td width="350px" align="center">내 용</td>
 			<td width="60px" align="center" >작성일</td>
 			<td width="40px" align="center">버튼</td>
