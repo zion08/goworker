@@ -53,27 +53,27 @@
 		<input type="hidden" name='pageNum' value="<%=pageNum %>"/>
 
 
-	<table border=1  align="center">
+	<table border=1  align="center" >
 			<tr>
-				<td align="center" colspan="3" width="700px"><b>Project 초대</b></td>
+				<td align="center" colspan="3" width="700px" ><b>Make Project invitation</b></td>
 			</tr>
 			<tr>
-				<td align="center" width="50px" align="center"><img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
+				<td align="center" width="50px" height="70px"   align="center"><img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
 				</td>
 				<td align="center" width="150px">
 					<%=sdf.format(dto.getReg_date()) %>
 				</td>
 				<td align="right" width="90px">
-						<img src="/goworker/makeproject/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
-						<img src="/goworker/makeproject/image/comment.png" width="20px" height="20px" /><%=comment_count %> &emsp;
-        				<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px" /><%=dto.getGood() %>&emsp;
-        				<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px" /><%=dto.getDown() %>
+						<img src="/goworker/makeproject/image/view.png" width="25px" height="25x"/><%=dto.getReadcount()%> &emsp;
+						<img src="/goworker/makeproject/image/comment.png" width="25px" height="25px" /><%=comment_count %> &emsp;
+        				<img src ="/goworker/makeproject/image/thumbs.png" width="25px" height="25px" /><%=dto.getGood() %>&emsp;
+        				<img src ="/goworker/makeproject/image/thumbs_down.png" width="25px" height="25px" /><%=dto.getDown() %>
         		</td>
 			</tr>
 			<tr>
-				<td align="center"  width="90px">제목</td>
-				<td  colspan="2" ><%=dto.getSubject() %></td>
+				<td align="center"  width="90px" height="4">제목</td>
+				<td  colspan="2" align="center" style="font-size:18px"><b><%=dto.getSubject() %></b></td>
 			</tr>
 			<tr>
 				<td align="center" width="90px">내 용</td>
@@ -86,7 +86,7 @@
 				<td align="center" width="90px">첨부파일</td>
 					<%if(dto.getProjectfile() != null){ %>
 						<td colspan="2" align="center">
-						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="500px"height="500px">
+						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="600px"height="600px">
 
 					<%}else{ %>
 				<td colspan="2">등록된 첨부파일이 없습니다.</td>
