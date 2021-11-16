@@ -16,6 +16,15 @@
 <jsp:useBean class= "bean.MakeProjectDTO"  id="dto" />
 <jsp:setProperty property="*" name="dto" />
 
+
+<style>
+	textarea {
+		font-size:17px;
+}
+</style>
+
+
+
 <%	
 	String pageNum = request.getParameter("pageNum");
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -36,10 +45,10 @@
 <center>	
 	<table border = "1" align="center">
 		<tr>
-			<th colspan="3" align="center" >프로젝트 신청 글 수정</th>
+			<td colspan="3" align="center"  width="700px"><b>프로젝트 신청 글 수정</b></td>
 		</tr>
 		<tr>
-			<td align="center" width="70px"><img src="/goworker/s-member/image/image.jpg" width="30px" height="30px"/><br/>
+			<td align="center" width="50px"><img src="/goworker/s-member/image/image.jpg" width="40px" height="40px"/><br/>
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"> 
 			</td>
 			<td align="center" width="150px">
@@ -53,15 +62,15 @@
         	</td>
 		</tr>
 		<tr>
-			<td align="center">제목</td>
-			<td colspan="2"><input type="text" size="70" name="subject" value="<%=dto.getSubject() %>"/></td>
+			<td align="center" width="150px">제목</td>
+			<td colspan="2"><input type="text" size="80px" name="subject" value="<%=dto.getSubject() %>"/></td>
 		</tr>
 		<tr>	
-			<td align="center">내 용</td>
-			<td colspan="2"><input type="text" maxlength="2000px" style="width:500px;height:200px" name="content"  value="<%=dto.getContent() %>"></td>
+			<td align="center" width="150px">내 용</td>
+			<td colspan="2">
+			<textarea name="content" id="contenet"  maxlength="2000px" cols="60px" rows="20px" style="resize: none;" ><%=dto.getContent() %></textarea></td>
 		</tr>
-		<tr>
-				<td align="center">첨부파일</td>
+				<td align="center" width="150px">첨부파일</td>
 			<%if(dto.getProjectfile() != null){ %>
 				<td colspan="2">
 					<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="500px"height="500px"/><br/>

@@ -39,9 +39,9 @@ public class MakeProject_CommentDAO {
 	// makeproject ´ñ±Û ÀÔ·Â ¸Þ¼­µå
 	public int insertComment(MakeProject_CommentDTO cdto) {
 			int comment_num = cdto.getComment_num();
-			int ref = cdto.getRef();
-			int re_step = cdto.getRe_step();
-			int re_level = cdto.getRe_level();
+			int comment_ref = cdto.getComment_ref();
+			int comment_step = cdto.getComment_step();
+			int comment_level = cdto.getComment_level();
 			int number = 0;
 			String sql = "";
 			int result  = 0;
@@ -57,27 +57,27 @@ public class MakeProject_CommentDAO {
 					number=1;
 						
 				if(comment_num != 0) {
-					sql = "update makeproject_comment set re_step = re_step+1 where ref=? and re_step > ?";
+					sql = "update makeproject_comment set comment_step = comment_step+1 where comment_ref=? and comment_step > ?";
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, ref);
-					pstmt.setInt(2,	re_step);
+					pstmt.setInt(1, comment_ref);
+					pstmt.setInt(2,	comment_step);
 					pstmt.executeUpdate();
-					re_step = re_step+1;
-					re_level = re_level+1;
+					comment_step = comment_step+1;
+					comment_level = comment_level+1;
 				} else {
-					ref = number;
-					re_step = 0;
-					re_level = 0;
+					comment_ref = number;
+					comment_step = 0;
+					comment_level = 0;
 				}
 						
-			sql = "insert into makeproject_comment(comment_num,num,id,comment_content,comment_regdate,comment_good,ref,re_step,re_level)values(makeproject_comment_seq.NEXTVAL,?,?,?,sysdate,0,?,?,?)";
+			sql = "insert into makeproject_comment(comment_num,board_num,comment_writerid,comment_content,comment_regdate,comment_ref,comment_step,comment_level,comment_good)values(makeproject_comment_seq.NEXTVAL,?,?,?,sysdate,?,?,?,0)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, cdto.getNum());
-			pstmt.setString(2, cdto.getId());
+			pstmt.setInt(1, cdto.getBoard_num());
+			pstmt.setString(2, cdto.getComment_writerid());
 			pstmt.setString(3, cdto.getComment_content());
-			pstmt.setInt(4, ref);
-			pstmt.setInt(5, re_step);
-			pstmt.setInt(6, re_level);
+			pstmt.setInt(4, comment_ref);
+			pstmt.setInt(5, comment_step);
+			pstmt.setInt(6, comment_level);
 			result = pstmt.executeUpdate();
 			}catch (Exception e) {
 				e.printStackTrace();		
@@ -89,24 +89,25 @@ public class MakeProject_CommentDAO {
 				
 		
 	 	
-		public List<MakeProject_CommentDTO> getComment(int num){
+		public List<MakeProject_CommentDTO> getComment(int board_num){
 			List<MakeProject_CommentDTO> list = null;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("select * from makeproject_comment where num=? order by ref desc, re_step asc");
-				pstmt.setInt(1, num);
+				pstmt = conn.prepareStatement("select * from makeproject_comment where board_num=? order by comment_ref desc, comment_step asc");
+				pstmt.setInt(1, board_num);
 				rs = pstmt.executeQuery();
 				list = new ArrayList();
 				while (rs.next()) {
 					MakeProject_CommentDTO dto = new MakeProject_CommentDTO();
 					dto.setComment_num(rs.getInt("comment_num"));
-					dto.setId(rs.getString("id"));
+					dto.setComment_writerid(rs.getString("comment_writerid"));
 					dto.setComment_content(rs.getString("comment_content"));
 					dto.setComment_regdate(rs.getTimestamp("comment_regdate"));
+					dto.setComment_ref(rs.getInt("comment_ref"));
+					dto.setComment_step(rs.getInt("comment_step"));
+					dto.setComment_level(rs.getInt("comment_level"));
 					dto.setComment_good(rs.getInt("comment_good"));
-					dto.setRef(rs.getInt("ref"));
-					dto.setRe_step(rs.getInt("re_step"));
-					dto.setRe_level(rs.getInt("re_level"));
+					dto.setBoard_name(rs.getString("board_name"));
 					list.add(dto);
 			}
 		}catch (Exception e) {
@@ -123,11 +124,11 @@ public class MakeProject_CommentDAO {
 		String result = null;
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("select id from makeproject_comment where comment_num=? ");
+			pstmt = conn.prepareStatement("select comment_writerid from makeproject_comment where comment_num=? ");
 			pstmt.setInt(1,comment_num);
 			rs = pstmt.executeQuery(); 
 			if(rs.next()) {
-				result = rs.getString("id");
+				result = rs.getString("comment_writerid");
 			}
 			pstmt = conn.prepareStatement("delete from makeproject_comment where comment_num=?");
 			pstmt.setInt(1, comment_num);
@@ -153,7 +154,7 @@ public class MakeProject_CommentDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				cdto.setComment_num(rs.getInt("comment_num"));
-				cdto.setId(rs.getString("id"));
+				cdto.setComment_writerid(rs.getString("comment_writerid"));
 				cdto.setComment_content(rs.getString("comment_content"));
 			}
 		}catch (Exception e) {
@@ -169,9 +170,9 @@ public class MakeProject_CommentDAO {
 		int result = 0;
 		try {
 			conn = OracleDB.getConnection();
-			String sql = ("update makeproject_comment set id=?, comment_content=? where comment_num=?");
+			String sql = ("update makeproject_comment set comment_writerid=?, comment_content=? where comment_num=?");
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, cdto.getId());
+			pstmt.setString(1, cdto.getComment_writerid());
 			pstmt.setString(2, cdto.getComment_content());
 			pstmt.setInt(3, cdto.getComment_num());
 			result =pstmt.executeUpdate();
@@ -201,12 +202,12 @@ public class MakeProject_CommentDAO {
 	
 	
 	// ´ñ±Û °¹¼ö Ãâ·Â ¸Þ¼­µå
-	public int getCommentCount(int num) {
+	public int getCommentCount(int board_num) {
 		int result = 0;
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("select count(*) from makeproject_comment where num=?");
-			pstmt.setInt(1,  num);
+			pstmt = conn.prepareStatement("select count(*) from makeproject_comment where board_num=?");
+			pstmt.setInt(1,  board_num);
 	            rs = pstmt.executeQuery();
 	            if (rs.next()) {
 	                result = rs.getInt(1);
@@ -225,8 +226,8 @@ public class MakeProject_CommentDAO {
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("select count(*) from makeproject_comment where ref=?");
-				pstmt.setInt(1,cdto.getRef());
+				pstmt = conn.prepareStatement("select count(*) from makeproject_comment where comment_ref=?");
+				pstmt.setInt(1,cdto.getComment_ref());
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
 					result = rs.getInt(1);

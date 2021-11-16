@@ -3,6 +3,7 @@
 <%@ page import="bean.SmemberDAO" %> 
 <%@ page import = "bean.Comment_SmemberDAO" %>
 <%@ page import = "bean.Comment_SmemberDTO" %>
+<%@ page import = "bean.FavoriteDAO" %>
 <%@ page import="java.util.List" %> 
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ include file = "../include/header.jsp" %>
@@ -130,6 +131,15 @@ function button_event(){
 	</table>
 	<br/>
 	
+	<form>
+		<% FavoriteDAO fdao = new FavoriteDAO(); 
+		boolean result = fdao.favCheck(sid, dto.getNum());
+		if(result == true) {%>
+		<a href="/goworker/member/favorite_out.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_fill.png" width="30px" height="30px"></a>
+		<%}else {%>
+		<a href="/goworker/member/favorite_in.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_empty.png" width="30px" height="30px"></a>
+		<%} %>
+	</form>
 	
 	
 	<form align="center">
@@ -166,16 +176,16 @@ function button_event(){
 	comment_count = cd.getCommentCount(board_num);
 	
 %>
-<Br/>
 <section class="section1">	
-	<div class="titletext">
-		<b>서비스 평가 - [작성된 댓글 수: <%=comment_count %>]</b>
-	
-	</div><br/>
-  	
-  	<div class="smallfont">
-  		실제 Go-Worker 이용자들이 남긴 평가입니다.<br/>
-  	</div>
+
+	<table   align="center">
+			<tr>
+				<td align="left" colspan="3" width="530px" style="font-size:15px">
+				<h3>▶ 서비스 평가 - [작성된 댓글 수: <%=comment_count %>]</h3><br/>
+				실제 Go-Worker 이용자들이 남긴 평가입니다.</td>
+			</tr>	
+		</table>
+
 
 	<form action="comment/commentPro.jsp" name="writeform" method="get" >
 			<input type="hidden" name="board_num" value="<%=dto.getNum()%>"/>
@@ -196,7 +206,7 @@ function button_event(){
 			<tr>
 
 				<td width="60" align="center">작성자</td>
-				<td width="300px" colspan=3 align="center">
+				<td width="200px" colspan=3 align="center">
 					<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
 				</td>
 
@@ -205,7 +215,7 @@ function button_event(){
 			<tr>	
 				<td width="60px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
-					<input type="text" size="100" name="comment_content" id="comment_content" style="width:465px;height:100px;" placeholder="댓글을 입력해주세요."></td>
+					<input type="text" size="100" name="comment_content" id="comment_content" style="width:465px;height:100px;" placeholder="댓글을 입력해주세요." required;></td>
 			</tr>
 			
 			<tr>
@@ -236,11 +246,11 @@ function button_event(){
 
 <section class="section1">
 
-	<table class="comments" border="1" align="center">
+	<table class="comments" border="1" width="535px" align="center">
 		<tr>
-			<td width="60px">작성자</td>
-			<td width="370px" align="center">내 용</td>
-			<td width="70px" align="center" >작성일</td>
+			<td width="60px" align="center">작성자</td>
+			<td width="350px" align="center">내 용</td>
+			<td width="60px" align="center" >작성일</td>
 			<td width="40px" align="center">버튼</td>
 		</tr>
 <% 
@@ -368,7 +378,7 @@ if(sid.equals(cdto.getComment_writerid())) { %>
 	function comment_removeCheck(){
 		if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
 			document.form.submit;
-			window.location='/goworker/s-member/comment/commentDelete.jsp?';
+			window.location='/goworker/s-member/comment/commentDelete.jsp';
 		}	
 </script>
 </html>
