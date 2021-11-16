@@ -27,11 +27,11 @@
 		</tr>
         <tr>
         	<td align="center">제목</td>	
-        	<td width="300px"><input type="text" size="70" name="subject" maxlength="100"/></td> 
+        	<td width="300px"><input type="text" size="70" name="subject" maxlength="100" required/ ></td> 
         </tr>
         <tr>
         	<td align="center">내용</td>
-        	<td><textarea name="content" maxlength="2000px" style="width:500px;height:300px"></textarea></td>
+        	<td><textarea name="content" maxlength="2000px" style="width:500px;height:300px" required></textarea></td>
         </tr>
         <tr>
         	<td align="center">첨부파일</td>
