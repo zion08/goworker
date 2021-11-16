@@ -17,7 +17,7 @@
  	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	
 	int pageSize = 5;
 	

@@ -28,7 +28,7 @@
  	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	
 	MakeProjectDAO dao = new MakeProjectDAO();
 	dao.readCountUp(dto);
@@ -62,7 +62,7 @@
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
 				</td>
 				<td align="center" width="150px">
-					<%=dto.getReg_date() %>
+					<%=sdf.format(dto.getReg_date()) %>
 				</td>
 				<td align="right" width="90px">
 						<img src="/goworker/makeproject/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
