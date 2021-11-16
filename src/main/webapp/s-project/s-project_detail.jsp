@@ -100,7 +100,7 @@ session.setAttribute("num", dto.getNum());
 	
 	<table   border="1" align="center">
 			<tr>
-				<td align="left" colspan="3" width="600px" >
+				<td align="left" colspan="3" width="580px" style="font-size:15px">
 				<h3>▶ 프로젝트 관련 문의 - [작성된 댓글 수: <%=comment_count %>]</h3>
 				프로젝트에 대한 문의사항을 남겨주세요.</td>
 			</tr>	
@@ -114,26 +114,26 @@ session.setAttribute("num", dto.getNum());
 				<input type="hidden" name="comment_level" value="<%=comment_level%>"/>
 				<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 				
-			<table class="comments" border="1" align="center" width="600px">
+			<table class="comments" border="1"  >
 			
 	<%	if(sid == null){ %>
 			<tr>
-				<td width="400px" colspan="3" align="center">
+				<td width="580px" colspan="3" align="center">
 					댓글은 회원만 작성이 가능합니다.<br/>
 					로그인 후, 이용 부탁드립니다.</td>
 			</tr>
 			<%}else{ %>
 			<tr>
-				<td width="50" align="center">작성자</td>
-				<td width="300px" colspan=3 align="center">
+				<td width="70px align="center" >작성자</td>
+				<td width="200px" colspan=3 align="center">
 					<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
 				</td>
 			
 			</tr>
 			<tr>	
-				<td width="50px" align="center">내 용</td>
+				<td width="70px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
-				<input type="text" size="100" name="comment_content" id="comment_content" style="width:500px;height:100px;" placeholder="댓글을 입력해주세요."  required;></td>
+				<input type="text" size="130" name="comment_content" id="comment_content" style="width:505px;height:100px;" placeholder="댓글을 입력해주세요."  required;></td>
 			</tr>
 			<tr>
 				<td colspan=2 align="center">
@@ -171,11 +171,11 @@ session.setAttribute("num", dto.getNum());
 	%>
 	
 	
-		<table class="comments" border=1>
+		<table class="comments" border=1 width="589px" align="center">
 			<tr>
-				<th width="60px">작성자</th>
-				<td width="370px" align="center">내 용</td>
-				<td width="70px" align="center" >작성일</td>
+				<th width="60px" align="center">작성자</th>
+				<td width="350px" align="center">내 용</td>
+				<td width="60px" align="center" >작성일</td>
 				<td width="40px" align="center">버튼</td>
 			</tr>
 			<% 

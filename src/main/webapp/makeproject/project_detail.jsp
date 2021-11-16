@@ -28,7 +28,7 @@
  	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	
 	MakeProjectDAO dao = new MakeProjectDAO();
 	dao.readCountUp(dto);
@@ -55,14 +55,14 @@
 
 	<table border=1  align="center">
 			<tr>
-				<th align="center" colspan="3" width="700px">Project 초대</th>
+				<td align="center" colspan="3" width="700px"><b>Project 초대</b></td>
 			</tr>
 			<tr>
 				<td align="center" width="50px" align="center"><img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
 				</td>
 				<td align="center" width="150px">
-					<%=dto.getReg_date() %>
+					<%=sdf.format(dto.getReg_date()) %>
 				</td>
 				<td align="right" width="90px">
 						<img src="/goworker/makeproject/image/view.png" width="20px" height="20px"/><%=dto.getReadcount()%> &emsp;
@@ -73,7 +73,7 @@
 			</tr>
 			<tr>
 				<td align="center"  width="90px">제목</td>
-				<td  colspan="2"><%=dto.getSubject() %></td>
+				<td  colspan="2" ><%=dto.getSubject() %></td>
 			</tr>
 			<tr>
 				<td align="center" width="90px">내 용</td>
@@ -175,7 +175,7 @@ if(sid.equals(dto.getId())) { %>
 			<tr>
 				<td width="90px" align="center">내 용</td>
 				<td width="400px" colspan="3" >
-					<input type="text" size="120" name="comment_content" style="width:600px;height:100px;" placeholder="댓글을 입력해주세요." required></td>
+					<input type="text" size="120" name="comment_content" style="width:618px;height:100px;" placeholder="댓글을 입력해주세요." required></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -206,7 +206,7 @@ if(sid.equals(dto.getId())) { %>
  
  <section class="section1" >
  
- <table class="comments" border="1" width="700px" align="center">
+ <table class="comments" border="1" width="705px" align="center">
  
  	
  	<tr>

@@ -17,7 +17,7 @@
  	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	
 	int pageSize = 5;
 	
@@ -99,17 +99,16 @@
         	<tr>
         		<th width="400px" height="70px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
         			<%=dto.getSubject() %></a> [<%=comment_count %>]</th>
-        		<td align="center" width="120px">
+        		<td align="center" width="140px">
         			<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
-        			<img src="/goworker/makeproject/image/comment.png" width="20px" height="20px" /><%=comment_count %><br/>
         			<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
         			<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
         		</td>
         		<td width="80px" align="center">
-        			<img src="/goworker/s-member/image/image.jpg" width="15px" height="15px"/><br/>
+        			<img src="/goworker/makeproject/image/image.jpg" width="30px" height="30px"/><br/>
         			<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
         		</td>
-        		<td width="100px" align="center" >
+        		<td width="60px" align="center" >
         			<%=sdf.format(dto.getReg_date()) %>
         		</td>
         	</tr>
