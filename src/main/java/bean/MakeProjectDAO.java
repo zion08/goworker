@@ -207,7 +207,7 @@ public class MakeProjectDAO {
 	}
 	
 	
-	// makeproject 추천 메서드
+	// 프로젝트 추천 메서드
 		public void projectGood(MakeProjectDTO dto) {
 			try {
 				conn = OracleDB.getConnection();
@@ -223,6 +223,7 @@ public class MakeProjectDAO {
 		}
 		
 		
+		// 프로젝트 비추천 기능 메서드
 		public void projectDown(MakeProjectDTO dto) {
 			try {
 				conn = OracleDB.getConnection();
@@ -290,8 +291,8 @@ public class MakeProjectDAO {
 				e.printStackTrace();
 			} finally {
 				DisconnDB.close(conn, pstmt, rs);
-		}
+			}
 			return list;
 		}
-}
+	}
 

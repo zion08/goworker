@@ -54,6 +54,7 @@ public class Comment_SmemberDAO {
 					number=rs.getInt(1)+1;
 				else
 					number=1;
+			
 			if (comment_num != 0) {
 				sql="update comment_smember set comment_step=comment_step+1 where comment_ref=? and comment_step > ?";
 				pstmt = conn.prepareStatement(sql);
@@ -253,5 +254,47 @@ public class Comment_SmemberDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 	}
+	
+	
+	
+	// ´ñ±Û °¹¼ö Ãâ·Â ¸Þ¼­µå
+	public int getCommentCount(int board_num) {
+		int result = 0;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select count(*) from comment_smember where board_num=?");
+			pstmt.setInt(1,  board_num);
+	            rs = pstmt.executeQuery();
+	            if (rs.next()) {
+	                result = rs.getInt(1);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            DisconnDB.close(conn, pstmt, rs);
+	        }
+	        return result;
+	    }
+	
+	
+		// ´ñ±Û °¹¼ö
+		public int getCommentCount(Comment_SmemberDTO cdto) {
+			int result  = 0;
+			try {
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select count(*) from comment_smember where comment_ref=?" );
+				pstmt.setInt(1, cdto.getComment_ref());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return result;
+		}
+	
 }
 

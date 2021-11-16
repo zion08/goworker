@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import oracle.DisconnDB;
 import oracle.OracleDB;
 
@@ -224,6 +225,71 @@ public class SprojectDAO {
 		return result;
 	}
 	
+	public int getMyCount(String id) {
+		int result = 0; 
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select count(*) from s_project where id=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+	
+	public List<SprojectDTO> getMyList(String id , int start , int end) {
+		List<SprojectDTO> list = null;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select * from "
+					+ " (select NUM, ID, LANG, CAREER, WORKTYPE, FIELD, PAY, LOCATION, EMPLOYTYPE,"
+					+ " PROJECTTYPE,INTRODUCE, EMAIL, PHONE, KAKAO, PROJECTIMG, PROJECTDETAIL, PERIOD,"
+					+ " AVAILABLE, FAVOR, GOOD, READCOUNT, REGDATE, rownum r from"
+					+ " (select * from s_project where id=? order by num desc)) "
+					+ " where r >=? and r <=?");
+			pstmt.setString(1, id);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);			
+			rs = pstmt.executeQuery();
+			list = new ArrayList();
+			while(rs.next()) {
+				SprojectDTO dto = new SprojectDTO();
+				dto.setNum(rs.getInt("num"));
+				dto.setId(rs.getString("id"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setLang(rs.getString("lang"));
+				dto.setEmail(rs.getString("email"));
+				dto.setPhone(rs.getString("phone"));
+				dto.setKakao(rs.getString("kakao"));
+				dto.setFavor(rs.getInt("favor"));
+				dto.setGood(rs.getInt("good"));
+				dto.setReadcount(rs.getInt("readcount"));
+				dto.setCareer(rs.getString("career"));
+				dto.setWorktype(rs.getString("worktype"));
+				dto.setProjecttype(rs.getString("projecttype"));
+				dto.setEmploytype(rs.getString("employtype"));
+				dto.setPeriod(rs.getString("period"));
+				dto.setPay(rs.getInt("pay"));
+				dto.setEndProject(rs.getString("endproject"));
+				dto.setSent(rs.getString("sent"));
+				dto.setPageNum(rs.getInt("pageNum"));
+				dto.setProjectName(rs.getString("projectName"));
+				dto.setLocation(rs.getString("location"));
+				list.add(dto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return list;
+	}
 }
 
 

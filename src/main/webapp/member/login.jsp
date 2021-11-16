@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="bean.Cookies" %>
-<jsp:include page="kakao_login.html" flush="false" />
+<%@ include file = "/include/header.jsp" %>
+<% //<jsp:include page="kakao_login.html" flush="false" / %>
 <title>로그인</title>
 <%
 	Cookies cookies = new Cookies(request);
 	if(session.getAttribute("sid") !=null || cookies.getValue("cid")!=null)
 	{ // 세션id있으면 main화면으로 이동
-		response.sendRedirect("main.jsp");
+		response.sendRedirect("main/index.jsp");
 	}else {
 %>
 <div class="login-page" align="center">
@@ -59,10 +60,10 @@
 			</tr>
 			<tr align="center">
 				<td colspan="1"><input type="submit" value=" 로그인 " /><button type="button" 
-					onClick="location.href='/goworker/member/apply/apply.jsp'" >회원가입</button></td>
+					onClick="location.href='/goworker/member/apply.jsp'" >회원가입</button></td>
 			</tr>
 			<tr>
-				<td><a href="javascript:kakaoLogin();"><img src="/goworker/member/login/image/kakao.png" style="height:40px;width:auto;"/></a></td>
+				<td><a href="javascript:kakaoLogin();"><img src="/goworker/member/image/kakao.png" style="height:40px;width:auto;"/></a></td>
 			</tr>
 		</table>
 	</div>
@@ -70,3 +71,4 @@
 <%
 }
 %>
+<%@ include file = "/include/footer.jsp" %>

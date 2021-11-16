@@ -1,32 +1,186 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">      
+<% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="bean.MemberDAO" %>
+<%@ page import="bean.MemberDTO" %>
+<%@ page import="bean.SmemberDTO" %>
+<%@ page import="bean.SmemberDAO" %>
+<%@ page import="bean.SprojectDTO" %>
+<%@ page import="bean.SprojectDAO" %>
+<%@ page import="java.util.List" %>
+<%@ include file = "../include/header.jsp" %>
+
+<html>
+<head>
+<title>마이페이지</title>
+</head><br>
+
+<body>
+<div class="input" >
+      <input type="submit" value="프로젝트찾기" onclick=" window.location='/goworker/s-project/s-project_list.jsp' "/>
+      <input type="submit" value="팀원찾기" onclick=" window.location='/goworker/s-member/s-member.jsp' "/>
+      <input type="submit" value="관심목록" onclick=" window.location='favorite.jsp' "/>
+</div><br/>
+<%	
+	String pageNum = request.getParameter("pageNum");
+	String my = request.getParameter("my");
+	int pageSize = 5;
+	if(pageNum==null) {
+		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
+	}
+	int currentPage = Integer.parseInt(pageNum);
+	int start = (currentPage - 1) * pageSize + 1;		
+	int end = currentPage * pageSize;
+	
+	SmemberDAO dao = new SmemberDAO();
+	int count = 0; 
+	List<SmemberDTO> list = null;	
+	count = dao.getMyCount(sid); // 나의 작성글수 
+	if(count > 0){
+		list = dao.getMyList(sid, start , end );
+	}
+%>
+	<%if(count == 0){%>
+	<div>
+		<table border="1">
+		  <tr>
+		   <th><a href="../s-member/s-member_input.jsp">나의멤버등록</a></th>
+		  </tr>
+		  <tr> 
+			<th colspan="6">게시글이 없습니다</th>
+		  </tr>
+			</table>
+		</div>	
+	<%}else{%>
+	<% 
+	for(SmemberDTO dto : list) { %>
+	<div>
+	<h2>나의 멤버</h2>
+		<table class="mboard" >
+			<tr>
+				<th><a href="s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
+				<th>
+				<%if(dto.getAvailable() == 1) { %>
+				<img src="image/switch-on.png" width="40px" height="36px"> 
+				<%} else{ %>
+				<img src="image/switch-off.png" width="40px" height="36px">
+				<%} %>
+				</th>
+				<th><%=dto.getField() %></th>
+				<td><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
+					<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+				</td>
+			</tr>
+			<tr>
+				<th><%=dto.getCareer() %></th>
+				<th><%=dto.getEmploytype() %></th>
+				<th><%=dto.getLocation() %></th>
+				<th><%=dto.getWorktype() %></th>
+			</tr>
+			<tr>
+			<td colspan="4"> <%=dto.getIntroduce() %>
+			</td>
+			</tr>
+		</table><br/>
+	</div>
+<%}
+	}
+%><br/>
+<%
+    String id = (String)session.getAttribute("sid");
+	SprojectDAO pdao = new SprojectDAO();
+	List<SprojectDTO> plist = null;
+	
+	count = dao.getMyCount(id); // 나의 작성글수 
+	if(count > 0){
+		list = dao.getMyList(id, start , end );
+	}
+	%>
+	
+	<%if(count == 0){ %>
+		<div>
+		<table border="1">
+		  <tr>
+		   <th><a href="../s-project/s-project.jsp">나의 프로젝트등록</a></th>
+		  </tr>
+		  <tr> 
+			<th colspan="9">게시글이 없습니다</th>
+		  </tr>
+			</table>
+		</div>	
+	<%}else{ %>
+<% 		for(SprojectDTO dto : plist){%>
+    <table border="1">
+    <h2>나의 프로젝트</h2>
+	<tr>
+		<th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
+	</tr>
+	<tr>
+		<td><%=dto.getNum() %></td>
+		<td><a href="s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getId() %></a></td>
+		<td><%=dto.getId() %></td>
+		<td><%=dto.getCareer() %></td>
+		<td><%=dto.getPeriod() %></td>
+		<td><%=dto.getPay() %></td> 
+		<td><%=dto.getProjecttype() %></td>
+		<td><%=dto.getLocation() %></td>
+		<td><%=dto.getRegdate() %></td>
+	</tr>	
+		<%} 
+		} %>
+</table>
+</body>
+<br/>
+<footer>
+<hr color="skyblue" size="2" align="center"><br/>
+<table  align="right">
+      
+      <thead align="center">
+        <tr>
+          <th></th>
+          <th>메인</th>
+          <th>회원</th>
+          <th>고객센터</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="">사이트소개</a></td>
+          <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
+          <td>회원가입</td>
+          <td><a href="/goworker/cs/notice.jsp">공지사항</a></td>
+          
+        </tr>
+        <tr>
+          <td>이용방법</td>
+          <td>프로젝트찾기</td>
+          <td>회원정보수정</td>
+          <td><a href="/goworker/cs/cs.jsp">Q&A</a></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>프로젝트만들기</td>
+          <td>회원탈퇴</td>
+          <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>취업정보</td>
+            <td></td>
+            <td></td>
+          </tr>
+        <tr>
+          <td></td>
+          <td>커뮤니티</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      
+    </table>
+</footer>
 <style>
-   header{
-                display:flex;
-                justify-content: left;
-                color: blue;
-            }
-            input[type=submit]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:25%;
-                height:35px;
-                font-size: 14pt;
-                margin-top:5px;
-                shap:circle;
-            }
-            input[type=button]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:10%;
-                height:20px;
-                font-size: 10pt;
-                margin-top:5px;
-            }
             
             #footer{
                 text-align: right;
@@ -35,46 +189,4 @@
                 margin:10px 0px;
             }
             </style>
-
-<html>
-<title>마이페이지</title>
-   <header>마이페이지 </header>
-    <img src = "fileSave"
-    width="100" height="100"/>
-<%
-	String id = (String)session.getAttribute("id");
-
-	if(id == null){%>
-		<a href="loginForm.jsp" >로그인</a>
-		<a href="inputForm.jsp" >회원가입</a>
-		<a href="/web/studyBoard/list.jsp" >게시판</a>
-  <%}else{%>
-	<h2> <%=id%> 님</h2>
-	<div class="sideicon" align="right" width="400" height="70">
-		<br/>
-		<a href="">쪽지함</a>&emsp;
-		<input type="button" name="modify" value="회원정보수정" onclick=" window.location='modify.jsp' "/>&emsp;
-		<input type="button" name="logout" value="로그아웃" onclick=" window.location='logout.jsp' "/>&emsp;
-	</div>
-<hr color="skyblue" size="2"  align="center" />
-<br/>
-<center>
-<div class="input" >
-<tr>
-    <td><nav>
-    <input type="submit" value="프로젝트찾기" onclick=" window.location='modity.jsp' "/>
-    <input type="submit" value="팀원찾기" onclick=" window.location='modity.jsp' "/>
-    <input type="submit" value="관심목록" onclick=" window.location='like.jsp' "/>
-    </nav></td>
-</tr>
-<tr>    
-    <td><section><input type="submit" value="진행중인 프로젝트"/></section></td>
-</tr>    
-	</table> <br/>
-	<hr color="skyblue" size="2" align="center"><br/>	
-</div>
-</center>
-<%}%>
-<footer>페이지 하단에 저작권이나 사업자 등록번호 같은 것들</footer>
 </html>
-
