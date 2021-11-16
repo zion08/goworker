@@ -17,14 +17,11 @@
 			<span>멤버 찾기</span>
 		</div>
 
-		<div id="sproject" onclick="window.location='../s-project/s-project.jsp'">
+		<div id="sproject">
 			<span>프로젝트 찾기</span>
 		</div>
 		<div id="mproject" onclick="window.location='/goworker/makeproject/project_list.jsp'">
 			<span>프로젝트 생성</span>
-		</div>
-		<div id="jobinfo">
-			<span>취업 정보</span>
 		</div>
 		<div id="community">
 			<span>커뮤니티</span>

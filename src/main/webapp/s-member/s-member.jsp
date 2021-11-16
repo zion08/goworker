@@ -291,10 +291,11 @@ if((dto.getLocation()).equals("jeju")) {
 }	
 */
 %>
-
+				
 
 	
 	<div>
+		<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=dto.getNum()%>','message','width=355px, height=540px');" >
 		<table class="mboard" >
 			<tr>
 				<th><a href="s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
