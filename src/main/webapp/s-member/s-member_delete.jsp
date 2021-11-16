@@ -16,7 +16,6 @@
 		 <script type="text/javascript">
 			alert("삭제 되었습니다.");
 			window.location = "/goworker/admin/admin_smember.jsp";
-			
 	</script>
 
 	<%} %>

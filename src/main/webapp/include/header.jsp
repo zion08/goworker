@@ -20,7 +20,7 @@
 					</a>
 				</span>			
 				<span class="sideicon2">
-					<a href="/goworker/login-test.jsp">로그인	<!-- 로그인 완성 후, 주소 변경 할것 -->
+					<a href="/goworker/member/login.jsp">로그인	<!-- 로그인 완성 후, 주소 변경 할것 -->
 					</a>
 				</span>
 			</div>

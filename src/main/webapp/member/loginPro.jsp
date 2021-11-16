@@ -24,12 +24,12 @@
 		{
 			session.setAttribute("sid", dto.getId()); // 세션 이름=값 생성
 			session.setMaxInactiveInterval(60*60*3); // 세션 유지시간 3시간
-			response.sendRedirect("main.jsp");
+			response.sendRedirect("/goworker/main/index.jsp");
 		}
 		else if(chkbox.equals("yes")) // 로그인 상태 유지 체크되어 있으면 실행. (내용비교)
 		{
 			response.addCookie(Cookies.createCookie("cid", session.getId(), "/", 60*60*24*30)); //쿠키에 기본쿠키세션id 저장
-			response.sendRedirect("main.jsp");
+			response.sendRedirect("/goworker/main/index.jsp");
 		}
 	}else
   	{%>
