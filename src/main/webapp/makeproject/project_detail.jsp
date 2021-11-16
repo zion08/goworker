@@ -87,6 +87,7 @@
 					<%if(dto.getProjectfile() != null){ %>
 						<td colspan="2" align="center">
 						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="500px"height="500px">
+
 					<%}else{ %>
 				<td colspan="2">등록된 첨부파일이 없습니다.</td>
 					<%} %>
@@ -174,7 +175,7 @@ if(sid.equals(dto.getId())) { %>
 			<tr>
 				<td width="100px" align="center">내 용</td>
 				<td width="400px" colspan="3" >
-					<input type="text" size="120" name="comment_content" style="width:590px;height:100px;" placeholder="댓글을 입력해주세요."></td>
+					<input type="text" size="120" name="comment_content" style="width:590px;height:100px;" placeholder="댓글을 입력해주세요." required></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -350,9 +351,10 @@ if(sid.equals(cdto.getId())) { %>
  		if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
  			document.form.submit;
  			window.location='/goworker/makeproject/comment/commentDelete.jsp';
- 			
- 		}
+ 			}
  	}
+ 	
+
  </script>
 
  

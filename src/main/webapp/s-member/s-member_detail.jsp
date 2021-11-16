@@ -205,7 +205,7 @@ function button_event(){
 			<tr>	
 				<td width="60px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
-					<input type="text" size="100" name="comment_content" id="comment_content" style="width:465px;height:100px;" placeholder="댓글을 입력해주세요."></td>
+					<input type="text" size="100" name="comment_content" id="comment_content" style="width:465px;height:100px;" placeholder="댓글을 입력해주세요." required;></td>
 			</tr>
 			
 			<tr>
