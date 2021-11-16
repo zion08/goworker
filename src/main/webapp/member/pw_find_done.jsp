@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "bean.MemberDAO" %>
-
+<%@ include file = "/include/header.jsp" %>
 <title>done</title>
 
 <div align="center">
@@ -24,4 +24,6 @@ String email = request.getParameter("email");
 		</tr>
 	</table>
 </div>
+
+<%@ include file = "/include/footer.jsp" %>
 

@@ -1,6 +1,5 @@
 package bean;
 
-import java.sql.Timestamp;
 
 public class MemberDTO {
 	private String id;
