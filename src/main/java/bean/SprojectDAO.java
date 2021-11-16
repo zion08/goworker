@@ -244,11 +244,11 @@ public class SprojectDAO {
 	}
 	
 	public List<SprojectDTO> getMyList(String id , int start , int end) {
-		List<SprojectDTO> list = null;
+		List<SprojectDTO> plist = null;
 		try {
 			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select * from "
-					+ " (select NUM, ID, LANG, CAREER, WORKTYPE, FIELD, PAY, LOCATION, EMPLOYTYPE,"
+					+ " (select NUM, ID, SUBJECT, LANG, CAREER, WORKTYPE, FIELD, PAY, LOCATION, EMPLOYTYPE,"
 					+ " PROJECTTYPE,INTRODUCE, EMAIL, PHONE, KAKAO, PROJECTIMG, PROJECTDETAIL, PERIOD,"
 					+ " AVAILABLE, FAVOR, GOOD, READCOUNT, REGDATE, rownum r from"
 					+ " (select * from s_project where id=? order by num desc)) "
@@ -257,7 +257,7 @@ public class SprojectDAO {
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);			
 			rs = pstmt.executeQuery();
-			list = new ArrayList();
+			plist = new ArrayList();
 			while(rs.next()) {
 				SprojectDTO dto = new SprojectDTO();
 				dto.setNum(rs.getInt("num"));
@@ -281,7 +281,103 @@ public class SprojectDAO {
 				dto.setPageNum(rs.getInt("pageNum"));
 				dto.setProjectName(rs.getString("projectName"));
 				dto.setLocation(rs.getString("location"));
-				list.add(dto);
+				plist.add(dto);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return plist;
+	}
+	
+	public int getSearchCount(String career, String field, String worktype,
+			String location, String employtype,
+			String projecttype,String period, int pay, int available) {
+		int result = 0; 
+		try {
+			conn = OracleDB.getConnection();
+			String sql = "select count(*) from s_proejct "
+							+ "where career like ? "
+							+ "and field like ? "
+							+ "and worktype like ? "
+							+ "and location like ? "
+							+ "and employtype like ?"
+							+ "and projecttype like ?"
+							+ "and period like ?"
+							+ "and pay like ?"
+							+ "and available like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, career);
+			pstmt.setString(2, field);
+			pstmt.setString(3, worktype);
+			pstmt.setString(4, location);
+			pstmt.setString(5, employtype);
+			pstmt.setString(6, projecttype);
+			pstmt.setString(7, period);
+			pstmt.setInt(8, pay);
+			pstmt.setInt(9, available);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return result;
+	}
+	
+	public List<SprojectDTO> getSearchList(String career, String field, String worktype,
+											String location, String employtype, 
+											String projecttype, String period,int pay, int available , 
+											int start , int end) {
+		List<SprojectDTO> list = null;
+		try {
+			conn = OracleDB.getConnection();
+			String sql = "select * from "
+							+ "(select rownum r, num, id, subjdcet, lang, career, worktype, field, pay, location, employtype, projecttype, introduce, email, phone, kakao, portfolio, period, available, favor, good, readcount, regdate "
+							+ "from (select  * from s_project "
+							+ "where career like ? "
+							+ "and field like ? "
+							+ "and worktype like ? "
+							+ "and location like ? "
+							+ "and employtype like ? "
+							+ "and projecttype like ? "
+							+ "and period like ?"
+							+ "and pay like ?"
+							+ "and available like ?  "
+							+ "order by num desc )) "
+							+ "where  r >= ? and r <= ?";
+			pstmt = conn.prepareStatement(sql);	
+			pstmt.setString(1, career);
+			pstmt.setString(2, field);
+			pstmt.setString(3, worktype);
+			pstmt.setString(4, location);
+			pstmt.setString(5, employtype);
+			pstmt.setString(6, projecttype);
+			pstmt.setString(7, period);
+			pstmt.setInt(8, pay);
+			pstmt.setInt(9, available);
+			pstmt.setInt(10, start);
+			pstmt.setInt(11, end);		
+			rs = pstmt.executeQuery();
+			list = new ArrayList();
+			while(rs.next()) {
+				SprojectDTO sdto = new SprojectDTO();
+				sdto.setNum(rs.getInt("num"));
+				sdto.setId(rs.getString("id"));
+				sdto.setField(rs.getString("field"));
+				sdto.setCareer(rs.getString("career"));
+				sdto.setEmploytype(rs.getString("employtype"));
+				sdto.setLocation(rs.getString("location"));
+				sdto.setWorktype(rs.getString("worktype"));
+				sdto.setIntroduce(rs.getString("introduce"));
+				sdto.setAvailable(rs.getInt("available"));
+				sdto.setReadcount(rs.getInt("readcount"));
+				sdto.setGood(rs.getInt("good"));
+				list.add(sdto);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -289,6 +385,21 @@ public class SprojectDAO {
 			DisconnDB.close(conn, pstmt, rs);
 		}
 		return list;
+	}
+	
+	public int sProjectDelete(SprojectDTO dto) {
+		int result = 0;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("delete from s_proejct where num=?");
+			pstmt.setInt(1, dto.getNum());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+		return result;
 	}
 }
 
