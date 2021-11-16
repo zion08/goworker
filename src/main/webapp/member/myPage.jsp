@@ -117,7 +117,7 @@
    </tr>
    <tr>
       <td><%=dto.getNum() %></td>
-      <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getId() %></a></td>
+      <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
       <td><%=dto.getId() %></td>
       <td><%=dto.getCareer() %></td>
       <td><%=dto.getPeriod() %></td>
