@@ -3,6 +3,7 @@
 <%@ page import="bean.SmemberDAO" %> 
 <%@ page import = "bean.Comment_SmemberDAO" %>
 <%@ page import = "bean.Comment_SmemberDTO" %>
+<%@ page import = "bean.FavoriteDAO" %>
 <%@ page import="java.util.List" %> 
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ include file = "../include/header.jsp" %>
@@ -130,6 +131,15 @@ function button_event(){
 	</table>
 	<br/>
 	
+	<form>
+		<% FavoriteDAO fdao = new FavoriteDAO(); 
+		boolean result = fdao.favCheck(sid, dto.getNum());
+		if(result == true) {%>
+		<a href="/goworker/member/favorite_out.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_fill.png" width="30px" height="30px"></a>
+		<%}else {%>
+		<a href="/goworker/member/favorite_in.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_empty.png" width="30px" height="30px"></a>
+		<%} %>
+	</form>
 	
 	
 	<form align="center">
