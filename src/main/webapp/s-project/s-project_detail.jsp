@@ -68,6 +68,11 @@ session.setAttribute("num", dto.getNum());
 	<%} %>
 <br /><br />
 
+
+
+
+
+
 <!-- 댓글 작성 폼 -->
 
 <section class="commentForm">
@@ -95,8 +100,8 @@ session.setAttribute("num", dto.getNum());
 	
 	<table   border="1" align="center">
 			<tr>
-				<td align="left" colspan="3" width="400px" style="font-size:15px">
-				<h3>▶ 프로젝트 관련 문의 - [작성된 댓글 수: <%=comment_count %>]</h3><br/>
+				<td align="left" colspan="3" width="600px" >
+				<h3>▶ 프로젝트 관련 문의 - [작성된 댓글 수: <%=comment_count %>]</h3>
 				프로젝트에 대한 문의사항을 남겨주세요.</td>
 			</tr>	
 		</table>
@@ -108,7 +113,8 @@ session.setAttribute("num", dto.getNum());
 				<input type="hidden" name="comment_step" value="<%=comment_step%>"/>
 				<input type="hidden" name="comment_level" value="<%=comment_level%>"/>
 				<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
-			<table class="comments" border=1>
+				
+			<table class="comments" border="1" align="center" width="600px">
 			
 	<%	if(sid == null){ %>
 			<tr>

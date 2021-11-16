@@ -40,9 +40,6 @@
 		list = dao.getAllList(startRow, endRow);
 	}
 	
-		
-
-		
 
 %>
 
@@ -102,7 +99,7 @@
         	<tr>
         		<th width="400px" height="70px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
         			<%=dto.getSubject() %></a> [<%=comment_count %>]</th>
-        		<td align="center">
+        		<td align="center" width="120px">
         			<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
         			<img src="/goworker/makeproject/image/comment.png" width="20px" height="20px" /><%=comment_count %><br/>
         			<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>

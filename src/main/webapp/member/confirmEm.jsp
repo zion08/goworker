@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="bean.MemberDAO" %>
-<title>check</title>
+<title>emcheck</title>
 
 <jsp:useBean id="dto" class="bean.MemberDTO" />
 <jsp:setProperty name="dto" property="*" />

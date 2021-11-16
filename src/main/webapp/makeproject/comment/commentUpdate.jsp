@@ -21,7 +21,7 @@
 %>
 
 <form action="/goworker/makeproject/comment/commentUpdatePro.jsp" method="post" >
-	<input type="hidden" name="num" value="<%=cdto.getNum() %>" />
+	<input type="hidden" name="num" value="<%=cdto.getBoard_num() %>" />
 	<input type="hidden" name="comment_num" value="<%=cdto.getComment_num() %>" />
 	<input type="hidden" name="pageNum" value="<%=pageNum %>" />
 	
@@ -32,7 +32,7 @@
 			<tr>
 				<td width="150px" align="center">작성자</td>
 				<td width="400px" colspan="2">
-					<%=cdto.getId() %><input type="hidden" name="id" value="<%=cdto.getId() %>" />
+					<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 				</td>	
 			</tr>
 			<tr>
