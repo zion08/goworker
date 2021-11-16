@@ -15,11 +15,12 @@
 	//받는 사람 정보 가저오기	
 	smdto = smdao.getContent(smdto);
 	session.setAttribute("sidTarget", smdto.getId());	//받는 사람(idtarget) 세션에 저장
-	
-	String sidTarget = (String)session.getAttribute("sidTarget");
+	String sidTarget = (String)session.getAttribute("sidTarget");	//저장된 값 가져오기
 	
 	if (sidTarget == null) {	//메인 화면에서 헤더에 있는 메세지 눌렀을때 
 		sidTarget = (String)request.getParameter("sidTarget");
+		session.setAttribute("sidTarget", sidTarget);
+		sidTarget = (String)session.getAttribute("sidTarget");
 	}
 	
 		
@@ -30,25 +31,19 @@
 %>
 
 <!-- 받는 사람 -->
-<!-- smdto에서 정보 가져옴 -->
-<%-- <%= sidTarget %> --%>
 <div id="messege-top">
 	<div></div>
-	<span>idtarget: <b><%=sidTarget%></b></span>
+	<span><b><%=sidTarget%></b></span>
 	<span><%=smdto.getField()%></span>
 	<span><%=smdto.getLang()%></span>
 </div>
 
 <!-- 메세지 출력 -->
-<iframe src="messageSend.jsp" name="if" id="messege-content">
-
-	
+<iframe src="messagePrint.jsp" name="if" id="messege-content">
 </iframe>
 
-<!-- 메세지, 보내는 사람, 받는 사람 정보 전송 -->
-<!-- 보내는 사람(나), 받는 사람(DB에서 가져온 사람) -->
-idsender: <%= sid %>
-<form action="messageSend.jsp" method="post" target="if" id="messege-send">
+<!-- 메세지 내용 전송 -->
+<form action="messagePrint.jsp" method="post" target="if" id="messege-send">
 	<input type="text" name="inputMessage">
 	<input type="submit" value="보내기">
 	<%-- <input type="hidden" name="idtarget" value="<%=smdto.getId()%>">
