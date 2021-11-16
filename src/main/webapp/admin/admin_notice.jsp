@@ -1,64 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="bean.NoticeDAO" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <%@ page import="bean.NoticeDTO" %>
+<%@ page import="bean.NoticeDAO" %>
+<%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
-<%request.setCharacterEncoding("UTF-8"); %>
-    
-<jsp:useBean class="bean.NoticeDTO"  id="dto" />
-<jsp:setProperty property="*" name="dto" />
 <html>
 <head>
 <title>공지사항</title>
 </head>
-<body>
-<%
-     
-	 String pageNum = request.getParameter("pageNum");
-	 NoticeDAO dao = new NoticeDAO();
-	 dto = dao.getContent(dto);
-	  
-     int pageNumber = 1; //기본페이지
-     if (request.getParameter("pageNumber") != null){
-     pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
-     }
+<body>	
+<%		
+      String id = null;
+      if(session.getAttribute("sid") != null){
+   	  id = (String) session.getAttribute("sid");
+      }
+      int pageNumber = 1; //기본페이지
+      if (request.getParameter("pageNumber") != null){
+	  pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
+      }
 	%>
-     <form action="/goworker/cs/noticeWritePro.jsp" method="post" enctype="multipart/form-data">
-    	<input type="hidden" name="num" value="<%=dto.getNum() %>" />
-		<input type="hidden" name="pageNum" value="<%=pageNum%>" />
+
+<h2>공지사항</h2>
+<%
+	int pageSize = 10;
+	String pageNum = request.getParameter("pageNum");
+	
+	 
+	if(pageNum == null){		
+		pageNum="1";	
+	}	
+	
+	int currentPage = Integer.parseInt(pageNum); 
+	int start = (currentPage-1) * pageSize + 1;  
+	int end = currentPage * pageSize;
+	NoticeDAO dao = new NoticeDAO();
 		
-		<table class="cs" border=1>
-    	<h1>공지사항</h1>
-    			 <input type="hidden" name="writer" value="관리자" />  <br />
-    				 <tr>
-			      <td width ="100px" align ="center">제 목</td>
-			      <th width="300px" colspan=3 align="center">
-    	          <input type="text" name="subject"  />  <br />
-    	          </th>
-    	     </tr>
-             <tr>	
-			      <td width="100px" align="center">내 용</td>
-			      <td width="300px" colspan=3 align="center">
-			      <input type="text" size="100" name="content" id="content" style="width:500px;height:100px;" ></td>
-		     </tr>
-		     <tr>
-		          <td width="100px" align="center">첨부파일</td>
-			      <td width="300px" colspan=3 align="center">
-    	          <input type="file" name="filename" /></td>
-    	          <tr>   
-              <%if(dto.getFilename() != null){%> 
-    				[<%=dto.getFilename()%>]    
-    				<input type="hidden" name="org" value="<%=dto.getFilename()%>" />					
-    		  <%}else{%>
-    				
-    		  <%} %>
-    	     <td colspan=2 align="center">
-    	         <input type="submit" value="글쓰기" />
-    	    </td>
-		</tr>
-		</table><br/>
-		</form>
-</body>
+	int count = 0;
+	List<NoticeDTO> list = null;
+	
+    count = dao.getCount(); // 전체글 수 
+    if(count > 0){
+	    list = dao.getAllList( start , end );
+		}
+%>
+     <table border="1">
+	<tr>
+		<th>글번호</th><th>작성자</th><th>제목</th> <th>작성일</th><th>조회</th>
+	</tr>
+	<%if(count == 0){%>
+		<tr>
+			<td colspan="6">저장된 글이 없습니다...!!</td>
+		</tr>	
+	<%}else{%>
+	<%
+    	for(NoticeDTO dto : list){%>
+	<tr>
+		<td><%=dto.getNum()%></td>
+		<td><%=dto.getWriter()%></td>
+		<td><a href="/goworker/admin/admin_noticeContent.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></td> 	
+		<td><%=dto.getRegdt()%></td>
+		<td><%=dto.getReadcount()%></td>
+	</tr>		
+<%	}
+}%>
+</table> 
+<%
+	if(count > 0){
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (currentPage / 10) * 10 + 1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock-1;
+		if(endPage > pageCount){
+			endPage = pageCount;
+		}	
+		if(startPage > 10){%>
+			<a href="admin_notice.jsp?pageNum=<%=startPage-10%>">[이전]</a>
+		<%}
+		for(int i = startPage ; i <= endPage ; i++){
+		%>	<a href="admin_notice.jsp?pageNum=<%=i%>">[<%=i%>]</a> 	
+	  <%}
+		if(endPage < pageCount){%>
+		<a href="admin_notice.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
+	<%}	
+	}
+%>
+ 		<input type="button"  value="글쓰기" onclick="window.location='admin_noticeWrite.jsp' "/>
+
+<br />
 <footer>
 <hr color="skyblue" size="2"  align="center" />
     <table  align="right">     

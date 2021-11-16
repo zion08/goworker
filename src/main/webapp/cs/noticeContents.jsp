@@ -63,12 +63,14 @@
 	   onclick=" window.location='notice.jsp?pageNum=<%=pageNum%>' "/>
 
 <%
-        String cid = (String)session.getAttribute("sid");
+        
         // 로그인된 id 와 글작성자 비교
-        if(cid != null){
+        if(sid!=null){
+        if(sid.equals("admin")){
 %>		<input type="button" value="글수정" onclick=" window.location='noticeUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
 		<input type="button" value="글삭제" onclick=" window.location='noticeDelete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>	
-<%  	}
+<%  		}
+      	}
 %>
 </body>
 <footer>

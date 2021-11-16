@@ -1,63 +1,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="bean.NoticeDAO" %>
+<% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="bean.MemberDAO" %>
+<%@ page import="bean.MemberDTO" %>
+<%@ page import="bean.SmemberDAO" %>
+<%@ page import="bean.SmemberDTO" %>
 <%@ page import="bean.NoticeDTO" %>
+<%@ page import="bean.NoticeDAO" %>
+<%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
-<%request.setCharacterEncoding("UTF-8"); %>
-    
+
 <jsp:useBean class="bean.NoticeDTO"  id="dto" />
-<jsp:setProperty property="*" name="dto" />
+<jsp:setProperty property="num" name="dto" />
+
 <html>
 <head>
 <title>공지사항</title>
 </head>
 <body>
-<%
-     
-	 String pageNum = request.getParameter("pageNum");
-	 NoticeDAO dao = new NoticeDAO();
-	 dto = dao.getContent(dto);
-	  
-     int pageNumber = 1; //기본페이지
-     if (request.getParameter("pageNumber") != null){
-     pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
-     }
+<%		
+      String id = null;
+      if(session.getAttribute("sid") != null){
+   	  sid = (String) session.getAttribute("sid");
+      }
+      int pageNumber = 1; //기본페이지
+      if (request.getParameter("pageNumber") != null){
+	  pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
+      }
 	%>
-     <form action="/goworker/cs/noticeWritePro.jsp" method="post" enctype="multipart/form-data">
-    	<input type="hidden" name="num" value="<%=dto.getNum() %>" />
-		<input type="hidden" name="pageNum" value="<%=pageNum%>" />
-		
-		<table class="cs" border=1>
-    	<h1>공지사항</h1>
-    			 <input type="hidden" name="writer" value="관리자" />  <br />
-    				 <tr>
-			      <td width ="100px" align ="center">제 목</td>
-			      <th width="300px" colspan=3 align="center">
-    	          <input type="text" name="subject"  />  <br />
-    	          </th>
-    	     </tr>
-             <tr>	
-			      <td width="100px" align="center">내 용</td>
-			      <td width="300px" colspan=3 align="center">
-			      <input type="text" size="100" name="content" id="content" style="width:500px;height:100px;" ></td>
-		     </tr>
-		     <tr>
-		          <td width="100px" align="center">첨부파일</td>
-			      <td width="300px" colspan=3 align="center">
-    	          <input type="file" name="filename" /></td>
-    	          <tr>   
-              <%if(dto.getFilename() != null){%> 
-    				[<%=dto.getFilename()%>]    
-    				<input type="hidden" name="org" value="<%=dto.getFilename()%>" />					
-    		  <%}else{%>
-    				
-    		  <%} %>
-    	     <td colspan=2 align="center">
-    	         <input type="submit" value="글쓰기" />
-    	    </td>
-		</tr>
-		</table><br/>
-		</form>
+<%
+	  String pageNum = request.getParameter("pageNum");
+	  NoticeDAO dao = new NoticeDAO();
+	  dao.readCountUp(dto);  // 조회수 증가 
+	  dto = dao.getContent(dto);
+%>
+ <form>
+   <table class="cs" border=1>
+    <tr>
+      <th width = "500px" align = "center">작성자 : <%=dto.getWriter() %> </th>
+    </tr>
+<tr>
+      <th width = "500px" align = "center">작성일 : <%=dto.getRegdt() %> </th>
+    </tr>
+<tr>
+      <th width = "500px" align = "center">제 목 : <%=dto.getSubject() %> </th>
+    </tr>
+<tr>
+      <th width = "500px" hight = "300px" align = "center">내 용 : <%=dto.getContent() %> </th>
+      
+</tr>
+<tr>
+      <th width = "500px" align = "center">
+      <%if(dto.getFilename() != null){ %>
+	    첨부파일  : <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
+      <%} %> </th>     
+</tr>
+
+</table>
+</form>
+
+<input type="button" value="목록" 
+	   onclick=" window.location='admin_notice.jsp?pageNum=<%=pageNum%>' "/>
+
+<form action="/goworker/cs/noticeDeletePro.jsp" method="post">
+	<input type="hidden" name="pageNum" value=<%=pageNum %> />
+	<input type="hidden" name="num" value=<%=dto.getNum() %> />
+		<input type="button" value="글수정" onclick=" window.location='/goworker/cs/noticeUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
+		<input type="submit" value="글삭제" onclick="button_event()"/>	
+</form>
+<script>
+function button_event(){
+
+	if (confirm("정말 삭제하시겠습니까??") == true){ 
+	    document.form.submit();
+	    window.loction='/goworker/cs/noticeDeletePro.jsp?num=<%=dto.getNum() %>'
+		} else{  
+	    	return;
+			}
+	}
+
+</script>
 </body>
 <footer>
 <hr color="skyblue" size="2"  align="center" />
@@ -75,7 +97,7 @@
           <td><a href="">사이트소개</a></td>
           <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
           <td>회원가입</td>
-          <td><a href="/goworker/cs/notice.jsp">공지사항</a></td>
+          <td><a href="/goworker/notice/notice.jsp">공지사항</a></td>
           
         </tr>
         <tr>

@@ -16,13 +16,10 @@
 	String pageNum = request.getParameter("pageNum");
 	NoticeDAO dao = new NoticeDAO();
 	dto = dao.getContent(dto);
-	int x = 100;
+	
 %>
 <%		
-      String id = null;
-      if(session.getAttribute("sid") != null){
-   	  sid = (String) session.getAttribute("sid");
-      }
+     
       int pageNumber = 1; //기본페이지
       if (request.getParameter("pageNumber") != null){
 	  pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
@@ -32,6 +29,7 @@
         <form action="noticeUpdatePro.jsp" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 				<input type="hidden" name="pageNum" value="<%=pageNum%>" />
+				<input type="hidden" name="writer" value="관리자" />
 				
 				  <table class="cs" border=1>
 
@@ -59,7 +57,7 @@
     		  </table>
     	     <td colspan=2 align="center">
     	         <input type="submit" value="수정" />
-    	         <input type="button" value="삭제" onclick = "csDelete.jsp"/>
+    	         
     	    </td>
 		</tr>
 	    <br/>

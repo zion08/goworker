@@ -55,7 +55,7 @@
 %>
      <table border="1">
 	<tr>
-		<th>글번호</th><th>작성자</th><th>제목</th> <th>내용</th><th>작성일</th><th>조회</th>
+		<th>글번호</th><th>작성자</th><th>제목</th><th>작성일</th><th>조회</th>
 	</tr>
 	<%if(count == 0){%>
 		<tr>
@@ -68,7 +68,6 @@
 		<td><%=dto.getNum()%></td>
 		<td><%=dto.getWriter()%></td>
 		<td><a href="noticeContents.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></td> 	
-		<td><%=dto.getContent()%></td>
 		<td><%=dto.getRegdt()%></td>
 		<td><%=dto.getReadcount()%></td>
 	</tr>		
@@ -95,10 +94,10 @@
 	<%}	
 	}
 %>
-<%     String cid = (String)session.getAttribute("sid");
+<%    
        // 로그인된 id 와 글작성자 비교
-       if(cid != null){
-	   if(cid.equals("admin")){
+       if(sid != null){
+	   if(sid.equals("admin")){
 %>		<input type="button"  value="글쓰기" onclick="window.location='noticeWrite.jsp' "/>
 <%  } 
 }%>
