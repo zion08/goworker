@@ -23,7 +23,7 @@
 		</tr>
 		<tr>
 			<td algin="center"><label>아이디</label></td>
-			<td><%=sid %><input type="hidden" name="id" value="<%=sid%>"/></td>
+			<td align="center"><%=sid %><input type="hidden" name="id" value="<%=sid%>"/></td>
 		</tr>
         <tr>
         	<td align="center">제목</td>	
