@@ -226,7 +226,9 @@ public class MemberDAO {
 				e.printStackTrace();
 			} finally {
 				DisconnDB.close(conn, pstmt, rs);
-
+			}
+			return list;
+		}
 		
 	public int getCount() {
 		int result = 0; 
@@ -371,9 +373,7 @@ public class MemberDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
-				if(rs != null) {try {rs.close();}catch(SQLException s) {}}
-				if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
-				if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+				DisconnDB.close(conn, pstmt, rs);
 			}
 			return result;
 		}
