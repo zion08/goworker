@@ -131,6 +131,8 @@ function button_event(){
 	</table>
 	<br/>
 	
+	<%if (sid !=null) {%>
+<%if(sid.equals(dto.getId())) {%>
 	<form>
 		<% FavoriteDAO fdao = new FavoriteDAO(); 
 		boolean result = fdao.favCheck(sid, dto.getNum());
@@ -140,6 +142,8 @@ function button_event(){
 		<a href="/goworker/member/favorite_in.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_empty.png" width="30px" height="30px"></a>
 		<%} %>
 	</form>
+	<%}
+}%>
 	
 	
 	<form align="center">
@@ -148,14 +152,19 @@ function button_event(){
 	</form>
 	
 	
-
-
-	<form align="center">
+<%if (sid !=null) {%>
+<%if(sid.equals(dto.getId())) {%>
+	<form action= "s-member_delete.jsp" method="post" align="center">
 		<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 		<input type="button" value="쪽지 보내기" />
-		<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
+		<input type="button" value="수정 하기" onclick="window.location='/goworker/s-member/s-member_update.jsp?num=<%=dto.getNum() %>'" />
+		<input type="submit" value="삭제 하기" onclick="button_event()" />
+		<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 	</form>
-
+ <%}
+}else { %>	
+	<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
+<%} %>
 </section>
 
 
@@ -180,7 +189,7 @@ function button_event(){
 
 	<table   align="center">
 			<tr>
-				<td align="left" colspan="3" width="530px" style="font-size:15px">
+				<td align="left" colspan="3" width="528px" style="font-size:15px">
 				<h3>▶ 서비스 평가 - [작성된 댓글 수: <%=comment_count %>]</h3><br/>
 				실제 Go-Worker 이용자들이 남긴 평가입니다.</td>
 			</tr>	
@@ -198,14 +207,14 @@ function button_event(){
 		<table class="comments" border=1>
 		<%	if(sid == null){ %>
 		<tr>
-			<td width="520px" colspan="3" align="center">
+			<td width="528px" colspan="3" align="center">
 				댓글은 회원만 작성이 가능합니다.<br/>
 				로그인 후, 이용 부탁드립니다.</td>
 		</tr>
 		<%}else{ %>
 			<tr>
 
-				<td width="60" align="center">작성자</td>
+				<td width="60px" align="center">작성자</td>
 				<td width="200px" colspan=3 align="center">
 					<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
 				</td>
@@ -246,7 +255,7 @@ function button_event(){
 
 <section class="section1">
 
-	<table class="comments" border="1" width="535px" align="center">
+	<table class="comments" border="1" width="537px" align="center">
 		<tr>
 			<td width="60px" align="center">작성자</td>
 			<td width="350px" align="center">내 용</td>

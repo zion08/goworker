@@ -13,7 +13,6 @@
 <jsp:setProperty property="*" name="dto" />  
 
 
-
 <form action="project_inputPro.jsp" method="post" enctype="multipart/form-data">
 
 <center>
@@ -22,8 +21,8 @@
 			<th colspan="2" align="center">프로젝트 신청 글 작성</th>
 		</tr>
 		<tr>
-			<td algin="center"><label>아이디</label></td>
-			<td><%=sid %><input type="hidden" name="id" value="<%=sid%>"/></td>
+			<td alIgn="center">아이디</td>
+			<td align="center"><%=sid %><input type="hidden" name="id" value="<%=sid%>"/></td>
 		</tr>
         <tr>
         	<td align="center">제목</td>	
@@ -47,3 +46,5 @@
     </table>
 </center>
 </form>
+
+

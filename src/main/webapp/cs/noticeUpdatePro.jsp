@@ -15,6 +15,7 @@
 	MultipartRequest mr = new MultipartRequest(request,path,size,enc,dp); 
 	
 	String num = mr.getParameter("num");
+	String writer = "관리자";
 	String pageNum = mr.getParameter("pageNum");
 	String subject = mr.getParameter("subject");
 	String content = mr.getParameter("content");
@@ -23,6 +24,7 @@
 	
 	NoticeDTO dto = new NoticeDTO();
 	dto.setNum(Integer.parseInt(num));  //  Integer.parseInt() 문자->숫자 변환 
+	dto.setWriter(writer);
 	dto.setSubject(subject);
 	dto.setContent(content);
 	if(filename == null){ // 첨부파일 없을때..
@@ -41,6 +43,6 @@
 %>
 	<script>
 		alert("수정되었습니다.");
-		window.location="notice.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
+		window.location="/goworker/admin/admin_noticeContent.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
 	</script>
 <%}%>

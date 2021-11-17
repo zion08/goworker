@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td width="150px" align="center">작성자</td>
-				<td width="400px" colspan="2">
+				<td width="400px" colspan="2" align="center">
 					<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 				</td>	
 			</tr>

@@ -7,6 +7,7 @@ public class MessageDTO {
 	private String idtarget;
 	private String idsender;
 	private Timestamp regdate;
+	private int readcheck;
 	
 	public String getMessage() {
 		return message;
@@ -34,5 +35,12 @@ public class MessageDTO {
 	}
 	public void setRegDate(Timestamp regdate) {
 		this.regdate = regdate;
+	}
+	
+	public int getReadCheck() {
+		return readcheck;
+	}
+	public void setReadCheck(int readcheck) {
+		this.readcheck = readcheck;
 	}
 }

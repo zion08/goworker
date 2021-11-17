@@ -48,13 +48,13 @@
 			<td colspan="3" align="center"  width="700px"><b>프로젝트 신청 글 수정</b></td>
 		</tr>
 		<tr>
-			<td align="center" width="50px"><img src="/goworker/s-member/image/image.jpg" width="40px" height="40px"/><br/>
+			<td align="center" width="50px"><img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"> 
 			</td>
 			<td align="center" width="150px">
 				<%=sdf.format(dto.getReg_date())%>
 			</td>
-			<td align="right" width="100px">
+			<td align="right" width="90px">
 					<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>&emsp;
         			<img src="/goworker/makeproject/image/comment.png" width="20px" height="20px" /><%=comment_count %>&emsp;
         			<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>&emsp;
@@ -62,15 +62,15 @@
         	</td>
 		</tr>
 		<tr>
-			<td align="center" width="150px">제목</td>
-			<td colspan="2"><input type="text" size="80px" name="subject" value="<%=dto.getSubject() %>"/></td>
+			<td align="center" width="90px">제 목</td>
+			<td colspan="2"><input type="text" size="85px" name="subject" value="<%=dto.getSubject() %>"/></td>
 		</tr>
 		<tr>	
-			<td align="center" width="150px">내 용</td>
+			<td align="center" width="90px">내 용</td>
 			<td colspan="2">
-			<textarea name="content" id="contenet"  maxlength="2000px" cols="60px" rows="20px" style="resize: none;" ><%=dto.getContent() %></textarea></td>
+			<textarea name="content" id="contenet"  maxlength="2000px" cols="67px" rows="20px" style="resize: none;" ><%=dto.getContent() %></textarea></td>
 		</tr>
-				<td align="center" width="150px">첨부파일</td>
+				<td align="center" width="90px">첨부파일</td>
 			<%if(dto.getProjectfile() != null){ %>
 				<td colspan="2">
 					<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="500px"height="500px"/><br/>

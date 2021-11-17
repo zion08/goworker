@@ -3,9 +3,9 @@
 <%@ page import="bean.SprojectDTO" %>
 <%@ page import="bean.SprojectDAO" %>
 <%@ page import ="java.util.List" %>
+<%@ include file = "../include/header.jsp" %>
 <%
 	int pageSize = 20;
-	String id = (String)session.getAttribute("id");
 	String pageNum = request.getParameter("pageNum");
 	if (pageNum == null){
 		pageNum = "1";
@@ -23,15 +23,22 @@
 	if (count > 0 ) {
 		list = dao.getAllList(start , end);
 	}else{	
-	}
+	}%>
+
+
+<center>
+
+<title>프로젝트 목록</title>
+<h1>프로젝트 목록</h1>
+	<% 
+	if(sid != null){
+		%>		<input type="button"  value="프로젝트 등록" onclick="window.location='s-project_input.jsp' "/>
+		<%}  %>
+
 	
-	//if(id != null){
-		%>		<input type="button"  value="프로젝트 등록" onclick="window.location='writeForm.jsp' "/>
-		<%//}  %>
-	<%=count %>
 <table border="1">
 	<tr>
-		<th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th>프로젝트 타입<th>지역</th><th>작성일</th>
+		<th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
 	</tr>
 	
 	<%if(count == 0){ %>
@@ -42,7 +49,7 @@
 <% 		for(SprojectDTO dto : list){%>
 	<tr>
 		<td><%=dto.getNum() %></td>
-		<td><a href="sprojectContent.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getProjectName()%></a></td>
+		<td><a href="s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
 		<td><%=dto.getId() %></td>
 		<td><%=dto.getCareer() %></td>
 		<td><%=dto.getPeriod() %></td>
@@ -64,20 +71,14 @@
 			endPage = pageCount;
 		}
 		if(startPage > 20){%>
-			<a href="list.jsp?pageNum=<%=startPage-20 %>">[이전]</a>
+			<a href="s-project_list.jsp?pageNum=<%=startPage-20 %>">[이전]</a>
 		<% }
 		for(int i = startPage ; i <= endPage ; i++){
-		%>	<a href="list.jsp?pageNum=<%=i %>">[<%=i%>]</a>
+		%>	<a href="s-project_list.jsp?pageNum=<%=i %>">[<%=i%>]</a>
 		<%} 
 		if(endPage < pageCount){%>
-		<a href="list.jsp?pageNum=<%=startPage + 20 %>">[다음]</a>
+		<a href="s-project_list.jsp?pageNum=<%=startPage + 20 %>">[다음]</a>
 	  <%}
 	} 
 %>
-
-
-
-
-
-
-
+</center>
