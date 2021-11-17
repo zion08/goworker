@@ -14,7 +14,9 @@
 
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
-	String my = request.getParameter("my");
+	String colum = request.getParameter("colum");
+	String search = request.getParameter("search");
+	
 	
 	int pageSize = 20;
 	if(pageNum==null) {
@@ -27,12 +29,13 @@
 	MemberDAO dao = new MemberDAO();
 	int count = 0; 
 	List<MemberDTO> list = null;	
-	if(my == null) {		
-		count = dao.getCount(); // 전체 글의 갯수
+			
+		count = dao.getSearchCount(colum,search); // 전체 글의 갯수
 		if(count > 0) {
-			list = dao.getmemberList(start,end);	
+			list = dao.searchMemberList(colum,search,start,end);	
 		}	
-	}	
+		System.out.println(count);
+		System.out.println(list);
 	
 	
 %>
@@ -122,8 +125,8 @@ function button_event(){
 <%		}
 	}
 %>
-
-<form action="admin_memberSearch.jsp?pageNum=<%=pageNum %>" method= "post">
+<input type="button" value="기존목록" onclick="window.location='admin_member.jsp'"/>
+<form action="admin_memberSearch.jsp" method= "post">
 	<select name = "colum">
 		<option value="id"> 아이디 </option>
 		<option value="rank"> 등급 </option>
