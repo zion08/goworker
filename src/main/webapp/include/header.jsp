@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
+<%@ page import="bean.Cookies" %>
+    
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <link href="../style.css" rel="stylesheet" type="text/css">
 
 
-<%	String sid = (String)session.getAttribute("sid"); %>
+<%	
+	String sid = (String)session.getAttribute("sid"); 
+	Cookies cookies = new Cookies(request);
+%>
 <header>
             <script language="javascript">  
                function goUrl(url)   
