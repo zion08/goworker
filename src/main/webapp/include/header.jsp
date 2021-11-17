@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
 <%@ page import="bean.Cookies" %>
-    
+<%@ page import="java.util.List" %>
+<%@ page import="bean.MemberDTO" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <link href="../style.css" rel="stylesheet" type="text/css">
-<%	String sid = (String)session.getAttribute("sid"); %>
+<jsp:useBean id="headerdao" class="bean.MemberDAO"></jsp:useBean>
 
 <script language="javascript">  
 	function goUrl(url) {
@@ -12,53 +13,64 @@
 		}  
 </script>
 
-<%	
-	String sid = (String)session.getAttribute("sid"); 
+<%
+	String sid = (String)session.getAttribute("sid");
 	Cookies cookies = new Cookies(request);
 	String cid = cookies.getValue("cid");
+	List<MemberDTO> headerlist =null;
+	String rank = new String();
+	
+
+	if (sid != null) {
+		headerlist = headerdao.getMemberInfo(sid);
+		MemberDTO dto = headerlist.get(0);
+		rank = dto.getRank();
+	}
+	if (cid != null) {
+		headerlist = headerdao.getMemberInfo(cid);
+		MemberDTO dto = headerlist.get(0);
+		rank = dto.getRank();
+	}
+	
+	
 %>
 
 
 <header>    
 			<div class="logo" onclick="window.location='/goworker/main/index.jsp'">
 			</div>	
-<%	if (sid == null) {
-%>			
-			
+		
 <%	if (sid == null && cid == null) {
-%>			<div class="wrapper-title">
-				<span class="title">
-					GoWorker<br/>함께 나아갈 동료와 프로젝트를 찾으세요! 
-				</span>
-			</div>
-			<div class="wrapper-sideicon">			
-				<span class="sideicon2" >
+%>			<div class="wrapper-sideicon">			
+				<span class="sideicon3" >
 					<a href="/goworker/member/apply.jsp">가입하기
 					</a>
 				</span>			
-				<span class="sideicon2">
+				<span class="sideicon3">
 					<a href="/goworker/member/login.jsp">로그인
 					</a>
 				</span>
 			</div>
 <%	} else {
-%>			<div class="wrapper-title">
-				<span class="title">
-					GoWorker<br/>함께 나아갈 동료와 프로젝트를 찾으세요! 
-				</span>
-			</div>
-
+%>			
             <div class="wrapper-sideicon">	
-<%            	if (rank=="") {
+<%            	if (rank.equals("member")) {
 %>					<span class="sideicon2">
-						<p>프로젝트등록</p>
+						<a href="../s-member/s-member_input.jsp">멤버등록
+						</a>
 					</span>
-<%           	} else if (rank=="") {
-%>
+<%           	} else if (rank.equals("manager")) {
+%>					<span class="sideicon2">
+						<a href="../s-project/s-project_input.jsp">프로젝트등록
+						</a>
+					</span>
 <%				} else {
-				
-%>				}		
-				<span class="sideicon2">
+%>					<span class="sideicon2">
+						<a href="../admin/admin.jsp">>관리자페이지
+						</a>
+					</span>
+<%				}		
+%>				<span class="sideicon2">
 					<p><%=(sid==null) ? cid : sid%></p>
 				</span>	
 
@@ -68,9 +80,6 @@
 					</a>
 				</span>
 
-				<span class="sideicon2">
-					<p><%=(sid==null) ? cid : sid%>님</p>
-				</span>	
 				<span class="sideicon1">
 	               <select onchange="goUrl(this.options[this.selectedIndex].value)">
 		               <option value="../member/myPage.jsp">회원관리
