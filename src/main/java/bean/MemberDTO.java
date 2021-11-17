@@ -6,8 +6,15 @@ public class MemberDTO {
 	private String email;
 	private String password;
 	private String reg;
+	private String rank;
 	private int warn;
 	
+	public String getRank() {
+		return rank;
+	}
+	public void setRank(String rank) {
+		this.rank=rank;
+	}
 	
 	public String getId() {
 		return id;
