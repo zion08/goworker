@@ -23,7 +23,7 @@
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	
-	int pageSize = 5;
+	int pageSize = 10;
 	
 	if(pageNum == null){
 		pageNum ="1"; // 값이 넘어오지 않을 경우 > 첫 페이지
