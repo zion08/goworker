@@ -128,47 +128,5 @@ function button_event(){
      </table>
     </footer>
 </body>
-<style>
-            input[type=submit]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:25%;
-                height:35px;
-                font-size: 14pt;
-                margin-top:5px;
-                shap:circle;
-            }
-            input[type=button]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:10%;
-                height:20px;
-                font-size: 10pt;
-                margin-top:5px;
-            }
-            
-            #footer{
-                text-align: right;
-                font-size:12pt;
-                color:rgb(164, 164, 164);
-                margin:10px 0px;
-            }
 
-            aside{
-                display:block;
-                width:400px;
-                margin:10px;
-                padding:4px;
-                text-align:center;
-            }
-            aside {
-                float:left;
-                width:104px;
-                height:240px;
-            }
-    </style>  
  </html>
