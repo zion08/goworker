@@ -36,7 +36,14 @@
 	<form action="pw_change.jsp" method="post">
 	<tr>
         <td>비밀번호 : <input type="password" name="password" value="<%=dto.getPassword()%>" /></td>
-    </tr>        
+    </tr>
+     <tr>
+	    <td align="center">회원등급 : </td>
+		 <select name = 'rank' >
+			 <option value = "member">멤버</option>
+			 <option value = "manager">매니저</option>
+		 </select>
+	</tr>        
     <tr>           
     	<td><input type="submit" value="정보 수정" /></td>
  	</tr> 
