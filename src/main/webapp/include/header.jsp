@@ -40,7 +40,7 @@
 					</a>
 				</span>
 				<span class="sideicon2">
-					<p><%=sid%></p>
+					<p><%=(sid==null) ? cid : sid%></p>
 				</span>	
 				<span class="sideicon1">
 	               <select onchange="goUrl(this.options[this.selectedIndex].value)">
