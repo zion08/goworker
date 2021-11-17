@@ -197,8 +197,37 @@ public class MemberDAO {
 			if(rs!=null) {try {rs.close();}catch(SQLException s) {}}
 			if(conn!=null) {try {conn.close();}catch(SQLException s) {}}
 		}
-		return result;
+    return result;
 	}
+
+		public List<MemberDTO> getmemberList(int start , int end) {
+			List<MemberDTO> list = null;
+			try {
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select * from "
+						+ " (select id,email,reg,warn,rank,rownum r from "
+						+ " (select * from member order by warn desc)) "
+						+ " where r >=? and r <=?");
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				rs = pstmt.executeQuery();			
+				list = new ArrayList();
+				while(rs.next()) {
+					MemberDTO dto = new MemberDTO();
+		            dto.setId(rs.getString("id"));
+		            dto.setEmail(rs.getString("email"));
+		            dto.setWarn(rs.getInt("warn"));
+		            dto.setRank(rs.getString("rank"));
+		            dto.setReg(rs.getTimestamp("reg").toString());
+		            list.add(dto);
+					
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+
+		
 	public int getCount() {
 		int result = 0; 
 		try {
@@ -215,34 +244,7 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	public List<MemberDTO> getmemberList(int start , int end) {
-		List<MemberDTO> list = null;
-		try {
-			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("select * from "
-					+ " (select id,email,reg,warn,rownum r from "
-					+ " (select * from member order by warn desc)) "
-					+ " where r >=? and r <=?");
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			rs = pstmt.executeQuery();			
-			list = new ArrayList();
-			while(rs.next()) {
-				MemberDTO dto = new MemberDTO();
-	            dto.setId(rs.getString("id"));
-	            dto.setEmail(rs.getString("email"));
-	            dto.setWarn(rs.getInt("warn"));
-	            dto.setReg(rs.getTimestamp("reg").toString());
-	            list.add(dto);
-				
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			DisconnDB.close(conn, pstmt, rs);
-		}
-		return list;
-	}
+	
 	public int memberWarn(String id) {
 		int result = 0;
 		try {
@@ -308,7 +310,72 @@ public class MemberDAO {
 		}finally {
 			DisconnDB.close(conn, pstmt, rs);
 		}
-		return dto;
+    	return dto;
 	}
-		
+
+		public int rankUpdate(MemberDTO dto) {
+			int result = 0;
+			try {
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("update member set rank=? where id=?"); 
+				pstmt.setString(1, dto.getRank());
+				pstmt.setString(2, dto.getId());
+				
+				result = pstmt.executeUpdate();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return result;
+		}
+		public List<MemberDTO> searchMemberList(String colum, String search, int start , int end) {
+			List<MemberDTO> list = null;
+			try {
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select * from "
+						+ " (select id,email,reg,warn,rank,rownum r from "
+						+ " (select * from member where "+colum +" like '%"+search+"%' order by rank desc)) "
+						+ " where r >=? and r <=?");
+			
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				
+				rs = pstmt.executeQuery();
+				list = new ArrayList();
+				while(rs.next()) {
+					MemberDTO dto = new MemberDTO();
+					dto.setId(rs.getString("id"));
+		            dto.setEmail(rs.getString("email"));
+		            dto.setWarn(rs.getInt("warn"));
+		            dto.setRank(rs.getString("rank"));
+		            dto.setReg(rs.getTimestamp("reg").toString());
+					list.add(dto);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return list;
+		}
+		public int getSearchCount(String colum , String search) {
+			int result = 0; 
+			try {
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select count(*) from member where "+colum +" like '%"+search+"%'");
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if(rs != null) {try {rs.close();}catch(SQLException s) {}}
+				if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
+				if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+			}
+			return result;
+		}
+
 }
