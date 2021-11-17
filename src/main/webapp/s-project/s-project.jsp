@@ -1,15 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="bean.SprojectDAO" %> 
 <%@ page import="bean.SprojectDTO" %>
-<%@ page import="bean.SprojectDAO" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List" %>  
 <%@ include file = "../include/header.jsp" %>
 
-<title>프로젝트 검색</title>
-<h1>프로젝트 검색</h1>
+<%	
+	request.setCharacterEncoding("UTF-8");
+	String pageNum = request.getParameter("pageNum");
+	String my = request.getParameter("my");
+	int pageSize = 5;
+	if(pageNum==null) {
+		pageNum = "1"; 
+	}
+	int currentPage = Integer.parseInt(pageNum);
+	int start = (currentPage - 1) * pageSize + 1;		
+	int end = currentPage * pageSize;
+	
+	SprojectDAO dao = new SprojectDAO();
+	int count = 0; 
+	List<SprojectDTO> list = null;	
+	if(my == null) {		
+		count = dao.getCount();
+		if(count > 0) {
+			list = dao.getAllList( start, end );	
+		}	
+%>
+
+<title>프로젝트 찾기</title>
+
 <script type="text/javascript">
 	var bDisplay = true;
+	
 	function doDisplay(){
 		var con = document.getElementById("checkboard");
 		if(con.style.display=='none'){
@@ -18,71 +40,19 @@
 			con.style.display = 'none';
 		}
 	}
-		function viewMine() {
-			value = document.getElementsByName("id")[0].value;
-			open('s-member_detail.jsp?id='+value,'confirm','width=500,height=500');
-		}
+	
+	function viewMine() {
+		value = document.getElementsByName("id")[0].value;
+		open('s-project_detail.jsp?id='+value,'confirm','width=500,height=500');
+	}
 </script>
 
 <aside>
-	<a href ="s-project_input.jsp"><input type="button" class=mInputButton value="멤버 등록하기"></a><br/><br/>
+	<a href ="s-project_input.jsp">
+		<input type="button" class=mInputButton value="프로젝트 등록하기">
+	</a><br/>
 </aside>
 
-<% 
-	String pageNum = request.getParameter("pageNum");
-	String my = request.getParameter("my");
-	String career = request.getParameter("career");
-	String field = request.getParameter("field");
-	String worktype = request.getParameter("worktype");
-	String location = request.getParameter("location");
-	String employtype = request.getParameter("employtype");
-	String projecttype = request.getParameter("projecttype");
-	String period = request.getParameter("period");
-	String pay = request.getParameter("pay");
-	String avail = request.getParameter("available");
-	
-	if (avail.isEmpty()) {
-		avail = String.valueOf('1');
-	}
-	int available = Integer.parseInt(avail);
-	
-	
-	int pageSize = 20;
-	if(pageNum==null) {
-		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
-	}
-	int currentPage = Integer.parseInt(pageNum);
-	int start = (currentPage - 1) * pageSize + 1;		
-	int end = currentPage * pageSize;
-	
-	SprojectDTO dto = new SprojectDTO();
-	
-	dto.setCareer(career);
-	dto.setField(field);
-	dto.setWorktype(worktype);
-	dto.setLocation(location);
-	dto.setEmploytype(employtype);
-	dto.setProjecttype(projecttype);	
-	dto.setAvailable(available);	
-	dto.setPeriod(period);
-	dto.setPay(pay);
-	
-	SprojectDAO dao = new SprojectDAO();
-	int scount = 0;					
-	List<SprojectDTO> list = null;	
-	String resultNone = new String();		
-			
-	scount = dao.getSearchCount(career, field, worktype,	// 검색 결과 갯수 저장
-			location, employtype, projecttype, period, pay,
-			available); 
-	if(scount > 0) {		
-		list = dao.getSearchList(career, field, worktype, 	
-								location, employtype, projecttype, period, pay,
-								available, start, end );	
-	} else {
-		resultNone = "검색결과가 없습니다...!!";	// 검색 결과 없을때 사용
-	}
-%>
 <section class="section1">
 	<div>
 		<a href="javascript:doDisplay();">검색조건 보기</a><br/>
@@ -191,7 +161,6 @@
 				</td>
 			</tr>
 			
-			
 			<tr>
 				<th>예상 기간</th>	
 				<td>
@@ -235,94 +204,76 @@
 				<td colspan=2 align="center">
 					<input type="submit" value="검색" />
 				</td>
-			</tr>
+			</tr>	
 			
 		</table>
 	</form>
 </section>
 
-<section class="section1">
+<section class="section3">
+<% 
+if(count > 0){
+	for(SprojectDTO dto : list) { %>
+	<div>
+		<table class="mboard" >
+			<tr>
+				<th><a href="s-proejct_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
+				<th>
+				<%if(dto.getAvailable() == 1) { %>
+				<img src="image/switch-on.png" width="40px" height="36px"> 
+				<%} else{ %>
+				<img src="image/switch-off.png" width="40px" height="36px">
+				<%} %>
+				</th>
+				<th><%=dto.getField() %></th>
+				<td><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
+					<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+				</td>
+			</tr>
+			<tr>
+				<th><%=dto.getCareer() %></th>
+				<th><%=dto.getEmploytype() %></th>
+				<th><%=dto.getLocation() %></th>
+				<th><%=dto.getWorktype() %></th>
+				<th><%=dto.getPay() %></th>
+				<th><%=dto.getPeriod() %></th>
+			</tr>
+			<tr>
+			<td colspan="4"> <%=dto.getIntroduce() %>
+			</td>
+			</tr>
+		</table><br/>
+	</div>
 
-<%	
-	if (scount == 0) { 
-%> 		<p><%=resultNone%></p>	
-<%	} 
-
-	if (scount > 0) {
-					
-		for(SprojectDTO sdto : list) {
-%>				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=sdto.getNum() %>','message','width=355px, height=540px');" >		
-					<table class="mboard">
-						<tr>
-							<th>
-								<a href="s-project_detail.jsp?num=<%=sdto.getNum()%>&pageNum=<%=pageNum%>"><%=sdto.getId() %>
-								</a>
-							</th>
-							<th>
-<%								if( sdto.getAvailable() == 1) { 
-%>										<img src="image/switch-on.png" width="40px" height="36px"> 
-<%									} else { 
-%>										<img src="image/switch-off.png" width="40px" height="36px">
-<%									} 
-%>							</th>
-							<th>
-								<%=sdto.getField() %>
-							</th>
-							<td>
-								<img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
-								<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
-							</td>
-						</tr>
-						
-						<tr>
-							<th><%=sdto.getCareer() %></th>
-							<th><%=sdto.getEmploytype() %></th>
-							<th><%=sdto.getLocation() %></th>
-							<th><%=sdto.getWorktype() %></th>
-							<th><%=sdto.getPeriod() %></th>
-							<th><%=sdto.getPay() %></th>
-						</tr>
-						
-						<tr>
-							<td colspan="4"> <%=sdto.getIntroduce() %>
-							</td>
-						</tr>
-					</table>
-					<!-- </form> -->
-				<br/>
-			
-<%		}
-%>
-
-<%	}	
-%>	
+<%}}
+}%>
 </section>
 
-
 <section class="section4">
-	<%
-		if (scount > 0) {
-			int pageCount = scount / pageSize + (scount % pageSize == 0 ? 0 : 1);
-			int startPage = (currentPage / 10)* 10 +1;
-			int pageBlock = 10;
-			int endPage = startPage + pageBlock -1;
-				if(endPage > pageCount) {
-					endPage = pageCount;
-				}
-			
-			if (startPage >10) {
-	%>			<a href="s-proejct.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
-	<%		}
+<%
+	if (count > 0) {
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		int startPage = (currentPage / 10)* 10 +1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock -1;
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
 		
-			for (int i = startPage ; i <= endPage ; i++) {
-	%> 			<a href="s-project.jsp?pageNum=<%=i%>">[<%=i %>] </a>
-	<%		}
-		
-			if(endPage < pageCount) {
-	%>		<a href="s-proejct.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-	<%		}
-		}
-	%>
+		if (startPage >10) {
+%>			<a href="s-member.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+<%		}
+	
+		for (int i = startPage ; i <= endPage ; i++) {
+%> 			<a href="s-member.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+<%		}
+	
+		if(endPage < pageCount) {
+%>		<a href="s-member.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+<%		}
+	
+	}
+%>
 </section>
 
 <footer>
@@ -374,4 +325,4 @@
     </table>
 </footer>
 
-</html>
+    

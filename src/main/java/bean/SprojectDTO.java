@@ -18,7 +18,7 @@ public class SprojectDTO {
 	private String projecttype;
 	private String worktype;
 	private String location;
-	private int pay;
+	private String pay;
 	private String period;
 	private int available;
 	private String introduce;
@@ -117,10 +117,10 @@ public class SprojectDTO {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public int getPay() {
+	public String getPay() {
 		return pay;
 	}
-	public void setPay(int pay) {
+	public void setPay(String pay) {
 		this.pay = pay;
 	}
 	public String getPeriod() {

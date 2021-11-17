@@ -156,8 +156,23 @@
 						</li>
 						
 						<li id="pay">
-							<label>계약금</label>
-								<input type="text" name="pay"  placeholder=", 없이 입력">만원
+							<label>찾는 프로젝트 유형</label>
+								<label><input type="radio" name="pay" value="0">전체</label>
+								<label><input type="radio" name="pay" value="100">100만원</label>
+								<label><input type="radio" name="pay" value="200">200만원</label>
+								<label><input type="radio" name="pay" value="300">300만원</label>
+								<label><input type="radio" name="pay" value="400">400만원</label>
+								<label><input type="radio" name="pay" value="500">500만원</label>
+								<label><input type="radio" name="pay" value="600">600만원</label>
+								<label><input type="radio" name="pay" value="700">700만원</label>
+								<label><input type="radio" name="pay" value="800">800만원</label>
+								<label><input type="radio" name="pay" value="900">900만원</label>
+								<label><input type="radio" name="pay" value="1000">1000만원</label>
+								<label><input type="radio" name="pay" value="2000">2000만원</label>
+								<label><input type="radio" name="pay" value="3000">3000만원</label>
+								<label><input type="radio" name="pay" value="4000">4000만원</label>
+								<label><input type="radio" name="pay" value="5000">5000만원</label>
+								<label><input type="radio" name="pay" value="10000">1억 이상</label>
 						</li>
 						
 						<li id="introduce">
