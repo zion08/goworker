@@ -60,18 +60,26 @@
 </form>
 
 <input type="button" value="목록" 
-	   onclick=" window.location='notice.jsp?pageNum=<%=pageNum%>' "/>
+	   onclick=" window.location='admin_notice.jsp?pageNum=<%=pageNum%>' "/>
 
-<%
-        
-        // 로그인된 id 와 글작성자 비교
-        if(sid!=null){
-        if(sid.equals("admin")){
-%>		<input type="button" value="글수정" onclick=" window.location='noticeUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
-		<input type="button" value="글삭제" onclick=" window.location='noticeDelete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>	
-<%  		}
-      	}
-%>
+<form action="/goworker/cs/noticeDeletePro.jsp" method="post">
+	<input type="hidden" name="pageNum" value=<%=pageNum %> />
+	<input type="hidden" name="num" value=<%=dto.getNum() %> />
+		<input type="button" value="글수정" onclick=" window.location='/goworker/cs/noticeUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
+		<input type="submit" value="글삭제" onclick="button_event()"/>	
+</form>
+<script>
+function button_event(){
+
+	if (confirm("정말 삭제하시겠습니까??") == true){ 
+	    document.form.submit();
+	    window.loction='/goworker/cs/noticeDeletePro.jsp?num=<%=dto.getNum() %>'
+		} else{  
+	    	return;
+			}
+	}
+
+</script>
 </body>
 <footer>
 <hr color="skyblue" size="2"  align="center" />
@@ -120,47 +128,5 @@
      </table>
     </footer>
 </body>
-<style>
-            input[type=submit]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:25%;
-                height:35px;
-                font-size: 14pt;
-                margin-top:5px;
-                shap:circle;
-            }
-            input[type=button]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:10%;
-                height:20px;
-                font-size: 10pt;
-                margin-top:5px;
-            }
-            
-            #footer{
-                text-align: right;
-                font-size:12pt;
-                color:rgb(164, 164, 164);
-                margin:10px 0px;
-            }
 
-            aside{
-                display:block;
-                width:400px;
-                margin:10px;
-                padding:4px;
-                text-align:center;
-            }
-            aside {
-                float:left;
-                width:104px;
-                height:240px;
-            }
-    </style>  
  </html>

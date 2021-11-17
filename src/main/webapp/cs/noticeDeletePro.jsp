@@ -7,8 +7,9 @@
 <jsp:setProperty property="num" name="dto" />
 <%
 	String pageNum = request.getParameter("pageNum");
+	int num = Integer.parseInt(request.getParameter("num"));
 	NoticeDAO dao = new NoticeDAO();
-	String result = dao.deleteNotice(dto.getNum());
+	String result = dao.deleteNotice(num);
 	if(result != null){
 		String path = request.getRealPath("fileSave");
 		File f = new File(path+"//"+result);
@@ -17,6 +18,6 @@
 %>
 <script>
 	alert("삭제 되었습니다.");
-	window.location="notice.jsp?pageNum=<%=pageNum%>";
+	window.location="/goworker/admin/admin_notice.jsp?pageNum=<%=pageNum%>";
 </script>
 
