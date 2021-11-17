@@ -13,7 +13,7 @@
   
 <% 
 	//받는 사람 정보 가저오기	
-	smdto = smdao.getContent(smdto);
+	smdto = smdao.getContent(smdto);	//클릭한 게시물 내용 가져옴
 	session.setAttribute("sidTarget", smdto.getId());	//받는 사람(idtarget) 세션에 저장
 	String sidTarget = (String)session.getAttribute("sidTarget");	//저장된 값 가져오기
 	
@@ -21,13 +21,16 @@
 		sidTarget = (String)request.getParameter("sidTarget");
 		session.setAttribute("sidTarget", sidTarget);
 		sidTarget = (String)session.getAttribute("sidTarget");
-	}
-	
+	}	
 		
 	//보내는 사람 (내 id) 가져오기
-	String sid = (String)session.getAttribute("sid");
-	
+	String sid = (String)session.getAttribute("sid");	
 	System.out.println("타겟id :" + sidTarget);
+	
+	//읽음 확인 파라미터 받기
+	String readcheck = (String)request.getParameter("readcheck");
+	System.out.println("readcheck :" + readcheck);
+	session.setAttribute("readcheck", readcheck);
 %>
 
 <!-- 받는 사람 -->
