@@ -3,8 +3,13 @@
 <%@ page import="bean.SmemberDAO" %> 
 <%@ page import = "bean.Comment_SmemberDAO" %>
 <%@ page import = "bean.Comment_SmemberDTO" %>
+<%@ page import = "bean.FavoriteDAO" %>
 <%@ page import="java.util.List" %> 
 <%@ page import = "java.text.SimpleDateFormat" %>
+
+<%@ page import = "bean.MemberDTO" %>
+<%@ page import = "bean.MemberDAO" %>
+
 <%@ include file = "../include/header.jsp" %>
    
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
@@ -130,6 +135,19 @@ function button_event(){
 	</table>
 	<br/>
 	
+	<%if (sid !=null) {%>
+<%if(sid.equals(dto.getId())) {%>
+	<form>
+		<% FavoriteDAO fdao = new FavoriteDAO(); 
+		boolean result = fdao.favCheck(sid, dto.getNum());
+		if(result == true) {%>
+		<a href="/goworker/member/favorite_out.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_fill.png" width="30px" height="30px"></a>
+		<%}else {%>
+		<a href="/goworker/member/favorite_in.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_empty.png" width="30px" height="30px"></a>
+		<%} %>
+	</form>
+	<%}
+}%>
 	
 	
 	<form align="center">
@@ -235,7 +253,9 @@ function button_event(){
 		count = cdao.getCount(); // 전체 글의 갯수
 		if(count > 0) {
 			list = cdao.getComment( dto.getNum() );	
-		}		
+		}
+		
+		
 %>
 
 <section class="section1">
@@ -250,10 +270,28 @@ function button_event(){
 <% 
 		if(count > 0) { 
 			for(Comment_SmemberDTO cdto : list)  {
+				
+				
+				MemberDTO mdto = new MemberDTO();
+				MemberDAO mdao = new MemberDAO();
+				String result = mdao.getRank(cdto.getComment_writerid());
+
+				
 %>	
 			<tr>	
 				<td align="center">
-					<img src="image/image.jpg" width="50" height="50"><br/>
+				
+<%			if(result != null){ %>
+<%			if(result.equals("admin")){%>	
+			<img src="/goworker/s-member/image/admin.jpg"  width="40px" height="40px" /></br>	
+			<%} %>
+<%			if(result.equals("manager")){%>				
+				<img src="/goworker/s-member/image/manager.jpg"  width="40px" height="40px" /></br/>
+				<%} %>
+<%		  	if(result.equals("member")){ %>
+					<img src="/goworker/s-memeber/image/image.jpg" width="40px" height="40px"><br/>
+						<% }
+        			}%>
 						<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 				</td>
 				 

@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<%@ page import="bean.MemberDAO" %>
-<%@ page import="bean.MemberDTO" %>
-<%@ page import="bean.SmemberDAO" %>
-<%@ page import="bean.SmemberDTO" %>
 <%@ page import="bean.NoticeDTO" %>
 <%@ page import="bean.NoticeDAO" %>
 <%@ page import="java.util.List" %>
@@ -24,12 +20,7 @@
 	  pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
       }
 	%>
-<aside>
-<tr>
- <td><a href="notice.jsp">공지사항</a></td><br>
- <td><a href="cs.jsp">문의사항</a></td>
-</tr>
-</aside>
+
 <h2>공지사항</h2>
 <%
 	int pageSize = 10;
@@ -55,7 +46,7 @@
 %>
      <table border="1">
 	<tr>
-		<th>글번호</th><th>작성자</th><th>제목</th><th>작성일</th><th>조회</th>
+		<th>글번호</th><th>작성자</th><th>제목</th> <th>작성일</th><th>조회</th>
 	</tr>
 	<%if(count == 0){%>
 		<tr>
@@ -67,7 +58,7 @@
 	<tr>
 		<td><%=dto.getNum()%></td>
 		<td><%=dto.getWriter()%></td>
-		<td><a href="noticeContents.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></td> 	
+		<td><a href="/goworker/admin/admin_noticeContent.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></td> 	
 		<td><%=dto.getRegdt()%></td>
 		<td><%=dto.getReadcount()%></td>
 	</tr>		
@@ -84,23 +75,18 @@
 			endPage = pageCount;
 		}	
 		if(startPage > 10){%>
-			<a href="notice.jsp?pageNum=<%=startPage-10%>">[이전]</a>
+			<a href="admin_notice.jsp?pageNum=<%=startPage-10%>">[이전]</a>
 		<%}
 		for(int i = startPage ; i <= endPage ; i++){
-		%>	<a href="notice.jsp?pageNum=<%=i%>">[<%=i%>]</a> 	
+		%>	<a href="admin_notice.jsp?pageNum=<%=i%>">[<%=i%>]</a> 	
 	  <%}
 		if(endPage < pageCount){%>
-		<a href="notice.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
+		<a href="admin_notice.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
 	<%}	
 	}
 %>
-<%    
-       // 로그인된 id 와 글작성자 비교
-       if(sid != null){
-	   if(sid.equals("admin")){
-%>		<input type="button"  value="글쓰기" onclick="window.location='noticeWrite.jsp' "/>
-<%  } 
-}%>
+ 		<input type="button"  value="글쓰기" onclick="window.location='admin_noticeWrite.jsp' "/>
+
 <br />
 <footer>
 <hr color="skyblue" size="2"  align="center" />
@@ -149,48 +135,5 @@
      </table>
     </footer>
 </body>
-<style>
-            input[type=submit]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:25%;
-                height:35px;
-                font-size: 14pt;
-                margin-top:5px;
-                shap:circle;
-            }
-            input[type=button]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:10%;
-                height:20px;
-                font-size: 10pt;
-                margin-top:5px;
-            }
-            
-            #footer{
-                text-align: right;
-                font-size:12pt;
-                color:rgb(164, 164, 164);
-                margin:10px 0px;
-            }
 
-            aside{
-                display:block;
-                width:400px;
-                margin:10px;
-                padding:4px;
-                text-align:center;
-            }
-            aside {
-                float:left;
-                width:104px;
-                height:240px;
-            }
-    </style>  
  </html>
-    

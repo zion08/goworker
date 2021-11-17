@@ -3,7 +3,10 @@
 <%@ page import="bean.SprojectDTO" %>
 <%@ page import="bean.SprojectDAO" %>
 <%@ page import ="java.util.List" %>
+<<<<<<< HEAD
 <link href="../style.css" rel="stylesheet" type="text/css">
+=======
+>>>>>>> master
 <%@ include file = "../include/header.jsp" %>
 <%
 	int pageSize = 20;

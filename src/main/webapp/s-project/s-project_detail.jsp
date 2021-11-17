@@ -9,6 +9,9 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
+<%@ page import = "bean.MemberDTO" %>
+<%@ page import = "bean.MemberDAO" %>
+
 <%@ include file = "../include/header.jsp" %>
 
 
@@ -170,6 +173,7 @@ session.setAttribute("num", dto.getNum());
 			}	
 	
 			
+			
 	%>
 	
 	
@@ -184,12 +188,29 @@ session.setAttribute("num", dto.getNum());
 				if(count > 0) { 
 				for(Comment_SprojectDTO cdto : list)  {
 				
-				
+
+					
+					MemberDTO mdto = new MemberDTO();
+					MemberDAO mdao = new MemberDAO();
+					String result = mdao.getRank(cdto.getComment_writerid());
 				%>
 			
 			<tr>	
 				<td align="center">
-					<img src="/goworker/s-project/image/image.jpg" width="50" height="50"><br/>
+				
+						
+<%			if(result != null){ %>
+<%			if(result.equals("admin")){%>	
+			<img src="/goworker/s-project/image/admin.jpg"  width="40px" height="40px" /></br>	
+			<%} %>
+<%			if(result.equals("manager")){%>				
+				<img src="/goworker/s-project/image/manager.jpg"  width="40px" height="40px" /></br/>
+				<%} %>
+<%		  	if(result.equals("member")){ %>
+
+					<img src="/goworker/s-project/image/image.jpg" width="40px" height="40px"><br/>
+						<%} 
+					} %>
 						<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 				</td>
 				 <td>
