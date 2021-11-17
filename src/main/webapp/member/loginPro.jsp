@@ -28,7 +28,7 @@
 		}
 		else if(chkbox.equals("yes")) // 로그인 상태 유지 체크되어 있으면 실행. (내용비교)
 		{
-			response.addCookie(Cookies.createCookie("cid", session.getId(), "/", 60*60*24*30)); //쿠키에 기본쿠키세션id 저장
+			response.addCookie(Cookies.createCookie("cid", dto.getId(), "/", 60*60*24*30)); //쿠키id = id
 			response.sendRedirect("/goworker/main/index.jsp");
 		}
 	}else
