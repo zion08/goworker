@@ -17,7 +17,7 @@
  	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	
 	int pageSize = 5;
 	
@@ -108,7 +108,7 @@
         			<img src="/goworker/makeproject/image/image.jpg" width="30px" height="30px"/><br/>
         			<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
         		</td>
-        		<td width="60px" align="center" >
+        		<td width="100px" align="center">
         			<%=sdf.format(dto.getReg_date()) %>
         		</td>
         	</tr>

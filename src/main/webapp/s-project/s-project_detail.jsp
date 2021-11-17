@@ -54,18 +54,20 @@ session.setAttribute("num", dto.getNum());
 	게시 날짜 : <%=dto.getRegdate() %><br />
 	조회 : <%=dto.getReadcount() %><br />
 	<br />
-	<input type="button" value="좋아요">
-
+	
 	<input type="button" value="목록" 
 	onclick="window.location='s-project_list.jsp?pageNum=<%=pageNum%>'" />
-
-	<%if( sid == id ) { %>	
-		<input type="button" value="수정하기" 
-		onclick="window.location='s-project_update.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum() %>&id=<%=id %>'" />	
-	<%} %>
-	<%if( sid != id ) { %>	
-		<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-project/email/mail.jsp?pageNum=<%=pageNum%>'"/>
-	<%} %>
+	<%if(id !=null){ %>
+		<input type="button" value="좋아요">
+		<%if( sid == id ) { %>	
+			<input type="button" value="수정하기" 
+			onclick="window.location='s-project_update.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum() %>&id=<%=id %>'" />	
+			<input type="button" value="삭제하기" 
+			onclick="window.location='s-project_delete.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum() %>&id=<%=id %>'" />	
+		<%} %>
+		<%if( sid != id ) { %>	
+			<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-project/email/mail.jsp?pageNum=<%=pageNum%>'"/>
+		<%}} %>
 <br /><br />
 
 
