@@ -131,14 +131,10 @@
         			}%>
         			<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
         		</td>
-<<<<<<< HEAD
-        		<td width="100px" align="center">
-=======
         		
         		
         		
         		<td width="100px" align="center" >
->>>>>>> master
         			<%=sdf.format(dto.getReg_date()) %>
         		</td>
         	</tr>

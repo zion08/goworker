@@ -172,6 +172,11 @@ function button_event(){
 </section>
 
 
+
+
+
+
+
 <!-- 댓글 작성 폼 -->
 <%
 	int comment_num=0, comment_ref=1, comment_step=0, comment_level=0;
@@ -224,6 +229,7 @@ function button_event(){
 				</td>
 
 			</tr>
+			
 			<tr>	
 				<td width="60px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
@@ -313,8 +319,9 @@ function button_event(){
 					<%=sdf.format(cdto.getComment_regdate()) %>
 				</td>
 				
-<% if(sid !=null) {
-if(sid.equals(cdto.getComment_writerid())) { %>					
+<% 
+	if(sid !=null) {
+		if(sid.equals(cdto.getComment_writerid())) { %>					
 				
 				<td  align="center">
 					<form action="/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
@@ -337,7 +344,7 @@ if(sid.equals(cdto.getComment_writerid())) { %>
  				</td>
  			</tr>
  			<%}
-}%>
+	}%>
  			
  			
  			
