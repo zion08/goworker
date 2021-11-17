@@ -10,6 +10,9 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
+<%@ page import = "bean.MemberDTO" %>
+<%@ page import = "bean.MemberDAO" %>
+
 <%@ include file = "../include/header.jsp" %>
 
 
@@ -42,6 +45,9 @@
 	
 	comment_count = cd.getCommentCount(board_num);
 
+	MemberDTO mdto = new MemberDTO();
+	MemberDAO mdao = new MemberDAO();
+	String result = mdao.getRank(dto.getId());
 	
 %>
 <section class="section1" >
@@ -58,13 +64,25 @@
 				<td align="center" colspan="3" width="700px" ><b>Make Project invitation</b></td>
 			</tr>
 			<tr>
-				<td align="center" width="50px" height="70px"   align="center"><img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
+				<td align="center" width="50px" height="70px"   align="center">
+				
+<%			if(result != null){ %>
+<%				if(result.equals("admin")){%>	
+				<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
+				<%} %>
+<%				if(result.equals("manager")){%>				
+				<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
+					<%} %>
+<%		  		if(result.equals("member")){ %>
+				<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
+					<% }
+        		}%>
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
 				</td>
 				<td align="center" width="150px">
 					<%=sdf.format(dto.getReg_date()) %>
 				</td>
-				<td align="right" width="90px">
+				<td align="center" width="110px">
 						<img src="/goworker/makeproject/image/view.png" width="25px" height="25x"/><%=dto.getReadcount()%> &emsp;
 						<img src="/goworker/makeproject/image/comment.png" width="25px" height="25px" /><%=comment_count %> &emsp;
         				<img src ="/goworker/makeproject/image/thumbs.png" width="25px" height="25px" /><%=dto.getGood() %>&emsp;
@@ -223,7 +241,19 @@ if(sid.equals(dto.getId())) { %>
 	
 	<tr>
 		<td align="center">
-			<img src="/goworker/makeproject/image/image.jpg" width="50" height="50"><br/>
+		
+		
+<%			if(result != null){ %>
+<%			if(result.equals("admin")){%>	
+				<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
+				<%} %>
+<%			if(result.equals("manager")){%>				
+				<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
+				<%} %>
+<%		  	if(result.equals("member")){ %>
+				<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"><br/>
+				<% }
+        	}%>
 				<%=cdto.getComment_writerid()%><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 		</td>
 		
