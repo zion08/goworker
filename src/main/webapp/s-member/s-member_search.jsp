@@ -347,7 +347,7 @@
 					
 		for(SmemberDTO sdto : list) {
 %>				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=sdto.getNum() %>','message','width=355px, height=540px');" >		
-					<table class="mboard">
+					<table class="mboard" style="table-layout:fixed">
 						<tr>
 							<th>
 								<a href="s-member_detail.jsp?num=<%=sdto.getNum()%>&pageNum=<%=pageNum%>"><%=sdto.getId() %>
@@ -377,7 +377,7 @@
 						</tr>
 						
 						<tr>
-							<td colspan="4"> <%=sdto.getIntroduce() %>
+							<td colspan="4" style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"> <%=sdto.getIntroduce() %>
 							</td>
 						</tr>
 					</table>

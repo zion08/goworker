@@ -132,7 +132,7 @@ function button_event(){
 	<br/>
 	
 	<%if (sid !=null) {%>
-<%if(sid.equals(dto.getId())) {%>
+
 	<form>
 		<% FavoriteDAO fdao = new FavoriteDAO(); 
 		boolean result = fdao.favCheck(sid, dto.getNum());
@@ -142,15 +142,14 @@ function button_event(){
 		<a href="/goworker/member/favorite_in.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_empty.png" width="30px" height="30px"></a>
 		<%} %>
 	</form>
-	<%}
-}%>
+	
 	
 	
 	<form align="center">
 		<a href="s-member_goodUp.jsp?num=<%=dto.getNum() %>" onclick= "window.open(this.href,'GoodUp','width=300,height=150'); return false; window.location.reload();" >좋아요<img src="image/thumbs.png" width="25px" height="25px" ></a>&emsp;
 		<a href="s-member_goodDown.jsp?num=<%=dto.getNum() %>" onclick= "window.open(this.href,'GoodDown','width=300,height=150'); return false; window.location.reload();" >싫어요<img src="image/thumbs_down.png" width="25px" height="25px" ></a>
 	</form>
-	
+	<%}%>
 	
 <%if (sid !=null) {%>
 <%if(sid.equals(dto.getId())) {%>

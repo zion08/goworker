@@ -296,7 +296,7 @@ if((dto.getLocation()).equals("jeju")) {
 	
 	<div>
 		<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=dto.getNum()%>','message','width=355px, height=540px');" >
-		<table class="mboard" >
+		<table class="mboard" style="table-layout:fixed" >
 			<tr>
 				<th><a href="s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
 				<th>
@@ -318,7 +318,7 @@ if((dto.getLocation()).equals("jeju")) {
 				<th><%=dto.getWorktype() %></th>
 			</tr>
 			<tr>
-			<td colspan="4"> <%=dto.getIntroduce() %>
+			<td colspan="4" style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"> <%=dto.getIntroduce() %>
 			</td>
 			</tr>
 		</table><br/>
