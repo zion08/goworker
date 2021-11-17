@@ -3,7 +3,7 @@
 <%@ include file = "../include/header.jsp" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 	
-<%	if (sid != null) { //로그인pro 수정 수정 후, ==으로 바꿀 것
+<%	if (sid == null) { //로그인pro 수정 수정 후, ==으로 바꿀 것
 %>		<script>
 			location.href="../member/login.jsp";
 		</script>  		
@@ -21,7 +21,7 @@
 						<li id="id">	
 							<label>아이디</label>
 								<span><%=sid%></span>
-								<input type="hidden" name="writer" value="<%=sid%>"/>
+								<input type="hidden" name="id" value="<%=sid%>"/>
 						</li>
 						
 						<li id=phone>

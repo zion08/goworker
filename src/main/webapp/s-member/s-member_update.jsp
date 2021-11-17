@@ -6,7 +6,6 @@
 <jsp:useBean class="bean.SmemberDTO" id="dto" />   
 <%	String num= request.getParameter("num");
 	String pageNum = request.getParameter("pageNum");
-	String sid = (String)session.getAttribute("sid"); 
 	SmemberDAO dao = new SmemberDAO();
 	dto = dao.getContent(dto);
 %>
@@ -17,7 +16,7 @@
 			<div id="id">	
 				<label>아이디</label>
 					<span><%=sid%></span>
-					<input type="hidden" name="writer" value="<%=sid%>" />
+					<input type="hidden" name="id" value="<%=sid%>" />
 			</div>
 			
 			<div id=phone>
@@ -161,7 +160,7 @@
 			
 			<hr color="skyblue" size="2" width="750" align="center">
 			<div class="wrapper-submit">
-				<input type="submit" value="등록하기" />
+				<input type="submit" value="수정하기" />
 			</div>
 		</div>
 	</form>	

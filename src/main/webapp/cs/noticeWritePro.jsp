@@ -31,7 +31,7 @@
 	if(result == 1){
 %>		<script>
 			alert("작성되었습니다.!");
-			window.location="notice.jsp";
+			window.location="/goworker/admin/admin_notice.jsp";
 		</script>
   <%} %>
 	
