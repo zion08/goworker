@@ -33,14 +33,13 @@
 <%	} else {
 %>			
             <div class="wrapper-sideicon">	
-                <h1> <%= (sid==null) ? cid : sid %> 님</h1>		
 				<span class="sideicon1">
 					<a href="#" onclick="window.open('../message/messageSave.jsp', 'message', 'width=355px, height=540px');">
 						<img src="../s-member/image/note.png"><p>메세지</p>
 					</a>
 				</span>
 				<span class="sideicon2">
-					<p><%=(sid==null) ? cid : sid%></p>
+					<p><%=(sid==null) ? cid : sid%>님</p>
 				</span>	
 				<span class="sideicon1">
 	               <select onchange="goUrl(this.options[this.selectedIndex].value)">
