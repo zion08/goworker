@@ -68,6 +68,9 @@
 					</a>
 				</span>
 
+				<span class="sideicon2">
+					<p><%=(sid==null) ? cid : sid%>님</p>
+				</span>	
 				<span class="sideicon1">
 	               <select onchange="goUrl(this.options[this.selectedIndex].value)">
 		               <option value="../member/myPage.jsp">회원관리
