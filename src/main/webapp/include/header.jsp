@@ -2,39 +2,57 @@
     pageEncoding="UTF-8"%>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <link href="../style.css" rel="stylesheet" type="text/css">
-
-
 <%	String sid = (String)session.getAttribute("sid"); %>
-<header>
-            <script language="javascript">  
-               function goUrl(url)   
-               { window.location.href  = url;     }  
-            </script>
-            
+
+<script language="javascript">  
+	function goUrl(url) {
+		window.location.href  = url;
+		}  
+</script>
+
+<header>    
 			<div class="logo" onclick="window.location='/goworker/main/index.jsp'">
 			</div>	
 <%	if (sid == null) {
-%>			<div class="wrapper-sideicon">			
+%>			<div class="wrapper-title">
+				<span class="title">
+					GoWorker<br/>함께 나아갈 동료와 프로젝트를 찾으세요! 
+				</span>
+			</div>
+			<div class="wrapper-sideicon">			
 				<span class="sideicon2" >
 					<a href="/goworker/member/apply.jsp">가입하기
 					</a>
 				</span>			
 				<span class="sideicon2">
-					<a href="/goworker/member/login.jsp">로그인	<!-- 로그인 완성 후, 주소 변경 할것 -->
+					<a href="/goworker/member/login.jsp">로그인
 					</a>
 				</span>
 			</div>
 <%	} else {
-%>			
-            <div class="wrapper-sideicon">			
+%>			<div class="wrapper-title">
+				<span class="title">
+					GoWorker<br/>함께 나아갈 동료와 프로젝트를 찾으세요! 
+				</span>
+			</div>
+            <div class="wrapper-sideicon">	
+<%            	if (rank=="") {
+%>					<span class="sideicon2">
+						<p>프로젝트등록</p>
+					</span>
+<%           	} else if (rank=="") {
+%>
+<%				} else {
+				
+%>				}		
+				<span class="sideicon2">
+					<p><%=sid%></p>
+				</span>
 				<span class="sideicon1">
 					<a href="#" onclick="window.open('../message/messageSave.jsp', 'message', 'width=355px, height=540px');">
 						<img src="../s-member/image/note.png"><p>메세지</p>
 					</a>
 				</span>
-				<span class="sideicon2">
-					<p><%=sid%></p>
-				</span>	
 				<span class="sideicon1">
 	               <select onchange="goUrl(this.options[this.selectedIndex].value)">
 		               <option value="../member/myPage.jsp">회원관리
@@ -48,4 +66,4 @@
 			</div>
 <%	}
 %></header>
-<hr color="skyblue" size="2"  align="center" />
+<hr color="#DFD8CA" size="2"  align="center" />
