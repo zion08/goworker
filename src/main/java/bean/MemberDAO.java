@@ -379,7 +379,7 @@ public class MemberDAO {
 		}
 		
 		
-		// lank 사진 변경 메서드
+		// Rank에 따른 프로필 사진 변경 메서드
 		public String getRank(String id) {
 			String result = null;
 			try {			
