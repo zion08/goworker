@@ -76,6 +76,15 @@
 				<td align="center">password : </td>
 				<td><input type="password" name="password" placeholder="영문+숫자 조합 6자리 이상 입력해주세요." /></td>
 			</tr>
+			<tr>
+				<td align="center">회원등급 : </td>
+				<td>
+					<select name = 'rank' >
+						<option value = "member">멤버</option>
+						<option value = "manager">매니저</option>
+					</select>
+				</td>
+			</tr>
 		</table>
 			<input type="submit" value="회원가입" onclick="applyPro.jsp"/>	
 	</div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
+<%@ page import="bean.Cookies" %>
+    
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <link href="../style.css" rel="stylesheet" type="text/css">
 <%	String sid = (String)session.getAttribute("sid"); %>
@@ -10,10 +12,20 @@
 		}  
 </script>
 
+<%	
+	String sid = (String)session.getAttribute("sid"); 
+	Cookies cookies = new Cookies(request);
+	String cid = cookies.getValue("cid");
+%>
+
+
 <header>    
 			<div class="logo" onclick="window.location='/goworker/main/index.jsp'">
 			</div>	
 <%	if (sid == null) {
+%>			
+			
+<%	if (sid == null && cid == null) {
 %>			<div class="wrapper-title">
 				<span class="title">
 					GoWorker<br/>함께 나아갈 동료와 프로젝트를 찾으세요! 
@@ -35,6 +47,7 @@
 					GoWorker<br/>함께 나아갈 동료와 프로젝트를 찾으세요! 
 				</span>
 			</div>
+
             <div class="wrapper-sideicon">	
 <%            	if (rank=="") {
 %>					<span class="sideicon2">
@@ -46,13 +59,15 @@
 				
 %>				}		
 				<span class="sideicon2">
-					<p><%=sid%></p>
-				</span>
+					<p><%=(sid==null) ? cid : sid%></p>
+				</span>	
+
 				<span class="sideicon1">
 					<a href="#" onclick="window.open('../message/messageSave.jsp', 'message', 'width=355px, height=540px');">
 						<img src="../s-member/image/note.png"><p>메세지</p>
 					</a>
 				</span>
+
 				<span class="sideicon1">
 	               <select onchange="goUrl(this.options[this.selectedIndex].value)">
 		               <option value="../member/myPage.jsp">회원관리
@@ -65,5 +80,6 @@
                </span>					
 			</div>
 <%	}
-%></header>
+%>
+</header>
 <hr color="#DFD8CA" size="2"  align="center" />
