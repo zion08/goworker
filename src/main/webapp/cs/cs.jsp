@@ -16,7 +16,7 @@
 </head>
 <aside>
 <tr>
- <td><a href="notice.jsp">고객센터</a></td><br>
+ <td><a href="notice.jsp">공지사항</a></td><br>
  <td><a href="cs.jsp">문의사항</a></td>
 </tr>
 </aside>
@@ -40,13 +40,21 @@
 	int count = 0;
 	List<CsDTO> list = null;
 	
-	count = dao.getMyCount(id); // 나의 작성글수 
-	if(count > 0){
-		list = dao.getMyList(id, start , end );
+	if(id !=null){
+	if(id.equals("admin"))	
+		count = dao.getCount(); // 전체글 수 
+    if(count > 0){
+	    list = dao.getAllList( start , end );
+	}else{
+		count = dao.getMyCount(id); // 나의 작성글수 
+		if(count > 0){
+			list = dao.getMyList(id, start , end ); 
+		}
 	}
+}
 	
 %>
-     <table border="1">
+<table border="1">
 	<tr>
 		<th>글번호</th><th>작성자</th><th>제목</th> <th>내용</th><th>작성일</th><th>조회</th>
 	</tr>
@@ -141,27 +149,6 @@
     </footer>
 </body>
 <style>
-            input[type=submit]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:25%;
-                height:35px;
-                font-size: 14pt;
-                margin-top:5px;
-                shap:circle;
-            }
-            input[type=button]{
-                background-color: skyblue;
-                border:none;
-                color:white;
-                border-radius: 5px;
-                width:10%;
-                height:20px;
-                font-size: 10pt;
-                margin-top:5px;
-            }
             
             #footer{
                 text-align: right;

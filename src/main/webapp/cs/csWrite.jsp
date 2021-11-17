@@ -39,13 +39,13 @@
     				 <tr>
 			      <td width ="100px" align ="center">제 목</td>
 			      <th width="300px" colspan=3 align="center">
-    	          <input type="text" name="subject" value="<%=dto.getSubject() %>" />  <br />
+    	          <input type="text" name="subject" />  <br />
     	          </th>
     	     </tr>
              <tr>	
 			      <td width="100px" align="center">내 용</td>
 			      <td width="300px" colspan=3 align="center">
-			      <input type="text" size="100" name="content" id="content" style="width:500px;height:100px;" value="<%=dto.getContent() %>"></td>
+			      <input type="text" size="100" name="content" id="content" style="width:500px;height:100px;" ></td>
 		     </tr>
 		     <tr>
 		          <td width="100px" align="center">첨부파일</td>
