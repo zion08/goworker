@@ -156,7 +156,7 @@
 						</li>
 						
 						<li id="pay">
-							<label>찾는 프로젝트 유형</label>
+							<label>예상 급여</label>
 								<label><input type="radio" name="pay" value="0">전체</label>
 								<label><input type="radio" name="pay" value="100">100만원</label>
 								<label><input type="radio" name="pay" value="200">200만원</label>
