@@ -9,6 +9,7 @@
 <%	
 	String sid = (String)session.getAttribute("sid"); 
 	Cookies cookies = new Cookies(request);
+	String cid = cookies.getValue("cid");
 %>
 <header>
             <script language="javascript">  
@@ -18,7 +19,7 @@
             
 			<div class="logo" onclick="window.location='/goworker/main/index.jsp'">
 			</div>	
-<%	if (sid == null) {
+<%	if (sid == null && cid == null) {
 %>			<div class="wrapper-sideicon">			
 				<span class="sideicon2" >
 					<a href="/goworker/member/apply.jsp">가입하기
@@ -32,7 +33,7 @@
 <%	} else {
 %>			
             <div class="wrapper-sideicon">	
-                <h1> <%=sid%> 님</h1>		
+                <h1> <%= (sid==null) ? cid : sid %> 님</h1>		
 				<span class="sideicon1">
 					<a href="../message/messageSave.jsp" >
 						<img src="../s-member/image/note.png"><p>메세지</p>

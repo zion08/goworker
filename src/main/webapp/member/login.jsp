@@ -5,7 +5,6 @@
 <% //<jsp:include page="kakao_login.html" flush="false" / %>
 <title>로그인</title>
 <%
-	Cookies cookies = new Cookies(request);
 	if(session.getAttribute("sid") !=null || cookies.getValue("cid")!=null)
 	{ // 세션id있으면 main화면으로 이동
 		response.sendRedirect("/main/index.jsp");
