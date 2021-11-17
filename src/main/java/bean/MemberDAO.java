@@ -27,6 +27,7 @@ public class MemberDAO {
 	            dto.setId(rs.getString("id"));
 	            dto.setEmail(rs.getString("email"));
 	            dto.setPassword(rs.getString("password"));
+	            dto.setRank(rs.getString("rank"));
 	            dto.setReg(rs.getTimestamp("reg").toString());
 	            list.add(dto);  // 리스트에 추가
 	         }
@@ -61,10 +62,11 @@ public class MemberDAO {
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("insert into member values(?,?,?,sysdate,0)");
+				pstmt = conn.prepareStatement("insert into member values(?,?,?,sysdate,0,?)");
 				pstmt.setString(1, dto.getId());
 				pstmt.setString(2, dto.getEmail());
 				pstmt.setString(3, dto.getPassword());
+				pstmt.setString(4, dto.getRank());
 				result = pstmt.executeUpdate();
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -86,6 +88,7 @@ public class MemberDAO {
 					dto.setId(rs.getString("id"));
 					dto.setEmail(rs.getString("email"));
 					dto.setPassword(rs.getString("password"));
+					dto.setRank(rs.getString("rank"));
 					dto.setWarn(rs.getInt("warn"));
 					dto.setReg(rs.getTimestamp("reg").toString());
 				}
@@ -101,10 +104,11 @@ public class MemberDAO {
 			int result = 0;
 			try {
 				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("update member set email=?,password=? where id=?"); 
+				pstmt = conn.prepareStatement("update member set email=?,password=?,rank=? where id=?"); 
 				pstmt.setString(1, dto.getEmail());
 				pstmt.setString(2, dto.getPassword());
-				pstmt.setString(3, dto.getId());
+				pstmt.setString(3, dto.getRank());
+				pstmt.setString(4, dto.getId());
 				result = pstmt.executeUpdate();
 			}catch(Exception e) {
 				e.printStackTrace();
