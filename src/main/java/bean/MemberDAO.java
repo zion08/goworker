@@ -380,21 +380,21 @@ public class MemberDAO {
 		
 		
 		// Rank에 따른 프로필 사진 변경 메서드
-		public String getRank(String id) {
-			String result = null;
-			try {			
-				conn = OracleDB.getConnection();
-				pstmt = conn.prepareStatement("select rank from member where id=?");
-				pstmt.setString(1, id);
-				rs = pstmt.executeQuery();
-				if(rs.next()) {
-				    result = rs.getString(1);
+			public String getRank(String id) {
+				String result = null;
+				try {			
+					conn = OracleDB.getConnection();
+					pstmt = conn.prepareStatement("select rank from member where id=?");
+					pstmt.setString(1, id);
+					rs = pstmt.executeQuery();
+					if(rs.next()) {
+					    result = rs.getString(1);
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					DisconnDB.close(conn, pstmt, rs);
 				}
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				DisconnDB.close(conn, pstmt, rs);
+				return result ;
 			}
-			return result ;
-		}
 }

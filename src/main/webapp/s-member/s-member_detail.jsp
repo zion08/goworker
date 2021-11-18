@@ -286,17 +286,17 @@ function button_event(){
 			<tr>	
 				<td align="center">
 				
-<%			if(result != null){ %>
-<%			if(result.equals("admin")){%>	
-			<img src="/goworker/s-member/image/admin.jpg"  width="40px" height="40px" /></br>	
-			<%} %>
-<%			if(result.equals("manager")){%>				
-				<img src="/goworker/s-member/image/manager.jpg"  width="40px" height="40px" /></br/>
+<%				if(result != null){ %>
+<%				if(result.equals("admin")){%>	
+					<img src="/goworker/s-member/image/admin.jpg"  width="40px" height="40px" /></br>	
 				<%} %>
-<%		  	if(result.equals("member")){ %>
+<%				if(result.equals("manager")){%>				
+					<img src="/goworker/s-member/image/manager.jpg"  width="40px" height="40px" /></br/>
+				<%} %>
+<%		  		if(result.equals("member")){ %>
 					<img src="/goworker/s-memeber/image/image.jpg" width="40px" height="40px"><br/>
 						<% }
-        			}%>
+        		}%>
 						<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 				</td>
 				 

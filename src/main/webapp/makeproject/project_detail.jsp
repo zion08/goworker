@@ -243,19 +243,19 @@ if(sid.equals(dto.getId())) { %>
 		<td align="center">
 		
 		
-<%			if(result != null){ %>
-<%			if(result.equals("admin")){%>	
-				<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
-				<%} %>
-<%			if(result.equals("manager")){%>				
-				<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
-				<%} %>
-<%		  	if(result.equals("member")){ %>
-				<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"><br/>
-				<% }
-        	}%>
-				<%=cdto.getComment_writerid()%><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
-		</td>
+			<%			if(result != null){ %>
+			<%			if(result.equals("admin")){%>	
+							<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
+							<%} %>
+			<%			if(result.equals("manager")){%>				
+							<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
+							<%} %>
+			<%		  	if(result.equals("member")){ %>
+							<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"><br/>
+							<% }
+						}%>
+							<%=cdto.getComment_writerid()%><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
+					</td>
 		
 		<td>
 <%
