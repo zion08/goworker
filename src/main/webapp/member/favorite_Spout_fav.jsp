@@ -47,7 +47,7 @@
 	 if(result == -1) {
 %>		<script type="text/javascript">
 			alert("등록해제 되었습니다.");
-			window.location = '/goworker/s-project/s-project_detail.jsp?num=<%=Sproject_num%>';
+			window.location = '/goworker/member/favorite.jsp';
 		</script>
 <%	} else {
 %>		<script type="text/javascript">

@@ -12,6 +12,8 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
+<%@ page import = "bean.MemberDAO" %>
+
 <%@ include file = "../include/header.jsp" %>
 
 
@@ -238,31 +240,42 @@ session.setAttribute("num", dto.getNum());
 			<% 
 				if(count > 0) { 
 				for(Comment_SprojectDTO cdto : list)  {
-				
-				
+
+					MemberDAO mdao = new MemberDAO();
+					String result = mdao.getRank(cdto.getComment_writerid());
 				%>
 			
 			<tr>	
 				<td align="center">
-					<img src="/goworker/s-project/image/image.jpg" width="50" height="50"><br/>
-						<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
-				</td>
-				 <td>
-			<%
-			  int wid=0; 
-			  if(cdto.getComment_level()>0){
-				// 답글일때에만 Re_level()의 값이 0 이상이다. / 답글일때에만 조건문 수행
-				wid=10*(cdto.getComment_level());
-			 // 답글 들여쓰기 사이즈(width의 값으로 넣을 변수와 값 저장해서 아래에 대입)
-			%>
-				 <img src="/goworker/s-project/image/white.jpg" width="<%=wid%>" height="16">
-				  <img src="/goworker/s-project/image/re.gif">
-			  <%}else{%>
+<%					if(result != null){ %>
+<%						if(result.equals("admin")){%>	
+								<img src="/goworker/s-project/image/admin.jpg"  width="40px" height="40px" /></br>	
+						<%} %>
+<%					if(result.equals("manager")){%>				
+								<img src="/goworker/s-project/image/manager.jpg"  width="40px" height="40px" /></br/>
+					<%} %>
+<%		  			if(result.equals("member")){ %>
+								<img src="/goworker/s-project/image/image.jpg" width="40px" height="40px"><br/>
+						<%} 
+					} %>
+							<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
+						</td>
+						<td>
+<%
+			 		 int wid=0; 
+			  		if(cdto.getComment_level()>0){
+					// 답글일때에만 Re_level()의 값이 0 이상이다. / 답글일때에만 조건문 수행
+						wid=10*(cdto.getComment_level());
+			 		// 답글 들여쓰기 사이즈(width의 값으로 넣을 변수와 값 저장해서 아래에 대입)
+					%>
+					 <img src="/goworker/s-project/image/white.jpg" width="<%=wid%>" height="16">
+				  	<img src="/goworker/s-project/image/re.gif">
+			 		 <%}else{%>
 				   <img src="/goworker/s-project/image/white.jpg" width="<%=wid%>" height="16">	  	 
-			   <%} %>
-					   <%=cdto.getComment_content() %>
+			   		<%} %>
+					 	  <%=cdto.getComment_content() %>
 			   
-				</td>
+					</td>
 				<td align="center">
 					<%=sdf.format(cdto.getComment_regdate()) %>
 				</td>

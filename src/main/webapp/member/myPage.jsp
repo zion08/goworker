@@ -38,9 +38,13 @@
 	count = dao.getMyCount(sid); // 나의 작성글수 
 	if(count > 0){
 		list = dao.getMyList(sid, start , end );
+
 	}
-%>
-	<%if(count == 0){%>
+%>  
+	<%
+	if(rank != null)	
+    if(rank.equals("member"))
+	if(count == 0){%>
 	<div>
 		<table border="1">
 		  <tr>
@@ -56,7 +60,7 @@
 	for(SmemberDTO dto : list) { %>
 	<div>
 	<h2>나의 멤버</h2>
-		<table class="mboard" >
+		<table class="mboard" style="table-layout:fixed" >
 			<tr>
 				<th><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
 				<th>
@@ -78,7 +82,8 @@
 				<th><%=dto.getWorktype() %></th>
 			</tr>
 			<tr>
-			<td colspan="4"> <%=dto.getIntroduce() %>
+			<td colspan="4"
+			style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"> <%=dto.getIntroduce() %>
 			</td>
 			</tr>
 		</table><br/>
@@ -138,65 +143,47 @@
 	} 
 %>
 
+
+   %>
+      <%
+      if(rank != null)	
+      if(rank.equals("manager"))
+      if(pcount == 0){ %>
+      <div>
+      <table border="1">
+        <tr>
+         <th><a href="../s-project/s-project_input.jsp">나의 프로젝트등록</a></th>
+        </tr>
+        <tr> 
+         <th colspan="9">게시글이 없습니다</th>
+        </tr>
+         </table>
+   </div>
+   <%}else{  %>
+<% for(SprojectDTO dto : plist){%>
+    <table border="1">
+    <h2>나의 프로젝트</h2>
+   <tr>
+      <th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
+   </tr>
+   <tr>
+      <td><%=dto.getNum() %></td>
+      <td><a href="../s-project/s-project_input.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
+      <td><%=dto.getId() %></td>
+      <td><%=dto.getCareer() %></td>
+      <td><%=dto.getPeriod() %></td>
+      <td><%=dto.getPay() %></td> 
+      <td><%=dto.getProjecttype() %></td>
+      <td><%=dto.getLocation() %></td>
+      <td><%=dto.getRegdate() %></td>
+   </tr>   
+      <%} 
+      } %>
+</table>
+
 </body>
   
 </body>
 <br/>
-<footer>
-<hr color="skyblue" size="2" align="center"><br/>
-<table  align="right">
-      
-      <thead align="center">
-        <tr>
-          <th></th>
-          <th>메인</th>
-          <th>회원</th>
-          <th>고객센터</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="">사이트소개</a></td>
-          <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
-          <td>회원가입</td>
-          <td><a href="/goworker/cs/notice.jsp">공지사항</a></td>
-          
-        </tr>
-        <tr>
-          <td>이용방법</td>
-          <td>프로젝트찾기</td>
-          <td>회원정보수정</td>
-          <td><a href="/goworker/cs/cs.jsp">Q&A</a></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>프로젝트만들기</td>
-          <td>회원탈퇴</td>
-          <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>취업정보</td>
-            <td></td>
-            <td></td>
-          </tr>
-        <tr>
-          <td></td>
-          <td>커뮤니티</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-      
-    </table>
-</footer>
-<style>
-            
-            #footer{
-                text-align: right;
-                font-size:12pt;
-                color:rgb(164, 164, 164);
-                margin:10px 0px;
-            }
-            </style>
+<%@ include file = "/include/footer.jsp" %>
 </html>

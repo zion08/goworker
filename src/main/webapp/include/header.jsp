@@ -77,7 +77,8 @@
 		               <option value="../member/myPage.jsp">회원관리
 		               <option value="../member/myPage.jsp">마이페이지</option>
 		               <option value="../member/favorite.jsp">관심목록</option>
-		               <option value="../member/modify.jsp">비밀번호수정</option> 
+		               <option value="../member/modify.jsp">회원정보수정</option>
+		               <option value="../cs/cs.jsp">나의문의사항</option> 
 		               <option value="../member/logout.jsp">로그아웃</option>
 		               <option value="../member/delete.jsp">회원탈퇴</option>
 	               </select>
