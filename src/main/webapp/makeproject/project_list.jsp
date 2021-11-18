@@ -9,9 +9,7 @@
 <%@ page import ="bean.MakeProject_CommentDTO" %>
 <%@ page import ="bean.MakeProject_CommentDAO" %>
 
-<%@ page import = "bean.MemberDTO" %>
 <%@ page import = "bean.MemberDAO" %>
-
 
 <%@ include file = "../include/header.jsp" %>
 
