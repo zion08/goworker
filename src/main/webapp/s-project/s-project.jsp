@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="bean.SmemberDAO" %> 
-<%@ page import="bean.SmemberDTO" %>
+<%@ page import="bean.SprojectDAO" %> 
+<%@ page import="bean.SprojectDTO" %>
 <%@ page import="java.util.List" %>  
 <%@ include file = "../include/header.jsp" %>
 
@@ -11,23 +11,23 @@
 	String my = request.getParameter("my");
 	int pageSize = 5;
 	if(pageNum==null) {
-		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
+		pageNum = "1"; 
 	}
 	int currentPage = Integer.parseInt(pageNum);
 	int start = (currentPage - 1) * pageSize + 1;		
 	int end = currentPage * pageSize;
 	
-	SmemberDAO dao = new SmemberDAO();
+	SprojectDAO dao = new SprojectDAO();
 	int count = 0; 
-	List<SmemberDTO> list = null;	
+	List<SprojectDTO> list = null;	
 	if(my == null) {		
-		count = dao.getCount(); // 전체 글의 갯수
+		count = dao.getCount();
 		if(count > 0) {
 			list = dao.getAllList( start, end );	
 		}	
 %>
 
-<title>멤버 찾기</title>
+<title>프로젝트 찾기</title>
 
 <script type="text/javascript">
 	var bDisplay = true;
@@ -43,13 +43,13 @@
 	
 	function viewMine() {
 		value = document.getElementsByName("id")[0].value;
-		open('s-member_detail.jsp?id='+value,'confirm','width=500,height=500');
+		open('s-project_detail.jsp?id='+value,'confirm','width=500,height=500');
 	}
 </script>
 
 <aside>
-	<a href ="s-member_input.jsp">
-		<input type="button" class=mInputButton value="멤버 등록하기">
+	<a href ="s-project_input.jsp">
+		<input type="button" class=mInputButton value="프로젝트 등록하기">
 	</a><br/>
 </aside>
 
@@ -58,7 +58,7 @@
 		<a href="javascript:doDisplay();">검색조건 보기</a><br/>
 	</div>
 
-	<form action="s-member_search.jsp" method= "post" class="form-box1">
+	<form action="s-project_search.jsp" method= "post" class="form-box1">
 		<table border=1>
 			<tr>
 				<th>경력</th>	
@@ -160,7 +160,46 @@
 					</select> 
 				</td>
 			</tr>
-		
+			
+			<tr>
+				<th>예상 기간</th>	
+				<td>
+					<select name="periond">
+						<option value="%">전체</option>
+						<option value="7">7일</option>
+						<option value="30">30일</option>
+						<option value="90">90일</option>
+						<option value="180">180일</option>
+						<option value="365">1년</option>
+						<option value="2">2년이상</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>예상 급여</th>	
+				<td>
+					<select name="pay">
+						<option value="%">전체</option>
+						<option value="100">100만원</option>
+						<option value="200">200만원</option>
+						<option value="300">300만원</option>
+						<option value="400">400만원</option>
+						<option value="500">500만원</option>
+						<option value="600">600만원</option>
+						<option value="700">700만원</option>
+						<option value="800">800만원</option>
+						<option value="900">900만원</option>
+						<option value="1000">1000만원</option>
+						<option value="2000">2000만원</option>
+						<option value="3000">3000만원</option>
+						<option value="4000">4000만원</option>
+						<option value="5000">5000만원</option>
+						<option value="10000">10000만원이상</option>
+					</select>
+				</td>
+			</tr>
+			
 			<tr>
 				<td colspan=2 align="center">
 					<input type="submit" value="검색" />
@@ -171,134 +210,14 @@
 	</form>
 </section>
 
-
-
 <section class="section3">
 <% 
-	for(SmemberDTO dto : list) { %>
-<% /*
-if((dto.getCareer()).equals("new")) {
-	dto.setCareer("신입"); 
-}
-if((dto.getCareer()).equals("1")) {
-	dto.setCareer("1년차"); 
-}
-if((dto.getCareer()).equals("2")) {
-	dto.setCareer("2년차"); 
-}
-if((dto.getCareer()).equals("3")) {
-	dto.setCareer("3년차"); 
-}
-if((dto.getCareer()).equals("4")) {
-	dto.setCareer("4년차"); 
-}
-if((dto.getCareer()).equals("5")) {
-	dto.setCareer("5년차"); 
-}
-if((dto.getCareer()).equals("6")) {
-	dto.setCareer("6년차"); 
-}
-if((dto.getCareer()).equals("7")) {
-	dto.setCareer("7년차 이상"); 
-}
-if((dto.getField()).equals("dev")) {
-	dto.setField("개발"); 
-}
-if((dto.getField()).equals("plan")) {
-	dto.setField("기획"); 
-}
-if((dto.getField()).equals("design")) {
-	dto.setField("디자인"); 
-}
-if((dto.getEmploytype()).equals("sfree")) {
-	dto.setEmploytype("개인 프리랜서"); 
-}
-if((dto.getEmploytype()).equals("tfree")) {
-	dto.setEmploytype("팀 프리랜서"); 
-}
-if((dto.getEmploytype()).equals("sbusiness")) {
-	dto.setEmploytype("개인 사업자"); 
-}
-if((dto.getEmploytype()).equals("cbusiness")) {
-	dto.setEmploytype("법인 사업자"); 
-}
-if((dto.getProjecttype()).equals("side")) {
-	dto.setProjecttype("사이드 프로젝트"); 
-}
-if((dto.getProjecttype()).equals("main")) {
-	dto.setProjecttype("메인 프로젝트"); 
-}
-if((dto.getWorktype()).equals("online")){
-	dto.setWorktype("원격"); 
-}
-if((dto.getWorktype()).equals("office")){
-	dto.setWorktype("상주"); 
-}
-if((dto.getWorktype()).equals("discuss")){
-	dto.setWorktype("협의"); 
-}
-
-if((dto.getLocation()).equals("online")) {
-	dto.setLocation("원격"); 
-}
-if((dto.getLocation()).equals("seoul")) {
-	dto.setLocation("서울"); 
-}
-if((dto.getLocation()).equals("gyunggi")) {
-	dto.setLocation("경기"); 
-}
-if((dto.getLocation()).equals("incheon")) {
-	dto.setLocation("인천"); 
-}
-if((dto.getLocation()).equals("gangwon")) {
-	dto.setLocation("강원"); 
-}
-if((dto.getLocation()).equals("chungbuk")) {
-	dto.setLocation("충북"); 
-}
-if((dto.getLocation()).equals("chungnam")) {
-	dto.setLocation("충남"); 
-}
-if((dto.getLocation()).equals("deajeon")) {
-	dto.setLocation("대전"); 
-}
-if((dto.getLocation()).equals("sejong")) {
-	dto.setLocation("세종"); 
-}
-if((dto.getLocation()).equals("jeonbuk")) {
-	dto.setLocation("전북"); 
-}
-if((dto.getLocation()).equals("jeonnam")) {
-	dto.setLocation("전남"); 
-}
-if((dto.getLocation()).equals("gwangju")) {
-	dto.setLocation("광주"); 
-}
-if((dto.getLocation()).equals("gyungbuk")) {
-	dto.setLocation("경북"); 
-}
-if((dto.getLocation()).equals("gyungnam")) {
-	dto.setLocation("경남"); 
-}
-if((dto.getLocation()).equals("daegu")) {
-	dto.setLocation("대구"); 
-}
-if((dto.getLocation()).equals("busan")) {
-	dto.setLocation("부산"); 
-}
-if((dto.getLocation()).equals("jeju")) {
-	dto.setLocation("제주"); 
-}	
-*/
-%>
-				
-
-	
+if(count > 0){
+	for(SprojectDTO dto : list) { %>
 	<div>
-		<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=dto.getNum()%>','message','width=355px, height=540px');" >
-		<table class="mboard" style="table-layout:fixed" >
+		<table class="mboard" >
 			<tr>
-				<th><a href="s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
+				<th><a href="s-proejct_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
 				<th>
 				<%if(dto.getAvailable() == 1) { %>
 				<img src="image/switch-on.png" width="40px" height="36px"> 
@@ -316,15 +235,17 @@ if((dto.getLocation()).equals("jeju")) {
 				<th><%=dto.getEmploytype() %></th>
 				<th><%=dto.getLocation() %></th>
 				<th><%=dto.getWorktype() %></th>
+				<th><%=dto.getPay() %></th>
+				<th><%=dto.getPeriod() %></th>
 			</tr>
 			<tr>
-			<td colspan="4" style="text-overflow:ellipsis; white-space:nowrap; overflow:hidden;"> <%=dto.getIntroduce() %>
+			<td colspan="4"> <%=dto.getIntroduce() %>
 			</td>
 			</tr>
 		</table><br/>
 	</div>
 
-<%}
+<%}}
 }%>
 </section>
 
@@ -350,62 +271,58 @@ if((dto.getLocation()).equals("jeju")) {
 		if(endPage < pageCount) {
 %>		<a href="s-member.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
 <%		}
+	
 	}
 %>
 </section>
 
 <footer>
-	<hr color="skyblue" size="2"  align="center" />
-	
-	<table width="500" align="right">
+<hr color="skyblue" size="2"  align="center" />
+<table width="500" align="right">
       
-		<thead align="center">
-			<tr>
-          		<th></th>
-          		<th>메인</th>
-          		<th>회원</th>
-          		<th>고객센터</th>
-        	</tr>
-     	 </thead>
-
-		<tbody>
-			<tr>
-          		<td>사이트소개</td>
-          		<td>
-          			<a href="/goworker/s-member/s-member.jsp">팀원찾기</a>
-         		</td>
-          		<td>회원가입</td>
-          		<td>공지사항</td> 
-        	</tr>
-        
-        	<tr>
-				<td>이용방법</td>
-	          	<td>프로젝트찾기</td>
-	          	<td>회원정보수정</td>
-	         	 <td>Q&A</td>
-        	</tr>
-       	 
-       	 	<tr>
-				<td></td>
-          		<td>프로젝트만들기</td>
-          		<td>회원탈퇴</td>
-          		<td></td>
-        	</tr>
-       		
-       		<tr>
-	            <td></td>
-	            <td>취업정보</td>
-	            <td></td>
-	            <td></td>
-         	 </tr>
-       		
-       		<tr>
-          		<td></td>
-          		<td>커뮤니티</td>
-          		<td></td>
-          		<td></td>
-        	</tr>
-		
-		</tbody>
+      <thead align="center">
+        <tr>
+          <th></th>
+          <th>메인</th>
+          <th>회원</th>
+          <th>고객센터</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>사이트소개</td>
+          <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
+          <td>회원가입</td>
+          <td>공지사항</td>
+          
+        </tr>
+        <tr>
+          <td>이용방법</td>
+          <td>프로젝트찾기</td>
+          <td>회원정보수정</td>
+          <td>Q&A</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>프로젝트만들기</td>
+          <td>회원탈퇴</td>
+          <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>취업정보</td>
+            <td></td>
+            <td></td>
+          </tr>
+        <tr>
+          <td></td>
+          <td>커뮤니티</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      
     </table>
 </footer>
+
+    

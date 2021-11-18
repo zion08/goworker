@@ -133,4 +133,122 @@ import oracle.DisconnDB;
 				}
 				return result;
 			}
+			public ArrayList<SprojectDTO> getSPFavlist(String sid) {
+			      ArrayList<SprojectDTO> list =null;
+			      try {
+			    	  conn = OracleDB.getConnection();
+					  pstmt = conn.prepareStatement
+					("select * from  (select s_project.num,s_project.id,s_project.subject, s_project.regdate, favorite.userid  from s_project , favorite where s_project.num = favorite.sproject_num) where userid=?");
+			          pstmt.setString(1, sid);
+					  rs = pstmt.executeQuery();
+					  list = new ArrayList();
+			         while(rs.next()) {
+			        	 SprojectDTO dto = new SprojectDTO();
+			        	 	dto.setNum(rs.getInt("num"));
+							dto.setId(rs.getString("id"));
+							dto.setSubject(rs.getString("subject"));
+							dto.setRegdate(rs.getTimestamp("regdate"));
+							list.add(dto);
+			         }
+			      }catch(Exception e) {
+			         e.printStackTrace();
+			      }finally {
+						if(rs != null) {try {rs.close();}catch(SQLException s) {}}
+						if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
+						if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+					}
+			      return list;
+			   }
+			   public int SPwrite(String sid, int sproject_num) {
+					try {
+						conn = OracleDB.getConnection();
+						pstmt = conn.prepareStatement("insert into favorite values(?,0,?)");
+						pstmt.setString(1, sid);
+						pstmt.setInt(2, sproject_num);
+						pstmt.executeUpdate();
+						
+					}catch(Exception e) {
+						e.printStackTrace();
+					}finally {
+						if(rs != null) {try {rs.close();}catch(SQLException s) {}}
+						if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
+						if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+					}
+					return 1; //�����ͺ��̽� ����
+				}
+			   public ArrayList<FavoriteDTO> getSPfavorite(String sid) {
+					ArrayList<FavoriteDTO> list = new ArrayList<FavoriteDTO>();
+					try {
+						conn = OracleDB.getConnection();
+						pstmt = conn.prepareStatement("select * from favorite where userid=?" );
+						pstmt.setString(1,  sid);
+						
+						rs = pstmt.executeQuery();
+						while (rs.next()) {
+							FavoriteDTO fdto = new FavoriteDTO();
+							fdto.setSproject_num(rs.getInt(1));
+							fdto.setUserid(rs.getString(2));
+							list.add(fdto);
+						}
+					}catch(Exception e) {
+						e.printStackTrace();
+					}finally {
+						if(rs != null) {try {rs.close();}catch(SQLException s) {}}
+						if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
+						if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+					}
+					return list;
+					
+				}
+				public int SPdelete(String sid,int sproject_num) {
+					try {
+						conn = OracleDB.getConnection();
+						pstmt = conn.prepareStatement("delete from favorite where sproject_num =? and userid = ? ");
+						pstmt.setInt(1, sproject_num);
+						pstmt.setString(2, sid);
+						pstmt.executeUpdate();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						if(rs != null) {try {rs.close();}catch(SQLException s) {}}
+						if(pstmt != null) {try {pstmt.close();}catch(SQLException s) {}}
+						if(conn != null) {try {conn.close();}catch(SQLException s) {}}
+					}
+					return -1; // �����ͺ��̽� ����
+				}
+				public int getSPfavCount(String sid) {
+					int result = 0; 
+					try {
+						conn = OracleDB.getConnection();
+						pstmt = conn.prepareStatement("select count(SPROJECT_NUM) from favorite where userid = ?");
+						pstmt.setString(1, sid);
+						rs = pstmt.executeQuery();
+						if(rs.next()) {
+							result = rs.getInt(1);
+						}
+					} catch(Exception e) {
+						e.printStackTrace();
+					} finally {
+						DisconnDB.close(conn, pstmt, rs);
+					}
+					return result;
+				}
+				public boolean SPfavCheck(String sid, int sproject_num) {
+					boolean result = false;
+					try {
+						conn = OracleDB.getConnection();
+						pstmt = conn.prepareStatement("select * from favorite where userid=? and sproject_num=?");
+						pstmt.setString(1, sid);
+						pstmt.setInt(2, sproject_num);
+						rs = pstmt.executeQuery();
+						if(rs.next()) {
+							result = true;
+						}
+					}catch(Exception e) {
+						e.printStackTrace();
+					}finally {
+						DisconnDB.close(conn, pstmt, rs);
+					}
+					return result;
+				}
 	}

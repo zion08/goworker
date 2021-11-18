@@ -3,6 +3,8 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="bean.SmemberDTO"%>
 <%@ page import="bean.SmemberDAO"%>
+<%@ page import="bean.SprojectDTO"%>
+<%@ page import="bean.SprojectDAO"%>
 <%@ page import="bean.FavoriteDTO"%>
 <%@ page import="bean.FavoriteDAO"%>
 <%@ page import="java.util.ArrayList"%>
@@ -15,7 +17,7 @@
 <title>관심목록</title>
 </head>
 <body>
-	<%
+	<%	request.setCharacterEncoding("UTF-8");
 		int pageNum = 1; //기본페이지
 		if (request.getParameter("pageNumber") != null){
 			pageNum = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
@@ -24,13 +26,13 @@
 	<div class="container">
 		<h1>관심목록<br></h1>
 
-		<p><%=sid %>님이 하신 좋아요목록입니다.<br><br></p>
+		<p><%=sid %>님이 추가하신 관심목록입니다.<br><br></p>
 			<div>
 						<%
-						request.setCharacterEncoding("UTF-8");
-						int pageSize = 10;
+						int pageSize = 20;
 						
-					    int currentPage = pageNum;
+						
+						int currentPage = pageNum;
 					/*	int start = (currentPage - 1) * pageSize + 1;		
 						int end = currentPage * pageSize; */
 						
@@ -40,28 +42,61 @@
 						count = fdao.getfavCount(sid);
 						if(count > 0){
 				        list= fdao.getFavlist(sid);	
-						} %>
-				<table border="1">	
+						} 
+						
+						int pcount = 0;
+						List<SprojectDTO> plist = null;
+						pcount = fdao.getSPfavCount(sid);
+						if(pcount > 0){
+				        plist= fdao.getSPFavlist(sid);	
+						}
+						%>
+				<table border="1" width="850" text-align="center">	
 			
 			    <tr>
-					<th>번호</th>
-					<th>멤버</th>
-					<th>작성일</th>
+			    	<th width="100">게시판</th>
+					<th width="50">번호</th>
+					<th width="350">아이디/제목</th>
+					<th width="350">작성일</th>
 				</tr>
 				
 			       <% if(count == 0){%>
 			    <tr>
-				    <th colspan="6">저장된 글이 없습니다...!!</th>
+				    <th colspan="6"> 멤버찾기에 관심목록이 없습니다...!!</th>
 				</tr>	
-				    <%}else{%>
-				    <%for(SmemberDTO dto : list){%>
+				    <%}%>
+				    
+				    <%if(count > 0) {
+				    for(SmemberDTO dto : list){%>
 			 <tr>
-				<td><%= dto.getNum() %></td>
-				<td><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></td>
-				<td><%= dto.getRegdate() %></td>
+			 	<td width="100">멤버찾기</td>
+				<td width="50"><%= dto.getNum() %></td>
+				<td width="350"><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></td>
+				<td width="350"><%= dto.getRegdate() %></td>
 			 </tr>
-				 <%}%>
-				</table>			
+				 <%}
+				   }
+				 %>
+				 
+
+				
+					<% if(pcount == 0){%>
+			    <tr>
+				    <th colspan="6">프로젝트 찾기에 관심목록이 없습니다...!!</th>
+				</tr>	
+				    <%}%>
+				    <%if(pcount > 0) {
+				    for(SprojectDTO pdto : plist){%>
+			 <tr>
+			 	<td width="100">프로젝트찾기</td>
+				<td width="50"><%= pdto.getNum() %></td>
+				<td width="350"><a href="/goworker/s-project/s-project_detail.jsp?num=<%=pdto.getNum()%>&pageNum=<%=pageNum%>"><%=pdto.getSubject() %></a></td>
+				<td width="350"><%= pdto.getRegdate() %></td>
+			 </tr>
+				 <%}
+				   }
+				 %>			
+				 </table>
 			</div>
 		</div>	
 	<%
@@ -86,7 +121,7 @@
 %>		<a href="favorite.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
 <%		}
 	   }
-	}
+	
 %>
 <footer>
 <hr color="skyblue" size="2"  align="center" />

@@ -4,7 +4,7 @@
 <%@ page import="bean.SprojectDTO" %>
 <%@ page import="bean.SprojectDAO" %>
 <%@ page import="java.util.List" %>
-<link href="../style.css" rel="stylesheet" type="text/css">
+<%@ include file = "../include/header.jsp" %>
 
 <title>프로젝트 검색</title>
 <h1>프로젝트 검색</h1>
@@ -38,14 +38,14 @@
 	String employtype = request.getParameter("employtype");
 	String projecttype = request.getParameter("projecttype");
 	String period = request.getParameter("period");
-	String spay = request.getParameter("pay");
+	String pay = request.getParameter("pay");
 	String avail = request.getParameter("available");
 	
 	if (avail.isEmpty()) {
 		avail = String.valueOf('1');
 	}
 	int available = Integer.parseInt(avail);
-	int pay = Integer.parseInt(spay);
+	
 	
 	int pageSize = 20;
 	if(pageNum==null) {
@@ -190,12 +190,7 @@
 					</select> 
 				</td>
 			</tr>
-		
-			<tr>
-				<td colspan=2 align="center">
-					<input type="submit" value="검색" />
-				</td>
-			</tr>	
+			
 			
 			<tr>
 				<th>예상 기간</th>	
@@ -233,6 +228,12 @@
 						<option value="5000">5000만원</option>
 						<option value="10000">10000만원이상</option>
 					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan=2 align="center">
+					<input type="submit" value="검색" />
 				</td>
 			</tr>
 			
