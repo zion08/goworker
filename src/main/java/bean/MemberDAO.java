@@ -63,6 +63,28 @@ public class MemberDAO {
 	      }
 	      return list;
 	   }
+   
+   public String getRank(String id) {
+	      String result = null;
+	      try {	    	  
+	    	  conn = OracleDB.getConnection();
+	    	  String sql = "select rank from member where id=?";
+			  pstmt = conn.prepareStatement(sql);
+			  pstmt.setString(1, id);
+	          rs = pstmt.executeQuery();
+	          while (rs.next()) {
+	        	  result = rs.getString(1);     	  
+	          }
+	      } catch(Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         DisconnDB.close(conn, pstmt, rs);
+	      }
+	      return result;
+	   }
+   
+   
+   
 	   
 	   
 	public boolean loginCheck(MemberDTO dto) {
