@@ -75,8 +75,6 @@ session.setAttribute("num", dto.getNum());
 	조회 : <%=dto.getReadcount() %><br />
 	좋아요 : <%=dto.getGood() %><br />
 	
-	<input type="button" value="목록" 
-	onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'" />
 	
 <!-- 관심목록 버튼 -->	
 	<%
@@ -103,17 +101,21 @@ session.setAttribute("num", dto.getNum());
 	<%}%>
 
 	
-	<%if(id !=null){ %>
-		<input type="button" value="좋아요">
-		<%if( sid == id ) { %>	
-			<input type="button" value="수정하기" 
-			onclick="window.location='s-project_update.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum() %>&id=<%=id %>'" />	
-			<input type="button" value="삭제하기" 
-			onclick="window.location='s-project_delete.jsp?pageNum=<%=pageNum%>&num=<%=dto.getNum() %>&id=<%=id %>'" />	
-		<%} %>
-		<%if( sid != id ) { %>	
-			<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-project/email/mail.jsp?pageNum=<%=pageNum%>'"/>
-		<%}} %>
+	<%if (sid !=null) {%>
+		<%if(sid.equals(dto.getId())) {%>
+		<form action= "s-member_delete.jsp" method="post" align="center">
+			<input type="button" value="수정 하기" onclick="window.location='/goworker/s-member/s-member_update.jsp?num=<%=dto.getNum() %>'" />
+			<input type="submit" value="삭제 하기" onclick="button_event()" />
+		<input type="hidden" name="num" value="<%=dto.getNum() %>" />
+	</form>
+ 		<%}else{%>
+	<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
+	<input type="button" value="쪽지 보내기" value="메세지" onclick="window.open('../message/message.jsp?num=<%=dto.getNum()%>'"/>
+		<% } 
+	}%>	
+<br />
+	<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
+
 <br /><br />
 
 
