@@ -6,6 +6,10 @@
 <%@ page import = "bean.FavoriteDAO" %>
 <%@ page import="java.util.List" %> 
 <%@ page import = "java.text.SimpleDateFormat" %>
+
+<%@ page import = "bean.MemberDTO" %>
+<%@ page import = "bean.MemberDAO" %>
+
 <%@ include file = "../include/header.jsp" %>
    
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
@@ -219,7 +223,6 @@ function button_event(){
 				</td>
 
 			</tr>
-			
 			<tr>	
 				<td width="60px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
@@ -249,7 +252,9 @@ function button_event(){
 		count = cdao.getCount(); // 전체 글의 갯수
 		if(count > 0) {
 			list = cdao.getComment( dto.getNum() );	
-		}		
+		}
+		
+		
 %>
 
 <section class="section1">
@@ -264,10 +269,28 @@ function button_event(){
 <% 
 		if(count > 0) { 
 			for(Comment_SmemberDTO cdto : list)  {
+				
+				
+				MemberDTO mdto = new MemberDTO();
+				MemberDAO mdao = new MemberDAO();
+				String result = mdao.getRank(cdto.getComment_writerid());
+
+				
 %>	
 			<tr>	
 				<td align="center">
-					<img src="image/image.jpg" width="50" height="50"><br/>
+				
+<%			if(result != null){ %>
+<%			if(result.equals("admin")){%>	
+			<img src="/goworker/s-member/image/admin.jpg"  width="40px" height="40px" /></br>	
+			<%} %>
+<%			if(result.equals("manager")){%>				
+				<img src="/goworker/s-member/image/manager.jpg"  width="40px" height="40px" /></br/>
+				<%} %>
+<%		  	if(result.equals("member")){ %>
+					<img src="/goworker/s-memeber/image/image.jpg" width="40px" height="40px"><br/>
+						<% }
+        			}%>
 						<%=cdto.getComment_writerid() %><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
 				</td>
 				 
