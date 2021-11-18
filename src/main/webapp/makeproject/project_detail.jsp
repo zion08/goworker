@@ -10,7 +10,6 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
-<%@ page import = "bean.MemberDTO" %>
 <%@ page import = "bean.MemberDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
@@ -45,7 +44,6 @@
 	
 	comment_count = cd.getCommentCount(board_num);
 
-	MemberDTO mdto = new MemberDTO();
 	MemberDAO mdao = new MemberDAO();
 	String result = mdao.getRank(dto.getId());
 	
@@ -241,8 +239,6 @@ if(sid.equals(dto.getId())) { %>
 	
 	<tr>
 		<td align="center">
-		
-		
 <%			if(result != null){ %>
 <%			if(result.equals("admin")){%>	
 				<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	

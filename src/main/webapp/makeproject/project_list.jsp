@@ -9,6 +9,8 @@
 <%@ page import ="bean.MakeProject_CommentDTO" %>
 <%@ page import ="bean.MakeProject_CommentDAO" %>
 
+<%@ page import = "bean.MemberDAO" %>
+
 <%@ include file = "../include/header.jsp" %>
 
 
@@ -93,6 +95,9 @@
 		int comment_count = 0;
 		int board_num = dto.getNum();
 		comment_count = cd.getCommentCount(board_num);
+		
+		MemberDAO mdao = new MemberDAO();
+		String result = mdao.getRank(dto.getId());
 %>
 	
 	<table border="1" width="700"  cellpadding="0" cellspacing="0" align="center"> 
@@ -105,8 +110,20 @@
         			<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
         		</td>
         		<td width="80px" align="center">
-        			<img src="/goworker/makeproject/image/image.jpg" width="30px" height="30px"/><br/>
-        			<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
+        		
+        		
+<%				if(result != null){ %>
+<%				if(result.equals("admin")){%>	
+					<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
+				<%} %>
+<%				if(result.equals("manager")){%>				
+					<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
+					<%} %>
+<%		  		if(result.equals("member")){ %>
+					<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
+					<% }
+        		}%>        			
+        				<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
         		</td>
         		<td width="60px" align="center" >
         			<%=sdf.format(dto.getReg_date()) %>
