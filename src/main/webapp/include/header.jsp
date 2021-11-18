@@ -23,6 +23,13 @@
 	}
 		
 	String rank = headerdao.getRank(sid);
+	
+	
+	if(rank=="member") {
+		System.out.println(rank);
+		System.out.println(rank.equals("member"));
+		
+	}
 %>
 
 
@@ -61,7 +68,7 @@
 					</span>
 <%				}		
 %>				<span class="sideicon2">
-					<p><%=(sid==null) ? cid : sid%></p>
+					<p><%=sid%></p>
 				</span>	
 
 				<span class="sideicon1">
