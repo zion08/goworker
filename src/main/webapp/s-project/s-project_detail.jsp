@@ -72,7 +72,6 @@ session.setAttribute("num", dto.getNum());
 			}%><br />
 	프로젝트 종류 :<% if(dto.getProjecttype() == "side"){ %> 사이드 프로젝트 <%}else{ %>메인 프로젝트<%}%> <br />
 	근무 형태 : <% if(dto.getWorktype() == "online"){ %> 원결 <%}else{ %>상주<%} %><br />
-	게시 날짜 : <%=dto.getRegdate() %><br />
 	조회 : <%=dto.getReadcount() %><br />
 	좋아요 : <%=dto.getGood() %><br />
 	

@@ -25,7 +25,7 @@
 </script>
 
 <aside>
-	<a href ="s-project_input.jsp"><input type="button" class=mInputButton value="멤버 등록하기"></a><br/><br/>
+	<a href ="s-project_input.jsp"><input type="button" class=mInputButton value="프로젝트 등록하기"></a><br/><br/>
 </aside>
 
 <% 

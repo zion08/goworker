@@ -21,7 +21,7 @@
 						<li id="id">	
 							<label>아이디</label>
 								<span><%=sid%></span>
-				
+							<input type="hidden" name="id" value="<%=sid%>"/>	
 						<li id=subject>
 							<label>프로젝트 명</label>
 								<input type="text" name="subject" >
@@ -97,7 +97,7 @@
 					
 					<ul class="condition-info">	
 						<li id="employtype">
-							<label>찾는 활동 유형</label>
+							<label>활동 유형</label>
 								<label><input type="radio" name="employtype" value="sfree">개인 프리랜서</label>
 								<label><input type="radio" name="employtype" value="tfree">팀 프리랜서</label>
 								<label><input type="radio" name="employtype" value="sbusiness">개인 사업자</label>
@@ -108,7 +108,6 @@
 							<label>프로젝트 진행 유형</label>
 								<label><input type="radio" name="projecttype" value="side">사이드 프로젝트</label>
 								<label><input type="radio" name="projecttype" value="main">메인 프로젝트</label>
-								<label><input type="radio" name="projecttype" value="sidemain">둘 다</label>
 						</li>            
 								
 						<li id="worktype">
@@ -119,7 +118,7 @@
 						</li>
 						
 						<li id="location"> <!--  업무 방식이 사무실 또는 협의인 경우  -->
-							<label>선호 업무 지역</label>
+							<label>업무 지역</label>
 								<select name="location">
 									<option value="online">원격</option>
 									<option value="seoul">서울</option>
@@ -144,8 +143,7 @@
 									
 						<li id="period">
 							<label>예상 기간</label>
-								<select name="periond">
-									<option value="%">전체</option>
+								<select name="period">
 									<option value="7">7일</option>
 									<option value="30">30일</option>
 									<option value="90">90일</option>
@@ -155,7 +153,7 @@
 								</select>
 						
 						<li id="available">
-							<label>구인활동여부</label>
+							<label>구인여부</label>
 							<select name="available">
 								<option value="1">on</option>
 								<option value="0">off</option>
