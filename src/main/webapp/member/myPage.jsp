@@ -18,7 +18,7 @@
 
 <body>
 <div class="input" >
-      <input type="submit" value="프로젝트찾기" onclick=" window.location='/goworker/s-project/list.jsp' "/>
+      <input type="submit" value="프로젝트찾기" onclick=" window.location='/goworker/s-project/s-project_list.jsp' "/>
       <input type="submit" value="팀원찾기" onclick=" window.location='/goworker/s-member/s-member.jsp' "/>
       <input type="submit" value="관심목록" onclick=" window.location='favorite.jsp' "/>
 </div><br/>
@@ -42,8 +42,8 @@
 	}
 %>  
 	<%
-	if(rank != null)	
-    if(rank.equals("member"))
+	if(rank != null){	
+    if(rank.equals("member")){
 	if(count == 0){%>
 	<div>
 		<table border="1">
@@ -65,9 +65,9 @@
 				<th><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
 				<th>
 				<%if(dto.getAvailable() == 1) { %>
-				<img src="image/switch-on.png" width="40px" height="36px"> 
+				<img src="../s-member/image/switch-on.png" width="40px" height="36px"> 
 				<%} else{ %>
-				<img src="image/switch-off.png" width="40px" height="36px">
+				<img src="../s-member/image/switch-off.png" width="40px" height="36px">
 				<%} %>
 				</th>
 				<th><%=dto.getField() %></th>
@@ -88,7 +88,9 @@
 			</tr>
 		</table><br/>
 	</div>
-<%}
+<%           }
+	     }
+       }
 	}
 %><br/>
 <% 
@@ -100,54 +102,11 @@
    if(pcount > 0){
       plist = pdao.getMyList(sid, start, end);
    }
-   
-   System.out.println(pcount);
-   System.out.println(start);
-   System.out.println(end);
-   System.out.println(sid);
-   System.out.println(plist);
-
-%>
-<%	if (pcount == 0) { 
-%>		<div>
-			<table border="1">
-		        <tr>
-					<th><a href="../s-project/s-project.jsp">나의 프로젝트등록</a></th>
-		        </tr>
-		        <tr> 
-					<th colspan="9">게시글이 없습니다</th>
-		        </tr>
-			</table>
-	   </div>
-<%	} else {  
-%>
-<%		for(SprojectDTO dto : plist){%>
-			<h2>나의 프로젝트</h2>
-				<table  class="mboard">
-					<tr>
-					   <th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
-					</tr>
-					<tr>
-					   <td><%=dto.getNum() %></td>
-					   <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
-					   <td><%=dto.getId() %></td>
-					   <td><%=dto.getCareer() %></td>
-					   <td><%=dto.getPeriod() %></td>
-					   <td><%=dto.getPay() %></td> 
-					   <td><%=dto.getProjecttype() %></td>
-					   <td><%=dto.getLocation() %></td>
-					   <td><%=dto.getRegdate() %></td>
-					</tr>
-				   
-<%		} 
-	} 
-%>
-
 
    %>
       <%
-      if(rank != null)	
-      if(rank.equals("manager"))
+      if(rank != null){	
+      if(rank.equals("manager")){
       if(pcount == 0){ %>
       <div>
       <table border="1">
@@ -168,7 +127,7 @@
    </tr>
    <tr>
       <td><%=dto.getNum() %></td>
-      <td><a href="../s-project/s-project_input.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
+      <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
       <td><%=dto.getId() %></td>
       <td><%=dto.getCareer() %></td>
       <td><%=dto.getPeriod() %></td>
@@ -177,10 +136,11 @@
       <td><%=dto.getLocation() %></td>
       <td><%=dto.getRegdate() %></td>
    </tr>   
-      <%} 
+<%             } 
+            }
+         }
       } %>
 </table>
-
 </body>
   
 </body>
