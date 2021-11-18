@@ -324,7 +324,7 @@ public class SprojectDAO {
 		try {
 			conn = OracleDB.getConnection();
 			String sql = "select * from "
-							+ "(select rownum r, num, id, subjdcet, lang, career, worktype, field, pay, location, employtype, projecttype, introduce, email, phone, kakao, portfolio, period, available, favor, good, readcount, regdate "
+							+ "(select rownum r, num, id, subject, lang, career, worktype, field, pay, location, employtype, projecttype, introduce, email, phone, kakao, portfolio, period, available, favor, good, readcount, regdate "
 							+ "from (select  * from s_project "
 							+ "where career like ? "
 							+ "and field like ? "
@@ -355,6 +355,7 @@ public class SprojectDAO {
 				SprojectDTO sdto = new SprojectDTO();
 				sdto.setNum(rs.getInt("num"));
 				sdto.setId(rs.getString("id"));
+				sdto.setSubject(rs.getString("subject"));
 				sdto.setField(rs.getString("field"));
 				sdto.setCareer(rs.getString("career"));
 				sdto.setEmploytype(rs.getString("employtype"));
@@ -395,7 +396,7 @@ public class SprojectDAO {
 		try {
 			conn = OracleDB.getConnection();
 			pstmt = conn.prepareStatement("select * from "
-					+ " (select num,id,subject,lang,career,worktype,field,pay,location,employtype,projecttype,introduce,email,phone,kakao,portfolio,period,available,favor,good,readcount,regdate,rownum r from "
+					+ " (select num, id, subject, lang, career, worktype, field, pay, location, employtype, projecttype, introduce, email, phone, kakao,projectimg,projectdetail, period, available, favor, good, readcount, regdate, rownum r from "
 					+ " (select * from s_project order by good desc)) "
 					+ " where r >=? and r <=?");
 			pstmt.setInt(1, start);
