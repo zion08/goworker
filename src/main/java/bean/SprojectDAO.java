@@ -31,7 +31,7 @@ public class SprojectDAO {
 			pstmt.setString(4, dto.getCareer());
 			pstmt.setString(5, dto.getWorktype());
 			pstmt.setString(6, dto.getField());
-			pstmt.setInt(7, dto.getPay());
+			pstmt.setString(7, dto.getPay());
 			pstmt.setString(8, dto.getLocation());
 			pstmt.setString(9, dto.getEmploytype());
 			pstmt.setString(10, dto.getProjecttype());
@@ -92,7 +92,7 @@ public class SprojectDAO {
 				dto.setCareer(rs.getString("career"));
 				dto.setWorktype(rs.getString("worktype"));
 				dto.setField(rs.getString("field"));
-				dto.setPay(rs.getInt("pay"));
+				dto.setPay(rs.getString("pay"));
 				dto.setLocation(rs.getString("location"));
 				dto.setEmploytype(rs.getString("employtype"));
 				dto.setProjecttype(rs.getString("projecttype"));
@@ -174,7 +174,7 @@ public class SprojectDAO {
 				dto.setProjecttype(rs.getString("projecttype"));
 				dto.setEmploytype(rs.getString("employtype"));
 				dto.setPeriod(rs.getString("period"));
-				dto.setPay(rs.getInt("pay"));
+				dto.setPay(rs.getString("pay"));
 				dto.setEndProject(rs.getString("endproject"));
 				dto.setSent(rs.getString("sent"));
 				dto.setPageNum(rs.getInt("pageNum"));
@@ -201,7 +201,7 @@ public class SprojectDAO {
 			pstmt.setString(3, dto.getCareer());
 			pstmt.setString(4, dto.getWorktype());
 			pstmt.setString(5, dto.getField());
-			pstmt.setInt(6, dto.getPay());
+			pstmt.setString(6, dto.getPay());
 			pstmt.setString(7, dto.getLocation());
 			pstmt.setString(8, dto.getEmploytype());
 			pstmt.setString(9, dto.getProjecttype());
@@ -275,7 +275,7 @@ public class SprojectDAO {
 				dto.setProjecttype(rs.getString("projecttype"));
 				dto.setEmploytype(rs.getString("employtype"));
 				dto.setPeriod(rs.getString("period"));
-				dto.setPay(rs.getInt("pay"));
+				dto.setPay(rs.getString("pay"));
 				dto.setEndProject(rs.getString("endproject"));
 				dto.setSent(rs.getString("sent"));
 				dto.setPageNum(rs.getInt("pageNum"));
@@ -293,7 +293,7 @@ public class SprojectDAO {
 	
 	public int getSearchCount(String career, String field, String worktype,
 			String location, String employtype,
-			String projecttype,String period, int pay, int available) {
+			String projecttype,String period, String pay, int available) {
 		int result = 0; 
 		try {
 			conn = OracleDB.getConnection();
@@ -315,7 +315,7 @@ public class SprojectDAO {
 			pstmt.setString(5, employtype);
 			pstmt.setString(6, projecttype);
 			pstmt.setString(7, period);
-			pstmt.setInt(8, pay);
+			pstmt.setString(8, pay);
 			pstmt.setInt(9, available);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -331,7 +331,7 @@ public class SprojectDAO {
 	
 	public List<SprojectDTO> getSearchList(String career, String field, String worktype,
 											String location, String employtype, 
-											String projecttype, String period,int pay, int available , 
+											String projecttype, String period,String pay, int available , 
 											int start , int end) {
 		List<SprojectDTO> list = null;
 		try {
@@ -358,7 +358,7 @@ public class SprojectDAO {
 			pstmt.setString(5, employtype);
 			pstmt.setString(6, projecttype);
 			pstmt.setString(7, period);
-			pstmt.setInt(8, pay);
+			pstmt.setString(8, pay);
 			pstmt.setInt(9, available);
 			pstmt.setInt(10, start);
 			pstmt.setInt(11, end);		
@@ -374,6 +374,8 @@ public class SprojectDAO {
 				sdto.setLocation(rs.getString("location"));
 				sdto.setWorktype(rs.getString("worktype"));
 				sdto.setIntroduce(rs.getString("introduce"));
+				sdto.setPay(rs.getString("pay"));
+				sdto.setPeriod(rs.getString("period"));
 				sdto.setAvailable(rs.getInt("available"));
 				sdto.setReadcount(rs.getInt("readcount"));
 				sdto.setGood(rs.getInt("good"));

@@ -2,12 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="bean.SprojectDAO" %>
 <%@ page import="bean.SprojectDTO" %>
-
+<%@ include file = "../include/header.jsp" %>
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
 
 <%
-	String sid = (String)session.getAttribute("id");
 	request.setCharacterEncoding("UTF-8"); 
 	String pageNum = request.getParameter("pageNum");
 	SprojectDAO dao = new SprojectDAO();
