@@ -73,8 +73,12 @@
 	int comment_count = 0;
 	int board_num = dto.getNum();
 	
-%>
-<section class="section1">	
+%>	
+<%
+        // 로그인된 id 와 글작성자 비교
+	    if(sid != null){
+		if(sid.equals("admin")){%>
+		<section class="section1">	
 
 	<form action="comment/commentPro.jsp" name="writeform" method="get" >
 			<input type="hidden" name="board_num" value="<%=dto.getNum()%>"/>
@@ -83,13 +87,7 @@
 			<input type="hidden" name="comment_step" value="<%=comment_step%>"/>
 			<input type="hidden" name="comment_level" value="<%=comment_level%>"/>
 			<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
-				
-		
-<%
-        String aid = (String)session.getAttribute("sid");
-        // 로그인된 id 와 글작성자 비교
-	    if(aid != null){
-		if(aid.equals("admin")){%>
+			
 		<table class="comments" border=1>
 			<tr>
 
@@ -168,7 +166,7 @@
 				</td>
 			
         <% if(sid !=null) {
-            if(sid.equals(cdto.getComment_writerid())||aid.equals("admin")) { %>								
+            if(sid.equals(cdto.getComment_writerid())||sid.equals("admin")) { %>								
 			<td  align="center">
 				<form action="/goworker/cs/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
 					<input type="button" value="수정" onclick="window.open('/goworker/cs/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
