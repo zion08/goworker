@@ -58,6 +58,7 @@
 					<th width="50">번호</th>
 					<th width="350">아이디/제목</th>
 					<th width="350">작성일</th>
+					<th width="50">삭제</th>
 				</tr>
 				
 			       <% if(count == 0){%>
@@ -68,18 +69,21 @@
 				    
 				    <%if(count > 0) {
 				    for(SmemberDTO dto : list){%>
-			 <tr>
+		   <form action="../member/favorite_out_fav.jsp" method="post">
+			  <tr>
+			 	<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 			 	<td width="100">멤버찾기</td>
 				<td width="50"><%= dto.getNum() %></td>
 				<td width="350"><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></td>
 				<td width="350"><%= dto.getRegdate() %></td>
+				<td width="50">
+                <input type ="submit" value="관심해제" >   
+                </td>
 			 </tr>
+		  </form>
 				 <%}
 				   }
 				 %>
-				 
-
-				
 					<% if(pcount == 0){%>
 			    <tr>
 				    <th colspan="6">프로젝트 찾기에 관심목록이 없습니다...!!</th>
@@ -87,12 +91,18 @@
 				    <%}%>
 				    <%if(pcount > 0) {
 				    for(SprojectDTO pdto : plist){%>
-			 <tr>
+		   <form action="../member/favorite_Spout_fav.jsp" method="post">
+			  <tr>
+			 	<input type="hidden" name="num" value="<%=pdto.getNum() %>" />	    
 			 	<td width="100">프로젝트찾기</td>
 				<td width="50"><%= pdto.getNum() %></td>
 				<td width="350"><a href="/goworker/s-project/s-project_detail.jsp?num=<%=pdto.getNum()%>&pageNum=<%=pageNum%>"><%=pdto.getSubject() %></a></td>
 				<td width="350"><%= pdto.getRegdate() %></td>
+				<td width="50">
+                <input type ="submit" value="관심해제" >   
+                </td>
 			 </tr>
+			 </form>
 				 <%}
 				   }
 				 %>			
