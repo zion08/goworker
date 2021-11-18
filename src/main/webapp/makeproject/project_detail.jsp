@@ -44,7 +44,6 @@
 	
 	comment_count = cd.getCommentCount(board_num);
 
-	MemberDTO mdto = new MemberDTO();
 	MemberDAO mdao = new MemberDAO();
 	String result = mdao.getRank(dto.getId());
 	

@@ -269,11 +269,8 @@ function button_event(){
 		if(count > 0) { 
 			for(Comment_SmemberDTO cdto : list)  {
 				
-				
-				MemberDTO mdto = new MemberDTO();
 				MemberDAO mdao = new MemberDAO();
 				String result = mdao.getRank(cdto.getComment_writerid());
-
 				
 %>	
 			<tr>	
@@ -311,8 +308,8 @@ function button_event(){
 					<%=sdf.format(cdto.getComment_regdate()) %>
 				</td>
 				
-<% if(sid !=null) {
-if(sid.equals(cdto.getComment_writerid())) { %>					
+<% 			if(sid !=null) {
+					if(sid.equals(cdto.getComment_writerid())) { %>					
 				
 				<td  align="center">
 					<form action="/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
