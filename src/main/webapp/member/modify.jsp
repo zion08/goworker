@@ -4,11 +4,9 @@
 <%@ page import="bean.MemberDTO" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <%@ include file = "../include/header.jsp" %>
-
+<title>회원정보수정</title>
 <html>
-<head>
-<title>비밀번호수정</title>
-</head><br>
+
 <%
 	String id = (String)session.getAttribute("sid");
 	if(sid == null){
@@ -26,7 +24,6 @@
  <table border="1" align="center">
 	<tr>
 		<td>아이디 : <%=sid%> </td>
-		<input type="hidden" name="id" value="<%=dto.getId()%>"/>
 	</tr>
  	<tr>		
 		<td>email : <%=dto.getEmail()%>
@@ -37,26 +34,19 @@
 	<tr>
         <td>비밀번호 : <input type="password" name="password" value="<%=dto.getPassword()%>" /></td>
     </tr>
-    <tr>
-		<td>회원등급 :
-			<select name = 'rank' >
-				<option value = "member">멤버</option>
-				<option value = "manager">매니저</option>
-			</select></td>
-	</tr>         
+     <tr>
+	    <td align="center">회원등급 : </td>
+		 <select name = 'rank' >
+			 <option value = "member">멤버</option>
+			 <option value = "manager">매니저</option>
+		 </select>
+	</tr>        
     <tr>           
-    	<td><input type="submit" value="정보 수정"  /></td>
- 	</tr>
- <%}%>
+    	<td><input type="submit" value="정보 수정" /></td>
+ 	</tr> 
  </table>
 </form>  
 </body> 
-<br/>
+	<%}%>
 <%@ include file = "/include/footer.jsp" %>
 </html>
-
-
-
-
-
-
