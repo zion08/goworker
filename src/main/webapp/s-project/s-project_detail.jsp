@@ -235,6 +235,10 @@ session.setAttribute("num", dto.getNum());
 				if(count > 0) { 
 				for(Comment_SprojectDTO cdto : list)  {
 				
+
+					MemberDTO mdto = new MemberDTO();
+					MemberDAO mdao = new MemberDAO();
+					String result = mdao.getRank(cdto.getComment_writerid());
 				
 				%>
 			
