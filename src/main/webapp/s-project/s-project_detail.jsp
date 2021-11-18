@@ -54,18 +54,37 @@ session.setAttribute("num", dto.getNum());
 <br />
 <div class="detailbox4" id="detailallbox"><br /><center><%=dto.getLang() %></center></div><br />
 	<br /><br />
-	위치 : <%=dto.getLocation() %><br />
-	프로젝트 종류 :<%=dto.getProjecttype() %><br />
-	근무 형태 : <%=dto.getWorktype() %><br />
+	위치 : <% if(dto.getLocation()=="online"){ %>원격<%
+			}else if(dto.getLocation()=="seoul"){%>서울<%
+			}else if(dto.getLocation()=="gyunggi"){%>경기<% 
+			}else if(dto.getLocation()=="incheon"){%>인천<% 
+			}else if(dto.getLocation()=="gangwon"){%>강원<%
+			}else if(dto.getLocation()=="chungbuk"){%>충북<%
+			}else if(dto.getLocation()=="chungnam"){%>충남<%
+			}else if(dto.getLocation()=="daejeon"){%>대전<%
+			}else if(dto.getLocation()=="sejong"){%>세종<%
+			}else if(dto.getLocation()=="jeonbuk"){%>전북<%
+			}else if(dto.getLocation()=="jeonnam"){%>전남<%
+			}else if(dto.getLocation()=="gwangju"){%>광주<%
+			}else if(dto.getLocation()=="gyungbuk"){%>경북<%
+			}else if(dto.getLocation()=="gyungnam"){%>경남<%
+			}else if(dto.getLocation()=="daegu"){%>대구<%
+			}else if(dto.getLocation()=="ulsan"){%>울산<%
+			}else if(dto.getLocation()=="busan"){%>부산<%
+			}else {%>제주<%
+			}%><br />
+	프로젝트 종류 :<% if(dto.getProjecttype() == "side"){ %> 사이드 프로젝트 <%}else{ %>메인 프로젝트<%}%> <br />
+	근무 형태 : <% if(dto.getWorktype() == "online"){ %> 원결 <%}else{ %>상주<%} %><br />
 	게시 날짜 : <%=dto.getRegdate() %><br />
 	조회 : <%=dto.getReadcount() %><br />
 	좋아요 : <%=dto.getGood() %><br />
 	
 	<input type="button" value="목록" 
-	onclick="window.location='s-project_list.jsp?pageNum=<%=pageNum%>'" />
+	onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'" />
 	
 <!-- 관심목록 버튼 -->	
-	<%if (sid !=null) {%>
+	<%
+	if (sid !=null) {%>
 
 	<form>
 		<% FavoriteDAO fdao = new FavoriteDAO(); 

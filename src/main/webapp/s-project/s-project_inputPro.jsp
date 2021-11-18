@@ -72,7 +72,7 @@
 	dto.setProjecttype(projecttype);
 	dto.setWorktype(worktype);
 	dto.setLocation(location);
-	dto.setPay(payi);
+	dto.setPay(pay);
 	dto.setPeriod(period);
 	dto.setAvailable(avail);
 	dto.setIntroduce(introduce);
@@ -84,7 +84,7 @@
 	if(result == 1) {
 %>		<script type="text/javascript">
 			alert("등록되었습니다.");
-			window.location = 's-project_list.jsp';
+			window.location = 's-project.jsp';
 		</script>
 <%	} else {
 %>		<script type="text/javascript">

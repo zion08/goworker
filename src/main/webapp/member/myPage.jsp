@@ -18,13 +18,12 @@
 
 <body>
 <div class="input" >
-      <input type="submit" value="프로젝트찾기" onclick=" window.location='/goworker/s-project/s-project_list.jsp' "/>
+      <input type="submit" value="프로젝트찾기" onclick=" window.location='/goworker/s-project/list.jsp' "/>
       <input type="submit" value="팀원찾기" onclick=" window.location='/goworker/s-member/s-member.jsp' "/>
       <input type="submit" value="관심목록" onclick=" window.location='favorite.jsp' "/>
 </div><br/>
 <%	
 	String pageNum = request.getParameter("pageNum");
-	String my = request.getParameter("my");
 	int pageSize = 5;
 	if(pageNum==null) {
 		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
@@ -59,7 +58,7 @@
 	<h2>나의 멤버</h2>
 		<table class="mboard" >
 			<tr>
-				<th><a href="s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
+				<th><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
 				<th>
 				<%if(dto.getAvailable() == 1) { %>
 				<img src="image/switch-on.png" width="40px" height="36px"> 
@@ -68,8 +67,8 @@
 				<%} %>
 				</th>
 				<th><%=dto.getField() %></th>
-				<td><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
-					<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+				<td><img src="../s-member/image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
+					<img src="../s-member/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
 				</td>
 			</tr>
 			<tr>
@@ -87,49 +86,51 @@
 <%}
 	}
 %><br/>
-<%
-    String id = (String)session.getAttribute("sid");
-	SprojectDAO pdao = new SprojectDAO();
-	List<SprojectDTO> plist = null;
-	
-	count = dao.getMyCount(id); // 나의 작성글수 
-	if(count > 0){
-		list = dao.getMyList(id, start , end );
-	}
-	%>
-	
-	<%if(count == 0){ %>
-		<div>
-		<table border="1">
-		  <tr>
-		   <th><a href="../s-project/s-project.jsp">나의 프로젝트등록</a></th>
-		  </tr>
-		  <tr> 
-			<th colspan="9">게시글이 없습니다</th>
-		  </tr>
-			</table>
-		</div>	
-	<%}else{ %>
-<% 		for(SprojectDTO dto : plist){%>
+<% 
+   SprojectDAO pdao = new SprojectDAO();
+    int pcount = 0;
+   List<SprojectDTO> plist = null;
+   
+   pcount = pdao.getMyCount(sid); // 나의 작성글수 
+   if(pcount > 0){
+      plist = pdao.getMyList(sid, start, end);
+   }
+
+   %>
+      <%if(pcount == 0){ %>
+      <div>
+      <table border="1">
+        <tr>
+         <th><a href="../s-project/s-project.jsp">나의 프로젝트등록</a></th>
+        </tr>
+        <tr> 
+         <th colspan="9">게시글이 없습니다</th>
+        </tr>
+         </table>
+   </div>
+   <%}else{  %>
+<% for(SprojectDTO dto : plist){%>
     <table border="1">
     <h2>나의 프로젝트</h2>
-	<tr>
-		<th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
-	</tr>
-	<tr>
-		<td><%=dto.getNum() %></td>
-		<td><a href="s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getId() %></a></td>
-		<td><%=dto.getId() %></td>
-		<td><%=dto.getCareer() %></td>
-		<td><%=dto.getPeriod() %></td>
-		<td><%=dto.getPay() %></td> 
-		<td><%=dto.getProjecttype() %></td>
-		<td><%=dto.getLocation() %></td>
-		<td><%=dto.getRegdate() %></td>
-	</tr>	
-		<%} 
-		} %>
+   <tr>
+      <th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
+   </tr>
+   <tr>
+      <td><%=dto.getNum() %></td>
+      <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
+      <td><%=dto.getId() %></td>
+      <td><%=dto.getCareer() %></td>
+      <td><%=dto.getPeriod() %></td>
+      <td><%=dto.getPay() %></td> 
+      <td><%=dto.getProjecttype() %></td>
+      <td><%=dto.getLocation() %></td>
+      <td><%=dto.getRegdate() %></td>
+   </tr>   
+      <%} 
+      } %>
 </table>
+</body>
+  
 </body>
 <br/>
 <footer>

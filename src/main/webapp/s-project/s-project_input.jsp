@@ -143,9 +143,16 @@
 						</li>
 									
 						<li id="period">
-							<label>업무 시작 일자</label>
-								<input type="date" name="period">
-						</li>
+							<label>예상 기간</label>
+								<select name="periond">
+									<option value="%">전체</option>
+									<option value="7">7일</option>
+									<option value="30">30일</option>
+									<option value="90">90일</option>
+									<option value="180">180일</option>
+									<option value="365">1년</option>
+									<option value="2">2년이상</option>
+								</select>
 						
 						<li id="available">
 							<label>구인활동여부</label>
@@ -157,22 +164,23 @@
 						
 						<li id="pay">
 							<label>예상 급여</label>
-								<label><input type="radio" name="pay" value="0">전체</label>
-								<label><input type="radio" name="pay" value="100">100만원</label>
-								<label><input type="radio" name="pay" value="200">200만원</label>
-								<label><input type="radio" name="pay" value="300">300만원</label>
-								<label><input type="radio" name="pay" value="400">400만원</label>
-								<label><input type="radio" name="pay" value="500">500만원</label>
-								<label><input type="radio" name="pay" value="600">600만원</label>
-								<label><input type="radio" name="pay" value="700">700만원</label>
-								<label><input type="radio" name="pay" value="800">800만원</label>
-								<label><input type="radio" name="pay" value="900">900만원</label>
-								<label><input type="radio" name="pay" value="1000">1000만원</label>
-								<label><input type="radio" name="pay" value="2000">2000만원</label>
-								<label><input type="radio" name="pay" value="3000">3000만원</label>
-								<label><input type="radio" name="pay" value="4000">4000만원</label>
-								<label><input type="radio" name="pay" value="5000">5000만원</label>
-								<label><input type="radio" name="pay" value="10000">1억 이상</label>
+								<select name="pay">
+									<option value="100">100만원</option>
+									<option value="200">200만원</option>
+									<option value="300">300만원</option>
+									<option value="400">400만원</option>
+									<option value="500">500만원</option>
+									<option value="600">600만원</option>
+									<option value="700">700만원</option>
+									<option value="800">800만원</option>
+									<option value="900">900만원</option>
+									<option value="1000">1000만원</option>
+									<option value="2000">2000만원</option>
+									<option value="3000">3000만원</option>
+									<option value="4000">4000만원</option>
+									<option value="5000">5000만원</option>
+									<option value="10000">10000만원</option>
+								</select>
 						</li>
 						
 						<li id="introduce">

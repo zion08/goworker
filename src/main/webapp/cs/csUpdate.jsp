@@ -15,7 +15,7 @@
 <%		
       String id = null;
       if(session.getAttribute("sid") != null){
-   	  sid = (String) session.getAttribute("sid");
+   	  id = (String) session.getAttribute("sid");
       }
 
   	  String pageNum = request.getParameter("pageNum");
@@ -64,7 +64,7 @@
 <%
       String cid = (String)session.getAttribute("sid");
       // 로그인된 id 와 글작성자 비교
- if(cid != null){
+      if(cid != null){
 		if(cid.equals(dto.getWriter()) || cid.equals("admin")){
 %>		<input type="submit" value="수정" />
 		<input type="button" value="삭제" onclick = "csDelete.jsp"/>	
