@@ -284,7 +284,7 @@ public class SprojectDAO {
 		int result = 0; 
 		try {
 			conn = OracleDB.getConnection();
-			String sql = "select count(*) from s_proejct "
+			String sql = "select count(*) from s_project "
 							+ "where career like ? "
 							+ "and field like ? "
 							+ "and worktype like ? "
@@ -381,7 +381,7 @@ public class SprojectDAO {
 		int result = 0;
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("delete from s_proejct where num=?");
+			pstmt = conn.prepareStatement("delete from s_project where num=?");
 			pstmt.setInt(1, dto.getNum());
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
