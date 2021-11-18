@@ -217,7 +217,7 @@ if(count > 0){
 	<div>
 		<table class="mboard" >
 			<tr>
-				<th><a href="s-proejct_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
+				<th><a href="s-project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
 				<th>
 				<%if(dto.getAvailable() == 1) { %>
 				<img src="image/switch-on.png" width="40px" height="36px"> 
