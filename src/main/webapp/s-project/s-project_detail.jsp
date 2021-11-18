@@ -3,6 +3,9 @@
 <%@ page import="bean.SprojectDTO" %>
 <%@ page import="bean.SprojectDAO" %>
 
+<%@ page import="bean.FavoriteDTO" %>
+<%@ page import="bean.FavoriteDAO" %>
+
 <%@ page import = "bean.Comment_SprojectDAO" %>
 <%@ page import = "bean.Comment_SprojectDTO" %>
 
@@ -56,10 +59,35 @@ session.setAttribute("num", dto.getNum());
 	근무 형태 : <%=dto.getWorktype() %><br />
 	게시 날짜 : <%=dto.getRegdate() %><br />
 	조회 : <%=dto.getReadcount() %><br />
-	<br />
+	좋아요 : <%=dto.getGood() %><br />
 	
 	<input type="button" value="목록" 
 	onclick="window.location='s-project_list.jsp?pageNum=<%=pageNum%>'" />
+	
+<!-- 관심목록 버튼 -->	
+	<%if (sid !=null) {%>
+
+	<form>
+		<% FavoriteDAO fdao = new FavoriteDAO(); 
+		boolean result = fdao.favCheck(sid, dto.getNum());
+		if(result == true) {%>
+		<a href="/goworker/member/favorite_Spout.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_fill.png" width="30px" height="30px"></a>
+		<%}else {%>
+		<a href="/goworker/member/favorite_Spin.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_empty.png" width="30px" height="30px"></a>
+		<%} %>
+	</form>
+	<!-- 관심목록 버튼 끝-->
+	
+	<!-- 좋아요 버튼-->
+	
+	<form align="center">
+		<a href="s-project_goodUp.jsp?num=<%=dto.getNum() %>" onclick= "window.open(this.href,'GoodUp','width=300,height=150'); return false; window.location.reload();" >좋아요<img src="image/thumbs.png" width="25px" height="25px" ></a>&emsp;
+		<a href="s-project_goodDown.jsp?num=<%=dto.getNum() %>" onclick= "window.open(this.href,'GoodDown','width=300,height=150'); return false; window.location.reload();" >싫어요<img src="image/thumbs_down.png" width="25px" height="25px" ></a>
+	</form>
+	
+	<%}%>
+
+	
 	<%if(id !=null){ %>
 		<input type="button" value="좋아요">
 		<%if( sid == id ) { %>	
