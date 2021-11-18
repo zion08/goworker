@@ -7,7 +7,6 @@
 <%@ page import="java.util.List" %> 
 <%@ page import = "java.text.SimpleDateFormat" %>
 
-<%@ page import = "bean.MemberDTO" %>
 <%@ page import = "bean.MemberDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
