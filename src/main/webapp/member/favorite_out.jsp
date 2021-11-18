@@ -42,9 +42,12 @@
 		 	FavoriteDAO fdao = new FavoriteDAO();
 		 	SmemberDTO smdto = new SmemberDTO();
 		 	
+		 	System.out.println(sid);
+		 	System.out.println(Smember_num);
+		 	
 	 		int result = fdao.delete(sid, Smember_num);
 	 	
-	 if(result == 1) {
+	 if(result == -1) {
 %>		<script type="text/javascript">
 			alert("등록해제 되었습니다.");
 			window.location = '/goworker/s-member/s-member_detail.jsp?num=<%=Smember_num%>';

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="bean.SprojectDTO"%>
-<%@ page import="bean.SprojectDAO"%>
+<%@ page import="bean.SmemberDTO"%>
+<%@ page import="bean.SmemberDAO"%>
 <%@ page import="bean.FavoriteDTO"%>
 <%@ page import="bean.FavoriteDAO"%>
 <%@ page import="java.util.ArrayList"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="sproject" class="bean.FavoriteDTO" scope="page" />
+<jsp:useBean id="smember" class="bean.FavoriteDTO" scope="page" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,9 +28,9 @@
 	 		script.println("</script>");
 	 	} 
 	 	else{
-		 	int Sproject_num = 0; 
+		 	int Smember_num = 0; 
 		 	if (request.getParameter("num") != null){
-		 		Sproject_num = Integer.parseInt(request.getParameter("num"));
+		 		Smember_num = Integer.parseInt(request.getParameter("num"));
 		 	}
 		 	/*if (Smember_num == 0){
 		 		PrintWriter script = response.getWriter();
@@ -40,14 +40,17 @@
 		 		script.println("</script>");
 		 	}*/
 		 	FavoriteDAO fdao = new FavoriteDAO();
-		 	SprojectDTO spdto = new SprojectDTO();
+		 	SmemberDTO smdto = new SmemberDTO();
 		 	
-	 		int result = fdao.SPdelete(sid, Sproject_num);
+		 	System.out.println(sid);
+		 	System.out.println(Smember_num);
+		 	
+	 		int result = fdao.delete(sid, Smember_num);
 	 	
 	 if(result == -1) {
 %>		<script type="text/javascript">
 			alert("등록해제 되었습니다.");
-			window.location = '/goworker/s-project/s-project_detail.jsp?num=<%=Sproject_num%>';
+			window.location = '/goworker/member/favorite.jsp';
 		</script>
 <%	} else {
 %>		<script type="text/javascript">
