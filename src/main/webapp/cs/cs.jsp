@@ -7,6 +7,8 @@
 <%@ page import="bean.SmemberDTO" %>
 <%@ page import="bean.CsDTO" %>
 <%@ page import="bean.CsDAO" %>
+<%@ page import="bean.Comment_CsDTO" %>
+<%@ page import="bean.Comment_CsDAO" %>
 <%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
 <html>
@@ -26,7 +28,7 @@
 	String pageNum = request.getParameter("pageNum");
 	String my = request.getParameter("my");
 	
-	String id = (String)session.getAttribute("sid");
+	
 	 
 	if(pageNum == null){		
 		pageNum="1";	
@@ -40,38 +42,48 @@
 	int count = 0;
 	List<CsDTO> list = null;
 	
-	if(id !=null){
-	if(id.equals("admin"))	
+	if(sid !=null){
+	if(sid.equals("admin"))	
 		count = dao.getCount(); // 전체글 수 
     if(count > 0){
 	    list = dao.getAllList( start , end );
 	}else{
-		count = dao.getMyCount(id); // 나의 작성글수 
+		count = dao.getMyCount(sid); // 나의 작성글수 
 		if(count > 0){
-			list = dao.getMyList(id, start , end ); 
-		}
+			list = dao.getMyList(sid, start , end ); 
+		}	
 	}
 }
 	
 %>
-<table border="1">
-	<tr>
-		<th>글번호</th><th>작성자</th><th>제목</th> <th>내용</th><th>작성일</th><th>조회</th>
-	</tr>
+    <table border="1">
+
 	<%if(count == 0){%>
 		<tr>
-			<td colspan="6">저장된 글이 없습니다...!!</td>
+			<th colspan="6">저장된 글이 없습니다. <br/>본인의 글만 볼수 있습니다.</th>
 		</tr>	
 	<%}else{%>
+	<tr>
+		<th>글번호</th><th>작성자</th><th>제목</th><th>작성일</th><th>조회</th><th>답변진행사항</th>
+	</tr>
 	<%
+	
     	for(CsDTO dto : list){%>
 	<tr>
 		<td><%=dto.getNum()%></td>
 		<td><%=dto.getWriter()%></td>
 		<td><a href="csContent.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></td> 	
-		<td><%=dto.getContent()%></td>
 		<td><%=dto.getRegdt()%></td>
 		<td><%=dto.getReadcount()%></td>
+		<%
+		Comment_CsDAO cdao = new Comment_CsDAO();
+		int ccount = 0;
+		ccount = cdao.getCommentCount(dto.getNum());
+		if(ccount == 0){%>
+			<td colspan="6">답변진행중</td>
+	    <%}else{%>
+			<td colspan="6">답변완료</td>
+		<%	}%>
 	</tr>		
 <%	}
 }%>
@@ -97,66 +109,12 @@
 	}
 %>
 <%
-	if(id != null){
+	if(sid != null){
 %>		<input type="button"  value="글쓰기" onclick="window.location='csWrite.jsp' "/>
 <%  } %>
 <br />
-<footer>
-<hr color="skyblue" size="2"  align="center" />
-    <table  align="right">     
-      <thead align="center">
-        <tr>
-          <th></th>
-          <th>메인</th>
-          <th>회원</th>
-          <th>고객센터</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="">사이트소개</a></td>
-          <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
-          <td>회원가입</td>
-          <td><a href="/goworker/cs/notice.jsp">공지사항</a></td>
-          
-        </tr>
-        <tr>
-          <td>이용방법</td>
-          <td>프로젝트찾기</td>
-          <td>회원정보수정</td>
-          <td><a href="/goworker/cs/cs.jsp">Q&A</a></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>프로젝트만들기</td>
-          <td>회원탈퇴</td>
-          <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>취업정보</td>
-            <td></td>
-            <td></td>
-          </tr>
-        <tr>
-          <td></td>
-          <td>커뮤니티</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>      
-     </table>
-    </footer>
-</body>
+<%@ include file = "/include/footer.jsp" %>
 <style>
-            
-            #footer{
-                text-align: right;
-                font-size:12pt;
-                color:rgb(164, 164, 164);
-                margin:10px 0px;
-            }
-
             aside{
                 display:block;
                 width:400px;
@@ -170,5 +128,6 @@
                 height:240px;
             }
     </style>  
+
  </html>
     
