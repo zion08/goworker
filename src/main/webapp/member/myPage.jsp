@@ -100,6 +100,49 @@
    if(pcount > 0){
       plist = pdao.getMyList(sid, start, end);
    }
+   
+   System.out.println(pcount);
+   System.out.println(start);
+   System.out.println(end);
+   System.out.println(sid);
+   System.out.println(plist);
+
+%>
+<%	if (pcount == 0) { 
+%>		<div>
+			<table border="1">
+		        <tr>
+					<th><a href="../s-project/s-project.jsp">나의 프로젝트등록</a></th>
+		        </tr>
+		        <tr> 
+					<th colspan="9">게시글이 없습니다</th>
+		        </tr>
+			</table>
+	   </div>
+<%	} else {  
+%>
+<%		for(SprojectDTO dto : plist){%>
+			<h2>나의 프로젝트</h2>
+				<table  class="mboard">
+					<tr>
+					   <th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
+					</tr>
+					<tr>
+					   <td><%=dto.getNum() %></td>
+					   <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
+					   <td><%=dto.getId() %></td>
+					   <td><%=dto.getCareer() %></td>
+					   <td><%=dto.getPeriod() %></td>
+					   <td><%=dto.getPay() %></td> 
+					   <td><%=dto.getProjecttype() %></td>
+					   <td><%=dto.getLocation() %></td>
+					   <td><%=dto.getRegdate() %></td>
+					</tr>
+				   
+<%		} 
+	} 
+%>
+
 
    %>
       <%
@@ -137,6 +180,7 @@
       <%} 
       } %>
 </table>
+
 </body>
   
 </body>

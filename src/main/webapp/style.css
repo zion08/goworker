@@ -373,6 +373,7 @@ hr {
 
 #message {
 	grid-column: 1 / 3;
+	color: #000000;
 }
 
 #send {

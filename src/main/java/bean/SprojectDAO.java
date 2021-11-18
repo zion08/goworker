@@ -40,7 +40,7 @@ public class SprojectDAO {
 			pstmt.setString(13, dto.getPhone());
 			pstmt.setString(14, dto.getKakao());
 			pstmt.setString(15, dto.getProjectimg());
-			pstmt.setString(16, dto.getProjectdetail());
+			pstmt.setString(16, dto.getProjectDetail());
 			pstmt.setString(17, dto.getPeriod());
 			pstmt.setInt(18, dto.getAvailable());
 			result = pstmt.executeUpdate();
@@ -101,7 +101,7 @@ public class SprojectDAO {
 				dto.setPhone(rs.getString("phone"));
 				dto.setKakao(rs.getString("kakao"));
 				dto.setProjectimg(rs.getString("projectimg"));
-				dto.setProjectdetail(rs.getString("projectdetail"));
+				dto.setProjectDetail(rs.getString("projectdetail"));
 				dto.setPeriod(rs.getString("period"));
 				dto.setAvailable(rs.getInt("available"));
 				dto.setFavor(rs.getInt("favor"));
@@ -158,7 +158,9 @@ public class SprojectDAO {
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setCareer(rs.getString("career"));
 				dto.setWorktype(rs.getString("worktype"));
+				dto.setProjectDetail(rs.getString("projectdetail"));
 				dto.setProjecttype(rs.getString("projecttype"));
+				dto.setProjectimg(rs.getString("projectimg"));
 				dto.setEmploytype(rs.getString("employtype"));
 				dto.setPeriod(rs.getString("period"));
 				dto.setPay(rs.getString("pay"));
@@ -196,7 +198,7 @@ public class SprojectDAO {
 			pstmt.setString(11, dto.getEmail());
 			pstmt.setString(12, dto.getPhone());
 			pstmt.setString(13, dto.getKakao());
-			pstmt.setString(14, dto.getProjectdetail());
+			pstmt.setString(14, dto.getProjectDetail());
 			pstmt.setString(15, dto.getPeriod());
 			pstmt.setInt(16, dto.getAvailable());
 			pstmt.setInt(17, dto.getNum());
@@ -251,23 +253,24 @@ public class SprojectDAO {
 				dto.setId(rs.getString("id"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setLang(rs.getString("lang"));
-				dto.setEmail(rs.getString("email"));
-				dto.setPhone(rs.getString("phone"));
-				dto.setKakao(rs.getString("kakao"));
-				dto.setFavor(rs.getInt("favor"));
-				dto.setGood(rs.getInt("good"));
-				dto.setReadcount(rs.getInt("readcount"));
 				dto.setCareer(rs.getString("career"));
 				dto.setWorktype(rs.getString("worktype"));
-				dto.setProjecttype(rs.getString("projecttype"));
-				dto.setEmploytype(rs.getString("employtype"));
-				dto.setPeriod(rs.getString("period"));
+				dto.setField(rs.getString("field"));
 				dto.setPay(rs.getString("pay"));
-				dto.setEndProject(rs.getString("endproject"));
-				dto.setSent(rs.getString("sent"));
-				dto.setPageNum(rs.getInt("pageNum"));
-				dto.setProjectName(rs.getString("projectName"));
 				dto.setLocation(rs.getString("location"));
+				dto.setEmploytype(rs.getString("employtype"));
+				dto.setProjecttype(rs.getString("projecttype"));
+				dto.setIntroduce(rs.getString("introduce"));
+				dto.setEmail(rs.getString("email"));				
+				dto.setPhone(rs.getString("phone"));				
+				dto.setKakao(rs.getString("kakao"));
+				dto.setProjectimg(rs.getString("projectimg"));
+				dto.setProjectDetail(rs.getString("projectdetail"));
+				dto.setPeriod(rs.getString("period"));
+				dto.setAvailable(rs.getInt("available"));				
+				dto.setFavor(rs.getInt("favor"));				
+				dto.setGood(rs.getInt("good"));
+				dto.setReadcount(rs.getInt("readcount"));			
 				plist.add(dto);
 			}
 		} catch(Exception e) {
