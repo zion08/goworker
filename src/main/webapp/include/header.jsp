@@ -17,22 +17,12 @@
 	String sid = (String)session.getAttribute("sid");
 	Cookies cookies = new Cookies(request);
 	String cid = cookies.getValue("cid");
-	List<MemberDTO> headerlist =null;
-	String rank = new String();
-	
 
-	if (sid != null) {
-		headerlist = headerdao.getMemberInfo(sid);
-		MemberDTO dto = headerlist.get(0);
-		rank = dto.getRank();
-	}
 	if (cid != null) {
-		headerlist = headerdao.getMemberInfo(cid);
-		MemberDTO dto = headerlist.get(0);
-		rank = dto.getRank();
+		sid = cid;
 	}
-	
-	
+		
+	String rank = headerdao.getRank(sid);
 %>
 
 
