@@ -35,12 +35,24 @@
         <td>비밀번호 : <input type="password" name="password" value="<%=dto.getPassword()%>" /></td>
     </tr>
      <tr>
+     	<%if(rank.equals("member")) { %>
 	    <td>회원등급 :
 		 <select name = 'rank' >
 			 <option value = "member">멤버</option>
 			 <option value = "manager">매니저</option>
 		 </select>
+		 &emsp; 현재등급 :[ 멤버 ]
 		 </td>
+		 <%} %>
+		 <%if(rank.equals("manager")) { %>
+	    <td>회원등급 :
+		 <select name = 'rank' >
+		  	<option value = "manager">매니저</option>
+			<option value = "member">멤버</option>
+		 </select>
+		 &emsp; 현재등급 :[ 매니저 ]
+		 </td>
+		 <%} %>
 	</tr>        
     <tr>           
     	<td><input type="submit" value="정보 수정" /></td>
@@ -51,3 +63,9 @@
 	<%}%>
 <%@ include file = "/include/footer.jsp" %>
 </html>
+
+
+
+
+
+
