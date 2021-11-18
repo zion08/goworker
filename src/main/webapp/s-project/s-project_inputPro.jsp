@@ -15,7 +15,7 @@
 -->
 
 <% 	
-	String path = request.getRealPath("projectFile"); //실제 경로
+	String path = request.getRealPath("uploadFile/projectFile"); //실제 경로
 	String encoding = "UTF-8"; //한글 파일명 인코딩
 	int size = 1024*1024*10; //파일 사이즈
 	DefaultFileRenamePolicy dp = new DefaultFileRenamePolicy();	//파일명 중복방지 클래스
@@ -62,7 +62,7 @@
 	dto.setCareer(career);
 	dto.setLang(langStr);
 	dto.setProjectimg(projectimg);
-	dto.setProjectdetail(projectdetail);
+	dto.setProjectDetail(projectdetail);
 	dto.setEmploytype(employtype);
 	dto.setProjecttype(projecttype);
 	dto.setWorktype(worktype);

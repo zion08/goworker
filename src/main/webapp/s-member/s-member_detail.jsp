@@ -103,7 +103,7 @@ function button_event(){
 		<tr>
 			<th>포트폴리오</th>		
 			<%if(dto.getPortfolio() != null) { %>
-				<td><img src = "/goworker/portfolioFile/<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
+				<td><img src = "../uploadFile/portfolioFile/<%=dto.getPortfolio() %>" width ="180px" height="300px"></td>
 			<%} else { %>
 			<td> 등록된 포트폴리오가 없습니다. </td>
 			<%} %>

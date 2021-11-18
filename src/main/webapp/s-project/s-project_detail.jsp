@@ -70,7 +70,14 @@ session.setAttribute("num", dto.getNum());
 			}else if(dto.getLocation()=="busan"){%>부산<%
 			}else {%>제주<%
 			}%><br />
+	프로젝트 명: <%= dto.getSubject() %><br />
+	프로젝트 설명: <%= dto.getProjectDetail() %><br />
 	프로젝트 종류 :<% if(dto.getProjecttype() == "side"){ %> 사이드 프로젝트 <%}else{ %>메인 프로젝트<%}%> <br />
+	대표 이미지: <%if(dto.getProjectimg() != null) { %>
+				<td><img src = "../uploadFile/projectFile/<%=dto.getProjectimg() %>" width ="180px" height="300px"></td>
+			<%} else { %>
+			<td> 등록된 포트폴리오가 없습니다. </td>
+			<%} %>
 	근무 형태 : <% if(dto.getWorktype() == "online"){ %> 원결 <%}else{ %>상주<%} %><br />
 	조회 : <%=dto.getReadcount() %><br />
 	좋아요 : <%=dto.getGood() %><br />

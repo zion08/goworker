@@ -24,12 +24,7 @@
 		
 	String rank = headerdao.getRank(sid);
 	
-	
-	if(rank=="member") {
-		System.out.println(rank);
-		System.out.println(rank.equals("member"));
-		
-	}
+
 %>
 
 
@@ -63,7 +58,7 @@
 					</span>
 <%				} else {
 %>					<span class="sideicon2">
-						<a href="../admin/admin.jsp">>관리자페이지
+						<a href="../admin/admin.jsp">관리자페이지
 						</a>
 					</span>
 <%				}		

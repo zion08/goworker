@@ -87,10 +87,10 @@ public class SprojectDTO {
 	public void setProjectimg(String projectimg) {
 		this.projectimg = projectimg;
 	}
-	public String getProjectdetail() {
+	public String getProjectDetail() {
 		return projectdetail;
 	}
-	public void setProjectdetail(String projectdetail) {
+	public void setProjectDetail(String projectdetail) {
 		this.projectdetail = projectdetail;
 	}
 	public String getEmploytype() {
