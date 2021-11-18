@@ -40,11 +40,6 @@
 	String available =mr.getParameter("available");
 	String introduce = mr.getParameter("introduce");
 		
-	if (pay.isEmpty()) {
-		pay = String.valueOf('0');
-	}
-	int payi = Integer.parseInt(pay);
-	
 	int avail = Integer.parseInt(available);
 	
 	String langStr = new String();
