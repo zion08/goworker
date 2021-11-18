@@ -32,3 +32,4 @@
 			window.location = "/goworker/admin/admin_sproject.jsp";
 			
 	</script>
+	<%}%>
