@@ -35,11 +35,12 @@
         <td>비밀번호 : <input type="password" name="password" value="<%=dto.getPassword()%>" /></td>
     </tr>
      <tr>
-	    <td align="center">회원등급 : </td>
+	    <td>회원등급 :
 		 <select name = 'rank' >
 			 <option value = "member">멤버</option>
 			 <option value = "manager">매니저</option>
 		 </select>
+		 </td>
 	</tr>        
     <tr>           
     	<td><input type="submit" value="정보 수정" /></td>
