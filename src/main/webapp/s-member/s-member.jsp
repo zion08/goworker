@@ -173,7 +173,7 @@
 
 
 
-<section class="section3">
+<section class="section5">
 <% 
 	for(SmemberDTO dto : list) { %>
 <% /*

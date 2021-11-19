@@ -57,23 +57,19 @@ hr {
 	display: flex;
 	align-items: center;
     justify-content: center;
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	padding: 15px 20px;
 }
 
-.section3 {
+.section3{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
     justify-content: center;
-	height: 100%;
-	border: 1px solid black;
 	padding: 15px 20px;
-}
-
-.section3-height{
 	height: 65%;
 }
+
 
 .section4 {
 	display: grid;
@@ -82,6 +78,16 @@ hr {
   	/* border: 1px solid black; */
   	column-gap: 40%;
 }
+
+.section5 {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+    justify-content: felx-start;
+	border: 1px solid black;
+	padding: 3vw 15vh;
+}
+
 
 .section4 p {
 	margin: 1vh 3vh;
@@ -320,6 +326,11 @@ hr {
 .condition-info select{
 	width: 100%;
 	height: 50%;
+}
+
+.searchfor-disply {
+	text-align: center;
+	margin-top: 5vh;
 }
 
 .searchfor {
