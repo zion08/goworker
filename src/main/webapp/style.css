@@ -38,6 +38,7 @@ img {
 
 ul {
 	list-style-type: none;
+	padding: 0;
 }
 
 hr {
@@ -110,9 +111,8 @@ hr {
 }
 
 .form-box1 {
-	width: 100%;
-	height: 35%;
-	border: 1px solid blue;
+	width: 60vw;
+	background-color: #F5F5F5;
 	padding: 15px 20px;
 }
 
@@ -259,9 +259,18 @@ hr {
 			margin: 20px 30px;
 		}
 
+.wrapper-submit2 {
+		width: 100%;
+		text-align: center;
+	}
+	
+	.wrapper-submit2 > input {
+			width: 20%;
+			margin-top: 2vh;
+		}
+
 .profile-info {
 	margin: 30px;
-	padding: 0;
  	display: grid;
   	grid-template-columns: repeat(2, minmax(100px, auto));
   	grid-template-rows: repeat(4, minmax(auto, auto));
@@ -279,7 +288,6 @@ hr {
 
 .skill-info {
 	margin: 10px 30px;
-	padding: 0;
  	display: grid;
   	grid-template-columns: repeat(2, minmax(100px, auto));
   	grid-auto-rows: minmax(auto, auto);
@@ -294,7 +302,6 @@ hr {
 
 .condition-info {
 	margin: 30px;
-	padding: 0;
  	display: grid;
   	grid-template-columns: repeat(2, minmax(100px, auto));
   	grid-auto-rows: minmax(auto, auto);
@@ -313,6 +320,16 @@ hr {
 .condition-info select{
 	width: 100%;
 	height: 50%;
+}
+
+.searchfor {
+	display: grid;
+	grid-template-columns: repeat(3,  minmax(100px, auto));
+	grid-auto-rows: minmax(auto, auto);
+}
+
+.searchfor label {
+	width: 6vw;
 }
 
 #message-save > div {
@@ -478,36 +495,36 @@ hr {
 	background-image: url('main/image/commu.png');
 }		
 
-	#detailallbox{
-		position:absolute;
-		left:50%;
-	}
-	.detailbox1{
-		border:1px solid black;
-		width:200px;
-		height:50px;
-		position:absolute;
-		margin: 100px -310px;
-	}
-	.detailbox2{
-		border:1px solid black;
-		width:200px;
-		height:50px;
-		position:absolute;
-		margin: 100px -110px;
-	}
-	.detailbox3{
-		border:1px solid black;
-		width:200px;
-		height:50px;
-		position:absolute;
-		margin: 100px 90px
-	}
-	.detailbox4{
-		border:1px solid black;
-		width:500px;
-		height:50px;
-		position:absolute;
-		margin: 0px -250px;
-	}
+#detailallbox{
+	position:absolute;
+	left:50%;
+}
+.detailbox1{
+	border:1px solid black;
+	width:200px;
+	height:50px;
+	position:absolute;
+	margin: 100px -310px;
+}
+.detailbox2{
+	border:1px solid black;
+	width:200px;
+	height:50px;
+	position:absolute;
+	margin: 100px -110px;
+}
+.detailbox3{
+	border:1px solid black;
+	width:200px;
+	height:50px;
+	position:absolute;
+	margin: 100px 90px
+}
+.detailbox4{
+	border:1px solid black;
+	width:500px;
+	height:50px;
+	position:absolute;
+	margin: 0px -250px;
+}
 

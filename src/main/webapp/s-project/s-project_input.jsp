@@ -21,7 +21,8 @@
 						<li id="id">	
 							<label>아이디</label>
 								<span><%=sid%></span>
-							<input type="hidden" name="id" value="<%=sid%>"/>	
+							<input type="hidden" name="id" value="<%=sid%>"/>
+						</li>	
 						<li id=subject>
 							<label>프로젝트 명</label>
 								<input type="text" name="subject" >
@@ -138,7 +139,7 @@
 									<option value="ulsan">울산</option>
 									<option value="busan">부산</option>
 									<option value="jeju">제주</option>
-							</select>
+								</select>
 						</li>
 									
 						<li id="period">
@@ -151,13 +152,14 @@
 									<option value="365">1년</option>
 									<option value="2">2년이상</option>
 								</select>
+						</li>
 						
 						<li id="available">
 							<label>구인여부</label>
-							<select name="available">
-								<option value="1">on</option>
-								<option value="0">off</option>
-							</select>
+								<select name="available">
+									<option value="1">on</option>
+									<option value="0">off</option>
+								</select>
 						</li>
 						
 						<li id="pay">
