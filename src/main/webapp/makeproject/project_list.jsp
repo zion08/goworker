@@ -21,6 +21,8 @@
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	
+	String best= request.getParameter("best"); 
+
 	int pageSize = 5;
 	
 	if(pageNum == null){
@@ -35,11 +37,18 @@
 	MakeProjectDAO dao = new MakeProjectDAO();
 	int count = 0;
 	List<MakeProjectDTO> list = null;
-	
+	if(best == null){
 		count = dao.getCount(); // 전체 글의 갯수
 	
-	if(count > 0){
-		list = dao.getAllList(startRow, endRow);
+		if(count > 0){
+			list = dao.getAllList(startRow, endRow);
+		}
+	}	
+	if(best != null){
+		count = dao.getCount(); // 전체 글의 갯수
+		if(count >0){
+			list = dao.getBestList(startRow, endRow);
+		}
 	}
 	
 
@@ -64,10 +73,12 @@
 <%
 	if(sid != null){
 %>	
-			<table width="700" align="center">
+			<table width="705" height="30px" align="center">
             	    <tr>
-                		<td align="right" bgcolor="pink">
-                		<a href="project_input.jsp">글쓰기</a>
+                		<td align="right" bgcolor="pink" >
+                		<a href="project_input.jsp" >글 작성하기</a> / 
+                		<a href ="project_list.jsp?best=1" >좋아요 많은 글</a>
+                		
                		</tr>
         	</table>
 <%} %>
