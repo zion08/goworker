@@ -19,14 +19,14 @@
 	//글 리스트 출력 및 페이지 처리 관련
 	List<SprojectDTO> list = null;	//컨텐츠 내용 저장할 list
 	
+	int count = 0;			//총 컨텐츠(글) 갯수	
 	int pageSize = 6;	//1개 페이지에 보여줄 컨텐츠(글) 갯수	
 	int currentPage = Integer.parseInt(pageNum);	//현제 페이지=pageNum, String > Integer 변환
 	int start = (currentPage - 1) * pageSize + 1;	//현재 페이지 기준으로 DB에 저장된 내용을 잘라서 들고와야 함
 	int end = currentPage * pageSize;
 	
-	int count = 0;	//총 컨텐츠(글) 갯수
-	int pageBlock = 7;	//페이지 버튼의 출력 단위
-	int totalPage;	//총 페이지 수
+	int pageBlock = 10;	//페이지 버튼의 출력 단위
+	int pageCount;	//총 페이지 수
 	int startPage;	//페이지 버튼 시작 번호
 	int endPage;	//페이지 버튼 끝 번호 
 %>
@@ -179,149 +179,98 @@
 </section>
 
 <section class="section5">
-<%	//2nd. 컨텐츠(글) 리스트 출력
-	if (list == null) {		//작성된 글이 없을때, count
+<%	
+	//2nd. 컨텐츠(글) 리스트 출력
+	if (list == null) {		//작성된 글이 없을때
 %>	<h1>작성된 글이 없습니다.</h1>
 <%	}
-	
-	if (list != null) {
-		for (SprojectDTO dto : list) {
-	}	
 %>
-	<ul>
-		<li class="mboard">
-			<tr>
-				<th><a
-					href="s-project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></th>
-				<th>
-					<%
-					if (dto.getAvailable() == 1) {
-					%> <img src="image/switch-on.png"
-					width="40px" height="36px"> <%
- } else {
- %> <img
-					src="image/switch-off.png" width="40px" height="36px"> <%
- }
- %>
-				</th>
-				<th><%=dto.getField()%></th>
-				<td><img src="image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
-					<img src="image/thumbs.png" width="20px" height="20px" /><%=dto.getGood()%>
-				</td>
-				<th><%=dto.getCareer() %></th>
-			</tr>
-			<tr>
-				<th><%=dto.getEmploytype() %></th>
-				<th><%=dto.getLocation() %></th>
-				<th><%=dto.getWorktype() %></th>
-				<th><%=dto.getPay() %></th>
-				<th><%=dto.getPeriod() %></th>
-			</tr>
-			<tr>
-				<td colspan="4"><%=dto.getIntroduce()%></td>
-			</tr>
-		</table>
-		<br />
-	</div>
 
-	<%
+<%	//2nd. 컨텐츠(글) 리스트 출력
+	if (list != null) {		//작성된 글이 있을떄
+		for (SprojectDTO dto : list) {	
+%>			<div class="mboard">
+				<ul class="mboard-inside">
+					<li class="mb-merge-center">
+						<a href="s-project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
+							<span><%=dto.getSubject()%></span>
+						</a>
+					<li class="mb-center">
+<%						if (dto.getAvailable() == 1) {
+%>							<img src="image/switch-on.png" width="40px" height="36px"> 
+<%						} else {
+%>							<img src="image/switch-off.png" width="40px" height="36px"> 
+<% 						}
+%>					</li>
+		
+					<li class="mb-center">
+						<span><%=dto.getField()%></span>
+					</li>
+					<li class="mb-center">
+						<img src="image/view.png" width="20px" height="20px" />
+						<%=dto.getReadcount()%>
+					</li>
+					<li class="mb-center">
+						<img src="image/thumbs.png" width="20px" height="20px" />
+						<%=dto.getGood()%>
+					</li>
+					<li class="mb-center">
+						<%=dto.getCareer() %>
+					</li>
+					<li class="mb-center">
+						<%=dto.getEmploytype() %>
+					</li>
+					<li class="mb-center">
+						<%=dto.getLocation() %>
+					</li>
+					<li class="mb-center">
+						<%=dto.getWorktype() %>
+					</li>
+					<li class="mb-center">
+						<%=dto.getPay() %>
+					</li>
+					<li class="mb-center">
+						<%=dto.getPeriod() %>
+					</li>
+					<li class="mb-merge-center">
+						<%=dto.getIntroduce()%>
+					</li>		
+				</ul>
+			</div>
+
+<%		}
 	}
-	}
-	}
-	%>
+%>
 </section>
 
 <section class="section4">
-<%	
-	
-	if (count > 0) {
-		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		int startPage = (currentPage / 10) * 10 + 1;
-		int pageBlock = 10;
-		int endPage = startPage + pageBlock -1;
-			if(endPage > pageCount) {
-				endPage = pageCount;
-			}
+<%	//4rd. 페이지 버튼 출력		
+	pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+	startPage = (currentPage / 10) * 10 + 1;
+	endPage = startPage + pageBlock -1;
+
+	if(endPage > pageCount) {
+		endPage = pageCount;
+	}
 		
-		if (startPage >10) {
-%>			<a href="s-project.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
-<%		}
+	if (startPage > pageBlock) {
+%>		<a href="s-project.jsp?pageNum=<%= startPage - pageBlock %>">[이전]</a>
+<%	}
 	
-		for (int i = startPage ; i <= endPage ; i++) {
-%> 			<a href="s-project.jsp?pageNum=<%=i%>">[<%=i %>] </a>
-<%		}
+	for (int i = startPage ; i <= endPage ; i++) {
+%> 		<a href="s-project.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+<%	}
 	
-		if(endPage < pageCount) {
-%>		<a href="s-project.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-<%		}
-	
-	}
-
-	for (int i = startPage; i <= endPage; i++) {
-	%>
-	<a href="s-member.jsp?pageNum=<%=i%>">[<%=i%>]
-	</a>
-	<%
-	}
-
-	if (endPage < pageCount) {
-	%>
-	<a href="s-member.jsp?pageNum=<%=startPage + 10%>">[다음]</a>
-	<%
-	}
-
-	}
-	%>
+	if(endPage < pageCount) {
+%>		<a href="s-project.jsp?pageNum=<%= startPage + pageBlock %>">[다음]</a>
+<%	}
+%>
 </section>
 
-<footer>
-	<hr color="skyblue" size="2" align="center" />
-	<table width="500" align="right">
+<%@ include file="../include/footer.jsp"%>
 
-		<thead align="center">
-			<tr>
-				<th></th>
-				<th>메인</th>
-				<th>회원</th>
-				<th>고객센터</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>사이트소개</td>
-				<td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
-				<td>회원가입</td>
-				<td>공지사항</td>
 
-			</tr>
-			<tr>
-				<td>이용방법</td>
-				<td>프로젝트찾기</td>
-				<td>회원정보수정</td>
-				<td>Q&A</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>프로젝트만들기</td>
-				<td>회원탈퇴</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>취업정보</td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>커뮤니티</td>
-				<td></td>
-				<td></td>
-			</tr>
-		</tbody>
 
-	</table>
-</footer>
 
 <script type="text/javascript">
 	var bDisplay = true;
@@ -341,4 +290,3 @@
 				'width=500,height=500');
 	}
 </script>
-
