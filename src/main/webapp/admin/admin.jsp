@@ -4,6 +4,8 @@
 <%@ page import= "bean.SmemberDAO" %>
 <%@ page import= "bean.SprojectDAO" %>
 <%@ page import= "bean.SprojectDTO" %>
+<%@ page import= "bean.CommentDAO" %>
+<%@ page import= "bean.CommentDTO" %>
 <%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
 
@@ -38,6 +40,15 @@
 		if( pcount > 0) {
 			plist = pdao.getSPHotList( 1, 5 );	
 		}	
+	
+	CommentDAO cdao = new CommentDAO();
+	int ccount = 0; 
+		List<CommentDTO> clist = null;	
+					
+		ccount = cdao.getCount(); // 전체 글의 갯수
+			if( ccount > 0) {
+				clist = cdao.getHotComment( 1, 5 );	
+			}	
 		
 %>
 
@@ -137,4 +148,54 @@
 }
 	%>
 	</section>
+</section>
+
+	<h3> 인기 댓글 </h3>
+	<section>
+	<table border=1 width="980px">
+		<tr>
+			<th width="150">게시판 이름</th>
+			<th width="80">댓글 번호</th>
+			<th width="150">아이디</th>
+			<th width="300">댓글 내용</th>
+			<th width="100">좋아요</th>
+			<th width="200">작성일시</th>
+			
+		</tr>
+	</table>
+<%  if(ccount > 0) {
+	for(CommentDTO cdto : clist) { %>
+	<div>
+		<table  border=1 width="980px">
+			<tr>
+				<th width="150"> <%=cdto.getBoard_name() %> </th>
+				<th width="80"><%=cdto.getComment_num() %></th>
+				<th width="150"> <%=cdto.getComment_writerid() %> </th>
+				<th width="300">
+				<% if(cdto.getBoard_name().equals("멤버찾기")) { %>
+				<a href="/goworker/s-member/s-member_detail.jsp?num=<%=cdto.getBoard_num()%>"><%=cdto.getComment_content() %></a>
+				<%} %>
+				<% if(cdto.getBoard_name().equals("프로젝트찾기")) { %>
+				<a href="/goworker/s-project/s-project_detail.jsp?num=<%=cdto.getBoard_num()%>"><%=cdto.getComment_content() %></a>
+				<%} %>
+				<% if(cdto.getBoard_name().equals("프로젝트만들기")) { %>
+				<a href="/goworker/makeproject/makeproject_detail.jsp?num=<%=cdto.getBoard_num()%>"><%=cdto.getComment_content() %></a>
+				<%} %>
+				
+				
+				
+				</th>
+				<th width="100">
+					<img src="image/thumbs.png" width="20px" height="20px"/><%=cdto.getComment_good() %>
+				</th>
+				<th width="200"><%=cdto.getComment_regdate()%></th>
+				
+			</tr>
+			
+		</table>
+	</div>
+<%}
+}%>
+
+
 </section>
