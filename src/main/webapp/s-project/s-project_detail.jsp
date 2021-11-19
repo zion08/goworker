@@ -123,7 +123,7 @@ session.setAttribute("num", dto.getNum());
 		<% } 
 	}%>	
 <br />
-	<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
+	<input type="button" value="목록으로" onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'"/>
 
 <br /><br />
 
