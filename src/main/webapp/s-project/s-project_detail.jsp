@@ -91,7 +91,7 @@ session.setAttribute("num", dto.getNum());
 
 	<form>
 		<% FavoriteDAO fdao = new FavoriteDAO(); 
-		boolean result = fdao.favCheck(sid, dto.getNum());
+		boolean result = fdao.SPfavCheck(sid, dto.getNum());
 		if(result == true) {%>
 		<a href="/goworker/member/favorite_Spout.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><img src="image/heart_fill.png" width="30px" height="30px"></a>
 		<%}else {%>
