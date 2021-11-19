@@ -272,10 +272,11 @@
 								<img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
 								<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
 							</td>
+							<th><%=dto.getCareer() %></th>
 						</tr>
 						
 						<tr>
-							<th><%=sdto.getCareer() %></th>
+						
 							<th><%=sdto.getEmploytype() %></th>
 							<th><%=sdto.getLocation() %></th>
 							<th><%=sdto.getWorktype() %></th>
@@ -311,15 +312,15 @@
 				}
 			
 			if (startPage >10) {
-	%>			<a href="s-proejct.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+	%>			<a href="s-project_search.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
 	<%		}
 		
 			for (int i = startPage ; i <= endPage ; i++) {
-	%> 			<a href="s-project.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+	%> 			<a href="s-project_search.jsp?pageNum=<%=i%>">[<%=i %>] </a>
 	<%		}
 		
 			if(endPage < pageCount) {
-	%>		<a href="s-proejct.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+	%>		<a href="s-project_search.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
 	<%		}
 		}
 	%>
