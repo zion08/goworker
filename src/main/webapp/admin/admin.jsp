@@ -47,6 +47,7 @@
 	<a href="admin_comment.jsp">댓글 관리</a> <br/>
 	<a href="admin_member.jsp">회원 관리</a> <br/>
 	<a href="admin_notice.jsp">공지사항</a> <br/>
+	<a href="admin_cs.jsp">문의사항</a> <br/>
 	
 </aside>
 <section>
