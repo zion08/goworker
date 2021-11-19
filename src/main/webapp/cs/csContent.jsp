@@ -194,15 +194,19 @@
 	   onclick=" window.location='cs.jsp?pageNum=<%=pageNum%>' "/>
 
 <%
-        String csid = (String)session.getAttribute("sid");
+        
         // 로그인된 id 와 글작성자 비교
-	    if(csid != null){
-		if(csid.equals(dto.getWriter()) || csid.equals("admin")){
+	    if(sid != null){
+		if(sid.equals(dto.getWriter()) || sid.equals("admin")){
 %>		<input type="button" value="글수정" onclick=" window.location='csUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
 		<input type="button" value="글삭제" onclick=" window.location='csDelete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>	
 <%  	     }
 	   }
-%>
+
+
+	if(sid.equals("admin")) {%>
+<input type="button" value="문의사항/관리자" onclick="window.location='/goworker/admin/admin_cs.jsp'" />
+	<%} %>
 </center>
  <br/>
 <%@ include file = "/include/footer.jsp" %>
