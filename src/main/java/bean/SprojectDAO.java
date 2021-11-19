@@ -169,6 +169,7 @@ public class SprojectDAO {
 				dto.setPageNum(rs.getInt("pageNum"));
 				dto.setProjectName(rs.getString("projectName"));
 				dto.setLocation(rs.getString("location"));
+				dto.setRegdate(rs.getTimestamp("regdate"));
 			}
 		} catch(Exception e){
 			e.printStackTrace();
@@ -270,7 +271,8 @@ public class SprojectDAO {
 				dto.setAvailable(rs.getInt("available"));				
 				dto.setFavor(rs.getInt("favor"));				
 				dto.setGood(rs.getInt("good"));
-				dto.setReadcount(rs.getInt("readcount"));			
+				dto.setReadcount(rs.getInt("readcount"));
+				dto.setRegdate(rs.getTimestamp("regdate"));
 				plist.add(dto);
 			}
 		} catch(Exception e) {
@@ -370,6 +372,7 @@ public class SprojectDAO {
 				sdto.setAvailable(rs.getInt("available"));
 				sdto.setReadcount(rs.getInt("readcount"));
 				sdto.setGood(rs.getInt("good"));
+				sdto.setRegdate(rs.getTimestamp("regdate"));
 				list.add(sdto);
 			}
 		} catch(Exception e) {
@@ -420,6 +423,7 @@ public class SprojectDAO {
 				dto.setAvailable(rs.getInt("available"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setGood(rs.getInt("good"));
+				dto.setRegdate(rs.getTimestamp("regdate"));
 				dto.setRegdate(rs.getTimestamp("regdate"));
 				list.add(dto);
 			}
