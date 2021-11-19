@@ -6,6 +6,10 @@
 <%@ page import="bean.MemberDTO" %>
 <%@ page import="bean.SmemberDTO" %>
 <%@ page import="bean.SmemberDAO" %>
+<%@ page import="bean.Comment_SmemberDTO" %>
+<%@ page import="bean.Comment_SmemberDAO" %>
+<%@ page import="bean.Comment_SprojectDTO" %>
+<%@ page import="bean.Comment_SprojectDAO" %>
 <%@ page import="bean.SprojectDTO" %>
 <%@ page import="bean.SprojectDAO" %>
 <%@ page import="java.util.List" %>
@@ -57,7 +61,9 @@
 		</div>	
 	<%}else{%>
 	<% 
-	for(SmemberDTO dto : list) { %>
+	for(SmemberDTO dto : list) { 
+	Comment_SmemberDAO cpdao = new Comment_SmemberDAO();
+    int ccount = cpdao.getCommentCount(dto.getNum());%>
 	<div>
 	<h2>나의 멤버</h2>
 		<table class="mboard" style="table-layout:fixed" >
@@ -82,9 +88,10 @@
 				<th><%=dto.getWorktype() %></th>
 			</tr>
 			<tr>
-			<td colspan="4"
+			<th colspan="3"
 			style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"> <%=dto.getIntroduce() %>
-			</td>
+			</th>
+			<th><img src="../s-member/image/comment.png" width="20px" height="20px"/><%=ccount %></th>
 			</tr>
 		</table><br/>
 	</div>
@@ -119,22 +126,22 @@
          </table>
    </div>
    <%}else{  %>
-<% for(SprojectDTO dto : plist){%>
+<% for(SprojectDTO dto : plist){
+	Comment_SprojectDAO cpdao = new Comment_SprojectDAO();
+   int ccount = cpdao.getCommentCount(dto.getNum());%>
     <table border="1">
     <h2>나의 프로젝트</h2>
    <tr>
-      <th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
+      <th>글번호</th><th>작성자</th><th>제목</th><th>좋아요</th><th>조회수</th><th>작성일</th><th>댓글수</th>
    </tr>
    <tr>
       <td><%=dto.getNum() %></td>
-      <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
       <td><%=dto.getId() %></td>
-      <td><%=dto.getCareer() %></td>
-      <td><%=dto.getPeriod() %></td>
-      <td><%=dto.getPay() %></td> 
-      <td><%=dto.getProjecttype() %></td>
-      <td><%=dto.getLocation() %></td>
+      <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
+      <td><%=dto.getGood() %></td>
+      <td><%=dto.getReadcount() %></td> 
       <td><%=dto.getRegdate() %></td>
+      <td><%=ccount %></td>
    </tr>   
 <%             } 
             }
