@@ -6,6 +6,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
 
+<%@ page import = "bean.MemberDAO" %>
+
+<%@ include file = "../include/header.jsp" %>
+
 
 <%
 
@@ -46,16 +50,17 @@
 		}
 	}
 %>
+<div class="search-box" align="center">프로젝트 검색 한 결과 페이지</div>
 
 <%
-	
+	if(sid != null) {
 %> 		<table width="700" align="center">
                 <tr>
                 	<td align="right" bgcolor="pink">
                 	<a href="project_input.jsp">글쓰기</a>
                 </tr>
     	</table>
-    
+   <%} %>
     
     
     <center>
@@ -73,17 +78,35 @@
 	<%}else{ %>
 
 <% 
-	for(MakeProjectDTO dto : list) { %>
+	for(MakeProjectDTO dto : list) { 
+	
+		MemberDAO mdao = new MemberDAO();
+		String result = mdao.getRank(dto.getId());
+	
+	%>
 	<table border="1" width="700" cellpadding="0" cellspacing="0" align="center"> 
         	<tr>
-        		<th width="400px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
+        		<th width="400px" height="70px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
         		<td align="center">
         			<img src="/goworker/s-member/image/view.png" width="20px" height="20px" ><%=dto.getReadcount()%>
         			<img src ="/goworker/s-member/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+        			<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
+        			
         		</td>
         		<td width="80px" align="center">
-        			<img src="/goworker/s-member/image/image.jpg" width="15px" height="15px"/><br/>
-        			<%=dto.getId() %>
+        		
+<%				if(result != null){ %>
+<%				if(result.equals("admin")){%>	
+					<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
+				<%} %>
+<%				if(result.equals("manager")){%>				
+					<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
+					<%} %>
+<%		  		if(result.equals("member")){ %>
+        			<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
+        			<%}
+				}%>
+        			<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
         		</td>
         		<td width="100px" align="center" >
         			<%=sdf.format(dto.getReg_date()) %>
