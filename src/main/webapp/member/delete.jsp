@@ -22,7 +22,7 @@
 if(sid == null){%>		
 	<script>
 		alert("로그인후 사용가능합니다. ");
-		window.location="loginForm.jsp";
+		window.location="login.jsp";
 	</script>
 <%}else{%>
 	<form action="deletePro.jsp" method="post">
