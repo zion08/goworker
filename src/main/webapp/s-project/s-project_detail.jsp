@@ -123,7 +123,7 @@ session.setAttribute("num", dto.getNum());
 		<% } 
 	}%>	
 <br />
-	<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
+	<input type="button" value="목록으로" onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'"/>
 
 <br /><br />
 
@@ -242,19 +242,19 @@ session.setAttribute("num", dto.getNum());
 				for(Comment_SprojectDTO cdto : list)  {
 
 					MemberDAO mdao = new MemberDAO();
-					String result = mdao.getRank(cdto.getComment_writerid());
+					String comment_result = mdao.getRank(cdto.getComment_writerid());
 				%>
 			
 			<tr>	
 				<td align="center">
-<%					if(result != null){ %>
-<%						if(result.equals("admin")){%>	
+<%					if(comment_result != null){ %>
+<%						if(comment_result.equals("admin")){%>	
 								<img src="/goworker/s-project/image/admin.jpg"  width="40px" height="40px" /></br>	
 						<%} %>
-<%					if(result.equals("manager")){%>				
+<%						if(comment_result.equals("manager")){%>				
 								<img src="/goworker/s-project/image/manager.jpg"  width="40px" height="40px" /></br/>
-					<%} %>
-<%		  			if(result.equals("member")){ %>
+						<%} %>
+<%		  				if(comment_result.equals("member")){ %>
 								<img src="/goworker/s-project/image/image.jpg" width="40px" height="40px"><br/>
 						<%} 
 					} %>
@@ -270,7 +270,8 @@ session.setAttribute("num", dto.getNum());
 					%>
 					 <img src="/goworker/s-project/image/white.jpg" width="<%=wid%>" height="16">
 				  	<img src="/goworker/s-project/image/re.gif">
-			 		 <%}else{%>
+<%					}else{
+%>
 				   <img src="/goworker/s-project/image/white.jpg" width="<%=wid%>" height="16">	  	 
 			   		<%} %>
 					 	  <%=cdto.getComment_content() %>
@@ -289,25 +290,25 @@ session.setAttribute("num", dto.getNum());
 						<input type="button" value="수정" onclick="window.open('/goworker/s-project/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num() %>','update','width=800,height=300');"/>
 						<input type="submit" value="삭제" onclick="comment_removeChek()"/>
 						 <input type="button" value="답글" onclick="window.open('/goworker/s-project/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>','reply','width=600,height=300');" />
+					 </form>
+				 </td>
 						 <%}else{ %>
 						 <td algin="center">
 							 <input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
 						 </td>
 						 
-					 </form>
-				 </td>
-				 <%} 
-				 }%>
 			 </tr>
 			 <tr>
 				 <td width="30px" align="center" colspan="4" style="font-size: 12px">
 					 <img src="/goworker/s-project/image/bestcomment.png" width="30" height="30" onclick="window.open('/goworker/s-project/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();" align="center"/>
 					 를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
 				 </td>
-		 </tr>
-			 <%} 
-			}
-		 }%>
+		 	</tr>
+			   	<%} 
+		    }%>
+	     <%}
+	   }
+	}%>
 			 
 	 </table><br/>
 		

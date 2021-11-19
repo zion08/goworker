@@ -1,23 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file = "../include/header.jsp" %>
 <html>
 <head>
     <title>탈퇴 화면</title>
-    
-    <style type="text/css">
-        table{
-            margin-left:auto; 
-            margin-right:auto;
-            border:3px solid skyblue;
-        }
-        
-        td{
-            border:1px solid skyblue
-        }
-        
-        #title{
-            background-color:skyblue
-        }
     </style>
     
     <script type="text/javascript">
@@ -28,34 +14,32 @@
                 return false;
             }
         }
-    </script>
-    
+    </script>   
 </head>
 <body>
- 
-    <br><br>
-    <b><font size="6" color="gray">내 정보</font></b>
     <br><br><br>
-    <% String id = (String)session.getAttribute("id"); 
-if(id == null){%>		
+    <% 
+if(sid == null){%>		
 	<script>
 		alert("로그인후 사용가능합니다. ");
-		window.location="loginForm.jsp";
+		window.location="login.jsp";
 	</script>
 <%}else{%>
 	<form action="deletePro.jsp" method="post">
-			 <input type="hidden" name="id" value="<%=id%>" />
+			 <input type="hidden" name="id" value="<%=sid%>" />
 		       <table>
             <tr>
                 <td bgcolor="skyblue">비밀번호</td>
-                <td><input type="password" name="pw" maxlength="50"></td>
+                <td><input type="password" name="password" maxlength="50"></td>
             </tr>
         </table>
         
         <br> 
-		     <input type="button" value="취소" onclick="javascript:window.location='main.jsp'">
+		     <input type="button" value="취소" onclick="javascript:window.location='../main/index.jsp'">
 			 <input type="submit" value="탈퇴" />
 	</form>
 <%}%>
 </body>
+<br/>
+<%@ include file = "/include/footer.jsp" %>
 </html>

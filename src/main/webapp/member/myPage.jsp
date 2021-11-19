@@ -6,6 +6,12 @@
 <%@ page import="bean.MemberDTO" %>
 <%@ page import="bean.SmemberDTO" %>
 <%@ page import="bean.SmemberDAO" %>
+<%@ page import="bean.CommentDAO" %>
+<%@ page import="bean.CommentDTO" %>
+<%@ page import="bean.Comment_SmemberDTO" %>
+<%@ page import="bean.Comment_SmemberDAO" %>
+<%@ page import="bean.Comment_SprojectDTO" %>
+<%@ page import="bean.Comment_SprojectDAO" %>
 <%@ page import="bean.SprojectDTO" %>
 <%@ page import="bean.SprojectDAO" %>
 <%@ page import="java.util.List" %>
@@ -22,22 +28,23 @@
       <input type="submit" value="팀원찾기" onclick=" window.location='/goworker/s-member/s-member.jsp' "/>
       <input type="submit" value="관심목록" onclick=" window.location='favorite.jsp' "/>
 </div><br/>
+
 <%	
 	String pageNum = request.getParameter("pageNum");
 	int pageSize = 5;
 	if(pageNum==null) {
-		pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
+	   pageNum = "1"; // 값이 안넘어오는경우 >> 첫페이지인경우 
 	}
 	int currentPage = Integer.parseInt(pageNum);
-	int start = (currentPage - 1) * pageSize + 1;		
-	int end = currentPage * pageSize;
+	int mstart = (currentPage - 1) * pageSize + 1;		
+	int mend = currentPage * pageSize;
 	
-	SmemberDAO dao = new SmemberDAO();
+	SmemberDAO sdao = new SmemberDAO();
 	int count = 0; 
-	List<SmemberDTO> list = null;	
-	count = dao.getMyCount(sid); // 나의 작성글수 
+	List<SmemberDTO> slist = null;	
+	count = sdao.getMyCount(sid); // 나의 작성글수 
 	if(count > 0){
-		list = dao.getMyList(sid, start , end );
+		slist = sdao.getMyList(sid, mstart , mend );
 
 	}
 %>  
@@ -57,7 +64,9 @@
 		</div>	
 	<%}else{%>
 	<% 
-	for(SmemberDTO dto : list) { %>
+	for(SmemberDTO dto : slist) { 
+	Comment_SmemberDAO cpdao = new Comment_SmemberDAO();
+    int ccount = cpdao.getCommentCount(dto.getNum());%>
 	<div>
 	<h2>나의 멤버</h2>
 		<table class="mboard" style="table-layout:fixed" >
@@ -82,9 +91,10 @@
 				<th><%=dto.getWorktype() %></th>
 			</tr>
 			<tr>
-			<td colspan="4"
+			<th colspan="3"
 			style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"> <%=dto.getIntroduce() %>
-			</td>
+			</th>
+			<th><img src="../s-member/image/comment.png" width="20px" height="20px"/><%=ccount %></th>
 			</tr>
 		</table><br/>
 	</div>
@@ -100,7 +110,7 @@
    
    pcount = pdao.getMyCount(sid); // 나의 작성글수 
    if(pcount > 0){
-      plist = pdao.getMyList(sid, start, end);
+      plist = pdao.getMyList(sid, mstart, mend);
    }
 
    %>
@@ -119,31 +129,127 @@
          </table>
    </div>
    <%}else{  %>
-<% for(SprojectDTO dto : plist){%>
-    <table border="1">
+<% for(SprojectDTO dto : plist){
+	Comment_SprojectDAO cpdao = new Comment_SprojectDAO();
+   int ccount = cpdao.getCommentCount(dto.getNum());%>
+    <table  border=1 width="610px" style="table-layout:fixed">
     <h2>나의 프로젝트</h2>
    <tr>
-      <th>글번호</th><th>제목</th><th>작성자</th><th>경력</th><th>예상기간</th><th>예상금액</th><th>프로젝트 타입</th><th>지역</th><th>작성일</th>
+      <th width="60">글번호</th>
+      <th width="60">작성자</th>
+      <th width="150">제목</th>
+      <th width="70">좋아요</th>
+      <th width="60">조회수</th>
+      <th width="180">작성일</th>
+      <th width="60">댓글수</th>
    </tr>
    <tr>
-      <td><%=dto.getNum() %></td>
-      <td><a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
-      <td><%=dto.getId() %></td>
-      <td><%=dto.getCareer() %></td>
-      <td><%=dto.getPeriod() %></td>
-      <td><%=dto.getPay() %></td> 
-      <td><%=dto.getProjecttype() %></td>
-      <td><%=dto.getLocation() %></td>
-      <td><%=dto.getRegdate() %></td>
+      <th width="60"><%=dto.getNum() %></th>
+      <th width="60"><%=dto.getId() %></th>
+      <th width="150" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">
+      <a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
+      </th>
+      <th width="70"><img src="../s-member/image/thumbs.png" width="20px" height="20px"><%=dto.getGood() %></th>
+      <th width="60"><%=dto.getReadcount() %></th> 
+      <th width="180"><%=dto.getRegdate() %></th>
+      <th width="60"><%=ccount %></th>
    </tr>   
 <%             } 
             }
          }
       } %>
 </table>
-</body>
-  
+<br/>
+<h2>나의 댓글목록</h2>
+<%	
+	int start = (currentPage - 1) * pageSize + 1;		
+	int end = currentPage * pageSize;
+	
+	CommentDAO dao = new CommentDAO();
+	int ccount = 0; 
+	List<CommentDTO> list = null;	
+	ccount = dao.getMyCount(sid); // 나의 작성글수 
+	if(ccount > 0){
+		list = dao.getMyComment(sid, start, end);		
+	}
+	System.out.println(ccount);
+	System.out.println(start);
+	System.out.println(end);
+	
+%> 
+	<table  border=1 width="660px" style="table-layout:fixed">
+		<tr>
+			<th maxwidth="120">게시판명</th>
+			<th width="70">아이디</th>
+			<th width="200">댓글내용</th>
+			<th width="70">좋아요</th>
+			<th width="180">작성일시</th>
+		</tr>
+	</table>
+<% 	
+	if(ccount !=0) {
+		
+	if(ccount >0) {
+	for(CommentDTO cdto : list) {
+		%>
+	<div>
+		<form action="/goworker/admin/admin_commentUpdate.jsp" method="post">
+		<table  border=1 width="660px" style="table-layout:fixed">
+			<tr>
+				<th maxwidth="120"> <%=cdto.getBoard_name() %> <input type="hidden" name="board_name" value= "<%=cdto.getBoard_name() %>" /></th>
+				<input type="hidden" name="board_num" value= "<%=cdto.getBoard_num() %>" />
+				<input type="hidden" name="comment_num" value= "<%=cdto.getComment_num() %>" />
+				</th>
+				<th width="70"><%=cdto.getComment_writerid()%></th>
+				<th width="200" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">
+              <%
+                 if(cdto.getBoard_name().equals("멤버찾기")){%>
+                 <a href = "/goworker/s-member/s-member_detail.jsp?num=<%=cdto.getBoard_num() %>"><%=cdto.getComment_content()%></a>	 
+              <%}
+                 if(cdto.getBoard_name().equals("프로젝트찾기")){%>
+                 <a href = "/goworker/s-project/s-project_detail.jsp?num=<%=cdto.getBoard_num() %>"><%=cdto.getComment_content()%></a>	 
+              <%}
+                 if(cdto.getBoard_name().equals("프로젝트만들기")){%>
+                 <a href = "/goworker/makeproject/makeproject_detail.jsp?num=<%=cdto.getBoard_num() %>"><%=cdto.getComment_content()%></a>
+              <%}%>   
+          		</th>
+				<th width="70"><img src="../s-member/image/thumbs.png" width="20px" height="20px"><%=cdto.getComment_good() %></th>
+				<th width="180"><%=cdto.getComment_regdate()%></th>
+			</tr>
+		</table>
+		</form>
+	</div>
+<%}
+	}
+%>
+
+<%
+	if (ccount > 0) {
+		int pageCount = ccount / pageSize + (ccount % pageSize == 0 ? 0 : 1);
+		int startPage = (currentPage / 10)* 10 +1;
+		int pageBlock = 10;
+		int endPage = startPage + pageBlock -1;
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+		
+		if (startPage >10) {
+%>			<a href="myPage.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+<%		}
+	
+		for (int i = startPage ; i <= endPage ; i++) {
+%> 			<a href="myPage.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+<%		}
+	
+		if(endPage < pageCount) {
+%>		<a href="myPage.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+<%		}
+	}
+}else{%>
+	작성된 댓글이 없습니다 .
+<%}
+%> 
 </body>
 <br/>
 <%@ include file = "/include/footer.jsp" %>
-</html>
+ </html>  

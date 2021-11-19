@@ -11,7 +11,7 @@
 	%>		
 		<script>
 			alert("탈퇴 되었습니다..");
-			window.location='loginForm.jsp';
+			window.location='../main/index.jsp';
 		</script>
 	<%}else{ %>
 		<script>
