@@ -127,6 +127,7 @@ if(sid.equals(dto.getId())) { %>
     	 <td align="center" colspan="3">
                     <input type="button" value="추천!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
                     <input type="button" value="비추천!" onclick="window.open('project_Down.jsp?num=<%=dto.getNum()%>','Down','width=300,height=150');window.location.reload();"/><br/>
+                    <input type="button" value="이메일보내기" onclick="window.location='/goworker/makeproject/email/mail.jsp?pageNum=<%=pageNum%>'"/>
        				<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
        	</td>
     </tr>
@@ -220,7 +221,15 @@ if(sid.equals(dto.getId())) { %>
  %>
  
  
- <section class="section1" >
+ 	
+<%
+		if(count > 0){
+			for(MakeProject_CommentDTO cdto : list) {
+				
+				String comment_result = mdao.getRank(cdto.getComment_writerid());
+%>	
+	
+<section class="section1" >
  
  <table class="comments" border="1" width="705px" align="center">
  
@@ -230,23 +239,18 @@ if(sid.equals(dto.getId())) { %>
  		<td width="300px" align="center">내용</td>
  		<td width="80px" align="center">작성일</td>
  		<td width="40px" align="center">버튼</td>
- 	</tr>
- 	
-<%
-		if(count > 0){
-			for(MakeProject_CommentDTO cdto : list) {
-%>	
-	
+ 	</tr>	
+		
 	<tr>
 		<td align="center">
-<%			if(result != null){ %>
-<%			if(result.equals("admin")){%>	
+<%			if(comment_result != null){ %>
+<%			if(comment_result.equals("admin")){%>	
 				<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
 				<%} %>
-<%			if(result.equals("manager")){%>				
+<%			if(comment_result.equals("manager")){%>				
 				<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
 				<%} %>
-<%		  	if(result.equals("member")){ %>
+<%		  	if(comment_result.equals("member")){ %>
 				<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"><br/>
 				<% }
         	}%>
@@ -271,24 +275,23 @@ if(sid.equals(dto.getId())) { %>
 		</td>		
 		
 		
-<% if(sid !=null) {
-if(sid.equals(cdto.getComment_writerid())) { %>			
+<% 
+	if(sid !=null) {
+		if(sid.equals(cdto.getComment_writerid())) { %>			
 				
 		<td align="center" >	
-
-	
 			<form action="/goworker/makeproject/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
 				<input type="button" value="수정" onclick="window.open('/goworker/makeproject/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
 				<input type="submit" value="삭제" onclick="comment_removeCheck()" /> 
 				<input type="button" value="답글" onclick="window.open('/goworker/makeproject/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&page=<%=pageNum %>','reply','width=600,height=300');" />
-				
+			</form>
+		</td>
+			
 				<%}else{%>
-				
 				<td align="center">
 				<input type="button" value="답글" onclick="window.open('/goworker/makeproject/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&page=<%=pageNum %>','reply','width=600,height=300');" />
 				</td>
-			</form>
-		</td>
+		
 	</tr>
 	<tr>
  		<td width="30px" align="center" colspan="4" style="font-size: 12px">
@@ -296,8 +299,8 @@ if(sid.equals(cdto.getComment_writerid())) { %>
  			를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
  		</td>
  	</tr>
- 	<%}
-}%>
+ 			<%}
+		}%>
 
 	<%}
 	}
