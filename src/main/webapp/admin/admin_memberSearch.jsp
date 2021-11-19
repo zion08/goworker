@@ -51,7 +51,13 @@
 			<th width="240">관리</th>
 		</tr>
 	</table>
-<% 
+	<% if(count==0){%>
+	
+	<h2>검색 조건에 맞는 멤버가 없습니다.</h2>
+	
+	<% } %>
+	
+<% 	if(count>0) {
 	for(MemberDTO dto : list) { %>
 	<div>
 		<form action="/goworker/admin/admin_memberKick.jsp" method="post">
@@ -87,6 +93,7 @@
 
 
 <%}
+}	
 %>
 <script>
 function button_event(){
