@@ -208,14 +208,14 @@
 				<td><img src="image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
 					<img src="image/thumbs.png" width="20px" height="20px" /><%=dto.getGood()%>
 				</td>
+				<th><%=dto.getCareer() %></th>
 			</tr>
 			<tr>
-				<th><%=dto.getCareer()%></th>
-				<th><%=dto.getEmploytype()%></th>
-				<th><%=dto.getLocation()%></th>
-				<th><%=dto.getWorktype()%></th>
-				<th><%=dto.getPay()%></th>
-				<th><%=dto.getPeriod()%></th>
+				<th><%=dto.getEmploytype() %></th>
+				<th><%=dto.getLocation() %></th>
+				<th><%=dto.getWorktype() %></th>
+				<th><%=dto.getPay() %></th>
+				<th><%=dto.getPeriod() %></th>
 			</tr>
 			<tr>
 				<td colspan="4"><%=dto.getIntroduce()%></td>
@@ -238,15 +238,23 @@
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 		int startPage = (currentPage / 10) * 10 + 1;
 		int pageBlock = 10;
-		int endPage = startPage + pageBlock - 1;
-		if (endPage > pageCount) {
-			endPage = pageCount;
-		}
-
-		if (startPage > 10) {
-	%>
-	<a href="s-member.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
-	<%
+		int endPage = startPage + pageBlock -1;
+			if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+		
+		if (startPage >10) {
+%>			<a href="s-project.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+<%		}
+	
+		for (int i = startPage ; i <= endPage ; i++) {
+%> 			<a href="s-project.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+<%		}
+	
+		if(endPage < pageCount) {
+%>		<a href="s-project.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+<%		}
+	
 	}
 
 	for (int i = startPage; i <= endPage; i++) {

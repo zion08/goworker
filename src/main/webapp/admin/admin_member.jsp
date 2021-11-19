@@ -48,7 +48,7 @@
 			<th width="240">관리</th>
 		</tr>
 	</table>
-<% 
+<% 	if(count >0) {
 	for(MemberDTO dto : list) { %>
 	<div>
 		<form action="/goworker/admin/admin_memberKick.jsp" method="post">
@@ -84,6 +84,7 @@
 
 
 <%}
+}	
 %>
 <script>
 function button_event(){

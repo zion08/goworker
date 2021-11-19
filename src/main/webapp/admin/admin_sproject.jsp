@@ -49,7 +49,7 @@
 			<tr>
 				<th width="80">
 				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
-				<a href="/goworker/s-member/s-project_detail.jsp?num=<%=dto.getNum()%>" onclick="window.open(this.href, 'detail','width=600,height=1000,toolbars=no'); return false;">No.<%=dto.getNum() %></a>
+				<a href="/goworker/s-project/s-project_detail.jsp?num=<%=dto.getNum()%>" onclick="window.open(this.href, 'detail','width=600,height=1000,toolbars=no'); return false;">No.<%=dto.getNum() %></a>
 				</th>
 				<th maxwidth="170"> <%=dto.getId() %> </th>
 				<th width="100"><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
