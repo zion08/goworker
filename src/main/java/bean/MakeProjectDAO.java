@@ -294,5 +294,42 @@ public class MakeProjectDAO {
 			}
 			return list;
 		}
+		
+		
+		
+		// makeproject 리스트 출력 메서드
+		public List<MakeProjectDTO> getBestList(int start, int end) {
+			List<MakeProjectDTO> list = null;
+			try {
+				conn = OracleDB.getConnection();
+				pstmt = conn.prepareStatement("select * from "
+						+ " (select num, id, subject, content, projectfile, reg_date, readcount, good,down, rownum r from "
+						+ " (select * from makeproject order by  good desc))"		
+						+ " where r >= ? and r <= ?");
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				rs = pstmt.executeQuery();
+				list = new ArrayList();
+				while(rs.next()) {
+					MakeProjectDTO dto = new MakeProjectDTO();
+					dto.setNum(rs.getInt("num"));
+					dto.setId(rs.getString("id"));
+					dto.setSubject(rs.getString("subject"));
+					dto.setContent(rs.getString("content"));
+					dto.setProjectfile(rs.getString("projectfile"));
+					dto.setReg_date(rs.getTimestamp("reg_date"));
+					dto.setReadcount(rs.getInt("readcount"));
+					dto.setGood(rs.getInt("good"));
+					dto.setDown(rs.getInt("down"));
+					list.add(dto);
+				}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DisconnDB.close(conn,pstmt,rs);
+		}
+			return list;
+		
 	}
+}
 
