@@ -32,7 +32,7 @@
 	}	
 %>
 <body>
-<div class="container">
+<div class="search-box" align="center" >
 <table border="1">
 	<thead>	
 	<tr>
@@ -45,7 +45,6 @@
 			<td colspan="6">저장된 글이 없습니다..</td>
 		</tr>
 	<%}else{
-		
  		for(BoardDTO dto : list)
 		{
 %>			<tr>
@@ -60,8 +59,7 @@
 %>
 	</tbody>
 </table>
-<div class="btm_line">
-		<div class="find" >
+<div class="search-box" align="center">
 			<form action="searchList.jsp" method="post"  >	
 				<input type="text" name="search" >	
 					<select name="colum">
@@ -72,17 +70,14 @@
 				<button type="submit" onclick="searchList.jsp" >Search</button>
 			</form>
 			
-			<a href="board.jsp">목록</a>
-			<a href="write.jsp">쓰기</a>
+			<a href="board.jsp">[목록]</a>
+			<a href="write.jsp">[쓰기]</a>
 			<%if(sid!=null || cid!=null){ %>
-			<a href="board.jsp?my=1" >내글</a>
+			<a href="board.jsp?my=1">[내글]</a>
 			<%} %>
-		</div>
-</div>
 </div>
 
-<div >
-	<ul >
+<div class="search-box" align="center" style="display:inline;">
 <%
 	if(total>0){
 		int pageCount = total / maxArticle + (total % maxArticle == 0? 0 : 1);
@@ -94,15 +89,14 @@
 		}
 		
 		if(startPage>10){%>
-			<li><a href="board.jsp?pageNum=<%=startPage-10%>" >[이전]</a></li>
+			<a href="board.jsp?pageNum=<%=startPage-10%>" >[이전]</a>
 		<%}
 		for(int i = startPage ; i<= endPage; i++){%>
-			<li><a href="board.jsp?pageNum=<%=i%>"class="btn btn-default"><%=i%></a></li>
+			<a href="board.jsp?pageNum=<%=i%>">[<%=i%>]</a>
 		<%}
 		if(endPage<pageCount){%>
-			<li><a href="board.jsp?pageNum=<%=startPage+10 %>" >[다음]</a></li>	
+			<a href="board.jsp?pageNum=<%=startPage+10 %>" >[다음]</a>
 		<% }%>
 	<%}%>
-	</ul>
 </div>
 </body>
