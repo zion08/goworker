@@ -61,9 +61,6 @@
 				<td colspan="1"><input type="submit" value=" 로그인 " /><button type="button" 
 					onClick="location.href='/goworker/member/apply.jsp'" >회원가입</button></td>
 			</tr>
-			<tr>
-				<td><a href="javascript:kakaoLogin();"><img src="/goworker/member/image/kakao.png" style="height:40px;width:auto;"/></a></td>
-			</tr>
 		</table>
 	</div>
 </form>
