@@ -14,33 +14,33 @@
       </thead>
       <tbody>
         <tr>
-          <td><a href="">사이트소개</a></td>
+          <td><a href="/goworker/main/intro.jsp">사이트소개</a></td>
           <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
-          <td>회원가입</td>
-          <td>공지사항</td>
+          <td><a href="/goworker/member/apply.jsp">회원가입</a></td>
+          <td><a href="/goworker/cs/notice.jsp">공지사항</a></td>
           
         </tr>
         <tr>
-          <td>이용방법</td>
-          <td>프로젝트찾기</td>
-          <td>회원정보수정</td>
-          <td>Q&A</td>
+          <td><a href="/goworker/main/howto.jsp">이용방법</a></td>
+          <td><a href="/goworker/s-project/s-project.jsp">프로젝트찾기</a></td>
+          <td><a href="/goworker/member/modify.jsp">회원정보수정</a></td>
+          <td><a href="/goworker/cs/cs.jsp">문의사항</a></td>
         </tr>
         <tr>
           <td></td>
-          <td>프로젝트만들기</td>
-          <td>회원탈퇴</td>
+          <td><a href="/goworker/makeproject/project_list.jsp">프로젝트만들기</a></td>
+          <td><a href="/goworker/member/mypage.jsp">마이페이지</a></td>
           <td></td>
         </tr>
         <tr>
             <td></td>
-            <td>취업정보</td>
+            <td><a href="/goworker/.jsp">취업정보</a></td>
             <td></td>
             <td></td>
           </tr>
         <tr>
           <td></td>
-          <td>커뮤니티</td>
+          <td><a href="/goworker/board/board.jsp">커뮤니티</a></td>
           <td></td>
           <td></td>
         </tr>
