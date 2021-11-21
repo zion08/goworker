@@ -14,7 +14,7 @@
 
 	if(sid!=null || cid!=null)
 	{
-%>	<div>	
+%>	<div style=" padding-right: 15px;  padding-left: 15px;  margin-right: auto;  margin-left: auto;" align="center" >	
 		<form action="writePro.jsp" method="post" enctype="multipart/form-data" ">
 			작성자 : <%= (sid==null) ? cid:sid %> 
 				<input type="hidden" name="writer" value="<%=(sid==null)? cid:sid%>"/><br/>
@@ -24,8 +24,8 @@
 				<option value="qna">	묻고답하기</option>
 				<option value="notice">	공지</option>
 			</select>
-				<input placeholder="제목" type="text" name = "subject" style="float: right; width:1040px;" /><br/>
-				<input placeholder="내용" size="200"  type="text" name = "content" /><br/>
+				<input placeholder="제목" type="text" name = "subject" style=" width:1040px;" /><br/>
+				<input placeholder="내용" size="200"  type="text" name = "content" style="width:1140px;height:500px;"/><br/>
 				<input placeholder="첨부파일" type="file" name = "filename"/><br/>
 				<input type="submit" value="등록" />	
 				<input type="button" value="목록" onclick="window.location='board.jsp'"/>
