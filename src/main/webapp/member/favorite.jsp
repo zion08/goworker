@@ -11,21 +11,20 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.lang.Math" %>
 <%@ include file = "../include/header.jsp" %>
-<html>
-<head>
+
 
 <title>관심목록</title>
-</head>
-<body>
-	<%	request.setCharacterEncoding("UTF-8");
-		int pageNum = 1; //기본페이지
-		if (request.getParameter("pageNumber") != null){
-			pageNum = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
-		}
-	%>
-	<div class="container">
-		<h1>관심목록<br></h1>
 
+<%	request.setCharacterEncoding("UTF-8");
+	int pageNum = 1; //기본페이지
+	if (request.getParameter("pageNumber") != null){
+		pageNum = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
+	}
+%>
+
+<h1>관심목록</h1>
+<section class="section1">
+	<div class="container">
 		<p><%=sid %>님이 추가하신 관심목록입니다.<br><br></p>
 			<div>
 						<%
@@ -108,8 +107,11 @@
 				 %>			
 				 </table>
 			</div>
-		</div>	
-	<%
+		</div>
+</section>	
+
+<section class="section2">
+<%
 	if (count > 0) {
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 		int startPage = (currentPage / 10)* 10 +1;
@@ -133,51 +135,7 @@
 	   }
 	
 %>
-<footer>
-<hr color="skyblue" size="2"  align="center" />
-<table  align="right">     
-      <thead align="center">
-        <tr>
-          <th></th>
-          <th>메인</th>
-          <th>회원</th>
-          <th>고객센터</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="">사이트소개</a></td>
-          <td><a href="/goworker/s-member/s-member.jsp">팀원찾기</a></td>
-          <td>회원가입</td>
-          <td><a href="/goworker/member/notice.jsp">공지사항</a></td>
-          
-        </tr>
-        <tr>
-          <td>이용방법</td>
-          <td>프로젝트찾기</td>
-          <td>회원정보수정</td>
-          <td><a href="/goworker/member/cs.jsp">Q&A</a></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>프로젝트만들기</td>
-          <td>회원탈퇴</td>
-          <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>취업정보</td>
-            <td></td>
-            <td></td>
-          </tr>
-        <tr>
-          <td></td>
-          <td>커뮤니티</td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>      
-    </table>
- </footer>
-</body>
-</html>
+</section>
+
+
+<%@ include file="../include/footer.jsp"%>

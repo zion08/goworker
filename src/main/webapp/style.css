@@ -15,9 +15,10 @@ header {
 	height: 10vh;
 }
 
-h1 {
+h1, h2 {
 	text-align: center;
 	margin: 20px 0;
+	display: block;
 }
 
 label {	
@@ -50,7 +51,7 @@ hr {
 	display: table; 
 	margin-left: auto;
 	margin-right: auto;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 
 .section2 {
@@ -83,11 +84,22 @@ hr {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
-	justify-content: space-around;
+	/* justify-content: space-around; */
 	/* border: 1px solid black; */
 	margin: 0 auto;
     width: 75vw;
 }
+
+.section6 {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: space-around;
+	/* border: 1px solid black; */
+	margin: 0 auto;
+    width: 60vw;
+}
+
 
 
 .section4 p {

@@ -118,7 +118,7 @@
 						<li id="location">
 							<label>선호 업무 지역</label>
 								<select name="location">
-									<option value="online">원격</option>
+									<option value="all">전지역</option>
 									<option value="seoul">서울</option>
 									<option value="gyunggi">경기</option>
 									<option value="incheon">인천</option>

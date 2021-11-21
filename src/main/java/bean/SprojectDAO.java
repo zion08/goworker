@@ -283,9 +283,9 @@ public class SprojectDAO {
 		return plist;
 	}
 	
-	public int getSearchCount(String career, String field, String worktype,
-			String location, String employtype,
-			String projecttype,String period, String pay, int available) {
+	public int getSearchCount(String career, String field, String worktype, 
+			String location, String employtype, String projecttype,
+			String period, String pay, int available) {
 		int result = 0; 
 		try {
 			conn = OracleDB.getConnection();

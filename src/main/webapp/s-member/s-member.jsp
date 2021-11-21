@@ -16,6 +16,7 @@
 	
 	//글 리스트 출력 및 페이지 처리 관련
 	List<SmemberDTO> list = null;	//컨텐츠 내용 저장할 list
+	String resultNone = new String();	//컨텐츠(글) 없을때 사용
 	
 	int count = 0;		//총 컨텐츠(글) 갯수
 	String pageSizeStr = request.getParameter("pageSize"); //1개 페이지에 보여줄 컨텐츠(글) 갯수
@@ -29,21 +30,27 @@
 	int end = currentPage * pageSize;
 	
 	int pageBlock = 10;	//페이지 버튼의 출력 단위
-	int pageCount;	//총 페이지 수
-	int startPage;	//페이지 버튼 시작 번호
-	int endPage;	//페이지 버튼 끝 번호
+	int pageCount = 0;	//총 페이지 수
+	int startPage = 0;	//페이지 버튼 시작 번호
+	int endPage = 0;	//페이지 버튼 끝 번호
 	
 	//1st. 전체 컨텐츠 가져오기
 	SmemberDAO dao = new SmemberDAO();
-	count = dao.getCount();
-	if (count > 0) {
+	count = dao.getCount();		// 검색 결과 갯수 저장
+	
+	if (count > 0) {			// 검색 결과 저장
 		list = dao.getAllList(start, end);
+		
+		//2nd. 페이지관련 변수 계산
+		pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);	//총 페이지 수
+		startPage = (currentPage / 10) * 10 + 1;	//페이지 버튼 시작 번호
+		endPage = startPage + pageBlock -1;			//페이지 버튼 끝 번호
+	} else {
+		resultNone = "작성된 글이 없어요";	// 검색 결과 없을때 사용
 	}
 	
-	//2nd. 페이지관련 변수 계산
-	pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);	//총 페이지 수
-	startPage = (currentPage / 10) * 10 + 1;	//페이지 버튼 시작 번호
-	endPage = startPage + pageBlock -1;			//페이지 버튼 끝 번호
+	
+	
 %>
 
 <title>멤버 찾기</title>
@@ -167,11 +174,10 @@
 <%	
 	//3rd. 컨텐츠(글) 리스트 출력
 	if (list == null) {		//작성된 글이 없을때
-%>	<h1>작성된 글이 없습니다.</h1>
+%>	<h2><%=resultNone%></h2>
 <%	}
-%>
 
-<%	//3rd. 컨텐츠(글) 리스트 출력
+	//3rd. 컨텐츠(글) 리스트 출력
 	if (list != null) {		//작성된 글이 있을떄
 		for(SmemberDTO dto : list) {
 			/* if((dto.getCareer()).equals("new")) {
@@ -353,6 +359,7 @@
 <%	}
 %>
 </section>
+
 
 <%@ include file="../include/footer.jsp"%>
 

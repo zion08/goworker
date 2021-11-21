@@ -121,7 +121,7 @@
 						<li id="location"> <!--  업무 방식이 사무실 또는 협의인 경우  -->
 							<label>업무 지역</label>
 								<select name="location">
-									<option value="online">원격</option>
+									<option value="all">전지역</option>
 									<option value="seoul">서울</option>
 									<option value="gyunggi">경기</option>
 									<option value="incheon">인천</option>

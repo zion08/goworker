@@ -96,7 +96,7 @@
 			<li>
 				<label>지역</label> 
 				<select name="location">
-					<option value="%">원격</option>
+					<option value="%">전지역</option>
 					<option value="seoul">서울</option>
 					<option value="gyunggi">경기</option>
 					<option value="incheon">인천</option>
