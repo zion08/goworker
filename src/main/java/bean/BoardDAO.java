@@ -19,7 +19,7 @@ public class BoardDAO {
 		try 
 		{
 			conn=OracleDB.getConnection();
-			pstmt=conn.prepareStatement("insert into board values(board_seq.nextval,?,?,?,?,?,0,sysdate,0,'y')");
+			pstmt=conn.prepareStatement("insert into board values(board_seq.nextval,?,?,?,?,?,sysdate,0,0)");
 			pstmt.setString(1, dto.getWriter());
 			pstmt.setString(2, dto.getSubject());
 			pstmt.setString(3, dto.getContent());
@@ -58,7 +58,7 @@ public class BoardDAO {
 		try {
 			conn=OracleDB.getConnection();
 			pstmt=conn.prepareStatement("select * from "
-					+ " (select num, writer, subject, content, filename, category, good, reg, readcount,show,rownum r from "
+					+ " (select num, writer, subject, content, filename, category, good, reg, readcount, rownum r from "
 					+ " (select * from board order by num desc)) "
 					+ " where r >=? and r <=?");
 			pstmt.setInt(1, start);
@@ -76,7 +76,6 @@ public class BoardDAO {
 				dto.setGood(rs.getInt("good"));
 				dto.setReg(rs.getTimestamp("reg"));
 				dto.setReadcount(rs.getInt("readcount"));
-				dto.setShow(rs.getString("show"));
 				dto.setRowNum(rs.getInt("r"));
 				list.add(dto);
 			}
@@ -92,7 +91,7 @@ public class BoardDAO {
 		try {
 			conn=OracleDB.getConnection();
 			pstmt=conn.prepareStatement("select * from "
-					+ " (select num, writer, subject, content, filename, category, good, reg, readcount,show,rownum r from "
+					+ " (select num, writer, subject, content, filename, category, good, reg, readcount, rownum r from "
 					+ " (select * from board where writer=? order by num desc)) "
 					+ " where r >=? and r <=?");
 			pstmt.setString(1, writer);
@@ -111,7 +110,7 @@ public class BoardDAO {
 				dto.setGood(rs.getInt("good"));
 				dto.setReg(rs.getTimestamp("reg"));
 				dto.setReadcount(rs.getInt("readcount"));
-				dto.setShow(rs.getString("show"));
+				dto.setRowNum(rs.getInt("r"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
@@ -170,7 +169,6 @@ public class BoardDAO {
 				dto.setReg(rs.getTimestamp("reg"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setGood(rs.getInt("good"));
-				dto.setShow(rs.getString("show"));
 			}
 			
 		} catch (Exception e) {
@@ -180,6 +178,7 @@ public class BoardDAO {
 		}
 		return dto;
 	}
+	
 	
 	public void goodUp(BoardDTO dto) {
 		try {
@@ -216,7 +215,7 @@ public class BoardDAO {
 		try {
 			conn=OracleDB.getConnection();
 			String sql = "select * from " 
-					+ " (select num, writer, subject, content,category, filename, reg, readcount, good, show, rownum r from "
+					+ " (select num, writer, subject, content,category, filename, reg, readcount, good, rownum r from "
 					+ " (select * from board where "+colum+" like '%"+search+"%' order by num desc)) "
 					+ " where r>=? and r<=? ";
 			pstmt=conn.prepareStatement(sql);
@@ -234,7 +233,6 @@ public class BoardDAO {
 				dto.setFilename(rs.getString("filename"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setGood(rs.getInt("good"));
-				dto.setShow(rs.getString("show"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
@@ -249,7 +247,7 @@ public class BoardDAO {
 		List<BoardDTO> list = null;
 		try {
 			conn=OracleDB.getConnection();
-			String sql = "select num,writer,subject,content,category,filename,readcount,good,show, rownum r from "
+			String sql = "select num,writer,subject,content,category,filename,readcount,good, rownum r from "
 					+ " (select * from board where writer=? order by num desc)"
 					+ " where r>=? and r<=?";
 			pstmt=conn.prepareStatement(sql);
@@ -267,7 +265,6 @@ public class BoardDAO {
 				dto.setNum(rs.getInt("num"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setReg(rs.getTimestamp("reg"));
-				dto.setShow(rs.getString("show"));
 				dto.setSubject(rs.getString("subject"));
 				dto.setWriter(rs.getString("writer"));
 				list.add(dto);
@@ -300,14 +297,19 @@ public class BoardDAO {
 		return result;
 	}
 	
-	public int deleteBoard(BoardDTO dto) {
-		int result = 0;
+	public String deleteBoard(int num) {
+		String result = null;
 		try {
 			conn=OracleDB.getConnection();
-			pstmt=conn.prepareStatement("update Board set show=? where num=?");
-			pstmt.setString(1, dto.getShow());
-			pstmt.setInt(2, dto.getNum());
-			result=pstmt.executeUpdate();
+			pstmt=conn.prepareStatement("select filename from board where num=?");
+			pstmt.setInt(1, num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getString("filename");
+			}
+			pstmt=conn.prepareStatement("delete form board where num=?");
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -315,6 +317,38 @@ public class BoardDAO {
 		}
 		return result;
 	}
+	
+	public BoardDTO getPrev(BoardDTO dto) {
+		try {
+			conn=OracleDB.getConnection();
+			pstmt=conn.prepareStatement("select num_prev from (select num, writer, subject, content, lag(num,1) over(order by num) as num_prev from board) where num=?");
+			pstmt.setInt(1, dto.getNum());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				dto.setNum_prev(rs.getInt("num_prev"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}return dto;
+	}	
+	
+	public BoardDTO getNext(BoardDTO dto) {
+		try {
+			conn=OracleDB.getConnection();
+			pstmt=conn.prepareStatement("select num_next from (select num, writer, subject, content, lead(num,1) over(order by num) as num_next from board) where num=?");
+			pstmt.setInt(1, dto.getNum());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				dto.setNum_next(rs.getInt("num_next"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}return dto;
+	}	
 }
 
 

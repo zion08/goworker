@@ -12,16 +12,22 @@ public class BoardDTO {
 	private Timestamp reg;
 	private	int readcount;
 	private int good;
-	private String show;
 	private int rownum;
+	private int num_prev;
+	private int num_next;
 	
-	public String getShow() {
-		return show;
+	public int getNum_prev() {
+		return num_prev;
 	}
-	public void setShow(String show) {
-		this.show=show;
+	public void setNum_prev(int num_prev) {
+		this.num_prev = num_prev;
 	}
-	
+	public int getNum_next() {
+		return num_next;
+	}
+	public void setNum_next(int num_next) {
+		this.num_next = num_next;
+	}
 	public String getFilename() {
 		return filename;
 	}
