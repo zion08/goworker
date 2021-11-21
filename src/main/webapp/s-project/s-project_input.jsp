@@ -3,7 +3,7 @@
 <%@ include file = "../include/header.jsp" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 	
-<%	if (sid == null){	//로그인pro 수정 수정 후, ==으로 바꿀 것
+<%	if (sid == null) {
 %>		<script>
 			location.href="../member/login.jsp";
 		</script>  		

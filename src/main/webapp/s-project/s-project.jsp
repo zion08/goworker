@@ -17,8 +17,13 @@
 	//글 리스트 출력 및 페이지 처리 관련
 	List<SprojectDTO> list = null;	//컨텐츠 내용 저장할 list
 	
-	int count = 0;			//총 컨텐츠(글) 갯수	
-	int pageSize = 6;	//1개 페이지에 보여줄 컨텐츠(글) 갯수	
+	int count = 0;		//총 컨텐츠(글) 갯수	
+	String pageSizeStr = request.getParameter("pageSize"); //1개 페이지에 보여줄 컨텐츠(글) 갯수
+	if (pageSizeStr == null) {
+		pageSizeStr = "8";
+	} 
+	int pageSize = Integer.parseInt(pageSizeStr);
+	
 	int currentPage = Integer.parseInt(pageNum);	//현제 페이지=pageNum, String > Integer 변환
 	int start = (currentPage - 1) * pageSize + 1;	//현재 페이지 기준으로 DB에 저장된 내용을 잘라서 들고와야 함
 	int end = currentPage * pageSize;
@@ -27,9 +32,9 @@
 	int pageCount;	//총 페이지 수
 	int startPage;	//페이지 버튼 시작 번호
 	int endPage;	//페이지 버튼 끝 번호 
-%>
 
-<%	
+	
+	
 	//1st. 전체 컨텐츠 가져오기
 	SprojectDAO dao = new SprojectDAO();
 	count = dao.getCount();
@@ -78,7 +83,6 @@
 				</select>
 			</li>
 
-
 			<li>
 				<label>업무 방식</label> 
 				<select name="worktype">
@@ -125,7 +129,7 @@
 			</li>
 
 			<li>
-				<label>프로젝트 유형</label> 
+				<label>프로젝트유형</label> 
 				<select name="projecttype">
 						<option value="%">전체</option>
 						<option value="side">사이드 프로젝트</option>
@@ -134,7 +138,7 @@
 			</li>
 
 			<li>
-				<label>구인활동 여부</label> 
+				<label>모집</label> 
 				<select name="available">
 						<option value="1">on</option>
 						<option value="0">off</option>
@@ -182,6 +186,19 @@
 	</form>
 </section>
 
+<form class="pagesize">
+	<select name="pageSize">
+		<option value="8">8개</option>
+		<option value="12">12개</option>
+		<option value="16">16개</option>
+		<option value="20">20개</option>
+		<option value="28">28개</option>
+		<option value="36">36개</option>
+	</select>
+	<input type="submit" value="확인" />
+</form>
+
+
 <section class="section5">
 <%	
 	//3rd. 컨텐츠(글) 리스트 출력
@@ -208,46 +225,38 @@
 %>					</li>
 		
 					<li class="mb-center">
-						<span><%=dto.getField()%></span>
+						<%= dto.getField()%>
 					</li>
+					
+					<li class="mb-merge-center">
+						<%= dto.getLang() %>
+					</li>
+					
 					<li class="mb-center">
-						<img src="image/view.png" width="20px" height="20px" />
-						<%=dto.getReadcount()%>
+						요구 경력: <%=dto.getCareer() %>
 					</li>
+										
+					<li class="mb-center">
+						<%= dto.getLocation() %>
+					</li>
+				
+					<li class="mb-center">
+						예상 기간: <%=dto.getPeriod() %>일
+					</li>
+
 					<li class="mb-center">
 						<img src="image/thumbs.png" width="20px" height="20px" />
 						<%=dto.getGood()%>
 					</li>
-					<li class="mb-center">
-						<%=dto.getCareer() %>
-					</li>
-					<li class="mb-center">
-						<%=dto.getEmploytype() %>
-					</li>
-					<li class="mb-center">
-						<%=dto.getLocation() %>
-					</li>
-					<li class="mb-center">
-						<%=dto.getWorktype() %>
-					</li>
-					<li class="mb-center">
-						<%=dto.getPay() %>
-					</li>
-					<li class="mb-center">
-						<%=dto.getPeriod() %>
-					</li>
-					<li class="mb-merge-center">
-						<%=dto.getIntroduce()%>
-					</li>		
+					
 				</ul>
 			</div>
-
 <%		}
 	}
 %>
 </section>
 
-<section class="section4">
+<section class="section2">
 <%	//4th. 페이지 버튼 출력			
 	if(endPage > pageCount) {
 		endPage = pageCount;
@@ -271,7 +280,6 @@
 
 
 
-
 <script type="text/javascript">
 	var bDisplay = true;
 
@@ -288,5 +296,5 @@
 		value = document.getElementsByName("id")[0].value;
 		open('s-project_detail.jsp?id=' + value, 'confirm',
 				'width=500,height=500');
-	}
+	}	
 </script>
