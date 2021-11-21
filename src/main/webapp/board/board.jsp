@@ -60,7 +60,6 @@
 				<td><%=dto.getReg()%></td>
 				<td><%=dto.getReadcount()%></td>
 				<td><%=dto.getGood()%></td>
-				<td><%=dto.getRowNum()%></td>
 			</tr>
 <%	 		}
 		}
