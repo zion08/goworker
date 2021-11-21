@@ -7,9 +7,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 
 
-<%		
-	/* String my = request.getParameter("my"); */
- 
+<%	 
 	//현제 페이지 설정, request로 받는 파라미터는 항상 String
 	String pageNum = request.getParameter("pageNum");
 	if (pageNum == null) {
@@ -32,12 +30,18 @@
 %>
 
 <%	
-	//1st.전체 컨텐츠 가져오기
+	//1st. 전체 컨텐츠 가져오기
 	SprojectDAO dao = new SprojectDAO();
 	count = dao.getCount();
 	if (count > 0) {
 		list = dao.getAllList(start, end);
-	}	
+	}
+	
+	//2nd. 페이지관련 변수 계산
+	pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);	//총 페이지 수
+	startPage = (currentPage / 10) * 10 + 1;	//페이지 버튼 시작 번호
+	endPage = startPage + pageBlock -1;			//페이지 버튼 끝 번호
+
 %>
 
 <title>프로젝트 찾기</title>
@@ -180,13 +184,13 @@
 
 <section class="section5">
 <%	
-	//2nd. 컨텐츠(글) 리스트 출력
+	//3rd. 컨텐츠(글) 리스트 출력
 	if (list == null) {		//작성된 글이 없을때
 %>	<h1>작성된 글이 없습니다.</h1>
 <%	}
 %>
 
-<%	//2nd. 컨텐츠(글) 리스트 출력
+<%	//3rd. 컨텐츠(글) 리스트 출력
 	if (list != null) {		//작성된 글이 있을떄
 		for (SprojectDTO dto : list) {	
 %>			<div class="mboard">
@@ -244,11 +248,7 @@
 </section>
 
 <section class="section4">
-<%	//4rd. 페이지 버튼 출력		
-	pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-	startPage = (currentPage / 10) * 10 + 1;
-	endPage = startPage + pageBlock -1;
-
+<%	//4th. 페이지 버튼 출력			
 	if(endPage > pageCount) {
 		endPage = pageCount;
 	}
