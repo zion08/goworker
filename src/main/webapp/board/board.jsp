@@ -30,7 +30,6 @@
 				list=dao.getMyAllList(sid,start, end);
 		}
 	}	
-	String show="y";
 %>
 <body>
 <div class="container">
@@ -45,11 +44,10 @@
 		<tr>
 			<td colspan="6">저장된 글이 없습니다..</td>
 		</tr>
-	<%}else{ %>	
-<% 		for(BoardDTO dto : list)
+	<%}else{
+		
+ 		for(BoardDTO dto : list)
 		{
-			if(show.equals(dto.getShow()))
-			{
 %>			<tr>
 				<td><%=dto.getCategory()%></td>
 				<td><a href="content.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>" ><%=dto.getSubject()%></a></td>
@@ -57,10 +55,8 @@
 				<td><%=dto.getReg()%></td>
 				<td><%=dto.getReadcount()%></td>
 			</tr>
-<%	 		}
-		}
-%>
-<%	}	 
+<%	 	}
+	  }	 
 %>
 	</tbody>
 </table>
@@ -77,7 +73,7 @@
 			</form>
 			
 			<a href="board.jsp">목록</a>
-			<a href="write.jsp" onsubmit="return chkLogin();">쓰기</a>
+			<a href="write.jsp">쓰기</a>
 			<%if(sid!=null || cid!=null){ %>
 			<a href="board.jsp?my=1" >내글</a>
 			<%} %>

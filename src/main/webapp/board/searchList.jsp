@@ -42,7 +42,6 @@
 				System.out.println(str.getGood());
 				System.out.println(str.getNum());
 				System.out.println(str.getReadcount());
-				System.out.println(str.getShow());
 				System.out.println(str.getSubject());
 				System.out.println(str.getWriter());
 			}

@@ -7,11 +7,15 @@
 
 <jsp:useBean class="bean.BoardDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
-<jsp:setProperty property="show" name="dto" />
 <%
 	String pageNum=request.getParameter("pageNum");
 	BoardDAO dao=new BoardDAO();
-	int result = dao.deleteBoard(dto);
+	String result = dao.deleteBoard(dto.getNum());
+	if(result!=null){
+		String path =request.getRealPath("uploadFile/boardFile");
+		File f = new File(path+"//"+result);
+		f.delete();
+	}
 %>
 <script>
 	alert("삭제 되었습니다.");

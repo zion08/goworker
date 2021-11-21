@@ -9,7 +9,6 @@
 <title>게시물내용</title>
 <jsp:useBean class="bean.BoardDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
-
 <%
 	if(sid==null){
 		sid=cid;
@@ -21,9 +20,14 @@
 	dao.readCountUp(dto); //조회수 증가
 	dto = dao.getContent(dto);
 	int count = dao.getCount(); //총게시글 수
-	int prev = dto.getNum()-1;
-	int next = dto.getNum()+1;
-
+	dao.getNext(dto);
+	dao.getPrev(dto);
+	int prev=dto.getNum_prev();
+	int next=dto.getNum_next();
+	//System.out.println(rownum);
+	System.out.println(prev);
+	System.out.println(next);
+	System.out.println(count);
 %>
 </script>
 	<div >
@@ -37,13 +41,13 @@
 	<td><a href="#" >[첨부파일 없음]</a></td></tr>
 	<%} %>
 	</table>
-	<div class="text-center" ">
+	<div class="text-center" >
 	<ul class="pagination">
-	<%if(prev>1){%>
-	<li><a href="content.jsp?num=<%=prev%>&pageNum=<%=pageNum%>">이전글</a></li>
-	<%} %> 
+	<%if(prev>=1){%>
+		<li><a href="content.jsp?num=<%=prev%>&pageNum=<%=pageNum%>">이전글</a></li>
+	<%}%>
 	<li><a href="board.jsp?pageNum=<%=pageNum%>">목록</a> </li>
-	<%if(next<count){%>
+	<%if(next>0){%>
 	<li><a href="content.jsp?num=<%=next%>&pageNum=<%=pageNum%>">다음글</a></li>
 	<%}%>
 	</ul>
