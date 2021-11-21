@@ -24,10 +24,7 @@
 	dao.getPrev(dto);
 	int prev=dto.getNum_prev();
 	int next=dto.getNum_next();
-	//System.out.println(rownum);
-	System.out.println(prev);
-	System.out.println(next);
-	System.out.println(count);
+	
 %>
 </script>
 	<div >

@@ -25,7 +25,6 @@
 	int currentPage = Integer.parseInt(pageNum);
 	int start = (currentPage-1)*maxArticle+1;
 	int end= currentPage*maxArticle;
-	//System.out.println(start+","+ end);
 	BoardDAO dao = new BoardDAO();
 	
 	int total = 0;
@@ -62,11 +61,9 @@
 		<tr>
 			<td colspan="6">저장된 글이 없습니다..</td>
 		</tr>
-	<%}else{ %>	
-<% 		for(BoardDTO dto : list)
+	<%}else{	
+ 		for(BoardDTO dto : list)
 		{
-			if(show.equals(dto.getShow()))
-			{
 %>			<tr>
 				<td><%=dto.getCategory()%></td>
 				<td><a href="content.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>" ><%=dto.getSubject()%></a></td>
@@ -76,8 +73,6 @@
 			</tr>
 <%	 		}
 		}
-%>
-<%	}	 
 %>
 	</tbody>
 </table>
