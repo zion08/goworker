@@ -165,3 +165,4 @@
 		</div>
 	</form>	
 </section>
+<%@ include file = "../include/footer.jsp" %>
