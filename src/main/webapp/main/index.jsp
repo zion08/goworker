@@ -29,7 +29,7 @@
 		<div id="mproject" onclick="window.location='../makeproject/project_list.jsp'">
 			<span>프로젝트 생성</span>
 		</div>
-		<div id="community">
+		<div id="community" onclick="window.location='../board/board.jsp'">
 			<span>커뮤니티</span>
 		</div>
 	</div>
