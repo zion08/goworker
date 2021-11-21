@@ -6,7 +6,6 @@
 <%@ page import="bean.Cookies" %>
 <%@ include file = "../include/header.jsp" %>
 	<title>자유게시판</title>
-	<link rel="stylesheet" href="../bootstrap.css" type="text/css">
 <%
 	int maxArticle = 10;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 페이지당 최대 게시글 수
 	String pageNum=request.getParameter("pageNum");
@@ -35,7 +34,7 @@
 %>
 <body>
 <div class="container">
-<table class="table table-hover">
+<table border="1">
 	<thead>	
 	<tr>
 		<th>탭</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th>
@@ -67,30 +66,27 @@
 </table>
 <div class="btm_line">
 		<div class="find" >
-			<form action="searchList.jsp" method="post" style="display: inline" >	
+			<form action="searchList.jsp" method="post"  >	
 				<input type="text" name="search" >	
 					<select name="colum">
 						<option value="subject">제목</option>
 						<option value="content">내용</option>
 						<option value="writer">작성자</option>
 					</select>
-				<button type="submit" onclick="searchList.jsp" class="btn btn-default">Search</button>
+				<button type="submit" onclick="searchList.jsp" >Search</button>
 			</form>
 			
-			<a class="btn btn-default " href="board.jsp">목록</a>
-			<a class="btn btn-default pull-right" href="write.jsp" onsubmit="return chkLogin();">쓰기</a>
+			<a href="board.jsp">목록</a>
+			<a href="write.jsp" onsubmit="return chkLogin();">쓰기</a>
 			<%if(sid!=null || cid!=null){ %>
-			<a class="btn btn-default pull-right" href="board.jsp?my=1" >내글</a>
+			<a href="board.jsp?my=1" >내글</a>
 			<%} %>
 		</div>
 </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../bootstrap.js"></script>
-
-<div class="text-center">
-	<ul class="pagination">
+<div >
+	<ul >
 <%
 	if(total>0){
 		int pageCount = total / maxArticle + (total % maxArticle == 0? 0 : 1);
@@ -102,13 +98,13 @@
 		}
 		
 		if(startPage>10){%>
-			<li><a href="board.jsp?pageNum=<%=startPage-10%>" class="btn btn-default pull-left">[이전]</a></li>
+			<li><a href="board.jsp?pageNum=<%=startPage-10%>" >[이전]</a></li>
 		<%}
 		for(int i = startPage ; i<= endPage; i++){%>
 			<li><a href="board.jsp?pageNum=<%=i%>"class="btn btn-default"><%=i%></a></li>
 		<%}
 		if(endPage<pageCount){%>
-			<li><a href="board.jsp?pageNum=<%=startPage+10 %>" class="btn btn-default pull-right">[다음]</a></li>	
+			<li><a href="board.jsp?pageNum=<%=startPage+10 %>" >[다음]</a></li>	
 		<% }%>
 	<%}%>
 	</ul>

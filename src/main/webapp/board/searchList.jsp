@@ -6,7 +6,6 @@
 <%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
 <title>내글 목록</title>
-	<link rel="stylesheet" href="../bootstrap.css">
 
 <%
 	if(sid==null){
@@ -52,8 +51,8 @@
 	String show="y";
 %>
 <body>
-<div class="container">
-<table class="table table-hover">
+<div>
+<table >
 	<thead>	
 	<tr>
 		<th>탭</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th>
@@ -86,7 +85,7 @@
 
 <div  class="btm_line">
 		<div class="find" >
-			<form action="searchList.jsp" method="post" style="display: inline" >	
+			<form action="searchList.jsp" method="post"  >	
 				<input type="text" name="search" >	
 					<select name="colum">
 						<option value="subject">제목</option>
@@ -94,20 +93,20 @@
 						<option value="writer">작성자</option>
 						<option value="comment">댓글</option>
 					</select>
-				<button type="submit" onclick="searchList.jsp" class="btn btn-default">Search</button>
+				<button type="submit" onclick="searchList.jsp" >Search</button>
 			</form>
-			<a class="btn btn-default " href="board.jsp">목록</a>
-			<a class="btn btn-default pull-right" href="write.jsp">쓰기</a>
+			<a  href="board.jsp">목록</a>
+			<a  href="write.jsp">쓰기</a>
 			<%if(sid!=null){ %>
-			<a class="btn btn-default pull-right" href="board.jsp?my=1">내글</a>
+			<a  href="board.jsp?my=1">내글</a>
 			<%} %>
-			<a class="btn btn-default pull-right" href="#favorite" onclick="searchList.jsp" >인기글</a>
+			<a  href="#favorite" onclick="searchList.jsp" >인기글</a>
 		</div>
 </div>
 </div>
 
-<div class="text-center">
-	<ul class="pagination">
+<div >
+	<ul >
 <%
 	if(total>0){
 		int pageCount = total / maxArticle + (total % maxArticle == 0? 0 : 1);
@@ -119,17 +118,15 @@
 		}
 		
 		if(startPage>10){%>
-			<li><a href="board.jsp?pageNum=<%=startPage-10%>" class="btn btn-default pull-left">[이전]</a></li>
+			<li><a href="board.jsp?pageNum=<%=startPage-10%>" >[이전]</a></li>
 		<%}
 		for(int i = startPage ; i<= endPage; i++){%>
-			<li><a href="board.jsp?pageNum=<%=i%>"class="btn btn-default"><%=i%></a></li>
+			<li><a href="board.jsp?pageNum=<%=i%>"><%=i%></a></li>
 		<%}
 		if(endPage<pageCount){%>
-			<li><a href="board.jsp?pageNum=<%=startPage+10 %>" class="btn btn-default pull-right">[다음]</a></li>	
+			<li><a href="board.jsp?pageNum=<%=startPage+10 %>" >[다음]</a></li>	
 		<% }%>
 	<%}%>
 	</ul>
 </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../bootstrap.js"></script>

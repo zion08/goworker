@@ -4,7 +4,6 @@
 <%@ page import = "bean.BoardDAO" %>
 <%@ include file = "../include/header.jsp" %>
 <title>내글수정</title>
-<link rel="stylesheet" href="../bootstrap.css">
 
 <%
 	if(sid==null && cid==null){
@@ -20,13 +19,13 @@
 	dto = dao.getContent(dto);
 	
 %>
-<div class="container" >
+<div >
 	<form action="editPro.jsp" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="num" value="<%=dto.getNum()%>"/>
 					<input type="hidden" name="pageNum" value="<%=pageNum%>"/>
-		<table class="table table-hover">
+		<table >
 			<tr><td>제목 : <input type="text" name="subject" value="<%= dto.getSubject()%>"/></td> 
-			<td><select name="category" class="form-control" style="float: left; width:100px;" >
+			<td><select name="category" class="form-control" >
 					<option value="tab">	탭</option>
 					<option value="forum">	자유게시판</option>
 					<option value="qna">	묻고답하기</option>
@@ -44,9 +43,7 @@
 					[첨부파일 없음]
 				<%} %>
 			</td></tr>	
-			<tr><td><input type="submit" value="수정" class="btn btn-default pull-left"/><a href="board.jsp?pageNum=<%=pageNum%>" class="btn btn-default pull-right">목록</a> </td></tr>
+			<tr><td><input type="submit" value="수정" /><a href="board.jsp?pageNum=<%=pageNum%>" >목록</a> </td></tr>
 		</table>
 	</form>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../bootstrap.js"></script>
