@@ -26,19 +26,11 @@
 	int next = dto.getNum()+1;
 
 %>
-<script>
-	function checkUp(dto)
-	{	
-		dao.goodUp(dto);
-		console.log(dto.getGood());
-		return true;
-	}
 </script>
 	<div class="container" >
 	<table class="table table-hover">	
 	<tr><td>제목 : <%=dto.getSubject() %></td> <td>등록일 : <%=dto.getReg() %></td></tr>
 	<tr><td>작성자 : <%=dto.getWriter() %></td> <td>조회수 : <%=dto.getReadcount() %></td>
-	<td><a href="content.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>" onclick="return checkUp(dto);" class="btn btn-default pull-left">추천<%=dto.getGood()%></a></td></tr> 
 	<tr><td>내용 : <%=dto.getContent()%></td>
 	<%if(dto.getFilename() != null){%>
 	<td><a href="uploadFile/boardFile/<%=dto.getFilename()%>" class="btn btn-default" ><%=dto.getFilename()%> [첨부파일]</a></td></tr>

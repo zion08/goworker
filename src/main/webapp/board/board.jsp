@@ -5,10 +5,8 @@
 <%@ page import="java.util.List"%>
 <%@ page import="bean.Cookies" %>
 <%@ include file = "../include/header.jsp" %>
-<head>
 	<title>자유게시판</title>
-	<link rel="stylesheet" href="../bootstrap.css">
-</head>
+	<link rel="stylesheet" href="../bootstrap.css" type="text/css">
 <%
 	int maxArticle = 10;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 페이지당 최대 게시글 수
 	String pageNum=request.getParameter("pageNum");
@@ -40,7 +38,7 @@
 <table class="table table-hover">
 	<thead>	
 	<tr>
-		<th>탭</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th><th>추천</th>
+		<th>탭</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -59,7 +57,6 @@
 				<td><%=dto.getWriter()%></td>
 				<td><%=dto.getReg()%></td>
 				<td><%=dto.getReadcount()%></td>
-				<td><%=dto.getGood()%></td>
 			</tr>
 <%	 		}
 		}
@@ -68,15 +65,6 @@
 %>
 	</tbody>
 </table>
-<script>
-	function chkLogin(){
-		if(sid==null && cid==null){
-			alert("로그인하세요");
-			window.location="/goworker/member/login.jsp";
-			return false;
-		}
-	}
-</script>
 <div class="btm_line">
 		<div class="find" >
 			<form action="searchList.jsp" method="post" style="display: inline" >	

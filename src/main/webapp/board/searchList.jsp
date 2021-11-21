@@ -56,7 +56,7 @@
 <table class="table table-hover">
 	<thead>	
 	<tr>
-		<th>탭</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th><th>추천</th>
+		<th>탭</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -75,8 +75,6 @@
 				<td><%=dto.getWriter()%></td>
 				<td><%=dto.getReg()%></td>
 				<td><%=dto.getReadcount()%></td>
-				<td><%=dto.getGood()%></td>
-				<td><%=dto.getRowNum()%></td>
 			</tr>
 <%	 		}
 		}
