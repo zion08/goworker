@@ -83,9 +83,10 @@ hr {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
-    /* justify-content: felx-start; */
+	justify-content: center;
 	border: 1px solid black;
 	margin: 2vw 22vw;
+	
 }
 
 
@@ -245,7 +246,7 @@ hr {
   	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 	width: 15vw;
 	margin:0.5vw;
 }
