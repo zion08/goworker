@@ -9,6 +9,22 @@ import java.util.List;
 import oracle.DisconnDB;
 import oracle.OracleDB;
 
+/*	<멤버 함수 목록>
+ * BoardInput     - 게시판 글쓰기
+ * getCount       - 총 게시글 수
+ * getAllList     - 총 게시글 리스트
+ * getMyAllList   - 나의 게시글 리스트
+ * getMyCount     - 나의 게시글 수
+ * readCountUp    - 조회수
+ * getContnet     - 게시글 내용 보기
+ * getSearchCount - 검색 결과 수
+ * getSearchList  - 게시물 검색 결과
+ * editBoard      - 글 수정
+ * deleteBoard    - 글 삭제
+ * getPrev  	  - 이전글 버튼
+ * getNext 		  - 다음글 버튼
+ */
+
 public class BoardDAO {
 	private PreparedStatement pstmt=null;
 	private Connection conn=null;
@@ -76,7 +92,6 @@ public class BoardDAO {
 				dto.setGood(rs.getInt("good"));
 				dto.setReg(rs.getTimestamp("reg"));
 				dto.setReadcount(rs.getInt("readcount"));
-				dto.setRowNum(rs.getInt("r"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
@@ -110,7 +125,6 @@ public class BoardDAO {
 				dto.setGood(rs.getInt("good"));
 				dto.setReg(rs.getTimestamp("reg"));
 				dto.setReadcount(rs.getInt("readcount"));
-				dto.setRowNum(rs.getInt("r"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
@@ -179,20 +193,6 @@ public class BoardDAO {
 		return dto;
 	}
 	
-	
-	public void goodUp(BoardDTO dto) {
-		try {
-			conn=OracleDB.getConnection();
-			pstmt=conn.prepareStatement("update board set good=good+1 where num=?");
-			pstmt.setInt(1, dto.getGood());
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			DisconnDB.close(conn, pstmt, rs);
-		}
-	}
-	
 	public int getSearchCount(String colum, String search) {
 		int result=0;
 		try {
@@ -242,40 +242,6 @@ public class BoardDAO {
 		}
 		return list;
 	}	
-	
-	public List<BoardDTO> myList(String writer, int start, int end){
-		List<BoardDTO> list = null;
-		try {
-			conn=OracleDB.getConnection();
-			String sql = "select num,writer,subject,content,category,filename,readcount,good, rownum r from "
-					+ " (select * from board where writer=? order by num desc)"
-					+ " where r>=? and r<=?";
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, writer);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
-			rs=pstmt.executeQuery();
-			list = new ArrayList();
-			while(rs.next()) {
-				BoardDTO dto = new BoardDTO();
-				dto.setCategory(rs.getString("category"));
-				dto.setContent(rs.getString("content"));
-				dto.setFilename(rs.getString("filename"));
-				dto.setGood(rs.getInt("good"));
-				dto.setNum(rs.getInt("num"));
-				dto.setReadcount(rs.getInt("readcount"));
-				dto.setReg(rs.getTimestamp("reg"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setWriter(rs.getString("writer"));
-				list.add(dto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			DisconnDB.close(conn, pstmt, rs);
-		}
-		return list;
-	}
 	
 	public int editBoard(BoardDTO dto) {
 		int result = 0;
