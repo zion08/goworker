@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "../include/header.jsp" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<!-- DTO, DAO 객채 생성 -->
-<%-- <jsp:useBean id="smdto" class="bean.MemberDTO"/> --%>
+<!-- DAO 객채 생성 -->
 <jsp:useBean id="dao" class="bean.MemberDAO"/>
 
 	
@@ -13,6 +12,7 @@
 		</script>  		
 <%	} else {
 		String email = dao.getEmail(sid);
+		String profileimg = dao.getProfileImg(sid);
 	
 %>		<title>멤버 등록</title>
 
@@ -22,7 +22,13 @@
 			<form action="s-member_inputPro.jsp" method="post" enctype="multipart/form-data" class="form-box2">
 				<div class="wrapper">
 					<ul class="profile-info">	
-						<li id="profile-img">		
+						<li id="profile-img" >
+<%						if(profileimg == null){
+%>							<img src = "../img/profileimg_default.png">
+<%						} else {
+%>							<img src = "../uploadFile/profileFile/<%=profileimg%>">
+<%						}
+%>							
 						</li>
 						<li id="id">	
 							<label>아이디</label>

@@ -343,7 +343,7 @@ hr {
 	margin: 30px;
  	display: grid;
   	grid-template-columns: repeat(2, minmax(100px, auto));
-  	grid-template-rows: repeat(4, minmax(auto, auto));
+  	grid-template-rows: repeat(4, minmax(auto, 5vh));
   	column-gap:7vh;
   	row-gap: 1vh;
 }
@@ -496,11 +496,19 @@ hr {
 
 #profile-img {
 	grid-row: 1 / 5;
-	background-image: url('img/profileimg_default.png');
+	width: 200px;
+    height: 200px;
+	/* background-image: url('img/profileimg_default.png');
 	background-repeat: no-repeat;
     background-size: contain;
-    background-position: center;
-	border: 1px solid blue;	
+    background-position: center; 
+	border: 1px solid blue;*/
+	
+}
+
+#profile-img img {
+	width: 200px;
+    height: 200px;
 }
 
 #lang, #portfolio, #pfdetail,
