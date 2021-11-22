@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>
 <%@ page import="bean.SprojectDTO" %>
 <%@ page import="bean.SprojectDAO" %>
 <%@ page import="java.util.List" %>
@@ -198,7 +197,6 @@
 			</li>
 			
 			<li>
-
 				<label>모집</label> 
 				<select name="available">
 						<option value="1">on</option>
@@ -206,40 +204,7 @@
 				</select>
 			</li>
 
-			<li>
-				<label>예상 기간</label> 
-				<select name="periond">
-						<option value="%">전체</option>
-						<option value="7">7일</option>
-						<option value="30">30일</option>
-						<option value="90">90일</option>
-						<option value="180">180일</option>
-						<option value="365">1년</option>
-						<option value="2">2년이상</option>
-				</select>
-			</li>
-
-			<li>
-				<label>예상 급여</label> 
-				<select name="pay">
-					<option value="%">전체</option>
-					<option value="100">100만원</option>
-					<option value="200">200만원</option>
-					<option value="300">300만원</option>
-					<option value="400">400만원</option>
-					<option value="500">500만원</option>
-					<option value="600">600만원</option>
-					<option value="700">700만원</option>
-					<option value="800">800만원</option>
-					<option value="900">900만원</option>
-					<option value="1000">1000만원</option>
-					<option value="2000">2000만원</option>
-					<option value="3000">3000만원</option>
-					<option value="4000">4000만원</option>
-					<option value="5000">5000만원</option>
-					<option value="10000">10000만원이상</option>
-				</select>
-			</li>
+			
 		</ul>
 		<div class="wrapper-submit2">
 			<input type="submit" value="검색" />
