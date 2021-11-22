@@ -10,8 +10,8 @@
 <%
 	String pageNum=request.getParameter("pageNum");
 	BoardDAO dao=new BoardDAO();
-	String result = dao.deleteBoard(dto.getNum());
-	if(result!=null){
+	String result = dao.deleteBoard(dto.getNum()); // 삭제 함수 호출
+	if(result!=null){ // 첨부 파일이 있으면 첨부파일 삭제.
 		String path =request.getRealPath("uploadFile/boardFile");
 		File f = new File(path+"//"+result);
 		f.delete();
