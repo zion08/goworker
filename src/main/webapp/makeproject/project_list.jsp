@@ -55,8 +55,10 @@
 %>
 
 
-<div class="search-box" align="center">프로젝트 만들기</div>
+<div align="center"><h3>프로젝트 만들기</h3></div>
 
+
+<!-- makeproject 검색창 -->
 	<form action="project_search.jsp" method="post" align="center">
 		<select name="colum">
 			<option value="subject">제목</option>
@@ -64,15 +66,15 @@
 			<option value="id">아이디</option>
 		</select>
 		<input type="text" name="search" />
-		<input type="submit" value="검색" />
+		<input type="submit" value="검색"  />
 	</form>		
-	
-	
-<center>
 
+
+
+
+<center>
 <%
-	if(sid != null){
-%>	
+	if(sid != null){%>	
 			<table width="705" height="30px" align="center">
             	    <tr>
                 		<td align="right" bgcolor="pink" >
@@ -81,14 +83,14 @@
                 		
                		</tr>
         	</table>
-<%} %>
+	<%} %>
 
 
 
 
 <%
-	if(count == 0){
-%>
+	if(count == 0){%>
+	
 	<table width="700" border="1" cellpadding="0" cellspacing="0">
 		<tr>
     		<td align="center">
@@ -97,7 +99,8 @@
    	 </tr>
 	</table>
 
-<%}else{ %>
+<%	
+	}else{%>
 
 <% 
 	for(MakeProjectDTO dto : list) {
@@ -116,23 +119,23 @@
         		<th width="400px" height="70px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
         			<%=dto.getSubject() %></a> [<%=comment_count %>]</th>
         		<td align="center" width="140px">
-        			<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
-        			<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
-        			<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
+        			<img src="image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
+        			<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+        			<img src="image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
         		</td>
         		<td width="80px" align="center">
         		
         		
 <%				if(result != null){ %>
-<%				if(result.equals("admin")){%>	
-					<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
-				<%} %>
-<%				if(result.equals("manager")){%>				
-					<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
+<%					if(result.equals("admin")){%>	
+						<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
 					<%} %>
-<%		  		if(result.equals("member")){ %>
-					<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
-					<% }
+<%					if(result.equals("manager")){%>				
+						<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
+					<%} %>
+<%		  			if(result.equals("member")){ %>
+						<img src="image/image.jpg" width="40px" height="40px" /><br/>
+					<%}
         		}%>        			
         				<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
         		</td>
@@ -144,6 +147,8 @@
      <%} 
 }%>      
 </center>
+
+
 
 
 <section align="center">
@@ -161,16 +166,14 @@
 %>				<a href="project_list.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
 <%		}
 	
-		for (int i = startPage ; i <= endPage ; i++) {
-%> 			<a href="project_list.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+		for (int i = startPage ; i <= endPage ; i++) {%>
+			<a href="project_list.jsp?pageNum=<%=i%>">[<%=i %>] </a>
 <%		}
 	
-		if(endPage < pageCount) {
-%>		<a href="project_list.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-<%		}
-	}
-%>
-
+		if(endPage < pageCount) {%>
+			<a href="project_list.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+		<%}
+	}%>
 </section >
 
 
