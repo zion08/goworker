@@ -49,8 +49,6 @@
 <form action="messagePrint.jsp" method="post" target="if" id="messege-send">
 	<input type="text" name="inputMessage">
 	<input type="submit" value="보내기">
-	<%-- <input type="hidden" name="idtarget" value="<%=smdto.getId()%>">
-	<input type="hidden" name="idsender" value="<%=sid%>">  --%>
 </form>
 
 
