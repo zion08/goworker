@@ -52,19 +52,19 @@
 		
 %>
 
-<aside>
-	<a href="admin_smember.jsp">멤버찾기 관리</a> <br/>
-	<a href="admin_sproject.jsp">프로젝트 찾기 관리</a> <br/>
-	<a href="admin_comment.jsp">댓글 관리</a> <br/>
-	<a href="admin_member.jsp">회원 관리</a> <br/>
-	<a href="admin_notice.jsp">공지사항</a> <br/>
-	<a href="admin_cs.jsp">문의사항</a> <br/>
-	
-</aside>
-<section>
+<div class="section7">
+	<a href="admin_smember.jsp" class="sideicon2"><p>멤버찾기 관리</p></a> 
+	<a href="admin_sproject.jsp"  class="sideicon2"><p>프로젝트 찾기 관리</p></a>
+	<a href="admin_comment.jsp"  class="sideicon2"><p>댓글 관리</p></a> 
+	<a href="admin_member.jsp"  class="sideicon2"><p>회원 관리</p></a> 
+	<a href="admin_notice.jsp"  class="sideicon2"><p>공지사항</p></a> 
+	<a href="admin_cs.jsp"  class="sideicon2"><p>문의사항</p></a> 
+</div>
+
+
+<section class="section1">
 	<h3> 인기 멤버 </h3>
-	<section>
-	<table border=1 width="470px">
+	<table border=1 width="980px">
 		<tr>
 			<th width="80">글 번호</th>
 			<th maxwidth="150">아이디</th>
@@ -77,7 +77,7 @@
 	for(SmemberDTO mdto : mlist) { %>
 	<div>
 		<form action="/goworker/s-member/s-member_delete.jsp?num=<%=mdto.getNum()%>" method="get">
-		<table  border=1 width="470px">
+		<table  border=1 width="980px">
 			<tr>
 				<th width="80">
 				<input type="hidden" name="num" value="<%=mdto.getNum() %>" />
@@ -96,18 +96,14 @@
 		</table>
 		</form>
 	</div>
- 
-
-
-
-
 <%}
 }
 %>
 </section>
+
+<section class="section1">
 	<h3> 인기 프로젝트 </h3>
-	<section>
-	<table border=1 width="470px">
+	<table border=1 width="980px">
 		<tr>
 			<th width="80">글 번호</th>
 			<th maxwidth="150">아이디</th>
@@ -120,7 +116,7 @@
 	for(SprojectDTO pdto : plist) { %>
 	<div>
 		<form action="/goworker/s-project/s-project_delete.jsp?num=<%=pdto.getNum()%>" method="get">
-		<table  border=1 width="470px">
+		<table  border=1 width="980px">
 			<tr>
 				<th width="80">
 				<input type="hidden" name="num" value="<%=pdto.getNum() %>" />
@@ -139,19 +135,13 @@
 		</table>
 		</form>
 	</div>
- 
-
-
-
-
 	<%}
 }
 	%>
-	</section>
 </section>
 
+<section class="section1">
 	<h3> 인기 댓글 </h3>
-	<section>
 	<table border=1 width="980px">
 		<tr>
 			<th width="150">게시판 이름</th>
@@ -196,7 +186,7 @@
 	</div>
 <%}
 }%>
-
-
 </section>
+
+
 <%@ include file = "../include/footer.jsp" %>
