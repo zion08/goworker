@@ -11,18 +11,15 @@
 <%@ page import="bean.Comment_CsDAO" %>
 <%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
-<html>
-<html>
-<head>
-<title>문의사항</title>
-</head>
-<aside>
-<tr>
- <td><a href="notice.jsp">공지사항</a></td><br>
- <td><a href="cs.jsp">문의사항</a></td>
-</tr>
-</aside>
-<h2>문의사항</h2>
+
+<title>고객센터</title>
+<h2>고객센터 [문의사항]</h2>
+<div class="section7">
+	<a href="notice.jsp" class="sideicon2"><p>공지사항</p></a>
+	<a href="cs.jsp" class="sideicon2"><p>문의사항</p></a>
+</div>
+
+
 <%
 	int pageSize = 10;
 	String pageNum = request.getParameter("pageNum");
@@ -56,7 +53,8 @@
 }
 	
 %>
-    <table border="1">
+<section class="section1">
+    <table border="1" width="800px">
 
 	<%if(count == 0){%>
 		<tr>
@@ -87,7 +85,10 @@
 	</tr>		
 <%	}
 }%>
-</table> 
+</table>
+</section>
+
+<section class="section2">
 <%
 	if(count > 0){
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -108,26 +109,16 @@
 	<%}	
 	}
 %>
+</section> 
+
+<section class="section2">
 <%
 	if(sid != null){
 %>		<input type="button"  value="글쓰기" onclick="window.location='csWrite.jsp' "/>
 <%  } %>
-<br />
-<%@ include file = "/include/footer.jsp" %>
-<style>
-            aside{
-                display:block;
-                width:400px;
-                margin:10px;
-                padding:4px;
-                text-align:center;
-            }
-            aside {
-                float:left;
-                width:104px;
-                height:240px;
-            }
-    </style>  
+</section> 
 
- </html>
+
+<%@ include file = "/include/footer.jsp" %>
+
     
