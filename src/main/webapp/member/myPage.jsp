@@ -17,18 +17,16 @@
 <%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
 
-<html>
-<head>
-<title>마이페이지</title>
-</head><br>
 
-<body>
+<title>마이페이지</title>
+
+<section class="section2">
 <div class="input" >
       <input type="submit" value="프로젝트찾기" onclick=" window.location='/goworker/s-project/s-project_list.jsp' "/>
       <input type="submit" value="팀원찾기" onclick=" window.location='/goworker/s-member/s-member.jsp' "/>
       <input type="submit" value="관심목록" onclick=" window.location='favorite.jsp' "/>
 </div><br/>
-
+</section>
 <%	
 	String pageNum = request.getParameter("pageNum");
 	int pageSize = 5;
@@ -47,62 +45,93 @@
 		slist = sdao.getMyList(sid, mstart , mend );
 
 	}
-%>  
-	<%
-	if(rank != null){	
-    if(rank.equals("member")){
-	if(count == 0){%>
-	<div>
-		<table border="1">
-		  <tr>
-		   <th><a href="../s-member/s-member_input.jsp">나의멤버등록</a></th>
-		  </tr>
-		  <tr> 
-			<th colspan="6">게시글이 없습니다</th>
-		  </tr>
-			</table>
-		</div>	
-	<%}else{%>
-	<% 
-	for(SmemberDTO dto : slist) { 
-	Comment_SmemberDAO cpdao = new Comment_SmemberDAO();
-    int ccount = cpdao.getCommentCount(dto.getNum());%>
-	<div>
-	<h2>나의 멤버</h2>
-		<table class="mboard" style="table-layout:fixed" >
-			<tr>
-				<th><a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a></th>
-				<th>
-				<%if(dto.getAvailable() == 1) { %>
-				<img src="../s-member/image/switch-on.png" width="40px" height="36px"> 
-				<%} else{ %>
-				<img src="../s-member/image/switch-off.png" width="40px" height="36px">
-				<%} %>
-				</th>
-				<th><%=dto.getField() %></th>
-				<td><img src="../s-member/image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
-					<img src="../s-member/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
-				</td>
-			</tr>
-			<tr>
-				<th><%=dto.getCareer() %></th>
-				<th><%=dto.getEmploytype() %></th>
-				<th><%=dto.getLocation() %></th>
-				<th><%=dto.getWorktype() %></th>
-			</tr>
-			<tr>
-			<th colspan="3"
-			style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"> <%=dto.getIntroduce() %>
-			</th>
-			<th><img src="../s-member/image/comment.png" width="20px" height="20px"/><%=ccount %></th>
-			</tr>
-		</table><br/>
-	</div>
+%>
+
+
+<%	if (rank.equals("member")) {
+%>		<h2> 내 포스팅(멤버) </h2>
+<%	}
+%>
+
+<section class="section6">  
+<%	
+    if (rank.equals("member")) {
+		if(count == 0){
+%>
+			<div>
+				<table border="1">
+					<tr>
+						<th>
+							<a href="../s-member/s-member_input.jsp">
+								나의멤버등록
+							</a>
+						</th>
+				  	</tr>
+				  <tr> 
+					<th colspan="6">
+						게시글이 없습니다
+					</th>
+				  </tr>
+				</table>
+			</div>	
+<%		} else {
+
+			for(SmemberDTO dto : slist) { 
+			Comment_SmemberDAO cpdao = new Comment_SmemberDAO();
+	    	int ccount = cpdao.getCommentCount(dto.getNum());%>
+			<div class="mboard">
+				<ul class="mboard-inside">
+					<li class="mb-merge-center">	
+						<a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
+							<span><%=dto.getId() %></span>
+						</a>
+					</li>
+					<li class="mb-center">
+<%						if(dto.getAvailable() == 1) { 
+%>							<img src="../s-member/image/switch-on.png" width="40px" height="36px"> 
+<%						} else { 
+%>							<img src="../s-member/image/switch-off.png" width="40px" height="36px">
+<%						} 
+%>					</li>
+					
+					<li class="mb-center">
+						<%= dto.getField() %>
+					</li>
+				
+					<li class="mb-merge-center">
+						<%= dto.getLang() %>
+					</li>
+					
+					<li class="mb-center">
+						경력: <%=dto.getCareer()%>
+					</li>
+					
+					<li class="mb-center">
+						<%= dto.getLocation() %>
+					</li>
+					
+					<li class="mb-center">
+						<%=dto.getWorktype() %>
+					</li>
+					
+					<li class="mb-center">
+						<img src="../s-member/image/thumbs.png" width="20px" height="20px"/>
+						<%=dto.getGood() %>
+					</li>
+					
+					<li class="mb-center">
+						<img src="../s-member/image/comment.png" width="20px" height="20px"/>
+						<%=ccount %>
+					</li>
+				</ul>
+			</div>
 <%           }
 	     }
-       }
 	}
-%><br/>
+	
+%>
+</section>
+
 <% 
    SprojectDAO pdao = new SprojectDAO();
     int pcount = 0;
@@ -113,53 +142,85 @@
       plist = pdao.getMyList(sid, mstart, mend);
    }
 
-   %>
-      <%
-      if(rank != null){	
-      if(rank.equals("manager")){
-      if(pcount == 0){ %>
-      <div>
-      <table border="1">
-        <tr>
-         <th><a href="../s-project/s-project_input.jsp">나의 프로젝트등록</a></th>
-        </tr>
-        <tr> 
-         <th colspan="9">게시글이 없습니다</th>
-        </tr>
-         </table>
-   </div>
-   <%}else{  %>
-<% for(SprojectDTO dto : plist){
-	Comment_SprojectDAO cpdao = new Comment_SprojectDAO();
-   int ccount = cpdao.getCommentCount(dto.getNum());%>
-    <table  border=1 width="610px" style="table-layout:fixed">
-    <h2>나의 프로젝트</h2>
-   <tr>
-      <th width="60">글번호</th>
-      <th width="60">작성자</th>
-      <th width="150">제목</th>
-      <th width="70">좋아요</th>
-      <th width="60">조회수</th>
-      <th width="180">작성일</th>
-      <th width="60">댓글수</th>
-   </tr>
-   <tr>
-      <th width="60"><%=dto.getNum() %></th>
-      <th width="60"><%=dto.getId() %></th>
-      <th width="150" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">
-      <a href="../s-project/s-project_detail.jsp?num=<%=dto.getNum() %>&pageNum=<%=pageNum %>"><%=dto.getSubject() %></a></td>
-      </th>
-      <th width="70"><img src="../s-member/image/thumbs.png" width="20px" height="20px"><%=dto.getGood() %></th>
-      <th width="60"><%=dto.getReadcount() %></th> 
-      <th width="180"><%=dto.getRegdate() %></th>
-      <th width="60"><%=ccount %></th>
-   </tr>   
-<%             } 
-            }
-         }
-      } %>
-</table>
-<br/>
+%>
+
+
+<%	if(rank.equals("manager")) {
+%>		<h2> 내 포스팅 (프로젝트) </h2>
+<%	}
+%>
+
+<section class="section6"> 
+<%	if(rank.equals("manager")){
+		if(pcount == 0){ 
+%>			<div>
+				<table border="1">
+        			<tr>
+         				<th>
+         					<a href="../s-project/s-project_input.jsp">나의 프로젝트등록
+         					</a>
+       					</th>
+        			</tr>
+       				 <tr> 
+        				 <th colspan="9">게시글이 없습니다
+        				 </th>
+       				</tr>
+         		</table>
+   			</div>
+<%		} else {  
+		for(SprojectDTO dto : plist){
+		Comment_SprojectDAO cpdao = new Comment_SprojectDAO();
+  		int ccount = cpdao.getCommentCount(dto.getNum());
+%>   
+   		<div class="mboard">
+			<ul class="mboard-inside">
+				<li class="mb-merge-center">
+					<a href="s-project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
+						<span><%=dto.getSubject()%></span>
+					</a>
+				<li class="mb-center">
+<%						if (dto.getAvailable() == 1) {
+%>							<img src="../s-project/image/switch-on.png" width="40px" height="36px"> 
+<%						} else {
+%>							<img src="../s-project/image/switch-off.png" width="40px" height="36px"> 
+<% 						}
+%>					</li>
+	
+				<li class="mb-center">
+					<%= dto.getField()%>
+				</li>
+				
+				<li class="mb-merge-center">
+					<%= dto.getLang() %>
+				</li>
+				
+				<li class="mb-center">
+					요구 경력: <%=dto.getCareer() %>
+				</li>
+									
+				<li class="mb-center">
+					<%= dto.getLocation() %>
+				</li>
+			
+				<li class="mb-center">
+					예상 기간: <%=dto.getPeriod() %>일
+				</li>
+
+				<li class="mb-center">
+					<img src="../s-project/image/thumbs.png" width="20px" height="20px" />
+					<%=dto.getGood()%>
+				</li>
+				
+			</ul>
+		</div>
+<%		} 
+	}
+}
+%>
+
+
+</section>
+
 <h2>나의 댓글목록</h2>
 <%	
 	int start = (currentPage - 1) * pageSize + 1;		
@@ -177,6 +238,7 @@
 	System.out.println(end);
 	
 %> 
+<section class="section1">
 	<table  border=1 width="660px" style="table-layout:fixed">
 		<tr>
 			<th maxwidth="120">게시판명</th>
@@ -222,7 +284,9 @@
 <%}
 	}
 %>
+</section>
 
+<section class="section2">
 <%
 	if (ccount > 0) {
 		int pageCount = ccount / pageSize + (ccount % pageSize == 0 ? 0 : 1);
@@ -249,7 +313,6 @@
 	작성된 댓글이 없습니다 .
 <%}
 %> 
-</body>
-<br/>
+</section>
 <%@ include file = "/include/footer.jsp" %>
- </html>  
+  
