@@ -6,7 +6,7 @@
 <title>내글수정</title>
 
 <%
-	if(sid==null && cid==null){
+	if(sid==null && cid==null){ //글 수정시 로그인 확인
 		response.sendRedirect("/goworker/member/login.jsp");
 	}
 %>
@@ -16,9 +16,9 @@
 	String pageNum= request.getParameter("pageNum");
 	
 	BoardDAO dao = new BoardDAO();
-	dto = dao.getContent(dto);
+	dto = dao.getContent(dto); // 게시글 호출 
 	
-%>
+%>	<%-- 수정화면 구현 --%>
 <div class="search-box" style=" padding-right: 15px;  padding-left: 15px;  margin-right: auto;  margin-left: auto;" align="center" >
 	<form action="editPro.jsp" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="num" value="<%=dto.getNum()%>"/>

@@ -9,13 +9,13 @@
 <%
 	int maxArticle = 10;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 페이지당 최대 게시글 수
 	String pageNum=request.getParameter("pageNum");
-	String my = request.getParameter("my"); //<<<<<<<<<<<<<<<<<<<<<<<<<<<< my
+	String my = request.getParameter("my"); 
 	if(pageNum==null){
 		pageNum="1";
 	}
 	int currentPage = Integer.parseInt(pageNum);
-	int start = (currentPage-1)*maxArticle+1;//<<<<<<<<<<<<<<<<<<<<<<<<<<< start 1
-	int end = currentPage*maxArticle;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end 10
+	int start = (currentPage-1)*maxArticle+1;
+	int end = currentPage*maxArticle;
 	BoardDAO dao = new BoardDAO();
 	int total = 0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 총 게시글 수
 	List<BoardDTO> list = null;
@@ -30,16 +30,13 @@
 				list=dao.getMyAllList(sid,start, end);
 		}
 	}	
-%>
+%>       <%-- 게시판 메인 화면 --%>
 <body>
 <div class="search-box" align="center" >
 <table border="1">
-	<thead>	
 	<tr>
 		<th>탭</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th>
 	</tr>
-	</thead>
-	<tbody>
 	<% if(total==0){%>
 		<tr>
 			<td colspan="6">저장된 글이 없습니다..</td>
@@ -56,8 +53,7 @@
 			</tr>
 <%	 	}
 	  }	 
-%>
-	</tbody>
+%>	 		 <%-- 검색 박스 --%>
 </table>
 <div class="search-box" align="center">
 			<form action="searchList.jsp" method="post"  >	
@@ -69,14 +65,14 @@
 					</select>
 				<button type="submit" onclick="searchList.jsp" >Search</button>
 			</form>
-			
+			 <%-- 기능 버튼 구현  --%>
 			<a href="board.jsp">[목록]</a>
 			<a href="write.jsp">[쓰기]</a>
 			<%if(sid!=null || cid!=null){ %>
 			<a href="board.jsp?my=1">[내글]</a>
 			<%} %>
 </div>
-
+			 <%-- 페이징 구현 --%>
 <div class="search-box" align="center" style="display:inline;">
 <%
 	if(total>0){
@@ -87,7 +83,6 @@
 		if(endPage>pageCount){
 			endPage=pageCount;
 		}
-		
 		if(startPage>10){%>
 			<a href="board.jsp?pageNum=<%=startPage-10%>" >[이전]</a>
 		<%}

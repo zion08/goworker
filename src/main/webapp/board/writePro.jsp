@@ -16,6 +16,7 @@
 
 	String writer = mr.getParameter("writer");
 	String category = mr.getParameter("category");
+	/* 카테고리 필수 선택 */
 	if(category.equals("tab")){
 %>		<script>
 			alert("카테고리를 선택하세요");
@@ -34,7 +35,7 @@
 	dto.setFilename(filename);
 	
 	BoardDAO dao = new BoardDAO();
-	int result = dao.BoardInput(dto);
+	int result = dao.BoardInput(dto); // 글 등록 함수 호출 / 저장
 	if(result==1)
 	{
 %>		<script>
