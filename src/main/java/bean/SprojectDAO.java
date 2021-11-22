@@ -155,6 +155,8 @@ public class SprojectDAO {
 				dto.setKakao(rs.getString("kakao"));
 				dto.setFavor(rs.getInt("favor"));
 				dto.setGood(rs.getInt("good"));
+				dto.setKakao(rs.getString("kakao"));
+				dto.setField(rs.getString("field"));
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setCareer(rs.getString("career"));
 				dto.setWorktype(rs.getString("worktype"));
@@ -164,12 +166,12 @@ public class SprojectDAO {
 				dto.setEmploytype(rs.getString("employtype"));
 				dto.setPeriod(rs.getString("period"));
 				dto.setPay(rs.getString("pay"));
-				dto.setEndProject(rs.getString("endproject"));
-				dto.setSent(rs.getString("sent"));
 				dto.setPageNum(rs.getInt("pageNum"));
 				dto.setProjectName(rs.getString("projectName"));
 				dto.setLocation(rs.getString("location"));
 				dto.setRegdate(rs.getTimestamp("regdate"));
+				dto.setAvailable(rs.getInt("available"));
+				dto.setIntroduce(rs.getString("introduce"));
 			}
 		} catch(Exception e){
 			e.printStackTrace();
@@ -183,9 +185,9 @@ public class SprojectDAO {
 		int result = 0;
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("update S_PROJECT set subject=?, lang=?, career=?, worktype=?, field=?, pay=?,"
-					+ " location=?, empoytype=?,projecttype=?, intoduce=?, email=?, phone=?, kakao=?, projectdetail=?,"
-					+ " period=?, available=? where num=?");
+			pstmt = conn.prepareStatement("update s_project set subject=?, lang=?, career=?, worktype=?, field=?, pay=?, "
+					+ " location=?, employtype=?, projecttype=?, introduce=?, email=?, phone=?, kakao=?, projectdetail=?, "
+					+ " period=?, available=? where num=? ");
 			pstmt.setString(1, dto.getSubject());
 			pstmt.setString(2, dto.getLang());
 			pstmt.setString(3, dto.getCareer());
