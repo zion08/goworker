@@ -26,8 +26,6 @@ public class SprojectDTO {
 	private int good;
 	private int readcount;
 	private Timestamp regdate;
-	private String endProject;
-	private String sent;
 	private String projectName;
 	private int pageNum;
 	private String filename;
@@ -164,18 +162,6 @@ public class SprojectDTO {
 	}
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
-	}
-	public String getEndProject() {
-		return endProject;
-	}
-	public void setEndProject(String endProject) {
-		this.endProject = endProject;
-	}
-	public String getSent() {
-		return sent;
-	}
-	public void setSent(String sent) {
-		this.sent = sent;
 	}
 	public String getProjectName() {
 		return projectName;
