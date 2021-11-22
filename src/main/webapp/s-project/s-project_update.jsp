@@ -16,41 +16,44 @@
 <title>프로젝트 수정</title>
 
 		<h1>프로젝트 수정</h1>
-<form action="s-project_updatePro.jsp" method="post" enctype="multipart/form-data"><br />
-	<input type="hidden" name = "num" value="<%=dto.getNum() %>">
-	<input type="hidden" name = "pageNum" value="<%=pageNum %>">
-	
-	제목 : <input type="text" name="subject" value="<%=dto.getSubject() %>" />
+	<section class="section2">
+		<form action="s-project_updatePro.jsp" method="post" enctype="multipart/form-data"><br />
+			<input type="hidden" name = "num" value="<%=dto.getNum() %>">
+			<input type="hidden" name = "pageNum" value="<%=pageNum %>">
 		
-		<br />
+			
+				<div class="wrapper">
+					<ul class="profile-info">
 						<li id="id">	
 							<label>아이디</label>
 								<span><%=sid%></span>
 								<input type="hidden" name="writer" value="<%=sid%>"/>						
 						</li>
 											
-						<li id=jubject>
+						<li id=subject>
 							<label>프로젝트 명</label>
-								<input type="text" name="jubject" >
+								<input type="text" name="subject" value="<%=dto.getSubject() %>">
 						</li>
 						
 						<li id=phone>
 							<label>전화번호</label>
-								<input type="text" name="phone" placeholder="-없이 입력">
+								<input type="text" name="phone" placeholder="<%=dto.getPhone() %>">
 						</li>
 						
 						<li id=email>
 							<label>이메일</label>
-								<input type="email" name="email">
+								<input type="email" name="email" value="<%=dto.getEmail()%>">
 						</li>
 						
 						<li id=kakao>
 							<label>카카오톡</label>
-								<input type="text" name="kakao">
+								<input type="text" name="kakao" value="<%=dto.getKakao()%>">
 						</li>
 					</ul>
 					
-					<ul class="career-info">
+					<ul class="skill-info">
+					
+						
 						<li id="field">
 							<label>분야</label>
 								<select name="field">
@@ -93,7 +96,7 @@
 						
 						<li id="projectimg">
 							<label >프로젝트 대표 이미지</label>
-								첨부파일 : <input type="file" name="filename"/>
+								<input type="file" name="projectimg" multiple="multiple">		
 									<%if(dto.getFilename() != null){ %>
 										[<%=dto.getFilename() %>]
 										<input type="hidden" name="org" value="<%=dto.getFilename() %>" />
@@ -110,7 +113,7 @@
 					
 					<ul class="condition-info">	
 						<li id="employtype">
-							<label>찾는 활동 유형</label>
+							<label>활동 유형</label>
 								<label><input type="radio" name="employtype" value="sfree">개인 프리랜서</label>
 								<label><input type="radio" name="employtype" value="tfree">팀 프리랜서</label>
 								<label><input type="radio" name="employtype" value="sbusiness">개인 사업자</label>
@@ -119,21 +122,21 @@
 						
 						<li id="projecttype">
 							<label>프로젝트 진행 유형</label>
-								<label><input type="checkbox" name="projecttype" value="side">사이드 프로젝트</label>
-								<label><input type="checkbox" name="projecttype" value="main">메인 프로젝트</label>
+								<label><input type="radio" name="projecttype" value="side">사이드 프로젝트</label>
+								<label><input type="radio" name="projecttype" value="main">메인 프로젝트</label>
 						</li>            
 								
 						<li id="worktype">
 							<label>가능한 업무 방식</label>
-								<label><input type="checkbox" name="worktype" value="online">원격</label>
-								<label><input type="checkbox" name="worktype" value="office">상주</label>
-								<label><input type="checkbox" name="worktype" value="discuss">협의</label>
+								<label><input type="radio" name="worktype" value="online">원격</label>
+								<label><input type="radio" name="worktype" value="office">상주</label>
+								<label><input type="radio" name="worktype" value="discuss">협의</label>
 						</li>
 						
 						<li id="location"> <!--  업무 방식이 사무실 또는 협의인 경우  -->
-							<label>선호 업무 지역</label>
+							<label>업무 지역</label>
 								<select name="location">
-									<option value="online">원격</option>
+									<option value="all">전지역</option>
 									<option value="seoul">서울</option>
 									<option value="gyunggi">경기</option>
 									<option value="incheon">인천</option>
@@ -151,30 +154,53 @@
 									<option value="ulsan">울산</option>
 									<option value="busan">부산</option>
 									<option value="jeju">제주</option>
-							</select>
+								</select>
 						</li>
 									
 						<li id="period">
-							<label>업무 시작 일자</label>
-								<input type="date" name="period">
+							<label>예상 기간</label>
+								<select name="period">
+									<option value="7">7일</option>
+									<option value="30">30일</option>
+									<option value="90">90일</option>
+									<option value="180">180일</option>
+									<option value="365">1년</option>
+									<option value="2">2년이상</option>
+								</select>
 						</li>
 						
 						<li id="available">
-							<label>구인활동여부</label>
-							<select name="available">
-								<option value="1">on</option>
-								<option value="0">off</option>
-							</select>
+							<label>구인여부</label>
+								<select name="available">
+									<option value="1">on</option>
+									<option value="0">off</option>
+								</select>
 						</li>
 						
 						<li id="pay">
-							<label>계약금</label>
-								<input type="text" name="pay"  placeholder=", 없이 입력">만원
+							<label>예상 급여</label>
+								<select name="pay">
+									<option value="100">100만원</option>
+									<option value="200">200만원</option>
+									<option value="300">300만원</option>
+									<option value="400">400만원</option>
+									<option value="500">500만원</option>
+									<option value="600">600만원</option>
+									<option value="700">700만원</option>
+									<option value="800">800만원</option>
+									<option value="900">900만원</option>
+									<option value="1000">1000만원</option>
+									<option value="2000">2000만원</option>
+									<option value="3000">3000만원</option>
+									<option value="4000">4000만원</option>
+									<option value="5000">5000만원</option>
+									<option value="10000">10000만원</option>
+								</select>
 						</li>
 						
 						<li id="introduce">
 							<label>소개</label>
-								<input type="text" name="introduce" >
+								<input type="text" name="introduce" value="<%=dto.getIntroduce()%>">
 						</li>
 					</ul>
 					
@@ -183,4 +209,5 @@
 						<input type="submit" value="수정하기" />
 					</div>
 				</div>
-</form>
+			</form>
+		</section>

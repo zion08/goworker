@@ -39,7 +39,7 @@
 						<li id=email>
 							<label>이메일</label>
 								<span><%=email%></span>
-								<input type="hidden" name="email">
+								<input type="hidden" name="email" value="<%=email%>">
 						</li>
 						
 						<li id=phone>

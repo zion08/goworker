@@ -9,7 +9,7 @@
 <%		
 	request.setCharacterEncoding("UTF-8");
 	
-	String path = request.getRealPath("s-project_file"); 
+	String path = request.getRealPath("uploadFile/projectFile"); 
 	String enc = "UTF-8";			
 	int size = 1024*1024*10; //
 	DefaultFileRenamePolicy dp = new DefaultFileRenamePolicy();
@@ -17,6 +17,7 @@
 	
 	String num = mr.getParameter("num");
 	String id = mr.getParameter("id");
+	String subject = mr.getParameter("subject");
 	String phone = mr.getParameter("phone");
 	String email = mr.getParameter("email");
 	String kakao = mr.getParameter("kakao");
@@ -26,8 +27,8 @@
 	String projectimg = mr.getFilesystemName("projectimg");
 	String projectdetail = mr.getParameter("projectdetail");
 	String employtype = mr.getParameter("employtype");
-	String projecttype[] = mr.getParameterValues("projecttype");
-	String worktype[] = mr.getParameterValues("worktype");
+	String projecttype = mr.getParameter("projecttype");
+	String worktype = mr.getParameter("worktype");
 	String location = mr.getParameter("location");
 	String pay = mr.getParameter("pay");
 	String period = mr.getParameter("period");
@@ -40,37 +41,14 @@
 	SprojectDTO dto = new SprojectDTO();
 	dto.setNum(Integer.parseInt(num));
 	
-	if (pay.isEmpty()) {
-		pay = String.valueOf('0');
-	}
-	int payi = Integer.parseInt(pay);
 	int avail = Integer.parseInt(available);
-	
+
 	String langStr = new String();
-	String projecttypeStr = new String();
-	String worktypeStr = new String();
-	
 	if (lang == null) {
 		langStr = null;
 	} else {
 		for ( String langName : lang) {
 			langStr += langName +" ";
-		}
-	}
-	
-	if(projecttype == null) {
-		projecttypeStr = null;
-	} else {
-		for ( String projecttypeName : projecttype) {
-			projecttypeStr += projecttypeName +" ";
-		}
-	}
-	
-	if (worktype == null) {
-		worktypeStr = null;
-	} else {
-		for ( String worktypeName : worktype) {
-			worktypeStr += worktypeName +" ";
 		}
 	}
 	
@@ -88,12 +66,16 @@
 			f.delete();
 		}
 %>
-	<script>
+	<script type="text/javascript">
 		alert("수정되었습니다");
-		window.location="s-project_detail.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
+		window.location= "s-project_detail.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
 	</script>
-<% } %>	
-	
+<% } else{%>	
+	<script type="text/javascript">
+			alert("잘못된 입력이 있습니다 , 확인하세요.");
+			history.go(-1);
+			</script>
+	<%} %> 
 	
 	
 	

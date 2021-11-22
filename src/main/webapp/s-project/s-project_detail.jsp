@@ -190,7 +190,7 @@
 			
 <%			if(sid.equals(dto.getId())) {
 %>			<form action= "s-member_delete.jsp" method="post" align="center">
-				<input type="button" value="수정 하기" onclick="window.location='/goworker/s-member/s-member_update.jsp?num=<%=dto.getNum() %>'" />
+				<input type="button" value="수정 하기" onclick="window.location='/goworker/s-project/s-project_update.jsp?num=<%=dto.getNum() %>'" />
 				<input type="submit" value="삭제 하기" onclick="button_event()" />
 				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 			</form>
@@ -273,13 +273,13 @@
 					<td align="center">
 <%						if(comment_result != null) { //등급에 따른 이미지
 							if(comment_result.equals("admin")){
-%>								<img src="/goworker/s-project/image/admin.jpg"  width="40px" height="40px" /><br/>	
+%>								<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
 <%							} 
 							if(comment_result.equals("manager")){
-%>								<img src="/goworker/s-project/image/manager.jpg"  width="40px" height="40px" /><br/>
+%>								<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
 <%							} 
 							if(comment_result.equals("member")){ 
-%>								<img src="/goworker/s-project/image/image.jpg" width="40px" height="40px" /><br/>
+%>								<img src="image/image.jpg" width="40px" height="40px" /><br/>
 <%							} 
 						} 
 %>
@@ -293,10 +293,10 @@
 							// 답글일때에만 Re_level()의 값이 0 이상이다. / 답글일때에만 조건문 수행
 							wid=10*(cdto.getComment_level());
 		 					// 답글 들여쓰기 사이즈(width의 값으로 넣을 변수와 값 저장해서 아래에 대입)
-%>							<img src="/goworker/s-project/image/white.jpg" width="<%=wid%>" height="16">
-				  			<img src="/goworker/s-project/image/re.gif">
+%>							<img src="image/white.jpg" width="<%=wid%>" height="16">
+				  			<img src="image/re.gif">
 <%						} else {
-%>					   		<img src="/goworker/s-project/image/white.jpg" width="<%=wid%>" height="16">	  	 
+%>					   		<img src="image/white.jpg" width="<%=wid%>" height="16">	  	 
 <%						} 
 %>
 						<%=cdto.getComment_content() %>
@@ -338,14 +338,6 @@
 </section>	
 
 <%@ include file="../include/footer.jsp"%>
-		 
-	 
-	 
-
-	
-
-	
-	
 	
 	<script>
 		function comment_removeChek(){
