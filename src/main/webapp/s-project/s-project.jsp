@@ -138,16 +138,8 @@
 			</li>
 
 			<li>
-				<label>모집</label> 
-				<select name="available">
-						<option value="1">on</option>
-						<option value="0">off</option>
-				</select>
-			</li>
-
-			<li>
 				<label>예상 기간</label> 
-				<select name="periond">
+				<select name="period">
 						<option value="%">전체</option>
 						<option value="7">7일</option>
 						<option value="30">30일</option>
@@ -177,6 +169,14 @@
 					<option value="4000">4000만원</option>
 					<option value="5000">5000만원</option>
 					<option value="10000">10000만원이상</option>
+				</select>
+			</li>
+			
+			<li>
+				<label>모집</label> 
+				<select name="available">
+						<option value="1">on</option>
+						<option value="0">off</option>
 				</select>
 			</li>
 		</ul>
