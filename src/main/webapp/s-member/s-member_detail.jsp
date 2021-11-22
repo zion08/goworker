@@ -207,7 +207,7 @@
 					<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 				</form>
 <%			} else { 
-%>				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
+%>				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?smnum=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
 				<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 <%			} 
 %>				<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>

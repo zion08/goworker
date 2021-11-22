@@ -127,6 +127,7 @@ if(sid.equals(dto.getId())) { %>
     	 <td align="center" colspan="3">
                     <input type="button" value="추천!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
                     <input type="button" value="비추천!" onclick="window.open('project_Down.jsp?num=<%=dto.getNum()%>','Down','width=300,height=150');window.location.reload();"/><br/>
+                    <input type="button" value="메세지" onclick="window.open('../message/message.jsp?mpnum=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
                     <input type="button" value="이메일보내기" onclick="window.location='/goworker/makeproject/email/mail.jsp?pageNum=<%=pageNum%>'"/>
        				<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
        	</td>
