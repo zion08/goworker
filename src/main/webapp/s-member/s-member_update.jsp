@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "bean.SmemberDAO" %>
+<%@ page import = "bean.SmemberDTO" %>
 <%@ include file = "../include/header.jsp" %>
 <jsp:useBean id="dao" class="bean.MemberDAO"/>
-<jsp:useBean class="bean.SmemberDTO" id="dto" />   
+   
 
 <%	if (sid == null) { //로그인pro 수정 수정 후, ==으로 바꿀 것
 %>		<script>
@@ -19,7 +20,10 @@
 
 <%	String num = request.getParameter("num");
 	String pageNum = request.getParameter("pageNum");
-	/*dto = dao.getContent(dto);*/
+	SmemberDAO sdao = new SmemberDAO();
+	SmemberDTO sdto = new SmemberDTO();
+	sdto.setNum(Integer.parseInt(num));
+	sdto = sdao.getContent(sdto);
 %>
 
 	<section class="section2">
@@ -49,13 +53,13 @@
 						
 						<li id=phone>
 							<label>전화번호</label>
-								<input type="text" name="phone" placeholder="-없이 입력">
+								<input type="text" name="phone" value="<%=sdto.getPhone() %>" >
 						</li>
 						
 						
 						<li id=kakao>
 							<label>카카오톡</label>
-								<input type="text" name="kakao">
+								<input type="text" name="kakao" value="<%=sdto.getKakao() %>">
 						</li>
 					</ul>
 					
@@ -102,12 +106,12 @@
 						
 						 <li id="portfolio">
 							<label>포트폴리오</label>
-								<input type="file" name="portfolio" multiple="multiple">
+								<input type="file" name="portfolio" multiple="multiple" value="<%=sdto.getPortfolio() %>">
 						</li>
 						
 						<li id="pfdetail">
 							<label>포트폴리오 설명</label>
-								<input type="text" name="pfdetail" >
+								<input type="text" name="pfdetail" value="<%=sdto.getPfdetail() %>" >
 						</li>
 					</ul>
 					
@@ -160,7 +164,7 @@
 						
 						<li id="period">
 							<label>근무가능일자</label>
-								<input type="date" name="period">
+								<input type="date" name="period" value="<%=sdto.getPeriod()%>">
 						</li>
 						
 						<li id="available">
@@ -173,12 +177,12 @@
 						
 						 <li id="pay">
 							<label>희망 계약금</label>
-								<input type="text" name="pay"  placeholder=", 없이 입력">만원
+								<input type="text" name="pay"  value="<%=sdto.getPay()%>">만원
 						</li>
 						
 						<li id="introduce">
 							<label>소개</label>
-								<input type="text" name="introduce" >
+								<input type="text" name="introduce" value="<%=sdto.getIntroduce()%>">
 						</li>
 					</ul>
 			
