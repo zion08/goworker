@@ -296,7 +296,7 @@
 <%							} 
 %>
 <%		  					if(comment_result.equals("member")){ 
-%>								<img src="/goworker/s-member/image/image.jpg" width="40px" height="40px"><br/>
+%>								<img src="/goworker/s-member/image/image.jpg" width="40px" height="40px" /><br/>
 <%							}
 						}
 %>
