@@ -55,19 +55,23 @@
 %>
 
 
-<div align="center"><h3>프로젝트 만들기</h3></div>
 
-
+<h2>프로젝트 만들기</h2>
 <!-- makeproject 검색창 -->
-	<form action="project_search.jsp" method="post" align="center">
+<div class="search2">
+	<form action="project_search.jsp" method="post" align="right">
 		<select name="colum">
 			<option value="subject">제목</option>
 			<option value="content">프로젝트 내용</option>
 			<option value="id">아이디</option>
 		</select>
 		<input type="text" name="search" />
-		<input type="submit" value="검색"  />
+		<input type="submit" value="검색" />
 	</form>		
+</div>
+	
+<center>
+
 
 
 

@@ -29,7 +29,7 @@ public class SprojectDTO {
 	private String projectName;
 	private int pageNum;
 	private String filename;
-	
+	private String spnum;
 	
 	public int getNum() {
 		return num;
@@ -39,6 +39,12 @@ public class SprojectDTO {
 	}
 	public String getId() {
 		return id;
+	}
+	public String getSpNum() {
+		return spnum;
+	}
+	public void setSpNum(String spnum) {
+		this.spnum = spnum;
 	}
 	public void setId(String id) {
 		this.id = id;

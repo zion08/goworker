@@ -160,6 +160,7 @@ public class SprojectDAO {
 				dto.setReadcount(rs.getInt("readcount"));
 				dto.setCareer(rs.getString("career"));
 				dto.setWorktype(rs.getString("worktype"));
+				dto.setField(rs.getString("field"));
 				dto.setProjectDetail(rs.getString("projectdetail"));
 				dto.setProjecttype(rs.getString("projecttype"));
 				dto.setProjectimg(rs.getString("projectimg"));
