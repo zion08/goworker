@@ -14,31 +14,31 @@ public class MemberDAO {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-	
-   public List<MemberDTO> getmember() {
-      List<MemberDTO> list = null;
-      try {
-    	  conn = OracleDB.getConnection();
-		  pstmt = conn.prepareStatement("select * from member");
-		  rs = pstmt.executeQuery();
-		  list = new ArrayList<MemberDTO>();
-		  while(rs.next()) {
-			  MemberDTO dto = new MemberDTO();
-			  dto.setId(rs.getString("id"));
-			  dto.setEmail(rs.getString("email"));
-			  dto.setPassword(rs.getString("password"));
-			  dto.setRank(rs.getString("rank"));
-			  dto.setReg(rs.getTimestamp("reg").toString());
-        	list.add(dto);  // 리스트에 추가
-         }
-      } catch(Exception e) {
-         e.printStackTrace();
-      } finally {
-         DisconnDB.close(conn, pstmt, rs);
-      }
-      return list;
-   }
-	   
+
+	public List<MemberDTO> getmember() {
+		List<MemberDTO> list = null;
+		try {
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select * from member");
+			rs = pstmt.executeQuery();
+			list = new ArrayList<MemberDTO>();
+			while(rs.next()) {
+				MemberDTO dto = new MemberDTO();
+				dto.setId(rs.getString("id"));
+				dto.setEmail(rs.getString("email"));
+				dto.setPassword(rs.getString("password"));
+				dto.setRank(rs.getString("rank"));
+				dto.setReg(rs.getTimestamp("reg").toString());
+				list.add(dto);  // 리스트에 추가
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DisconnDB.close(conn, pstmt, rs);
+		}
+			return list;
+	}
+		   
    public List<MemberDTO> getMemberInfo(String id) {
       List<MemberDTO> list = null;
       try {	    	  
@@ -63,8 +63,26 @@ public class MemberDAO {
 	      }
 	      return list;
 	   }
+   
+	public String getEmail(String id) {
+		String result = null;
+		try {	    	  
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select email from member where id=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getString(1);
+			}
+			} catch(Exception e) {
+		         e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return result;
+	}
 	   
-	   
+	
 	public boolean loginCheck(MemberDTO dto) {
 		boolean result = false;
 		try {

@@ -2,12 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "../include/header.jsp" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<!-- DAO 객채 생성 -->
+<jsp:useBean id="dao" class="bean.MemberDAO"/>
 	
 <%	if (sid == null) {
 %>		<script>
 			location.href="../member/login.jsp";
 		</script>  		
 <%	} else {
+		String email = dao.getEmail(sid);
+		
 %>		<title>프로젝트 등록</title>
 
 		<h1>프로젝트 등록</h1>
@@ -22,29 +26,32 @@
 							<label>아이디</label>
 								<span><%=sid%></span>
 							<input type="hidden" name="id" value="<%=sid%>"/>
-						</li>	
-						<li id=subject>
-							<label>프로젝트 명</label>
-								<input type="text" name="subject" >
-						</li>
-						
-						<li id=phone>
-							<label>전화번호</label>
-								<input type="text" name="phone" placeholder="-없이 입력">
 						</li>
 						
 						<li id=email>
 							<label>이메일</label>
-								<input type="email" name="email">
+								<span><%=email%></span>
+								<input type="hidden" name="email">
 						</li>
-						
+										
+						<li id=phone>
+							<label>전화번호</label>
+								<input type="text" name="phone" placeholder="-없이 입력">
+						</li>
+											
 						<li id=kakao>
 							<label>카카오톡</label>
 								<input type="text" name="kakao">
 						</li>
+						
 					</ul>
 					
 					<ul class="skill-info">
+						<li id=subject>
+							<label>프로젝트 명</label><br/>
+								<input type="text" name="subject" >
+						</li>
+						
 						<li id="field">
 							<label>분야</label>
 								<select name="field">

@@ -2,12 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "../include/header.jsp" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<!-- DTO, DAO 객채 생성 -->
+<%-- <jsp:useBean id="smdto" class="bean.MemberDTO"/> --%>
+<jsp:useBean id="dao" class="bean.MemberDAO"/>
+
 	
 <%	if (sid == null) { //로그인pro 수정 수정 후, ==으로 바꿀 것
 %>		<script>
 			location.href="../member/login.jsp";
 		</script>  		
 <%	} else {
+		String email = dao.getEmail(sid);
+	
 %>		<title>멤버 등록</title>
 
 		<h1>멤버 등록</h1>
@@ -24,15 +30,17 @@
 								<input type="hidden" name="id" value="<%=sid%>"/>
 						</li>
 						
+						<li id=email>
+							<label>이메일</label>
+								<span><%=email%></span>
+								<input type="hidden" name="email">
+						</li>
+						
 						<li id=phone>
 							<label>전화번호</label>
 								<input type="text" name="phone" placeholder="-없이 입력">
 						</li>
 						
-						<li id=email>
-							<label>이메일</label>
-								<input type="email" name="email">
-						</li>
 						
 						<li id=kakao>
 							<label>카카오톡</label>
