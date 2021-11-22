@@ -9,6 +9,7 @@
 <title>게시물내용</title>
 <jsp:useBean class="bean.BoardDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
+
 <%
 	if(sid==null){ // 로그인 확인 => 수정 버튼 클릭시 사용
 		sid=cid;
@@ -24,20 +25,54 @@
 	int prev=dto.getNum_prev();
 	int next=dto.getNum_next();
 	
-%>			<%-- 게시글 내용 화면 --%>
-</script>
-	<div class="search-box" style=" padding-right: 15px;  padding-left: 15px;  margin-right: auto;  margin-left: auto;" align="center" >
-	<table boarder="1" >	
-	<tr><td>제목 : <%=dto.getSubject() %></td> <td>등록일 : <%=dto.getReg() %></td></tr>
-	<tr><td>작성자 : <%=dto.getWriter() %></td> <td>조회수 : <%=dto.getReadcount() %></td>
-	<tr><td style="width:1140px;height:500px;">내용 : <%=dto.getContent()%></td>
-	<%if(dto.getFilename() != null){%>
-	<td><a href="uploadFile/boardFile/<%=dto.getFilename()%>" ><%=dto.getFilename()%> [첨부파일]</a></td></tr>
-	<%}else{%>
-	<td><a href="#" >[첨부파일 없음]</a></td></tr>
-	<%} %>
-	</table>
-	<div  >	<%-- 하단 버튼 구현 --%>
+%>			
+
+<%-- 게시글 내용 화면 --%>
+<section class="section2">
+	<div class="detail-box">
+		<ul class="detail-inside">
+			<li>
+				<label>제목</label>
+				<p><%=dto.getSubject() %></p>
+			</li>
+			
+			<li>
+				<label>작성자</label>
+				<p><%=dto.getWriter() %></p>
+			</li>
+						
+			<li>
+				<label>등록일</label>
+				<p><%=dto.getReg() %></p>
+			</li>
+						
+			<li id="detail-img">
+				<label>첨부파일
+					<a href="javascript:doDisplay();">
+						[접기/보기]
+					</a>
+				</label>
+				
+				<p id="checkboard">
+<%					if(dto.getFilename() != null) { %>
+						<img src = "../uploadFile/boardFile/<%=dto.getFilename()%>">
+<%					} else { 
+%>						등록된 이미지가 없습니다.
+<%					} 
+%>				</p>
+			</li>
+			
+			<li id="detail-content">
+				<label>내용</label>
+				<p><%=dto.getContent()%></p>
+			</li>		
+		</ul>	
+	</div>
+</section>
+	
+<%-- 하단 버튼 구현 --%>
+<section class="section2">	
+	
 	<%if(prev>=1){%>
 		<a href="content.jsp?num=<%=prev%>&pageNum=<%=pageNum%>">[이전글]</a>
 	<%}%>
@@ -45,16 +80,43 @@
 	<%if(next>0){%>
 		<a href="content.jsp?num=<%=next%>&pageNum=<%=pageNum%>">[다음글]</a>
 	<%}%>
-	</div> <%-- 게시물 삭제 기능 구현 --%>
+</section>
+
+	
+<%-- 게시물 삭제 기능 구현 --%>
+<section class="section2">	
 <%	if(sid!=null){ 
 		if(sid.equals(dto.getWriter()))
 		{
-%>			<a href="edit.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">수정</a> 
-			<form action="delete.jsp" method="post" ">
+%>			<form action="edit.jsp" method="post" >
+				<input type="hidden" name="pageNum" value="<%=pageNum%>" />
+				<input type="hidden" name="num" value="<%=dto.getNum()%>">
+				<input type="hidden" name="pageNum" value="<%=pageNum%>%>">
+				<input type="submit" value="수 정" />
+			</form>
+			 
+			<form action="delete.jsp" method="post" >
 				<input type="hidden" name="num" value="<%=dto.getNum()%>" />
 				<input type="hidden" name="pageNum" value="<%=pageNum%>" />
 				<input type="submit" value="삭 제" />
 			</form>
 <%		}
 	}
-%>	</div>
+%>	
+</section>
+
+<%@ include file="../include/footer.jsp"%>
+
+
+<script type="text/javascript">
+	var bDisplay = true;
+
+	function doDisplay() {
+		var con = document.getElementById("checkboard");
+		if (con.style.display == 'none') {
+			con.style.display = 'block';
+		} else {
+			con.style.display = 'none';
+		}
+	}
+</script>

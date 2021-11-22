@@ -540,7 +540,9 @@ hr {
 #detail-projectimg,
 #detail-portfoiloimg,
 #detail-portfoilodetail,
-#detail-introduce {
+#detail-introduce,
+#detail-content,
+#detail-img {
 	grid-column: 1 / 4;
 }
 
@@ -603,8 +605,16 @@ hr {
 }		
 
 #detail-projectimg img{
-	object-fit: scale-down;
-    width: 70%;
+    width: 20vw;
+}
+
+#detail-img img{
+    width: 15vw;
+}
+
+#detail-img a{
+    font-size: 12px;
+    color: #7A7A7A;
 }
 /* #detailallbox{
 	position:absolute;
