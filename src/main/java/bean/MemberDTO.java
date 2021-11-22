@@ -8,6 +8,7 @@ public class MemberDTO {
 	private String reg;
 	private String rank;
 	private int warn;
+	private String profileimg;
 	
 	public String getRank() {
 		return rank;
@@ -45,6 +46,13 @@ public class MemberDTO {
 	}
 	public void setWarn(int warn) {
 		this.warn = warn;
+	}
+	
+	public String getProfileImg() {
+		return profileimg;
+	}
+	public void setProfileImg(String profileimg) {
+		this.profileimg = profileimg;
 	}
 	
 }

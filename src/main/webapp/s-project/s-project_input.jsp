@@ -11,6 +11,7 @@
 		</script>  		
 <%	} else {
 		String email = dao.getEmail(sid);
+		String profileimg = dao.getProfileImg(sid);
 		
 %>		<title>프로젝트 등록</title>
 
@@ -20,8 +21,13 @@
 			<form action="s-project_inputPro.jsp" method="post" enctype="multipart/form-data" class="form-box2">
 				<div class="wrapper">
 					<ul class="profile-info">
-						<li id="profile-img">		
-						</li>
+						<li id="profile-img" >
+<%						if(profileimg == null){
+%>							<img src = "../img/profileimg_default.png">
+<%						} else {
+%>							<img src = "../uploadFile/profileFile/<%=profileimg%>">
+<%						}
+%>							
 						<li id="id">	
 							<label>아이디</label>
 								<span><%=sid%></span>

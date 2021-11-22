@@ -81,6 +81,43 @@ public class MemberDAO {
 			}
 			return result;
 	}
+	
+	public String getProfileImg(String id) {
+		String result = null;
+		try {	    	  
+			conn = OracleDB.getConnection();
+			pstmt = conn.prepareStatement("select profileimg from member where id=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getString(1);
+			}
+			} catch(Exception e) {
+		         e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return result;
+	}
+	
+	public int updateProfileImg(String profileimg, String id) {
+		int result = 0;
+		try {	    	  
+			conn = OracleDB.getConnection();
+			String sql ="update member set profileimg=? where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, profileimg);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();			
+			} catch(Exception e) {
+		         e.printStackTrace();
+			} finally {
+				DisconnDB.close(conn, pstmt, rs);
+			}
+			return result;
+	}
+	
+	
 	   
 	
 	public boolean loginCheck(MemberDTO dto) {
@@ -107,11 +144,12 @@ public class MemberDAO {
 		int result = 0;
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("insert into member values(?,?,?,sysdate,0,?)");
+			pstmt = conn.prepareStatement("insert into member values(?,?,?,sysdate,0,?,?)");
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getEmail());
 			pstmt.setString(3, dto.getPassword());
 			pstmt.setString(4, dto.getRank());
+			pstmt.setString(5, dto.getProfileImg());
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

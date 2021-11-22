@@ -58,6 +58,15 @@
 	 </table>
 	</form>  	
 	<%}%>
+</section>
+
+<section class="section1">
+	프로필 사진 등록
+	<form action="modifyProImg.jsp" method="post" enctype="multipart/form-data">
+		<input type="file" name="profileimg" multiple="multiple">
+		<input type="submit" value="확인" />
+	</form>
+
 </section>	
 	
 <%@ include file = "/include/footer.jsp" %>
