@@ -80,9 +80,9 @@
 	<a href="javascript:doDisplay();">검색조건 보기</a>
 </div>
 
-<section class="section2" >
-	<form action="s-project_search.jsp" method= "post" class="form-box1" id="checkboard">
-		<ul class="searchfor">			
+<section class="section2">
+	<form action="s-project_search.jsp" method="post" class="form-box1" id="checkboard">
+		<ul class="searchfor">
 			<li>
 				<label>경력</label> 
 				<select name="career">
@@ -97,7 +97,7 @@
 					<option value="7">7년차이상</option>
 				</select>
 			</li>
-			
+
 			<li>
 				<label>분야</label> 
 				<select name="field">
@@ -107,7 +107,7 @@
 					<option value="design">디자인</option>
 				</select>
 			</li>
-			
+
 			<li>
 				<label>업무 방식</label> 
 				<select name="worktype">
@@ -117,11 +117,11 @@
 					<option value="discuss">협의</option>
 				</select>
 			</li>
-			
+
 			<li>
 				<label>지역</label> 
 				<select name="location">
-					<option value="%">원격</option>
+					<option value="%">전지역</option>
 					<option value="seoul">서울</option>
 					<option value="gyunggi">경기</option>
 					<option value="incheon">인천</option>
@@ -141,7 +141,7 @@
 					<option value="jeju">제주</option>
 				</select>
 			</li>
-			
+
 			<li>
 				<label>활동 유형</label> 
 				<select name="employtype">
@@ -152,7 +152,7 @@
 						<option value="cbusiness">법인 사업자</option>
 				</select>
 			</li>
-			
+
 			<li>
 				<label>프로젝트유형</label> 
 				<select name="projecttype">
@@ -161,7 +161,7 @@
 						<option value="main">메인 프로젝트</option>
 				</select>
 			</li>
-			
+
 			<li>
 				<label>예상 기간</label> 
 				<select name="period">
@@ -198,15 +198,49 @@
 			</li>
 			
 			<li>
+
 				<label>모집</label> 
 				<select name="available">
 						<option value="1">on</option>
 						<option value="0">off</option>
 				</select>
 			</li>
-			
-		</ul>	
-		
+
+			<li>
+				<label>예상 기간</label> 
+				<select name="periond">
+						<option value="%">전체</option>
+						<option value="7">7일</option>
+						<option value="30">30일</option>
+						<option value="90">90일</option>
+						<option value="180">180일</option>
+						<option value="365">1년</option>
+						<option value="2">2년이상</option>
+				</select>
+			</li>
+
+			<li>
+				<label>예상 급여</label> 
+				<select name="pay">
+					<option value="%">전체</option>
+					<option value="100">100만원</option>
+					<option value="200">200만원</option>
+					<option value="300">300만원</option>
+					<option value="400">400만원</option>
+					<option value="500">500만원</option>
+					<option value="600">600만원</option>
+					<option value="700">700만원</option>
+					<option value="800">800만원</option>
+					<option value="900">900만원</option>
+					<option value="1000">1000만원</option>
+					<option value="2000">2000만원</option>
+					<option value="3000">3000만원</option>
+					<option value="4000">4000만원</option>
+					<option value="5000">5000만원</option>
+					<option value="10000">10000만원이상</option>
+				</select>
+			</li>
+		</ul>
 		<div class="wrapper-submit2">
 			<input type="submit" value="검색" />
 		</div>
