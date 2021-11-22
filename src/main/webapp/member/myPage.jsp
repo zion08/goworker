@@ -175,7 +175,7 @@
    		<div class="mboard">
 			<ul class="mboard-inside">
 				<li class="mb-merge-center">
-					<a href="s-project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
+					<a href="/goworker/s-project/s-project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
 						<span><%=dto.getSubject()%></span>
 					</a>
 				<li class="mb-center">
