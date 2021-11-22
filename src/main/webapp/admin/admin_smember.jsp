@@ -7,7 +7,7 @@
 
 
 <h2>멤버찾기 관리</h2>
-<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
+
 <%	
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
@@ -27,11 +27,13 @@
 		count = dao.getCount(); // 전체 글의 갯수
 		if(count > 0) {
 			list = dao.getAllList( start, end );	
-		}	
+		}
+	}
 		
 %>
 
-<section>
+<section class="section1">
+	<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
 	<table border=1 width="570px">
 		<tr>
 			<th width="80">글 번호</th>
@@ -42,46 +44,44 @@
 		</tr>
 	</table>
 <% 
-	for(SmemberDTO dto : list) { %>
-	<div>
-		<form action="/goworker/s-member/s-member_delete.jsp?num=<%=dto.getNum()%>" method="get">
-		<table  border=1 width="570px">
-			<tr>
-				<th width="80">
-				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
-				<a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>" onclick="window.open(this.href, 'detail','width=600,height=1000,toolbars=no'); return false;">No.<%=dto.getNum() %></a>
-				</th>
-				<th maxwidth="170"> <%=dto.getId() %> </th>
-				<th width="100"><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
-					<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
-				</th>
-				<th width="200">
-					<%=dto.getRegdate()%>
-				</th>
-				<th width="80">
-				<input type="submit" value="삭제" />
-				</form>
-				<form action= "/goworker/s-member/s-member_warn.jsp?num=<%=dto.getNum()%>" method="post">
-				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
-				<input type="hidden" name="id" value="<%=dto.getId() %>" />
-				<input type="submit" value="삭제 및 경고" />
-				</form>
-				
-				</th>
-			</tr>
-			
-		</table>
-		
-	</div>
- 
+	if(list != null) {
+		for(SmemberDTO dto : list) {
+%>
+			<div>
+				<form action="/goworker/s-member/s-member_delete.jsp?num=<%=dto.getNum()%>" method="get">
+				<table  border=1 width="570px">
+					<tr>
+						<th width="80">
+						<input type="hidden" name="num" value="<%=dto.getNum() %>" />
+						<a href="/goworker/s-member/s-member_detail.jsp?num=<%=dto.getNum()%>" onclick="window.open(this.href, 'detail','width=600,height=1000,toolbars=no'); return false;">No.<%=dto.getNum() %></a>
+						</th>
+						<th maxwidth="170"> <%=dto.getId() %> </th>
+						<th width="100"><img src="image/view.png" width="20px" height="20px"/><%=dto.getReadcount() %>
+							<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+						</th>
+						<th width="200">
+							<%=dto.getRegdate()%>
+						</th>
+						<th width="80">
+						<input type="submit" value="삭제" />
+						</form>
+						<form action= "/goworker/s-member/s-member_warn.jsp?num=<%=dto.getNum()%>" method="post">
+						<input type="hidden" name="num" value="<%=dto.getNum() %>" />
+						<input type="hidden" name="id" value="<%=dto.getId() %>" />
+						<input type="submit" value="삭제 및 경고" />
+						</form>
+						
+						</th>
+					</tr>
+				</table>
+			</div>
+<%		}
+	}
+%>
+</section>
 
 
-
-
-<%}
-}%>
-
-<section class="section4">
+<section class="section2">
 <%
 	if (count > 0) {
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);

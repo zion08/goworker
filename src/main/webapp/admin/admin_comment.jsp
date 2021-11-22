@@ -6,7 +6,7 @@
 <%@ include file = "../include/header.jsp" %>
 
 
-<h2>멤버 관리</h2><input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
+<h2>멤버 관리</h2>
 <%	
 
 	request.setCharacterEncoding("UTF-8");
@@ -34,7 +34,8 @@
 		
 	
 
-<section>
+<section class="section1">
+	<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
 	<table border=1 width="1250px">
 		<tr>
 			<th maxwidth="170">게시판명</th>
@@ -72,14 +73,12 @@
 		</table>
 		</form>
 	</div>
- 
-
-
-
 <%}
 %>
+</section>
 
-<section class="section4">
+
+<section class="section2">
 <%
 	if (count > 0) {
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
