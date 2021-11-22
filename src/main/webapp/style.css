@@ -138,7 +138,9 @@ hr {
 .form-box2 {
 	width: 50%;
 	height: 100%;
-	border: 1px solid blue;
+	border: solid 1px #DFD8CA;
+	background-color:#fcfbfa;
+	border-radius: 5px;
 	padding: 15px 20px;
 }
 
@@ -504,7 +506,7 @@ hr {
 #lang, #portfolio, #pfdetail,
 #projectimg, #projectdetail,
 #employtype, #projecttype, #introduce,
-#detail-subject, #detail-lang {
+#detail-subject, #detail-lang, #subject {
 	grid-column: 1 / 3;
 }
 
