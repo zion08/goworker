@@ -243,8 +243,8 @@
 								작성자
 						</td>
 						<td width="200px" colspan=3 align="center">
-							<input type="hidden" name="comment_writerid" value="<%=sid%>"/>
-								<%=sid %>
+							<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
+								
 						</td>
 
 					</tr>
@@ -288,15 +288,15 @@
 					<td align="center">
 <%						if(comment_result != null){ 
 							if(comment_result.equals("admin")){
-%>							<img src="/goworker/s-member/image/admin.jpg"  width="40px" height="40px" /></br>	
+%>							<img src="/goworker/s-member/image/admin.jpg"  width="40px" height="40px" /><br/>	
 <%							}
 %>
 <%							if(comment_result.equals("manager")){
-%>								<img src="/goworker/s-member/image/manager.jpg"  width="40px" height="40px" /></br/>
+%>								<img src="/goworker/s-member/manager.jpg"  width="40px" height="40px" /><br/>
 <%							} 
 %>
 <%		  					if(comment_result.equals("member")){ 
-%>								<img src="/goworker/s-memeber/image/image.jpg" width="40px" height="40px"><br/>
+%>								<img src="/goworker/s-member/image/image.jpg" width="40px" height="40px"><br/>
 <%							}
 						}
 %>
@@ -310,10 +310,10 @@
 							// 답글일때에만 Re_level()의 값이 0 이상이다. / 답글일때에만 조건문 수행
 							wid=10*(cdto.getComment_level());
 							// 답글 들여쓰기 사이즈(width의 값으로 넣을 변수와 값 저장해서 아래에 대입)
-%>							<img src="image/white.jpg" width="<%=wid%>" height="16">
-							<img src="image/re.gif">
+%>							<img src="/goworker/s-memeber/image/white.jpg" width="<%=wid%>" height="16">
+							<img src="/goworker/s-member/image/re.gif">
 <%						} else {
-%>							<img src="image/white.jpg" width="<%=wid%>" height="16">	  	 
+%>							<img src="/goworker/s-member/image/white.jpg" width="<%=wid%>" height="16">	  	 
 <%						}
 %>	  	 				<%=cdto.getComment_content() %> 
 					</td>
@@ -330,7 +330,7 @@
 		 						<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
 							</form>
 <%					} else {
-%>						<td algin="center">
+%>						<td align="center">
 		 					<form action="/goworker/s-member/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >	
 		 						<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
 		 					</form>
