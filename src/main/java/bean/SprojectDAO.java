@@ -205,7 +205,7 @@ public class SprojectDAO {
 			pstmt.setString(15, dto.getPeriod());
 			pstmt.setInt(16, dto.getAvailable());
 			pstmt.setInt(17, dto.getNum());
-			
+			result = pstmt.executeUpdate();
 		
 		}catch(Exception e) {
 			e.printStackTrace();
