@@ -9,29 +9,26 @@
 <%@ page import="bean.NoticeDAO" %>
 <%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
-<html>
-<head>
-<title>공지사항</title>
-</head>
-<body>	
+
+<title>고객센터</title>
+<h2>고객센터 [공지사항]</h2>
+<div class="section7">
+	<a href="notice.jsp" class="sideicon2"><p>공지사항</p></a>
+	<a href="cs.jsp" class="sideicon2"><p>문의사항</p></a>
+</div>
+
+
 <%		
-      String id = null;
-      if(session.getAttribute("sid") != null){
-   	  id = (String) session.getAttribute("sid");
-      }
-      int pageNumber = 1; //기본페이지
-      if (request.getParameter("pageNumber") != null){
-	  pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
-      }
-	%>
-<aside>
-<tr>
- <td><a href="notice.jsp">공지사항</a></td><br>
- <td><a href="cs.jsp">문의사항</a></td>
-</tr>
-</aside>
-<h2>공지사항</h2>
-<%
+     String id = null;
+     if(session.getAttribute("sid") != null){
+  	  id = (String) session.getAttribute("sid");
+     }
+     int pageNumber = 1; //기본페이지
+     if (request.getParameter("pageNumber") != null){
+  		pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
+     }
+
+
 	int pageSize = 10;
 	String pageNum = request.getParameter("pageNum");
 	
@@ -53,7 +50,9 @@
 	    list = dao.getAllList( start , end );
 		}
 %>
-     <table border="1">
+
+<section class="section1">
+     <table border="1" width="800px">
 	<tr>
 		<th>글번호</th><th>작성자</th><th>제목</th><th>작성일</th><th>조회</th>
 	</tr>
@@ -73,7 +72,10 @@
 	</tr>		
 <%	}
 }%>
-</table> 
+</table>
+</section>
+
+<section class="section2">
 <%
 	if(count > 0){
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -94,14 +96,22 @@
 	<%}	
 	}
 %>
+</section> 
+
+<section class="section2">
 <%    
        // 로그인된 id 와 글작성자 비교
-       if(sid != null){
+    if(sid != null){
 	   if(sid.equals("admin")){
 %>		<input type="button"  value="글쓰기" onclick="window.location='noticeWrite.jsp' "/>
 <%  } 
 }%>
-<br />
+</section>
+
+
+<%@ include file = "/include/footer.jsp" %>
+
+<!-- <br />
 <footer>
 <hr color="skyblue" size="2"  align="center" />
     <table  align="right">     
@@ -192,5 +202,5 @@
                 height:240px;
             }
     </style>  
- </html>
+ </html> -->
     

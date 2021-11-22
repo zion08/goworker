@@ -8,11 +8,9 @@
 <jsp:useBean class="bean.CsDTO"  id="dto" />
 <jsp:setProperty property="*" name="dto" />
 
-<html>
-<head>
 <title>문의사항</title>
-</head>
-<body>
+<h2>문의사항</h2>
+
 <%		
       String id = null;
       if(session.getAttribute("sid") != null){
@@ -27,14 +25,13 @@
       if (request.getParameter("pageNumber") != null){
 	  pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
       }
-	%>
-<br/>
+%>
+<section class="section1">
     <form action="csWritePro.jsp" method="post" enctype="multipart/form-data">
     	<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 		<input type="hidden" name="pageNum" value="<%=pageNum%>" />
 		
 		<table class="cs" border=1>
-    	<h1>문의사항</h1>
     			 <input type="hidden" name="writer" value="<%=sid%>" />  <br />
     				 <tr>
 			      <td width ="100px" align ="center">제 목</td>
@@ -64,24 +61,11 @@
 	              onclick= "history.go(-1)"/>
     	    </td>
 		</tr>
-		</table><br/>
+		</table>
 		</form>
-</body>
-<%@ include file = "/include/footer.jsp" %>
-<style>
-            aside{
-                display:block;
-                width:400px;
-                margin:10px;
-                padding:4px;
-                text-align:center;
-            }
-            aside {
-                float:left;
-                width:104px;
-                height:240px;
-            }
-    </style>  
+</section>
 
- </html>
-    
+
+
+<%@ include file = "/include/footer.jsp" %>
+
