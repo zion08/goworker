@@ -5,11 +5,10 @@
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="bean.CsDTO" %>
 <%@ page import="bean.CsDAO" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <%
-	request.setCharacterEncoding("UTF-8");
-
-	String path = request.getRealPath("fileSave");
+	String path = request.getRealPath("uploadFile/csFile");
 	String enc = "UTF-8";			//한글명 파일업로드시 적용된다.
 	int size = 1024*1024*10;  // 10MB (업로드 최대크기 10MB 설정)
 	DefaultFileRenamePolicy dp = new DefaultFileRenamePolicy(); // 파일명 중복방지
