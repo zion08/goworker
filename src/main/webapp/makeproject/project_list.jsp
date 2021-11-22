@@ -70,10 +70,6 @@
 	</form>		
 </div>
 	
-<center>
-
-
-
 
 
 <center>
@@ -130,6 +126,9 @@
         		<td width="80px" align="center">
         		
         		
+        		
+        		
+        		
 <%				if(result != null){ %>
 <%					if(result.equals("admin")){%>	
 						<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
@@ -151,6 +150,9 @@
      <%} 
 }%>      
 </center>
+
+
+
 
 
 
