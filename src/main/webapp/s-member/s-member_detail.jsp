@@ -292,7 +292,7 @@
 <%							}
 %>
 <%							if(comment_result.equals("manager")){
-%>								<img src="/goworker/s-member/manager.jpg"  width="40px" height="40px" /><br/>
+%>								<img src="/goworker/s-member/image/manager.jpg"  width="40px" height="40px" /><br/>
 <%							} 
 %>
 <%		  					if(comment_result.equals("member")){ 
