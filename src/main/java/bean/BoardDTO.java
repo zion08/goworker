@@ -12,7 +12,6 @@ public class BoardDTO {
 	private Timestamp reg;
 	private	int readcount;
 	private int good;
-	private int rownum;
 	private int num_prev;
 	private int num_next;
 	
@@ -81,11 +80,5 @@ public class BoardDTO {
 	}
 	public void setGood(int good) {
 		this.good = good;
-	}
-	public void setRowNum(int rownum) {
-		this.rownum=rownum;
-	}
-	public int getRowNum() {
-		return rownum;
 	}
 }

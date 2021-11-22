@@ -40,7 +40,6 @@
 			comment_step=Integer.parseInt(request.getParameter("comment_step"));
 			comment_level=Integer.parseInt(request.getParameter("comment_level"));
 		}
-
 		Comment_SprojectDAO cd = new Comment_SprojectDAO();	
 		int comment_count = 0;
 		int board_num = dto.getNum();
@@ -227,7 +226,7 @@
 					
 				<table class="comments" border="1" >
 					<tr>
-						<td width="70px align="center">
+						<td width="70px" align="center">
 							작성자
 						</td>
 						<td width="200px" colspan=3 align="center">
@@ -274,13 +273,13 @@
 					<td align="center">
 <%						if(comment_result != null) { //등급에 따른 이미지
 							if(comment_result.equals("admin")){
-%>								<img src="/goworker/s-project/image/admin.jpg"  width="40px" height="40px" /></br>	
+%>								<img src="/goworker/s-project/image/admin.jpg"  width="40px" height="40px" /><br/>	
 <%							} 
 							if(comment_result.equals("manager")){
-%>								<img src="/goworker/s-project/image/manager.jpg"  width="40px" height="40px" /></br/>
+%>								<img src="/goworker/s-project/image/manager.jpg"  width="40px" height="40px" /><br/>
 <%							} 
 							if(comment_result.equals("member")){ 
-%>								<img src="/goworker/s-project/image/image.jpg" width="40px" height="40px"><br/>
+%>								<img src="/goworker/s-project/image/image.jpg" width="40px" height="40px" /><br/>
 <%							} 
 						} 
 %>
@@ -317,7 +316,7 @@
 						 	</form>
 					 	</td>
 <%					} else { 
-%>						<td algin="center">
+%>						<td align="center">
 							<form action="/goworker/s-project/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post">
 								<input type="button" value="답글" onclick="window.open('/goworker/s-member/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
 							</form>

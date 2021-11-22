@@ -8,9 +8,6 @@
 <title>내글 목록</title>
 
 <%
-	if(sid==null){
-		sid=cid;
-	}
 	int maxArticle=10;
 	String colum = request.getParameter("colum");
 	String search= request.getParameter("search");
@@ -30,33 +27,19 @@
 	int total = 0;
 	List<BoardDTO> list = null;
 	if(my == null){
-		total  = dao.getSearchCount(colum, search);
+		total  = dao.getSearchCount(colum, search); // 검색 결과 수 호출 / 저장
 		System.out.println(total);
 		if(total>0){
-			list= dao.getSearchList(colum, search, start, end);
-			for(BoardDTO str : list){
-				System.out.println(str.getCategory());
-				System.out.println(str.getContent());
-				System.out.println(str.getFilename());
-				System.out.println(str.getGood());
-				System.out.println(str.getNum());
-				System.out.println(str.getReadcount());
-				System.out.println(str.getSubject());
-				System.out.println(str.getWriter());
+			list= dao.getSearchList(colum, search, start, end); // 검색 결과 리스트 얻는 함수
 			}
 		}
-	}
-	String show="y";
-%>
+%> 			<%-- 검새결과 화면 --%>
 <body>
 <div  class="search-box" align="center">
 <table >
-	<thead>	
 	<tr>
 		<th>탭</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th>
 	</tr>
-	</thead>
-	<tbody>
 	<% if(total==0){%>
 		<tr>
 			<td colspan="6">저장된 글이 없습니다..</td>
@@ -74,7 +57,6 @@
 <%	 		}
 		}
 %>
-	</tbody>
 </table>
 
 <div  class="search-box" align="center">
@@ -106,7 +88,6 @@
 		if(endPage>pageCount){
 			endPage=pageCount;
 		}
-		
 		if(startPage>10){%>
 			<a href="board.jsp?pageNum=<%=startPage-10%>" >[이전]</a>
 		<%}
