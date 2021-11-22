@@ -283,9 +283,9 @@ public class SprojectDAO {
 		return plist;
 	}
 	
-	public int getSearchCount(String career, String field, String worktype, 
-			String location, String employtype, String projecttype,
-			String period, String pay, int available) {
+	public int getSearchCount(String career, String field, String worktype,
+			String location, String employtype,
+			String projecttype, String period, String pay, int available) {
 		int result = 0; 
 		try {
 			conn = OracleDB.getConnection();
@@ -323,13 +323,13 @@ public class SprojectDAO {
 	
 	public List<SprojectDTO> getSearchList(String career, String field, String worktype,
 											String location, String employtype, 
-											String projecttype, String period,String pay, int available , 
+											String projecttype, String period, String pay, int available , 
 											int start , int end) {
 		List<SprojectDTO> list = null;
 		try {
 			conn = OracleDB.getConnection();
 			String sql = "select * from "
-							+ "(select rownum r, num, id, subject, lang, career, worktype, field, pay, location, employtype, projecttype, introduce, email, phone, kakao, portfolio, period, available, favor, good, readcount, regdate "
+							+ "(select rownum r, num, id, subject, lang, career, worktype, field, pay, location, employtype, projecttype, introduce, email, phone, kakao, period, available, favor, good, readcount, regdate "
 							+ "from (select  * from s_project "
 							+ "where career like ? "
 							+ "and field like ? "
@@ -337,11 +337,11 @@ public class SprojectDAO {
 							+ "and location like ? "
 							+ "and employtype like ? "
 							+ "and projecttype like ? "
-							+ "and period like ?"
-							+ "and pay like ?"
+							+ "and period like ? "
+							+ "and pay like ? "
 							+ "and available like ?  "
 							+ "order by num desc )) "
-							+ "where  r >= ? and r <= ?";
+							+ "where  r >= ? and r <= ? ";
 			pstmt = conn.prepareStatement(sql);	
 			pstmt.setString(1, career);
 			pstmt.setString(2, field);
