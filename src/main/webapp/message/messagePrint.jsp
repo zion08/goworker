@@ -10,13 +10,6 @@
 <jsp:useBean id="mgdto" class="bean.MessageDTO"/>
 <jsp:useBean id="mgdao" class="bean.MessageDAO"/>
 
-<!-- message.jsp로 부터 받은 파라미타 mgdto에 저장 >> 이거 액선태그 안됨, 왜안되는지 아시는 분??
-<jsp:setProperty property="*" name="mgdto"/> -->
-
-<!-- <script>
-	setTimeout('location.reload()', 5000); 
-</script> -->
-
 <% 
 	// message.jsp에서 보낸 파라미터 받기
 	String inputMessage = (String)request.getParameter("inputMessage");

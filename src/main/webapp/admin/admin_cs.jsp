@@ -13,9 +13,10 @@
 
 <title>문의사항 / 관리자</title>
 
-
 <h2>문의사항</h2>
-<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
+
+<section class="section1">
+	<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
 <%
 	int pageSize = 10;
 	String pageNum = request.getParameter("pageNum");
@@ -47,8 +48,8 @@
 		}	
 	}
 }
-	
 %>
+
     <table border="1">
 
 	<%if(count == 0){%>
@@ -115,7 +116,11 @@
 <%	}
   	}		
 }%>
-</table> 
+	</table>
+</section>
+ 
+ 
+<section class="section2">
 <%
 	if(count > 0){
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -136,9 +141,14 @@
 	<%}	
 	}
 %>
+</section>
+
+<section class="section2">
 <%
 	if(sid != null){
 %>		<input type="button"  value="글쓰기" onclick="window.location='csWrite.jsp' "/>
 <%  } %>
-<br />
+
+</section>
+
 <%@ include file = "/include/footer.jsp" %>

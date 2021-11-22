@@ -6,10 +6,7 @@
 <%@ include file = "../include/header.jsp" %>
 
 
-<h2>멤버 관리</h2>
-<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
-
-
+<h2>회원 관리</h2>
 <%	
 
 	request.setCharacterEncoding("UTF-8");
@@ -33,11 +30,11 @@
 			list = dao.getmemberList(start,end);	
 		}	
 	}	
-	
-	
+
 %>
 
-<section>
+<section class="section1">
+	<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
 	<table border=1 width="1010px">
 		<tr>
 			<th maxwidth="170">아이디</th>
@@ -79,27 +76,15 @@
 		</table>
 		
 	</div>
- 
-
-
-
 <%}
 }	
 %>
-<script>
-function button_event(){
+</section>
 
-	if (confirm("정말 삭제하시겠습니까??") == true){ 
-	    document.form.submit();
-	    window.loction='/goworker/admin/admin_memberKick.jsp'
-		} else{  
-	    	return;
-			}
-	}
 
-</script>
 
-<section class="section4">
+
+<section class="section2">
 <%
 	if (count > 0) {
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -123,15 +108,33 @@ function button_event(){
 <%		}
 	}
 %>
-
-<form action="admin_memberSearch.jsp?pageNum=<%=pageNum %>" method= "post">
-	<select name = "colum">
-		<option value="id"> 아이디 </option>
-		<option value="rank"> 등급 </option>
-	</select>
-	<input type="text" name="search" />
-	<input type="submit" value="검색" />
-</form>
 </section>
+
+<section class="section2">
+	<form action="admin_memberSearch.jsp?pageNum=<%=pageNum %>" method= "post">
+		<select name = "colum">
+			<option value="id"> 아이디 </option>
+			<option value="rank"> 등급 </option>
+		</select>
+		<input type="text" name="search" />
+		<input type="submit" value="검색" />
+	</form>
+</section>
+
+
+
+
+<script>
+function button_event(){
+
+	if (confirm("정말 삭제하시겠습니까??") == true){ 
+	    document.form.submit();
+	    window.loction='/goworker/admin/admin_memberKick.jsp'
+		} else{  
+	    	return;
+			}
+	}
+
+</script>
 
 <%@ include file = "../include/footer.jsp" %>

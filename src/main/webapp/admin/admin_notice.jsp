@@ -6,10 +6,8 @@
 <%@ page import="java.util.List" %>
 <%@ include file = "../include/header.jsp" %>
 
-<head>
 <title>공지사항</title>
-</head>
-<body>	
+
 <%		
       String id = null;
       if(session.getAttribute("sid") != null){
@@ -22,6 +20,9 @@
 	%>
 
 <h2>공지사항</h2>
+
+<section class="section1">
+	<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
 <%
 	int pageSize = 10;
 	String pageNum = request.getParameter("pageNum");
@@ -64,7 +65,11 @@
 	</tr>		
 <%	}
 }%>
-</table> 
+	</table>
+</section>
+
+
+<section class="section2"> 
 <%
 	if(count > 0){
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -85,7 +90,12 @@
 	<%}	
 	}
 %>
- 		<input type="button"  value="글쓰기" onclick="window.location='admin_noticeWrite.jsp' "/>
+</section>
 
-<br />
+
+<section class="section2">
+ 		<input type="button"  value="글쓰기" onclick="window.location='admin_noticeWrite.jsp' "/>
+</section>
+
+
 <%@ include file = "../include/footer.jsp" %>

@@ -50,41 +50,42 @@
 %>
 <section class="section1" >
 
-	<title>프로젝트 detail 페이지</title>
+	<title>프로젝트 페이지</title>
 
 
 		<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
 		<input type="hidden" name='pageNum' value="<%=pageNum %>"/>
 
 
+
+
+	<div  align="center"><h3>프로젝트 만들기 페이지</h3></div><br/>
+	
 	<table border=1  align="center" >
-			<tr>
-				<td align="center" colspan="3" width="700px" ><b>Make Project invitation</b></td>
-			</tr>
 			<tr>
 				<td align="center" width="50px" height="70px"   align="center">
 				
 <%			if(result != null){ %>
 <%				if(result.equals("admin")){%>	
-				<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
+				<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
 				<%} %>
 <%				if(result.equals("manager")){%>				
-				<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
-					<%} %>
+					<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
+				<%} %>
 <%		  		if(result.equals("member")){ %>
-				<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
-					<% }
-        		}%>
+					<img src="image/image.jpg" width="40px" height="40px" /><br/>
+				<% }
+        	}%>
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
 				</td>
 				<td align="center" width="150px">
 					<%=sdf.format(dto.getReg_date()) %>
 				</td>
 				<td align="center" width="110px">
-						<img src="/goworker/makeproject/image/view.png" width="25px" height="25x"/><%=dto.getReadcount()%> &emsp;
-						<img src="/goworker/makeproject/image/comment.png" width="25px" height="25px" /><%=comment_count %> &emsp;
-        				<img src ="/goworker/makeproject/image/thumbs.png" width="25px" height="25px" /><%=dto.getGood() %>&emsp;
-        				<img src ="/goworker/makeproject/image/thumbs_down.png" width="25px" height="25px" /><%=dto.getDown() %>
+						<img src="image/view.png" width="25px" height="25x"/><%=dto.getReadcount()%> &emsp;
+						<img src="image/comment.png" width="25px" height="25px" /><%=comment_count %> &emsp;
+        				<img src="image/thumbs.png" width="25px" height="25px" /><%=dto.getGood() %>&emsp;
+        				<img src="image/thumbs_down.png" width="25px" height="25px" /><%=dto.getDown() %>
         		</td>
 			</tr>
 			<tr>
@@ -102,7 +103,7 @@
 				<td align="center" width="90px">첨부파일</td>
 					<%if(dto.getProjectfile() != null){ %>
 						<td colspan="2" align="center">
-						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="600px"height="600px">
+						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="500px"height="500px">
 
 					<%}else{ %>
 				<td colspan="2">등록된 첨부파일이 없습니다.</td>
@@ -127,6 +128,7 @@ if(sid.equals(dto.getId())) { %>
     	 <td align="center" colspan="3">
                     <input type="button" value="추천!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
                     <input type="button" value="비추천!" onclick="window.open('project_Down.jsp?num=<%=dto.getNum()%>','Down','width=300,height=150');window.location.reload();"/><br/>
+                    <input type="button" value="메세지" onclick="window.open('../message/message.jsp?mpnum=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
                     <input type="button" value="이메일보내기" onclick="window.location='/goworker/makeproject/email/mail.jsp?pageNum=<%=pageNum%>'"/>
        				<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
        	</td>

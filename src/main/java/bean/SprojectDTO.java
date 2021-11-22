@@ -26,12 +26,10 @@ public class SprojectDTO {
 	private int good;
 	private int readcount;
 	private Timestamp regdate;
-	private String endProject;
-	private String sent;
 	private String projectName;
 	private int pageNum;
 	private String filename;
-	
+	private String spnum;
 	
 	public int getNum() {
 		return num;
@@ -41,6 +39,12 @@ public class SprojectDTO {
 	}
 	public String getId() {
 		return id;
+	}
+	public String getSpNum() {
+		return spnum;
+	}
+	public void setSpNum(String spnum) {
+		this.spnum = spnum;
 	}
 	public void setId(String id) {
 		this.id = id;
@@ -164,18 +168,6 @@ public class SprojectDTO {
 	}
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
-	}
-	public String getEndProject() {
-		return endProject;
-	}
-	public void setEndProject(String endProject) {
-		this.endProject = endProject;
-	}
-	public String getSent() {
-		return sent;
-	}
-	public void setSent(String sent) {
-		this.sent = sent;
 	}
 	public String getProjectName() {
 		return projectName;

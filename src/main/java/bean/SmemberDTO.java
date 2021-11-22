@@ -25,12 +25,19 @@ public class SmemberDTO {
 	private int good;
 	private int readcount;
 	private Timestamp regdate;
+	private String smnum;
 	
 	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public String getSmNum() {
+		return smnum;
+	}
+	public void setSmNum(String smnum) {
+		this.smnum = smnum;
 	}
 	public String getId() {
 		return id;

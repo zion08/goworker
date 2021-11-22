@@ -17,6 +17,7 @@
 
 	String writer = mr.getParameter("writer");
 	String category = mr.getParameter("category");
+	/* 수정시 카테고리 필수 선태 */
 	if(category.equals("tab")){
 %>		<script>
 			alert("카테고리를 선택하세요");
@@ -38,13 +39,13 @@
 	dto.setContent(content);
 	
 	if(filename==null){
-		dto.setFilename(org);
+		dto.setFilename(org); // 원본 파일 있으면 이름 가져오기.
 	}else{
 		dto.setFilename(filename);
 	}
 	
 	BoardDAO dao = new BoardDAO();
-	int result = dao.editBoard(dto);
+	int result = dao.editBoard(dto); // 게시글 수정 결과 저장
 	if(result==1)
 	{
 		if(filename!=null && org != null)

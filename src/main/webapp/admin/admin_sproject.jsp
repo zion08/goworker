@@ -6,8 +6,8 @@
 <%@ include file = "../include/header.jsp" %>
 
 
-<h2>멤버찾기 관리</h2>
-<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
+<h2>프로젝트찾기 관리</h2>
+
 <%	
 	request.setCharacterEncoding("UTF-8");
 	String pageNum = request.getParameter("pageNum");
@@ -26,12 +26,11 @@
 		if(count > 0) {
 			list = dao.getAllList( start, end );	
 		}
-		%>
+%>
 			
-		
-
-
-<section>
+	
+<section class="section1">
+	<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
 	<table border=1 width="570px">
 		<tr>
 			<th width="80">글 번호</th>
@@ -73,14 +72,14 @@
 		</table>
 		
 	</div>
- 
- 	
 					<% }
 				}else {	%>
 					<h3>등록된 글이 없습니다 </h3>
 				<%}%>
+</section>
 
-<section class="section4">
+
+<section class="section2">
 <%
 	if (count > 0) {
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);

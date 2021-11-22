@@ -207,7 +207,7 @@
 					<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 				</form>
 <%			} else { 
-%>				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?num=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
+%>				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?smnum=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
 				<input type="button" value="메일 보내기" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 <%			} 
 %>				<input type="button" value="목록으로" onclick="window.location='s-member.jsp?pageNum=<%=pageNum%>'"/>
@@ -288,15 +288,15 @@
 					<td align="center">
 <%						if(comment_result != null){ 
 							if(comment_result.equals("admin")){
-%>							<img src="/goworker/s-member/image/admin.jpg"  width="40px" height="40px" /><br/>	
+%>							<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
 <%							}
 %>
 <%							if(comment_result.equals("manager")){
-%>								<img src="/goworker/s-member/image/manager.jpg"  width="40px" height="40px" /><br/>
+%>								<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
 <%							} 
 %>
 <%		  					if(comment_result.equals("member")){ 
-%>								<img src="/goworker/s-member/image/image.jpg" width="40px" height="40px" /><br/>
+%>								<img src="image/image.jpg" width="40px" height="40px" /><br/>
 <%							}
 						}
 %>
@@ -310,10 +310,10 @@
 							// 답글일때에만 Re_level()의 값이 0 이상이다. / 답글일때에만 조건문 수행
 							wid=10*(cdto.getComment_level());
 							// 답글 들여쓰기 사이즈(width의 값으로 넣을 변수와 값 저장해서 아래에 대입)
-%>							<img src="/goworker/s-memeber/image/white.jpg" width="<%=wid%>" height="16">
-							<img src="/goworker/s-member/image/re.gif">
+%>							<img src="image/white.jpg" width="<%=wid%>" height="16">
+							<img src="image/re.gif">
 <%						} else {
-%>							<img src="/goworker/s-member/image/white.jpg" width="<%=wid%>" height="16">	  	 
+%>							<img src="image/white.jpg" width="<%=wid%>" height="16">	  	 
 <%						}
 %>	  	 				<%=cdto.getComment_content() %> 
 					</td>

@@ -13,12 +13,19 @@ public class MakeProjectDTO {
 	private int readcount;
 	private int good;
 	private int down;
+	private String mpnum;
 	
 	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public String getMpNum() {
+		return mpnum;
+	}
+	public void setMpNum(String mpnum) {
+		this.mpnum = mpnum;
 	}
 	public String getId() {
 		return id;

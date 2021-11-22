@@ -11,7 +11,7 @@
 			window.location="/goworker/member/login.jsp"
 		</script>
 <%	}
-
+								/* 글쓰기 화면 구현 */
 	if(sid!=null || cid!=null)
 	{
 %>	<div style=" padding-right: 15px;  padding-left: 15px;  margin-right: auto;  margin-left: auto;" align="center" >	

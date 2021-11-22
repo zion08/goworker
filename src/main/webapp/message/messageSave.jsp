@@ -19,9 +19,7 @@
 	List<MessageDTO> list = null;
 	
 	//받은 메세지 중 최신꺼만 가져옴 (모든 컬럼)
-	System.out.println(sid);
 	list = mgdao.getMyMessage(sid);
-	System.out.println(list);
 		
 	//안읽은 메세지 갯수
 	int countNewMessage = mgdao.getCountNewMessage(sid);
