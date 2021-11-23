@@ -24,7 +24,7 @@
 	
 	String best= request.getParameter("best"); 
 
-	int pageSize = 5;
+	int pageSize = 7;
 	
 	if(pageNum == null){
 		pageNum ="1"; // 값이 넘어오지 않을 경우 > 첫 페이지
@@ -162,7 +162,7 @@
 	if(count > 0){
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 		int startPage = (currentPage / 10)* 10 +1;
-		int pageBlock = 10;
+		int pageBlock = 7;
 		int endPage = startPage + pageBlock -1;
 			if(endPage > pageCount) {
 				endPage = pageCount;
