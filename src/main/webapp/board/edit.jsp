@@ -31,7 +31,8 @@
 					<option value="notice">	공지</option>
 			</select>[<%=dto.getCategory() %>]
 			작성자 : <%=dto.getWriter() %> 조회수 : <%=dto.getReadcount() %></br>
-			내용 : 	<input type="text" name="content" value="<%=dto.getContent()%>"style="width:1140px;height:500px;"/></br>
+					<label>내용</label></br>
+					<textarea name="content" cols="100" rows="10" ><%=dto.getContent()%></textarea></br>
 					<input type="file" name="filename" />
 			<%
 				if(dto.getFilename() != null){%>

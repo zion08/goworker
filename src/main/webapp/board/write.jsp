@@ -25,7 +25,8 @@
 				<option value="notice">	공지</option>
 			</select>
 				<input placeholder="제목" type="text" name = "subject" style=" width:1040px;" /><br/>
-				<input placeholder="내용" size="200"  type="text" name = "content" style="width:1140px;height:500px;"/><br/>
+				<label>내용</label><br/>
+				<textarea name="content" cols="160" rows="20"></textarea><br/>
 				<input placeholder="첨부파일" type="file" name = "filename"/><br/>
 				<input type="submit" value="등록" />	
 				<input type="button" value="목록" onclick="window.location='board.jsp'"/>

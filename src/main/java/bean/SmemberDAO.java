@@ -232,6 +232,7 @@ public class SmemberDAO {
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
 				dto.setField(rs.getString("field"));
+				dto.setLang(rs.getString("lang"));
 				dto.setCareer(rs.getString("career"));
 				dto.setEmploytype(rs.getString("employtype"));
 				dto.setLocation(rs.getString("location"));
