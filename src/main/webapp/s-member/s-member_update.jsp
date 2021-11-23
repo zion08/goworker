@@ -107,11 +107,19 @@
 						 <li id="portfolio">
 							<label>포트폴리오</label>
 								<input type="file" name="portfolio" multiple="multiple" value="<%=sdto.getPortfolio() %>">
+								<%if(sdto.getPortfolio() != null){ %>
+										[<%=sdto.getPortfolio() %>]
+										<input type="hidden" name="org" value="<%=sdto.getPortfolio() %>" />
+									<%}else{ %>
+										[첨부파일 없음]
+									<%} %>
 						</li>
 						
 						<li id="pfdetail">
 							<label>포트폴리오 설명</label>
-								<input type="text" name="pfdetail" value="<%=sdto.getPfdetail() %>" >
+								<textarea name="pfdetail" cols="60" rows="10">
+								 <%=sdto.getPfdetail()%>
+								</textarea>
 						</li>
 					</ul>
 					
@@ -182,7 +190,10 @@
 						
 						<li id="introduce">
 							<label>소개</label>
-								<input type="text" name="introduce" value="<%=sdto.getIntroduce()%>">
+							<textarea name="introduce" cols="60" rows="10" >
+							<%=sdto.getIntroduce()%>
+								</textarea>
+								
 						</li>
 					</ul>
 			

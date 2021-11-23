@@ -48,7 +48,7 @@
 		for(SmemberDTO dto : list) {
 %>
 			<div>
-				<form action="/goworker/s-member/s-member_delete.jsp?num=<%=dto.getNum()%>" method="get">
+				<form action="/goworker/s-member/s-member_adminDelete.jsp?num=<%=dto.getNum()%>" method="get">
 				<table  border=1 width="570px">
 					<tr>
 						<th width="80">

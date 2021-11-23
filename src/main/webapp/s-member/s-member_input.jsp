@@ -102,7 +102,8 @@
 						
 						<li id="pfdetail">
 							<label>포트폴리오 설명</label>
-								<input type="text" name="pfdetail" >
+								<textarea name="pfdetail" cols="60" rows="10">
+								</textarea>
 						</li>
 					</ul>
 					
@@ -173,7 +174,8 @@
 						
 						<li id="introduce">
 							<label>소개</label>
-								<input type="text" name="introduce" >
+								<textarea name="introduce" cols="60" rows="10">
+								</textarea>
 						</li>
 					</ul>
 			
