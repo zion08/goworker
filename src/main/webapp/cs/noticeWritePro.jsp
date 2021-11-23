@@ -9,7 +9,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String path = request.getRealPath("uploadFile/csFile");
+	String path = request.getRealPath("fileSave");
 	String enc = "UTF-8";			//한글명 파일업로드시 적용된다.
 	int size = 1024*1024*10;  // 10MB (업로드 최대크기 10MB 설정)
 	DefaultFileRenamePolicy dp = new DefaultFileRenamePolicy(); // 파일명 중복방지
@@ -33,12 +33,8 @@
 			alert("작성되었습니다.!");
 			window.location="/goworker/admin/admin_notice.jsp";
 		</script>
-  <%}else { %>
-  		<script>
-			alert("제목과 내용을 확인해주세요.!");
-			history.go(-1);
-		</script>
   <%} %>
+	
 
 
 
