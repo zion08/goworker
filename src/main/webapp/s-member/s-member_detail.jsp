@@ -82,7 +82,7 @@
 					</li>
 					
 					<li>
-						<label>타입</label>
+						<label>찾는 프로젝트 타입</label>
 						<span>
 <%							if(dto.getProjecttype() == "side") { 
 %>								사이드 프로젝트 
@@ -141,9 +141,13 @@
 					</li>
 					
 					<li id="detail-portfoiloimg">
-						<label>포트폴리오</label>		
+						<label>포트폴리오
+							<a href="javascript:doDisplay();">
+								[접기/보기]
+							</a>
+						</label>		
 <%							if(dto.getPortfolio() != null) { 
-%>								<img src = "../uploadFile/portfolioFile/<%=dto.getPortfolio() %>">
+%>								<img id="checkboard" src = "../uploadFile/portfolioFile/<%=dto.getPortfolio() %>">
 <%							} else { 
 %>								등록된 포트폴리오가 없습니다.
 <%							} 
@@ -371,4 +375,18 @@
 		    	return;
 			}
 		}
+	
+	
+	
+	var bDisplay = true;
+
+	function doDisplay() {
+		var con = document.getElementById("checkboard");
+		if (con.style.display == 'none') {
+			con.style.display = 'block';
+		} else {
+			con.style.display = 'none';
+		}
+	}
+</script>
 </script>
