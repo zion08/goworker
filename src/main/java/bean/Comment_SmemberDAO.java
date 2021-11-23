@@ -15,7 +15,7 @@ public class Comment_SmemberDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	// ÀüÃ¼ comment ºÒ·¯¿À´Â ±â´É
+	// ì „ì²´ comment ë¶ˆëŸ¬ì˜¤ëŠ”
 	public int selectComment(Comment_SmemberDTO cdto) throws Exception {
 		int result = 0;
 		try {
@@ -36,12 +36,12 @@ public class Comment_SmemberDAO {
 	}
 
 	
-	// ´ñ±Û ÀÔ·Â ½Ã °ª ÀÔ·Â
+	// ëŒ“ê¸€ ì…ë ¥ ì‹œ ê°’ ì…ë ¥
 	public int insertComment(Comment_SmemberDTO cdto) throws Exception {	
 		int comment_num = cdto.getComment_num();
-		int comment_ref=cdto.getComment_ref(); // »õ ±ÛÀº ÇÏ³ªÀÇ ±×·ìÀ» °¡Áø´Ù.[´äº¯À» ´Ş¸é, ±Û°ú ´äº¯ÀÇ  ref°¡ µ¿ÀÏ]
-		int comment_step=cdto.getComment_step();   // »õ ±Û°ú ´ä±ÛÀ» ±¸ºĞÇÏ´Â ¿ëµµ(Á¤·Ä)
-		int comment_level=cdto.getComment_level();    // ±×·ì ´ä±Û¿¡¼­ ´ä±ÛÀÇ ÀÛ¼ºµÈ ¼ø¼­
+		int comment_ref=cdto.getComment_ref(); 
+		int comment_step=cdto.getComment_step();  
+		int comment_level=cdto.getComment_level(); 
 		int number=0;
 		String sql="";
 		int result = 0;
@@ -87,7 +87,8 @@ public class Comment_SmemberDAO {
 	}
 
 	
-	// ´ñ±Û ¸®½ºÆ® Ãâ·Â
+	
+	// ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥
 	public List<Comment_SmemberDTO> getComment(int board_num) throws Exception {
 		List<Comment_SmemberDTO> list = null;
 		try {
@@ -117,7 +118,8 @@ public class Comment_SmemberDAO {
 	}
 	
 	
-	// ¸®½ºÆ® °¹¼ö 
+	
+	// ë¦¬ìŠ¤íŠ¸ ê°¯ìˆ˜ 
 	public int getCount() {
 		int result = 0;
 		try {
@@ -159,7 +161,8 @@ public class Comment_SmemberDAO {
 	}
 	
 	
-	// ´ñ±Û ¼öÁ¤ ±â´É
+	
+	// ëŒ“ê¸€ ìˆ˜ì •
 	public int updateComment(Comment_SmemberDTO cdto) {
 		int result = 0;
 		try {
@@ -179,7 +182,7 @@ public class Comment_SmemberDAO {
 	}
 	
 	
-	// ´ñ±Û »èÁ¦ ±â´É
+	// ëŒ“ê¸€ ì‚­ì œ
 	public String deleteComment(int comment_num) {
 		String result = null;
 		try {
@@ -203,7 +206,7 @@ public class Comment_SmemberDAO {
 	
 	
 	
-	// ´ñ±Û ÆäÀÌÂ¡ Ã³¸® ±â´É (ÇöÀç »ç¿ëÇÏÁö´Â ¾Ê½À´Ï´Ù.)
+	// ëŒ“ê¸€ í˜ì´ì§• ì²˜ë¦¬
 	public List getCommentReply(int start, int end) {
 		List commentReplyList = null;
 		try {
@@ -240,7 +243,7 @@ public class Comment_SmemberDAO {
 		}
 	
 	
-	// ´ñ±Û ÃßÃµ ±â´É ¸Ş¼­µå
+	// ëŒ“ê¸€ ì¶”ì²œ
 	public void commentGood(Comment_SmemberDTO cdto) {
 		try {
 			conn = OracleDB.getConnection();
@@ -257,7 +260,7 @@ public class Comment_SmemberDAO {
 	
 	
 	
-	// ´ñ±Û °¹¼ö Ãâ·Â ¸Ş¼­µå
+	// ëŒ“ê¸€ ê°¯ìˆ˜ ì¶œë ¥ ë©”ì„œë“œ
 	public int getCommentCount(int board_num) {
 		int result = 0;
 		try {
@@ -277,7 +280,7 @@ public class Comment_SmemberDAO {
 	    }
 	
 	
-		// ´ñ±Û °¹¼ö
+		// ëŒ“ê¸€ ê°¯ìˆ˜
 		public int getCommentCount(Comment_SmemberDTO cdto) {
 			int result  = 0;
 			try {

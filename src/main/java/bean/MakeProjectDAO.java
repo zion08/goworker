@@ -17,7 +17,7 @@ public class MakeProjectDAO {
 	private ResultSet rs = null;
 	
 	
-	// makeproject ÀÛ¼º ¸Ş¼­µå
+	// í”„ë¡œì íŠ¸ ì…ë ¥ ê¸°ëŠ¥
 	public int projectInsert(MakeProjectDTO dto) {
 		int result = 0;
 		try {
@@ -37,7 +37,8 @@ public class MakeProjectDAO {
 	}
 	
 	
-	// makeproject ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå
+	
+	// ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ê¸°ëŠ¥
 	public List<MakeProjectDTO> getAllList(int start, int end) {
 		List<MakeProjectDTO> list = null;
 		try {
@@ -72,7 +73,9 @@ public class MakeProjectDAO {
 		
 	}
 	
-	// ¸®½ºÆ® °¹¼ö ¸Ş¼­µå
+	
+	
+	// í”„ë¡œì íŠ¸ ìˆ˜
 	public int getCount() {
 		int result = 0;
 		try {
@@ -107,7 +110,7 @@ public class MakeProjectDAO {
 	}
 	
 	
-	// makeproject¿¡¼­ °¡Á®¿À´Â ¸Ş¼­µå
+	// makeprojectì—ì„œ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ
 	public MakeProjectDTO getContent(MakeProjectDTO dto) {
 		try {
 			conn = OracleDB.getConnection();
@@ -163,7 +166,7 @@ public class MakeProjectDAO {
 	}
 	
 	
-	// makeproject ¼öÁ¤ ¸Ş¼­µå
+	// ìˆ˜ì • ë©”ì„œë“œ
 	public int  makeProjectUpdate(MakeProjectDTO dto) {
 		int result  = 0;
 		try {
@@ -184,7 +187,8 @@ public class MakeProjectDAO {
 		return result;
 	}
 	
-	// makeproject »èÁ¦ ¸Ş¼­µå
+	
+	// ì‚­ì œ ë©”ì„œë“œ
 	public String deleteProject(int num) {
 		String result  = null;
 		try {
@@ -207,7 +211,8 @@ public class MakeProjectDAO {
 	}
 	
 	
-	// ÇÁ·ÎÁ§Æ® ÃßÃµ ¸Ş¼­µå
+	
+		// ì¶”ì²œ ë©”ì„œë“œ
 		public void projectGood(MakeProjectDTO dto) {
 			try {
 				conn = OracleDB.getConnection();
@@ -223,7 +228,8 @@ public class MakeProjectDAO {
 		}
 		
 		
-		// ÇÁ·ÎÁ§Æ® ºñÃßÃµ ±â´É ¸Ş¼­µå
+		
+		// ë¹„ì¶”ì²œ ë©”ì„œë“œ
 		public void projectDown(MakeProjectDTO dto) {
 			try {
 				conn = OracleDB.getConnection();
@@ -239,7 +245,7 @@ public class MakeProjectDAO {
 		}
 		
 		
-		// °Ë»ö ±Û °¹¼ö ¸Ş¼­µå
+		// ê²€ìƒ‰ í”„ë¡œì íŠ¸ ìˆ˜
 		public  int getSearchCount(String colum, String search) {
 			int result = 0;
 		try {
@@ -260,7 +266,8 @@ public class MakeProjectDAO {
 	}
 		
 		
-		// °Ë»ö °á°ú ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå
+		
+		// ê²€ìƒ‰ ê²°ê³¼ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ
 		public List<MakeProjectDTO> getSearchList(String colum, String search, int start, int end){
 			List<MakeProjectDTO> list = null;
 			try {
@@ -297,7 +304,7 @@ public class MakeProjectDAO {
 		
 		
 		
-		// makeproject ¸®½ºÆ® Ãâ·Â ¸Ş¼­µå
+		// í”„ë¡œì íŠ¸ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ ë©”ì„œë“œ
 		public List<MakeProjectDTO> getBestList(int start, int end) {
 			List<MakeProjectDTO> list = null;
 			try {
