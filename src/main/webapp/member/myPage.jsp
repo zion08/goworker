@@ -22,7 +22,7 @@
 
 <section class="section2">
 <div class="input" >
-      <input type="submit" value="프로젝트찾기" onclick=" window.location='/goworker/s-project/s-project_list.jsp' "/>
+      <input type="submit" value="프로젝트찾기" onclick=" window.location='/goworker/s-project/s-project.jsp' "/>
       <input type="submit" value="팀원찾기" onclick=" window.location='/goworker/s-member/s-member.jsp' "/>
       <input type="submit" value="관심목록" onclick=" window.location='favorite.jsp' "/>
 </div><br/>
