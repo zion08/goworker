@@ -46,7 +46,7 @@
 	
 	
 	
-	// 좋아요 많은 게시글 순
+	// 랭크에 따른 프로필 사진 변경 메서드
 	MemberDAO mdao = new MemberDAO();
 	String result = mdao.getRank(dto.getId());
 	
@@ -72,18 +72,17 @@
 		}
 	
 %>
+
+<title>프로젝트 페이지</title>
+
 <section class="section1" >
-
-	<title>프로젝트 페이지</title>
-
-
 		<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
 		<input type="hidden" name='pageNum' value="<%=pageNum %>"/>
 
 
-
 	<br/>
-	<div  align="center"><h3>프로젝트 만들기 페이지</h3></div><br/>
+	<div  align="center"><h3>프로젝트 만들기 페이지</h3></div>
+	<br/>
 	
 	<table border=1  align="center" >
 			<tr>
@@ -105,7 +104,7 @@
 				<td align="center" width="150px">
 					<%=sdf.format(dto.getReg_date()) %>
 				</td>
-				<td align="center" width="110px">
+				<td align="center" width="110px" align="center">
 						<img src="image/view.png" width="25px" height="25x"/><%=dto.getReadcount()%> &emsp;
 						<img src="image/comment.png" width="25px" height="25px" /><%=comment_count %> &emsp;
         				<img src="image/thumbs.png" width="25px" height="25px" /><%=dto.getGood() %>&emsp;
@@ -119,7 +118,7 @@
 			<tr>
 				<td align="center" width="90px">내 용</td>
 				<td colspan="2" >
-				<textarea name="content" id="contenet"  maxlength="2000px"  cols="67" rows="20"  style="resize: none;"  readonly><%=dto.getContent() %></textarea>
+				<textarea name="content" id="contenet"  maxlength="2000px"  cols="67" rows="33"  style="resize: none;"  readonly><%=dto.getContent() %></textarea>
 		
 				</td>
 			</tr>

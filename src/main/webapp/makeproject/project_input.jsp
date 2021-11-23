@@ -14,9 +14,13 @@
 
 
 <title>프로젝트 만들기</title>
-<h2>프로젝트 만들기</h2>
+
 
 <center>
+	<br/>
+	<h3>프로젝트 만들기</h3>
+	<br/>
+	
 	<form action="project_inputPro.jsp" method="post" enctype="multipart/form-data">
 		<table border="1"  cellpadding="0" cellspacing="0" align="center"> 
 			<tr>
@@ -43,6 +47,6 @@
        		</tr>
 	    </table>
 	</form>
-</center>
+</center><br/>
 
 <%@ include file = "/include/footer.jsp" %>

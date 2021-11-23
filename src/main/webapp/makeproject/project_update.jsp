@@ -3,9 +3,9 @@
 
 <%@ page import = "bean.MakeProjectDTO" %>
 <%@ page import = "bean.MakeProjectDAO" %>
-
 <%@ page import = "bean.MakeProject_CommentDTO" %>
 <%@ page import = "bean.MakeProject_CommentDAO" %>
+<%@ page import = "bean.MemberDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
 
@@ -33,31 +33,53 @@
 	dto = dao.getMakeProject(dto);
 	
 	
+	// 댓글 수 관련
 	MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
 	int comment_count = 0;
 	int board_num = dto.getNum();
 	comment_count = cd.getCommentCount(board_num);
+	
+	
+	// rank에 따른 프로필 사진 변경 메서드
+	MemberDAO mdao = new MemberDAO();
+	String result = mdao.getRank(dto.getId());
+	
 %>    
 
 
 
 <title>프로젝트 수정 페이지</title>
-<h2>프로젝트 수정 페이지</h2>
+
 
 <center>
+	<br/>
+	<h3>프로젝트 수정 페이지</h3>
+	<br/>
+	
 	<form action="project_updatePro.jsp" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
 			<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 			
 		<table border = "1" align="center">
 			<tr>
-				<td align="center" width="50px"><img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
-							<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"> 
+				<td align="center" width="50px" height="70px" align="center">
+<%				if(result != null){ %>
+<%					if(result.equals("admin")){%>	
+						<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
+					<%} %>
+<%					if(result.equals("manager")){%>				
+						<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
+					<%} %>
+<%		  			if(result.equals("member")){ %>
+					<img src="image/image.jpg" width="40px" height="40px" /><br/>
+					<%}
+				}%>
+						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"> 
 				</td>
 				<td align="center" width="150px">
 					<%=sdf.format(dto.getReg_date())%>
 				</td>
-				<td align="right" width="90px">
+				<td align="right" width="90px" align="center">
 						<img src="/goworker/makeproject/image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>&emsp;
         				<img src="/goworker/makeproject/image/comment.png" width="20px" height="20px" /><%=comment_count %>&emsp;
         				<img src ="/goworker/makeproject/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>&emsp;
@@ -70,7 +92,7 @@
 			</tr>
 			<tr>	
 				<td align="center" width="90px">내 용</td>
-				<td colspan="2"><textarea name="content" id="contenet"  maxlength="2000px" cols="67px" rows="20px" style="resize: none;" ><%=dto.getContent() %></textarea>
+				<td colspan="2"><textarea name="content" id="contenet"  maxlength="2000px" cols="67px" rows="33px" style="resize: none;" ><%=dto.getContent() %></textarea>
 				</td>
 			</tr>
 			<tr>

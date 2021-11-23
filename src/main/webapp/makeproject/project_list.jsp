@@ -142,7 +142,7 @@
 						<img src="image/image.jpg" width="40px" height="40px" /><br/>
 					<%}
         		}%>        			
-        				<span class=" getid"><%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"></span><br/>
+        				<span class="getid"><%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"></span><br/>
         				<span class="regdate"><%=sdf.format(dto.getReg_date()) %></span>
         		</td>
         	</tr>
