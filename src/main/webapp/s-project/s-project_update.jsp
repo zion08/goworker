@@ -5,12 +5,13 @@
 <%@ include file = "../include/header.jsp" %>
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
 <jsp:setProperty property="num" name="dto" />
-
+<jsp:useBean id="edao" class="bean.MemberDAO"/>
 <%
 	request.setCharacterEncoding("UTF-8"); 
 	String pageNum = request.getParameter("pageNum");
 	SprojectDAO dao = new SprojectDAO();
 	dto = dao.getContent(dto);
+	String email = edao.getEmail(sid);
 %>
 
 <title>프로젝트 수정</title>
@@ -32,22 +33,22 @@
 											
 						<li id=subject>
 							<label>프로젝트 명</label>
-								<input type="text" name="subject" value="<%=dto.getSubject() %>">
+								<input type="text" name="subject" value="<%=dto.getSubject() %>" />
 						</li>
 						
 						<li id=phone>
 							<label>전화번호</label>
-								<input type="text" name="phone" placeholder="<%=dto.getPhone() %>">
+								<input type="text" name="phone" value="<%=dto.getPhone() %>" />
 						</li>
 						
 						<li id=email>
 							<label>이메일</label>
-								<input type="email" name="email" value="<%=dto.getEmail()%>">
+								<input type="email" name="email" value="<%=email%>" />
 						</li>
 						
 						<li id=kakao>
 							<label>카카오톡</label>
-								<input type="text" name="kakao" value="<%=dto.getKakao()%>">
+								<input type="text" name="kakao" value="<%=dto.getKakao()%>" />
 						</li>
 					</ul>
 					
@@ -107,16 +108,17 @@
 						
 						<li id="projectdetail">
 							<label>프로젝트 설명</label>
-								<textarea name="projectdetail" cols="60" rows="10">
+								<textarea name="projectdetail" cols="60" rows="10" />
 								<%=dto.getProjectDetail() %>
 								</textarea>
+								<input type="text" name="projectdetail" value="<%=dto.getProjectDetail() %>" />
 						</li>
 					</ul>
 					
 					<ul class="condition-info">	
 						<li id="employtype">
 							<label>활동 유형</label>
-								<label><input type="radio" name="employtype" value="sfree">개인 프리랜서</label>
+								<label><input type="radio" name="employtype" value="sfree" checked>개인 프리랜서</label>
 								<label><input type="radio" name="employtype" value="tfree">팀 프리랜서</label>
 								<label><input type="radio" name="employtype" value="sbusiness">개인 사업자</label>
 								<label><input type="radio" name="employtype" value="cbusiness">법인 사업자</label>
@@ -124,13 +126,13 @@
 						
 						<li id="projecttype">
 							<label>프로젝트 진행 유형</label>
-								<label><input type="radio" name="projecttype" value="side">사이드 프로젝트</label>
+								<label><input type="radio" name="projecttype" value="side" checked>사이드 프로젝트</label>
 								<label><input type="radio" name="projecttype" value="main">메인 프로젝트</label>
 						</li>            
 								
 						<li id="worktype">
 							<label>가능한 업무 방식</label>
-								<label><input type="radio" name="worktype" value="online">원격</label>
+								<label><input type="radio" name="worktype" value="online" checked>원격</label>
 								<label><input type="radio" name="worktype" value="office">상주</label>
 								<label><input type="radio" name="worktype" value="discuss">협의</label>
 						</li>
@@ -201,10 +203,9 @@
 						</li>
 						
 						<li id="introduce">
-							<label>소개</label>
-								<textarea name="introduce" cols="60" rows="10">
-								<%=dto.getIntroduce() %>
-								</textarea>
+							<textarea name="introduce" cols="60" rows="10" />
+							<%=dto.getIntroduce() %>
+							</textarea>>
 						</li>
 					</ul>
 					
@@ -215,4 +216,5 @@
 				</div>
 			</form>
 		</section>
+		
 <%@ include file = "../include/footer.jsp" %>
