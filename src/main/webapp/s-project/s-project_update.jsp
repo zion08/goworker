@@ -111,7 +111,6 @@
 								<textarea name="projectdetail" cols="60" rows="10" />
 								<%=dto.getProjectDetail() %>
 								</textarea>
-								<input type="text" name="projectdetail" value="<%=dto.getProjectDetail() %>" />
 						</li>
 					</ul>
 					
