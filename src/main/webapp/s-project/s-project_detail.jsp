@@ -57,6 +57,135 @@
 		if(count > 0) {
 			list = cdao.getComment( dto.getNum() );	
 		}
+		
+		//한글패치
+		if((dto.getCareer()).equals("new")) {
+			dto.setCareer("신입"); 
+		}
+		if((dto.getCareer()).equals("1")) {
+			dto.setCareer("1년차"); 
+		}
+		if((dto.getCareer()).equals("2")) {
+			dto.setCareer("2년차"); 
+		}
+		if((dto.getCareer()).equals("3")) {
+			dto.setCareer("3년차"); 
+		}
+		if((dto.getCareer()).equals("4")) {
+			dto.setCareer("4년차"); 
+		}
+		if((dto.getCareer()).equals("5")) {
+			dto.setCareer("5년차"); 
+		}
+		if((dto.getCareer()).equals("6")) {
+			dto.setCareer("6년차"); 
+		}
+		if((dto.getCareer()).equals("7")) {
+			dto.setCareer("7년차 이상"); 
+		}
+		if((dto.getField()).equals("dev")) {
+			dto.setField("개발"); 
+		}
+		if((dto.getField()).equals("plan")) {
+			dto.setField("기획"); 
+		}
+		if((dto.getField()).equals("design")) {
+			dto.setField("디자인"); 
+		}
+		if((dto.getEmploytype()).equals("sfree")) {
+			dto.setEmploytype("개인 프리랜서"); 
+		}
+		if((dto.getEmploytype()).equals("tfree")) {
+			dto.setEmploytype("팀 프리랜서"); 
+		}
+		if((dto.getEmploytype()).equals("sbusiness")) {
+			dto.setEmploytype("개인 사업자"); 
+		}
+		if((dto.getEmploytype()).equals("cbusiness")) {
+			dto.setEmploytype("법인 사업자"); 
+		}
+		if((dto.getProjecttype()).equals("side")) {
+			dto.setProjecttype("사이드 프로젝트"); 
+		}
+		if((dto.getProjecttype()).equals("main")) {
+			dto.setProjecttype("메인 프로젝트"); 
+		}
+		if((dto.getProjecttype()).equals("sidemain")) {
+			dto.setProjecttype("둘 다");
+		}
+		if((dto.getWorktype()).equals("online")){
+			dto.setWorktype("원격"); 
+		}
+		if((dto.getWorktype()).equals("office")){
+			dto.setWorktype("상주"); 
+		}
+		if((dto.getWorktype()).equals("discuss")){
+			dto.setWorktype("협의"); 
+		}
+		
+		if(dto.getLang() == null){
+			if((dto.getField()).equals("기획")){
+				dto.setLang("기획");
+			}
+			if((dto.getField()).equals("디자인")){
+				dto.setLang("디자인");
+			}
+		}
+		if((dto.getLocation()).equals("all")) {
+			dto.setLocation("전지역"); 
+		}
+		if((dto.getLocation()).equals("online")) {
+			dto.setLocation("원격"); 
+		}
+		if((dto.getLocation()).equals("seoul")) {
+			dto.setLocation("서울"); 
+		}
+		if((dto.getLocation()).equals("gyunggi")) {
+			dto.setLocation("경기"); 
+		}
+		if((dto.getLocation()).equals("incheon")) {
+			dto.setLocation("인천"); 
+		}
+		if((dto.getLocation()).equals("gangwon")) {
+			dto.setLocation("강원"); 
+		}
+		if((dto.getLocation()).equals("chungbuk")) {
+			dto.setLocation("충북"); 
+		}
+		if((dto.getLocation()).equals("chungnam")) {
+			dto.setLocation("충남"); 
+		}
+		if((dto.getLocation()).equals("deajeon")) {
+			dto.setLocation("대전"); 
+		}
+		if((dto.getLocation()).equals("sejong")) {
+			dto.setLocation("세종"); 
+		}
+		if((dto.getLocation()).equals("jeonbuk")) {
+			dto.setLocation("전북"); 
+		}
+		if((dto.getLocation()).equals("jeonnam")) {
+			dto.setLocation("전남"); 
+		}
+		if((dto.getLocation()).equals("gwangju")) {
+			dto.setLocation("광주"); 
+		}
+		if((dto.getLocation()).equals("gyungbuk")) {
+			dto.setLocation("경북"); 
+		}
+		if((dto.getLocation()).equals("gyungnam")) {
+			dto.setLocation("경남"); 
+		}
+		if((dto.getLocation()).equals("daegu")) {
+			dto.setLocation("대구"); 
+		}
+		if((dto.getLocation()).equals("busan")) {
+			dto.setLocation("부산"); 
+		}
+		if((dto.getLocation()).equals("jeju")) {
+			dto.setLocation("제주"); 
+		}
+			
 %>		
 		<title>프로젝트 내용</title>
 		<section class="section2">
@@ -80,17 +209,13 @@
 					<li>
 						<label>타입</label>
 						<span>
-<%							if(dto.getProjecttype() == "side") { 
-%>								사이드 프로젝트 
-<%							} else { 
-%>								메인 프로젝트
-<%							}
-%>						</span>
+							<%=dto.getProjecttype()%> 
+						</span>
 					</li>
 					
 					<li>
 						<label>예상 금액</label>
-						<span><%=dto.getPay() %>원</span>
+						<span><%=dto.getPay() %>만원</span>
 					</li>
 					
 					<li>
@@ -100,25 +225,7 @@
 					
 					<li>
 						<label>위치</label>
-						<span><% if(dto.getLocation()=="online"){ %>원격<%
-						}else if(dto.getLocation()=="seoul"){%>서울<%
-						}else if(dto.getLocation()=="gyunggi"){%>경기<% 
-						}else if(dto.getLocation()=="incheon"){%>인천<% 
-						}else if(dto.getLocation()=="gangwon"){%>강원<%
-						}else if(dto.getLocation()=="chungbuk"){%>충북<%
-						}else if(dto.getLocation()=="chungnam"){%>충남<%
-						}else if(dto.getLocation()=="daejeon"){%>대전<%
-						}else if(dto.getLocation()=="sejong"){%>세종<%
-						}else if(dto.getLocation()=="jeonbuk"){%>전북<%
-						}else if(dto.getLocation()=="jeonnam"){%>전남<%
-						}else if(dto.getLocation()=="gwangju"){%>광주<%
-						}else if(dto.getLocation()=="gyungbuk"){%>경북<%
-						}else if(dto.getLocation()=="gyungnam"){%>경남<%
-						}else if(dto.getLocation()=="daegu"){%>대구<%
-						}else if(dto.getLocation()=="ulsan"){%>울산<%
-						}else if(dto.getLocation()=="busan"){%>부산<%
-						}else {%>제주도<%
-						}%></span>
+						<span><%=dto.getLocation() %></span>
 					</li>
 					
 					<li id="detail-projectimg">

@@ -180,7 +180,8 @@
 	//3rd. 컨텐츠(글) 리스트 출력
 	if (list != null) {		//작성된 글이 있을떄
 		for(SmemberDTO dto : list) {
-			/* if((dto.getCareer()).equals("new")) {
+			//한글패치
+			if((dto.getCareer()).equals("new")) {
 				dto.setCareer("신입"); 
 			}
 			if((dto.getCareer()).equals("1")) {
@@ -231,6 +232,9 @@
 			if((dto.getProjecttype()).equals("main")) {
 				dto.setProjecttype("메인 프로젝트"); 
 			}
+			if((dto.getProjecttype()).equals("sidemain")) {
+				dto.setProjecttype("둘 다");
+			}
 			if((dto.getWorktype()).equals("online")){
 				dto.setWorktype("원격"); 
 			}
@@ -240,7 +244,18 @@
 			if((dto.getWorktype()).equals("discuss")){
 				dto.setWorktype("협의"); 
 			}
-
+			
+			if(dto.getLang() == null){
+				if((dto.getField()).equals("기획")){
+					dto.setLang("기획");
+				}
+				if((dto.getField()).equals("디자인")){
+					dto.setLang("디자인");
+				}
+			}
+			if((dto.getLocation()).equals("all")) {
+				dto.setLocation("전지역"); 
+			}
 			if((dto.getLocation()).equals("online")) {
 				dto.setLocation("원격"); 
 			}
@@ -291,7 +306,7 @@
 			}
 			if((dto.getLocation()).equals("jeju")) {
 				dto.setLocation("제주"); 
-			}  */
+			} 
 
 %>			<div class="mboard">
 				<ul class="mboard-inside">
