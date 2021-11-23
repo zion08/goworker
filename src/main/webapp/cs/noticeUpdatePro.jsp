@@ -8,7 +8,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	String path = request.getRealPath("fileSave");  // 저장 경로 
+	String path = request.getRealPath("uploadFile/csFile");  // 저장 경로 
 	String enc = "UTF-8";			
 	int size = 1024*1024*10;  
 	DefaultFileRenamePolicy dp = new DefaultFileRenamePolicy(); 

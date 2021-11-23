@@ -14,10 +14,10 @@
 
 <title>고객센터</title>
 <h2>고객센터 [문의사항]</h2>
-<div class="section7">
-	<a href="notice.jsp" class="sideicon2"><p>공지사항</p></a>
-	<a href="cs.jsp" class="sideicon2"><p>문의사항</p></a>
-</div>
+	<div class="section7">
+		<a href="notice.jsp" class="sideicon2"><p>공지사항</p></a>
+		<a href="cs.jsp" class="sideicon2"><p>문의사항</p></a>
+	</div>
 
 
 <%
@@ -117,7 +117,6 @@
 %>		<input type="button"  value="글쓰기" onclick="window.location='csWrite.jsp' "/>
 <%  } %>
 </section> 
-
 
 <%@ include file = "/include/footer.jsp" %>
 
