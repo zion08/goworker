@@ -82,7 +82,7 @@
 
 
 
-
+	<br/>
 	<div  align="center"><h3>프로젝트 만들기 페이지</h3></div><br/>
 	
 	<table border=1  align="center" >
@@ -114,7 +114,7 @@
 			</tr>
 			<tr>
 				<td align="center"  width="90px" height="4">제목</td>
-				<td  colspan="2" align="center" style="font-size:18px"><b><%=dto.getSubject() %></b></td>
+				<td  colspan="2" align="center" style="font-size:15px"><b><%=dto.getSubject() %></b></td>
 			</tr>
 			<tr>
 				<td align="center" width="90px">내 용</td>
@@ -130,7 +130,9 @@
 						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="600px"height="500px">
 
 					<%}else{ %>
-				<td colspan="2">등록된 첨부파일이 없습니다.</td>
+				<td colspan="2" style="font-size:13px">
+					등록된 첨부파일이 없습니다. 
+				</td>
 					<%} %>
 			</tr>
 	
@@ -139,8 +141,8 @@
             <tr>
             	<td align="center" colspan="3">
                	 	<form action="/goworker/makeproject/project_delete.jsp?num=<%=dto.getNum()%>"  method="post" >
-                   		 <input type="hidden" name="num" value="<%=dto.getNum() %>"/>
-                   		 <input type="button" value="수정" onclick="window.location='/goworker/makeproject/project_update.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
+                   		<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
+                   		<input type="button" value="수정" onclick="window.location='/goworker/makeproject/project_update.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum %>'"/>
                      	<input type="submit" value="삭제" onclick="project_removeCheck()"/>
                      	<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
                 	</form>
@@ -150,7 +152,7 @@
     		<tr>
     			 <td align="center" colspan="3">
                     <input type="button" value="추천!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
-                    <input type="button" value="비추천!" onclick="window.open('project_Down.jsp?num=<%=dto.getNum()%>','Down','width=300,height=150');window.location.reload();"/><br/>
+                    <input type="button" value="비추천!" onclick="window.open('project_Down.jsp?num=<%=dto.getNum()%>','Down','width=300,height=150');window.location.reload();"/><br/><br/>
                     <input type="button" value="메세지" onclick="window.open('../message/message.jsp?mpnum=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
                     <input type="button" value="이메일보내기" onclick="window.location='/goworker/makeproject/email/mail.jsp?pageNum=<%=pageNum%>'"/>
        				<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>

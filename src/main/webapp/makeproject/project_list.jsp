@@ -13,6 +13,7 @@
 
 <%@ include file = "../include/header.jsp" %>
 
+<link href="style.css" rel="stylesheet" type="text/css">
 
 
 <%
@@ -55,8 +56,10 @@
 %>
 
 
-
+<br/>
+<title>프로젝트 만들기</title>
 <h2>프로젝트 만들기</h2>
+
 <!-- makeproject 검색창 -->
 <div class="search2">
 	<form action="project_search.jsp" method="post" align="right">
@@ -65,8 +68,8 @@
 			<option value="content">프로젝트 내용</option>
 			<option value="id">아이디</option>
 		</select>
-		<input type="text" name="search" />
-		<input type="submit" value="검색" />
+			<input type="text" name="search" />
+			<input type="submit" value="검색" />
 	</form>		
 </div>
 	
@@ -83,7 +86,7 @@
                 		
                		</tr>
         	</table>
-	<%} %>
+	<%}%>
 
 
 
@@ -92,11 +95,11 @@
 	if(count == 0){%>
 	
 	<table width="700" border="1" cellpadding="0" cellspacing="0">
-		<tr>
-    		<td align="center">
-    			게시판에 저장된 글이 없습니다.
-    		</td>
-   	 </tr>
+		 <tr>
+    			<td align="center">
+    				게시판에 저장된 글이 없습니다.
+    			</td>
+   		 </tr>
 	</table>
 
 <%	
@@ -116,19 +119,18 @@
 	
 	<table border="1" width="700"  cellpadding="0" cellspacing="0" align="center"> 
         	<tr>
-        		<th width="400px" height="70px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
+        		<th width="400px" height="85px" style="font-size:14.5px">
+        			<a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
         			<%=dto.getSubject() %></a> [<%=comment_count %>]</th>
-        		<td align="center" width="140px">
+        		<td align="center" width="90px">
         			<img src="image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
         			<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
         			<img src="image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
         		</td>
-        		<td width="80px" align="center">
         		
         		
         		
-        		
-        		
+        		<td width="85px" align="center" style="font-size:13px">
 <%				if(result != null){ %>
 <%					if(result.equals("admin")){%>	
 						<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
@@ -140,15 +142,13 @@
 						<img src="image/image.jpg" width="40px" height="40px" /><br/>
 					<%}
         		}%>        			
-        				<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
-        		</td>
-        		<td width="60px" align="center" >
-        			<%=sdf.format(dto.getReg_date()) %>
+        				<span class=" getid"><%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"></span><br/>
+        				<span class="regdate"><%=sdf.format(dto.getReg_date()) %></span>
         		</td>
         	</tr>
         </table>
-     <%} 
-}%>      
+     		<%} 
+		}%>      
 </center>
 
 
@@ -168,19 +168,19 @@
 				endPage = pageCount;
 			}
 			
-			if(startPage > 10){
-%>				<a href="project_list.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
-<%		}
+			if(startPage > 10){%>
+				<a href="project_list.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+			<%}
 	
 		for (int i = startPage ; i <= endPage ; i++) {%>
 			<a href="project_list.jsp?pageNum=<%=i%>">[<%=i %>] </a>
-<%		}
+		<%}
 	
 		if(endPage < pageCount) {%>
 			<a href="project_list.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
 		<%}
 	}%>
-</section >
+</section ><br/>
 
 
 
