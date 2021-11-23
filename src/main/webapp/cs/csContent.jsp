@@ -11,12 +11,9 @@
 <jsp:useBean class="bean.CsDTO"  id="dto" />
 <jsp:setProperty property="num" name="dto" />
 
-<html>
-<head>
+
 <title>문의사항</title>
-</head>
 <br/>
-<body>
 <%		
       String id = null;
       if(session.getAttribute("sid") != null){
@@ -34,29 +31,27 @@
 	 dto = dao.getContent(dto);
 %>
 <section class="section1">
-   <table border="1" width="535px" >
-    <tr>
-      <th width = "500px" >작성자 : <%=dto.getWriter() %> </th>
-    </tr>
-<tr>
-      <th width = "500px" >작성일 : <%=dto.getRegdt() %> </th>
-    </tr>
-<tr>
-      <th width = "500px" >제 목 : <%=dto.getSubject() %> </th>
-    </tr>
-<tr>
-      <th width = "500px" hight = "300px" >내 용 : <%=dto.getContent() %> </th>
-      
-</tr>
-<tr>
-      <th width = "500px">
-        <%if(dto.getFilename() != null){ %>
-	     첨부파일  : <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
-        <%} else { %>
-			 등록된 첨부파일이 없습니다.</th>
-			<%} %>     
-</tr>
-</table>
+	<table border="1" width="535px" >
+	    <tr>
+	      <th width = "500px" >작성자 : <%=dto.getWriter() %> </th>
+	    </tr>
+	    <tr>
+	      <th width = "500px" >작성일 : <%=dto.getRegdt() %> </th>
+	    </tr>
+	    <tr>
+	      <th width = "500px" >제 목 : <%=dto.getSubject() %> </th>
+	    </tr>
+	    <tr>
+	      <th width = "500px" hight = "300px" >내 용 : <%=dto.getContent() %> </th>	      
+	    </tr>
+	    <tr>
+	   <%if(dto.getFilename() != null){ %>
+	      <th width = "500px">
+		     첨부파일  : <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
+	      </th>				    
+	     </tr>
+	<%} %> 
+	</table>
 </section>
 <!-- 댓글 작성 폼 -->
 <%
@@ -129,8 +124,8 @@
 	
 %>
 <% 
-		if(count > 0) { 
-			for(Comment_CsDTO cdto : list)  {
+    if(count > 0) { 
+	  for(Comment_CsDTO cdto : list)  {
 %>
 <section class="section1">
 
@@ -165,67 +160,49 @@
 					<%=sdf.format(cdto.getComment_regdate()) %>
 				</td>
 			
-        <% if(sid !=null) {
-            if(sid.equals(cdto.getComment_writerid())||sid.equals("admin")) { %>								
+ <%   if(sid !=null) {
+         if(sid.equals(cdto.getComment_writerid())||sid.equals("admin")) { %>								
 			<td  align="center">
 				<form action="/goworker/cs/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
 					<input type="button" value="수정" onclick="window.open('/goworker/cs/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
 					<input type="submit" value="삭제" onclick="comment_removeCheck()" />
 	 				<input type="button" value="답글" onclick="window.open('/goworker/cs/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
-	 				</td>				
-	 				<%}else{ %>
-	 				
-	 				<td algin="center">
-	 					<input type="button" value="답글" onclick="window.open('/goworker/cs/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
-	 				</td>
+	 	    </td>				
+	 	     <%}else{ %>	 				
+	 		       <td algin="center">
+	 			      <input type="button" value="답글" onclick="window.open('/goworker/cs/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&pageNum=<%=pageNum%>','reply','width=600,height=300');" />
+	 		       </td>
 	 			</form> 			
-	 	       </tr>				
+	 	     </tr>				
           <% 	}
             }%>
 <%       }
 	}
 %>
-</table><br/>
-</section>
-</section>
-<br/>
+      </table><br/>
+    </section>
+</section><br/>
+
 <center>
-<input type="button" value="목록" 
+    <input type="button" value="목록" 
 	   onclick=" window.location='cs.jsp?pageNum=<%=pageNum%>' "/>
 
 <%
         
-        // 로그인된 id 와 글작성자 비교
-	    if(sid != null){
-		if(sid.equals(dto.getWriter()) || sid.equals("admin")){
-%>		<input type="button" value="글수정" onclick=" window.location='csUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
-		<input type="button" value="글삭제" onclick=" window.location='csDelete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>	
-<%  	     }
-	   }
-
-
+     // 로그인된 id 와 글작성자 비교
+	 if(sid != null){
+     if(sid.equals(dto.getWriter()) || sid.equals("admin")){
+%>	   <input type="button" value="글수정" onclick=" window.location='csUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
+	   <input type="button" value="글삭제" onclick=" window.location='csDelete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>	
+<%  	  }
+	}
 	if(sid.equals("admin")) {%>
 <input type="button" value="문의사항/관리자" onclick="window.location='/goworker/admin/admin_cs.jsp'" />
 	<%} %>
 </center>
  <br/>
 <%@ include file = "/include/footer.jsp" %>
-<style>
-            aside{
-                display:block;
-                width:400px;
-                margin:10px;
-                padding:4px;
-                text-align:center;
-            }
-            aside {
-                float:left;
-                width:104px;
-                height:240px;
-            }
-    </style>  
 
- </html>
     
 
 
