@@ -7,12 +7,14 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 
 <%@ page import = "bean.MemberDAO" %>
+<%@ page import ="bean.MakeProject_CommentDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
 
+<title>프로젝트만들기 검색 결과페이지</title>
+<h2>프로젝트 검색결과 페이지</h2>
 
 <%
-
 	request.setCharacterEncoding("UTF-8");
 
 	int pageSize = 5;
@@ -20,12 +22,10 @@
 	String colum = request.getParameter("colum");
 	String search = request.getParameter("search");
 	
-
 	String pageNum = request.getParameter("pageNum");
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");
 
-	
 	String id = (String)session.getAttribute("id");
 	
 	
@@ -38,112 +38,150 @@
 	int endRow = currentPage * pageSize;
 	
 	MakeProjectDAO dao = new MakeProjectDAO();
-	
 	int count = 0;
-	
 	List<MakeProjectDTO> list = null;
 	
 	if(id == null){
-		count = dao.getSearchCount(colum, search); // 전체 글 수
+		count = dao.getSearchCount(colum, search);
 		if(count > 0){
 			list = dao.getSearchList(colum, search, startRow, endRow);
 		}
 	}
+	
+	
+	// 댓글 수 출력 기능
+	MakeProjectDTO mdto = new MakeProjectDTO();
+	MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
+	int comment_count = 0;
+	int board_num = mdto.getNum();
+	comment_count = cd.getCommentCount(board_num);
 %>
-<div class="search-box" align="center">프로젝트 검색 한 결과 페이지</div>
 
+<%-- 기능 버튼 --%>
+<section class="section2">
 <%
-	if(sid != null) {
-%> 		<table width="700" align="center">
-                <tr>
-                	<td align="right" bgcolor="pink">
-                	<a href="project_input.jsp">글쓰기</a>
-                </tr>
-    	</table>
-   <%} %>
+	if(sid != null || cid!=null){
+%>	
+                	<a href="project_input.jsp" >[글 작성하기]</a>
+                	<a href ="project_list.jsp?best=1" >[좋아요 많은 글]</a>
+<%	}
+%>
+</section>
+
+
     
-    
-    <center>
+<%-- 메인 화면 --%>
+<section class="section1">
+	<table border="1">
+		<tr>
+			<th width="480px">제 목</th>
+			<th width="130px">조 회</th>
+			<th width="100px">작성자</th>
+		</tr>
 <%
 	if(count == 0){
 %>
-	<table width="700" border="1" cellpadding="0" cellspacing="0">
-		<tr>
-    		<td align="center">
-    			게시판에 저장된 글이 없습니다.
-    		</td>
-   	 </tr>
-	</table>
+			 <tr>
+    				<td align="center" >
+    					게시판에 저장된 글이 없습니다.
+    				</td>
+   		 	</tr>
 
-	<%}else{ %>
-
-<% 
-	for(MakeProjectDTO dto : list) { 
-	
-		MemberDAO mdao = new MemberDAO();
-		String result = mdao.getRank(dto.getId());
-	
-	%>
-	<table border="1" width="700" cellpadding="0" cellspacing="0" align="center"> 
-        	<tr>
-        		<th width="400px" height="70px" ><a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject() %></a></th>
-        		<td align="center">
-        			<img src="/goworker/s-member/image/view.png" width="20px" height="20px" ><%=dto.getReadcount()%>
-        			<img src ="/goworker/s-member/image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
-        			<img src ="/goworker/makeproject/image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
-        			
+<%	}else{
+		for(MakeProjectDTO dto : list) { 
+			MemberDAO mdao = new MemberDAO();
+			String result = mdao.getRank(dto.getId());
+%>
+        		<tr>
+        		<th width="400px" height="85px" style="font-size:14.5px">
+        			<a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
+        			<%=dto.getSubject() %></a> [<%=comment_count %>]
+        		</th>
+        		<td align="center" width="90px">
+        			<img src="image/view.png" width="20px" height="20px" /><%=dto.getReadcount()%>
+        			<img src="image/thumbs.png" width="20px" height="20px"/><%=dto.getGood() %>
+        			<img src="image/thumbs_down.png" width="20px" height="20px"/><%=dto.getDown() %>
         		</td>
-        		<td width="80px" align="center">
-        		
-<%				if(result != null){ %>
-<%				if(result.equals("admin")){%>	
-					<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
-				<%} %>
-<%				if(result.equals("manager")){%>				
-					<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
-					<%} %>
-<%		  		if(result.equals("member")){ %>
-        			<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"/><br/>
-        			<%}
-				}%>
-        			<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
-        		</td>
-        		<td width="100px" align="center" >
-        			<%=sdf.format(dto.getReg_date()) %>
+        		<td width="85px" align="center" style="font-size:13px">
+<%				if(result != null){
+%>
+<%					if(result.equals("admin")){
+%>	
+						<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
+<%					}
+%>
+<%					if(result.equals("manager")){
+%>				
+						<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
+<%					}
+%>
+<%		  			if(result.equals("member")){
+%>
+						<img src="image/image.jpg" width="40px" height="40px" /><br/>
+<%					}
+        		}
+%>        			
+        				<span class="getid"><%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"></span><br/>
+        				<span class="regdate"><%=sdf.format(dto.getReg_date()) %></span>
         		</td>
         	</tr>
+<%				} 
+			}
+%>
         </table>
-     <%} 
-}%>      
-</center>
+</section>     	      
 
 
-<section align="center">
+<%-- 검색 박스 --%>
+<section class="section2">
+	<form action="project_search.jsp" method="post">
+		<select name="colum">
+			<option value="subject">제목</option>
+			<option value="content">프로젝트내용</option>
+			<option value="id">작성자</option>
+		</select>
+			<input type="text" name="search" />
+			<input type="submit" value="검색" />
+	</form>		
+</section>
+
+
+
+
+
+
+<section class="section2">
 <%
 	if(count > 0){
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 		int startPage = (currentPage / 10)* 10 +1;
-		int pageBlock = 10;
+		int pageBlock = 7;
 		int endPage = startPage + pageBlock -1;
 			if(endPage > pageCount) {
 				endPage = pageCount;
 			}
 			
 			if(startPage > 10){
-%>				<a href="project_list.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
-<%		}
+%>
+				<a href="project_list.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+<%			}
 	
 		for (int i = startPage ; i <= endPage ; i++) {
-%> 			<a href="project_list.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+%>
+			<a href="project_list.jsp?pageNum=<%=i%>">[<%=i %>] </a>
 <%		}
 	
 		if(endPage < pageCount) {
-%>		<a href="project_list.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-<%		}
-	}
 %>
+			<a href="project_list.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+<%		}
+%>
+<%	 }
+%>
+</section ><br/>
 
-</section >
+
+<%@ include file="../include/footer.jsp"%>
 
     
     

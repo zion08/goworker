@@ -11,18 +11,14 @@
 
 <%@ page import = "java.text.SimpleDateFormat" %>
 
-<%request.setCharacterEncoding("UTF-8"); %>
-    
+
+ 
 <jsp:useBean class= "bean.MakeProjectDTO"  id="dto" />
 <jsp:setProperty property="*" name="dto" />
 
 
-<style>
-	textarea {
-		font-size:15px;
-	}
-</style>
-
+<title>프로젝트 수정 페이지</title>
+<h2>프로젝트 수정 페이지</h2>
 
 
 <%	
@@ -46,21 +42,12 @@
 	
 %>    
 
-
-
-<title>프로젝트 수정 페이지</title>
-
-
-<center>
-	<br/>
-	<h3>프로젝트 수정 페이지</h3>
-	<br/>
-	
+<div style=" padding-right: 15px;  padding-left: 15px;  margin-right: auto;  margin-left: auto;" align="center" >		
 	<form action="project_updatePro.jsp" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
 			<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 			
-		<table border = "1" cellpadding="0" cellspacing="0" align="center">
+		<table border = "1">
 			<tr>
 				<td align="center" width="50px" height="70px" align="center">
 <%				if(result != null){ %>
@@ -88,26 +75,29 @@
 			</tr>
 			<tr>
 				<td align="center" width="90px">제 목</td>
-				<th colspan="2"><input type="text"  style="width:605px;height:30px;font-size:15px;" name="subject" value="<%=dto.getSubject() %>"/></th>
+				<th colspan="2">
+					<input type="text"  style="width:605px;height:30px;font-size:15px;" name="subject" value="<%=dto.getSubject() %>"/>
+				</th>
 			</tr>
 			<tr>	
 				<td align="center" width="90px">내 용</td>
-				<td colspan="2"><textarea name="content" id="contenet"  maxlength="2000px" cols="73px" rows="33px" style="resize: none;" ><%=dto.getContent() %></textarea>
+				<td colspan="2">
+					<textarea name="content" id="contenet"  maxlength="2000px" cols="73px" rows="33px" style="resize: none;font-size:15px" ><%=dto.getContent() %></textarea>
 				</td>
 			</tr>
 			<tr>
 					<td align="center" width="90px">첨부파일</td>
-				<%if(dto.getProjectfile() != null){ %>
+<%			if(dto.getProjectfile() != null){%>
 					<td colspan="2">
 						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="600px"height="500px"/><br/>
 						<input type="file" name="projectfile"/>
 					</td>
-				<%}else{ %>
+<%			}else{%>
 					<td colspan="2" style="font-size:13px">
 						<input type="file" name="projectfile"/><br/>
 						등록된 첨부파일이 없습니다. 파일을 첨부해주세요.
 					</td>
-				<%} %>
+			<%} %>
 			</tr>
 			<tr>
 				<td colspan="3" align="center">
@@ -117,6 +107,6 @@
 			</tr>
 		</table>
 	</form>
-</center><br/>
+</div><br/>
 
 <%@ include file = "/include/footer.jsp" %>
