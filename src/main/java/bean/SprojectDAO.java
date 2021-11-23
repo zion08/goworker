@@ -161,6 +161,7 @@ public class SprojectDAO {
 				dto.setCareer(rs.getString("career"));
 				dto.setWorktype(rs.getString("worktype"));
 				dto.setField(rs.getString("field"));
+				dto.setLocation(rs.getString("location"));
 				dto.setProjectDetail(rs.getString("projectdetail"));
 				dto.setProjecttype(rs.getString("projecttype"));
 				dto.setProjectimg(rs.getString("projectimg"));
@@ -169,7 +170,6 @@ public class SprojectDAO {
 				dto.setPay(rs.getString("pay"));
 				dto.setPageNum(rs.getInt("pageNum"));
 				dto.setProjectName(rs.getString("projectName"));
-				dto.setLocation(rs.getString("location"));
 				dto.setRegdate(rs.getTimestamp("regdate"));
 				dto.setAvailable(rs.getInt("available"));
 				dto.setIntroduce(rs.getString("introduce"));
@@ -366,6 +366,7 @@ public class SprojectDAO {
 				sdto.setSubject(rs.getString("subject"));
 				sdto.setField(rs.getString("field"));
 				sdto.setCareer(rs.getString("career"));
+				sdto.setLang(rs.getString("lang"));
 				sdto.setEmploytype(rs.getString("employtype"));
 				sdto.setLocation(rs.getString("location"));
 				sdto.setWorktype(rs.getString("worktype"));

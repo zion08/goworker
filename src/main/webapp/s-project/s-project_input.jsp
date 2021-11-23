@@ -164,7 +164,7 @@
 									<option value="90">90일</option>
 									<option value="180">180일</option>
 									<option value="365">1년</option>
-									<option value="2">2년이상</option>
+									<option value="730">2년이상</option>
 								</select>
 						</li>
 						
