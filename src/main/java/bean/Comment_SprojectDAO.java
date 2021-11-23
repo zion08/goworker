@@ -41,9 +41,9 @@ public class Comment_SprojectDAO {
 	// 댓글 입력 시 값 입력
 	public int insertComment(Comment_SprojectDTO cdto) throws Exception {
 		int comment_num = cdto.getComment_num();
-		int comment_ref=cdto.getComment_ref(); // �� ���� �ϳ��� �׷��� ������.[�亯�� �޸�, �۰� �亯��  ref�� ����]
-		int comment_step=cdto.getComment_step();   // �� �۰� ����� �����ϴ� �뵵(����)
-		int comment_level=cdto.getComment_level();    // �׷� ��ۿ��� ����� �ۼ��� ����
+		int comment_ref=cdto.getComment_ref(); 
+		int comment_step=cdto.getComment_step();  
+		int comment_level=cdto.getComment_level(); 
 		int number=0;
 		String sql="";
 		int result = 0;
@@ -271,7 +271,7 @@ public class Comment_SprojectDAO {
 			
 			
 			
-			// 댓글 갯수 출력 메서드
+			// 댓글 갯수를 화면에 표시할 때 사용 하는 메서드
 			public int getCommentCount(int board_num) {
 				int result = 0;
 				try {
@@ -291,7 +291,7 @@ public class Comment_SprojectDAO {
 			    }
 			
 			
-			// 댓글 갯수
+			// 댓글 삭제 시, [그룹으로] 댓글을 불러올 때 사용 하는 메서드
 			public int getCommentCount(Comment_SprojectDTO cdto) {
 				int result  = 0;
 				try {
