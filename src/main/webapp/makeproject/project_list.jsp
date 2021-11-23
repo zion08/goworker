@@ -80,7 +80,7 @@
 	if(sid != null){%>	
 			<table width="705" height="30px" align="center">
             	    <tr>
-                		<td align="right" bgcolor="pink" >
+                		<td align="right" >
                 		<a href="project_input.jsp" >글 작성하기</a> / 
                 		<a href ="project_list.jsp?best=1" >좋아요 많은 글</a>
                 		

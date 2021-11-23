@@ -112,7 +112,7 @@
         		</td>
 			</tr>
 			<tr>
-				<td align="center"  width="90px" height="4">제목</td>
+				<td align="center"  width="90px" height="40px">제목</td>
 				<td  colspan="2" align="center" style="font-size:15px"><b><%=dto.getSubject() %></b></td>
 			</tr>
 			<tr>

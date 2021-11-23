@@ -60,7 +60,7 @@
 			<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
 			<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 			
-		<table border = "1" align="center">
+		<table border = "1" cellpadding="0" cellspacing="0" align="center">
 			<tr>
 				<td align="center" width="50px" height="70px" align="center">
 <%				if(result != null){ %>
@@ -71,7 +71,7 @@
 						<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
 					<%} %>
 <%		  			if(result.equals("member")){ %>
-					<img src="image/image.jpg" width="40px" height="40px" /><br/>
+						<img src="image/image.jpg" width="40px" height="40px" /><br/>
 					<%}
 				}%>
 						<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"> 
@@ -88,7 +88,7 @@
 			</tr>
 			<tr>
 				<td align="center" width="90px">제 목</td>
-				<td colspan="2"><input type="text" size="85px" name="subject" value="<%=dto.getSubject() %>"/></td>
+				<td colspan="2"><input type="text"  style="width:600px;height:40px;font-size:15px;" name="subject" value="<%=dto.getSubject() %>"/></td>
 			</tr>
 			<tr>	
 				<td align="center" width="90px">내 용</td>
