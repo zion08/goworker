@@ -422,6 +422,15 @@ hr {
 	grid-auto-rows: minmax(auto, auto);
 }
 
+.getid{
+	font-size:14px;
+}
+.regdate{
+	font-size:10px;
+}
+
+
+
 .searchfor label {
 	width: 6.5vw;
 }
