@@ -91,7 +91,6 @@
 %>			<form action="edit.jsp" method="post" >
 				<input type="hidden" name="pageNum" value="<%=pageNum%>" />
 				<input type="hidden" name="num" value="<%=dto.getNum()%>">
-				<input type="hidden" name="pageNum" value="<%=pageNum%>%>">
 				<input type="submit" value="수 정" />
 			</form>
 			 
