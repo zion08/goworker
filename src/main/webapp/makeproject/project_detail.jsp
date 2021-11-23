@@ -21,8 +21,8 @@
 
 <style>
 	textarea {
-		font-size:17px;
-}
+		font-size:15px;
+	}
 </style>
 
 
@@ -112,13 +112,13 @@
         		</td>
 			</tr>
 			<tr>
-				<td align="center"  width="90px" height="40px">제목</td>
+				<td align="center"  width="90px" height="30px">제목</td>
 				<td  colspan="2" align="center" style="font-size:15px"><b><%=dto.getSubject() %></b></td>
 			</tr>
 			<tr>
 				<td align="center" width="90px">내 용</td>
 				<td colspan="2" >
-				<textarea name="content" id="contenet"  maxlength="2000px"  cols="67" rows="33"  style="resize: none;"  readonly><%=dto.getContent() %></textarea>
+				<textarea name="content" id="contenet"  maxlength="2000px"  cols="73" rows="33"  style="resize: none;"  readonly><%=dto.getContent() %></textarea>
 		
 				</td>
 			</tr>

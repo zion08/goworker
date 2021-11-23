@@ -15,8 +15,8 @@
 
 <style>
 	textarea {
-		font-size:17px;
-}
+		font-size:15px;
+	}
 </style>
 
 
@@ -36,11 +36,11 @@
 			</tr>
         	<tr>
         		<td align="center"  width="90px">제목</td>	
-        		<th width="300px"><input type="text" style="width:500px;height:30px;font-size:15px;" height="40px" name="subject" maxlength="100" required></th> 
+        		<th><input type="text" style="width:605px;height:30px;font-size:15px;" height="40px" name="subject" maxlength="100" required></th> 
        	 	</tr>
        	 	<tr>
         		<td align="center" width="90px">내용</td>
-        		<td><textarea name="content" maxlength="2000px" style="width:500px;height:550px;" required></textarea></td>
+        		<td><textarea name="content" maxlength="2000px" cols="73px" rows="33px" style="resize: none;"required></textarea></td>
         	</tr>
         	<tr>
         		<td align="center" width="90px">첨부파일</td>

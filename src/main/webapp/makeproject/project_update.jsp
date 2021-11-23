@@ -19,8 +19,8 @@
 
 <style>
 	textarea {
-		font-size:17px;
-}
+		font-size:15px;
+	}
 </style>
 
 
@@ -88,11 +88,11 @@
 			</tr>
 			<tr>
 				<td align="center" width="90px">제 목</td>
-				<td colspan="2"><input type="text"  style="width:600px;height:40px;font-size:15px;" name="subject" value="<%=dto.getSubject() %>"/></td>
+				<th colspan="2"><input type="text"  style="width:605px;height:30px;font-size:15px;" name="subject" value="<%=dto.getSubject() %>"/></th>
 			</tr>
 			<tr>	
 				<td align="center" width="90px">내 용</td>
-				<td colspan="2"><textarea name="content" id="contenet"  maxlength="2000px" cols="67px" rows="33px" style="resize: none;" ><%=dto.getContent() %></textarea>
+				<td colspan="2"><textarea name="content" id="contenet"  maxlength="2000px" cols="73px" rows="33px" style="resize: none;" ><%=dto.getContent() %></textarea>
 				</td>
 			</tr>
 			<tr>
