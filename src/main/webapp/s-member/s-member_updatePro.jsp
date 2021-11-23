@@ -27,6 +27,7 @@
 	String career = mr.getParameter("career");
 	String lang[] = mr.getParameterValues("lang");
 	String portfolio = mr.getFilesystemName("portfolio");
+	String org = mr.getParameter("org");
 	String pfdetail = mr.getParameter("pfdetail");
 	String employtype = mr.getParameter("employtype");
 	String projecttype = mr.getParameter("projecttype");
@@ -53,6 +54,7 @@
 		}
 	}
 	
+	
 	SmemberDTO dto = new SmemberDTO();
 	dto.setId(sid);	
 	dto.setNum(Integer.parseInt(num));
@@ -62,7 +64,6 @@
 	dto.setField(field);
 	dto.setCareer(career);
 	dto.setLang(langStr);
-	dto.setPortfolio(portfolio);
 	dto.setPfdetail(pfdetail);
 	dto.setEmploytype(employtype);
 	dto.setProjecttype(projecttype);
@@ -72,6 +73,11 @@
 	dto.setPeriod(period);
 	dto.setAvailable(avail);
 	dto.setIntroduce(introduce);
+	if(portfolio == null){
+		dto.setPortfolio(org);
+	}else{
+		dto.setPortfolio(portfolio);
+	}
 	
 	SmemberDAO dao = new SmemberDAO();
 	
