@@ -142,7 +142,7 @@ public class SprojectDAO {
 	public SprojectDTO getContent(SprojectDTO dto) {
 		try {
 			conn = OracleDB.getConnection();
-			pstmt = conn.prepareStatement("select * from S_PROJECT where num=?");
+			pstmt = conn.prepareStatement("select * from s_project where num=?");
 			pstmt.setInt(1, dto.getNum());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -161,15 +161,13 @@ public class SprojectDAO {
 				dto.setCareer(rs.getString("career"));
 				dto.setWorktype(rs.getString("worktype"));
 				dto.setField(rs.getString("field"));
-				dto.setLocation(rs.getString("location"));
 				dto.setProjectDetail(rs.getString("projectdetail"));
 				dto.setProjecttype(rs.getString("projecttype"));
 				dto.setProjectimg(rs.getString("projectimg"));
 				dto.setEmploytype(rs.getString("employtype"));
 				dto.setPeriod(rs.getString("period"));
 				dto.setPay(rs.getString("pay"));
-				dto.setPageNum(rs.getInt("pageNum"));
-				dto.setProjectName(rs.getString("projectName"));
+				dto.setLocation(rs.getString("location"));
 				dto.setRegdate(rs.getTimestamp("regdate"));
 				dto.setAvailable(rs.getInt("available"));
 				dto.setIntroduce(rs.getString("introduce"));
