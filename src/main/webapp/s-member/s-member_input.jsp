@@ -102,7 +102,7 @@
 						
 						<li id="pfdetail">
 							<label>포트폴리오 설명</label>
-								<textarea name="pfdetail" >
+								<textarea name="pfdetail">
 								</textarea>
 						</li>
 					</ul>

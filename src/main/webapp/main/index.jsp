@@ -27,7 +27,7 @@
 			<span>프로젝트 찾기</span>
 		</div>
 		<div id="mproject" onclick="window.location='../makeproject/project_list.jsp'">
-			<span>프로젝트 생성</span>
+			<span>프로젝트 의뢰</span>
 		</div>
 		<div id="community" onclick="window.location='../board/board.jsp'">
 			<span>커뮤니티</span>
