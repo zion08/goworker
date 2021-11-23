@@ -7,11 +7,10 @@
     
 <jsp:useBean class="bean.CsDTO"  id="dto" />
 <jsp:setProperty property="*" name="dto" />
-<html>
-<head>
+
 <title>문의사항</title>
-</head>
-<body>
+
+
 <%		
       String id = null;
       if(session.getAttribute("sid") != null){
@@ -29,41 +28,38 @@
 	%>
 <br/>
 <h1>문의사항 수정</h1>
-        <form action="csUpdatePro.jsp" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
-				<input type="hidden" name="pageNum" value="<%=pageNum%>" />
-				
-				  <table class="cs" border=1>
-
-			 <tr>
+  <section class="section1">
+      <form action="csUpdatePro.jsp" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="num" value="<%=dto.getNum() %>" />
+		<input type="hidden" name="pageNum" value="<%=pageNum%>" />				
+		   <table class="cs" border=1>
+			   <tr>
 			      <th width ="100px" align = "center">제 목</th>
 			      <th width="300px" colspan=3 align="center">
-    	          <input type="text" name="subject" value="<%=dto.getSubject() %>" />  <br />
-    	          </th>
-    	     </tr>
-             <tr>	
+	    	          <input type="text" name="subject" value="<%=dto.getSubject() %>" />  <br />
+	   	          </th>
+	    	   </tr>
+	           <tr>	
 			      <td width="100px" align="center">내 용</td>
 			      <td width="300px" colspan=3 align="center">
-			      <input type="text" size="100" name="content" id="content" style="width:500px;height:100px;" value="<%=dto.getContent() %>"></td>
-		     </tr>
-		     <tr>
-		          <td width="100px" align="center">첨부파일</td>
-			      <td width="300px" colspan=3 align="center">  
-              <%if(dto.getFilename() != null){%> 
-    			   <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
-    		  <%}else{%>
-    				[첨부파일 없음]
-    		  <%} %>
-    		       <input type="file" name="filename" /> 
-    		  </td><br />
-    		  </table>
-    	     <td colspan=2 align="center">
-    	     <input type="button" value="목록" 
-	   onclick=" window.location='cs.jsp?pageNum=<%=pageNum%>' "/>
+				      <input type="text" size="100" name="content" id="content" style="width:500px;height:100px;" value="<%=dto.getContent() %>"></td>
+			   </tr>
+			   <tr>
+			      <td width="100px" align="center">첨부파일</td>
+	    	      <td width="300px" colspan=3 align="center">  
+	                <%if(dto.getFilename() != null){%> 
+	    			   <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
+	    		    <%}else{%>
+	    				[첨부파일 없음]
+	    		    <%} %>
+	    		       <input type="file" name="filename" /> 
+	    		  </td><br />
+	    		</tr>
+	       </table>	       
+	    	     <td colspan=2 align="center">
+    	            <input type="button" value="목록" onclick=" window.location='cs.jsp?pageNum=<%=pageNum%>' "/>
 
-<%
-    
-      // 로그인된 id 와 글작성자 비교
+<%          // 로그인된 id 와 글작성자 비교
       if(sid != null){
 		if(sid.equals(dto.getWriter()) || cid.equals("admin")){
 %>		<input type="submit" value="수정" />
@@ -71,28 +67,11 @@
 <%  	}
 	}
 %>
-    	    </td>
-		</tr>
-</form>
-</body>
- <br/>
+    	</td>
+    </form>
+</section> 
+<br/>
 <%@ include file = "/include/footer.jsp" %>
-<style>
-            aside{
-                display:block;
-                width:400px;
-                margin:10px;
-                padding:4px;
-                text-align:center;
-            }
-            aside {
-                float:left;
-                width:104px;
-                height:240px;
-            }
-    </style>  
-
- </html>
     
     
     
