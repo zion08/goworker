@@ -107,7 +107,9 @@
 						
 						<li id="projectdetail">
 							<label>프로젝트 설명</label>
-								<input type="text" name="projectdetail" >
+								<textarea name="projectdetail" cols="60" rows="10">
+								<%=dto.getProjectDetail() %>
+								</textarea>
 						</li>
 					</ul>
 					
@@ -200,7 +202,9 @@
 						
 						<li id="introduce">
 							<label>소개</label>
-								<input type="text" name="introduce" value="<%=dto.getIntroduce()%>">
+								<textarea name="introduce" cols="60" rows="10">
+								<%=dto.getIntroduce() %>
+								</textarea>
 						</li>
 					</ul>
 					

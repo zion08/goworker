@@ -29,21 +29,16 @@
         <tr>
           <td></td>
           <td><a href="/goworker/makeproject/project_list.jsp">프로젝트만들기</a></td>
-          <td><a href="/goworker/member/mypage.jsp">마이페이지</a></td>
+          <td><a href="/goworker/member/myPage.jsp">마이페이지</a></td>
           <td></td>
         </tr>
         <tr>
             <td></td>
-            <td><a href="/goworker/.jsp">취업정보</a></td>
+            <td><a href="/goworker/board/board.jsp">커뮤니티</a></td>
             <td></td>
             <td></td>
           </tr>
-        <tr>
-          <td></td>
-          <td><a href="/goworker/board/board.jsp">커뮤니티</a></td>
-          <td></td>
-          <td></td>
-        </tr>
+        
       </tbody>
       
     </table>

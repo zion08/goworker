@@ -43,7 +43,7 @@
 <%  if(count > 0){
 	for(SprojectDTO dto : list) { %>
 	<div>
-		<form action="/goworker/s-project/s-project_delete.jsp?num=<%=dto.getNum()%>" method="get">
+		<form action="/goworker/s-project/s-project_adminDelete.jsp?num=<%=dto.getNum()%>" method="get">
 		<table  border=1 width="570px">
 			<tr>
 				<th width="80">

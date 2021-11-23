@@ -200,7 +200,7 @@
 			</form>
 			
 			
-<%			if(sid.equals(dto.getId())) {
+<%			if(sid.equals(dto.getId()) || rank.equals("admin")) {
 %>				<form action= "s-member_delete.jsp" method="post" align="center">
 					<input type="button" value="수정 하기" onclick="window.location='/goworker/s-member/s-member_update.jsp?num=<%=dto.getNum() %>'" />
 					<input type="submit" value="삭제 하기" onclick="button_event()" />

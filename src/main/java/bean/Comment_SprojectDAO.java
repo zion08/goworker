@@ -16,7 +16,7 @@ public class Comment_SprojectDAO {
 	private ResultSet rs = null;
 	
 	
-	// ÀüÃ¼ comment ºÒ·¯¿À´Â ±â´É
+	// ì „ì²´ comment ë¶ˆëŸ¬ì˜¤ëŠ” ê¸°ëŠ¥
 	public int selectComment(Comment_SprojectDTO cdto) throws Exception {
 		int result = 0;
 		try { 
@@ -38,12 +38,12 @@ public class Comment_SprojectDAO {
 	
 	
 	
-	// ´ñ±Û ÀÔ·Â ½Ã °ª ÀÔ·Â
+	// ëŒ“ê¸€ ì…ë ¥ ì‹œ ê°’ ì…ë ¥
 	public int insertComment(Comment_SprojectDTO cdto) throws Exception {
 		int comment_num = cdto.getComment_num();
-		int comment_ref=cdto.getComment_ref(); // »õ ±ÛÀº ÇÏ³ªÀÇ ±×·ìÀ» °¡Áø´Ù.[´äº¯À» ´Ş¸é, ±Û°ú ´äº¯ÀÇ  ref°¡ µ¿ÀÏ]
-		int comment_step=cdto.getComment_step();   // »õ ±Û°ú ´ä±ÛÀ» ±¸ºĞÇÏ´Â ¿ëµµ(Á¤·Ä)
-		int comment_level=cdto.getComment_level();    // ±×·ì ´ä±Û¿¡¼­ ´ä±ÛÀÇ ÀÛ¼ºµÈ ¼ø¼­
+		int comment_ref=cdto.getComment_ref(); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.[ï¿½äº¯ï¿½ï¿½ ï¿½Ş¸ï¿½, ï¿½Û°ï¿½ ï¿½äº¯ï¿½ï¿½  refï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½]
+		int comment_step=cdto.getComment_step();   // ï¿½ï¿½ ï¿½Û°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ëµµ(ï¿½ï¿½ï¿½ï¿½)
+		int comment_level=cdto.getComment_level();    // ï¿½×·ï¿½ ï¿½ï¿½Û¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int number=0;
 		String sql="";
 		int result = 0;
@@ -89,7 +89,8 @@ public class Comment_SprojectDAO {
 	
 	
 	
-	// ´ñ±Û ¸®½ºÆ® Ãâ·Â
+	
+	// ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥
 	public List<Comment_SprojectDTO> getComment(int board_num) throws Exception {
 		List<Comment_SprojectDTO> list = null;
 		try {
@@ -120,7 +121,8 @@ public class Comment_SprojectDAO {
 	
 	
 	
-	// ¸®½ºÆ® °¹¼ö 
+	
+		// ë¦¬ìŠ¤íŠ¸ ê°¯ìˆ˜ 
 		public int getCount() {
 			int result = 0;
 			try {
@@ -137,6 +139,7 @@ public class Comment_SprojectDAO {
 			}
 			return result;
 		}
+		
 		
 		
 		
@@ -164,7 +167,7 @@ public class Comment_SprojectDAO {
 		
 		
 		
-		// ´ñ±Û ¼öÁ¤ ±â´É
+		// ëŒ“ê¸€ ìˆ˜ì •
 		public int updateComment(Comment_SprojectDTO cdto) {
 			int result = 0;
 			try {
@@ -186,7 +189,7 @@ public class Comment_SprojectDAO {
 		
 		
 		
-		// ´ñ±Û »èÁ¦ ±â´É
+		// ëŒ“ê¸€ ì‚­ì œ
 		public String deleteComment(int comment_num) {
 			String result = null;
 			try {
@@ -212,7 +215,7 @@ public class Comment_SprojectDAO {
 		
 		
 		
-		// ´ñ±Û ÆäÀÌÂ¡ Ã³¸® ±â´É (ÇöÀç »ç¿ëÇÏÁö´Â ¾Ê½À´Ï´Ù.)
+		// ëŒ“ê¸€ í˜ì´ì§• ì²˜ë¦¬
 		public List getCommentReply(int start, int end) {
 			List commentReplyList = null;
 			try {
@@ -249,7 +252,9 @@ public class Comment_SprojectDAO {
 				return commentReplyList;
 			}
 		
-			// ´ñ±Û ÃßÃµ ±â´É ±â´É ±¸Çö
+		
+		
+			// ëŒ“ê¸€ ì¶”ì²œ ë©”ì„œë“œ
 			public void commentGood(Comment_SprojectDTO cdto) {
 				try {
 					conn = OracleDB.getConnection();
@@ -265,7 +270,8 @@ public class Comment_SprojectDAO {
 		}
 			
 			
-			// ´ñ±Û °¹¼ö Ãâ·Â ¸Ş¼­µå
+			
+			// ëŒ“ê¸€ ê°¯ìˆ˜ ì¶œë ¥ ë©”ì„œë“œ
 			public int getCommentCount(int board_num) {
 				int result = 0;
 				try {
@@ -285,7 +291,7 @@ public class Comment_SprojectDAO {
 			    }
 			
 			
-			// ´ñ±Û °¹¼ö
+			// ëŒ“ê¸€ ê°¯ìˆ˜
 			public int getCommentCount(Comment_SprojectDTO cdto) {
 				int result  = 0;
 				try {
