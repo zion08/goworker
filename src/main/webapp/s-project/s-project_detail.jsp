@@ -59,6 +59,9 @@
 		}
 		
 		//한글패치
+		if((dto.getCareer())==null) {
+			dto.setCareer("미입력");
+		}
 		if((dto.getCareer()).equals("new")) {
 			dto.setCareer("신입"); 
 		}
@@ -83,6 +86,9 @@
 		if((dto.getCareer()).equals("7")) {
 			dto.setCareer("7년차 이상"); 
 		}
+		if((dto.getField())==null) {
+			dto.setField("미입력"); 
+		}
 		if((dto.getField()).equals("dev")) {
 			dto.setField("개발"); 
 		}
@@ -91,6 +97,9 @@
 		}
 		if((dto.getField()).equals("design")) {
 			dto.setField("디자인"); 
+		}
+		if((dto.getEmploytype())==null){
+			dto.setEmploytype("미입력");
 		}
 		if((dto.getEmploytype()).equals("sfree")) {
 			dto.setEmploytype("개인 프리랜서"); 
@@ -104,6 +113,9 @@
 		if((dto.getEmploytype()).equals("cbusiness")) {
 			dto.setEmploytype("법인 사업자"); 
 		}
+		if((dto.getProjecttype())==null){
+			dto.setProjecttype("미입력");
+		}
 		if((dto.getProjecttype()).equals("side")) {
 			dto.setProjecttype("사이드 프로젝트"); 
 		}
@@ -112,6 +124,9 @@
 		}
 		if((dto.getProjecttype()).equals("sidemain")) {
 			dto.setProjecttype("둘 다");
+		}
+		if((dto.getWorktype())==null) {
+			dto.setWorktype("미입력");
 		}
 		if((dto.getWorktype()).equals("online")){
 			dto.setWorktype("원격"); 
@@ -130,6 +145,12 @@
 			if((dto.getField()).equals("디자인")){
 				dto.setLang("디자인");
 			}
+			if((dto.getField())==null){
+				dto.setLang("미입력");
+			}
+		}
+		if((dto.getLocation())==null) {
+			dto.setLocation("미입력");
 		}
 		if((dto.getLocation()).equals("all")) {
 			dto.setLocation("전지역"); 
@@ -184,7 +205,7 @@
 		}
 		if((dto.getLocation()).equals("jeju")) {
 			dto.setLocation("제주"); 
-		}
+		} 
 			
 %>		
 		<title>프로젝트 내용</title>
