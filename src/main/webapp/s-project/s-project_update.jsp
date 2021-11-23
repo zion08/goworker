@@ -203,9 +203,10 @@
 						</li>
 						
 						<li id="introduce">
-							<textarea name="introduce" cols="60" rows="10" />
-							<%=dto.getIntroduce() %>
-							</textarea>>
+							<label>소개</label>
+								<textarea name="introduce" cols="60" rows="10" />
+								<%=dto.getIntroduce() %>
+								</textarea>>
 						</li>
 					</ul>
 					
