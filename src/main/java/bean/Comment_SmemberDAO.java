@@ -260,7 +260,7 @@ public class Comment_SmemberDAO {
 	
 	
 	
-	// 댓글 갯수 출력 메서드
+	// 댓글 갯수를 화면에 표시할 때 사용 하는 메서드
 	public int getCommentCount(int board_num) {
 		int result = 0;
 		try {
@@ -280,7 +280,7 @@ public class Comment_SmemberDAO {
 	    }
 	
 	
-		// 댓글 갯수
+		// 댓글 삭제 시, [그룹으로] 댓글을 불러올 때 사용 하는 메서드
 		public int getCommentCount(Comment_SmemberDTO cdto) {
 			int result  = 0;
 			try {
