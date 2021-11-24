@@ -198,7 +198,7 @@
 						</li>
 						
 						<li id="introduce">
-							<label>소개</label>
+							<label>업무 내용</label>
 								<textarea name="introduce" >
 								</textarea>
 						</li>
