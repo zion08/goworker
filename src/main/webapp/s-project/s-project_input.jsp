@@ -105,7 +105,7 @@
 						
 						<li id="projectdetail">
 							<label>프로젝트 설명</label>
-								<textarea name="projectdetail" cols="60" rows="10">
+								<textarea name="projectdetail">
 								</textarea>
 						</li>
 					</ul>
@@ -199,7 +199,7 @@
 						
 						<li id="introduce">
 							<label>소개</label>
-								<textarea name="introduce" cols="60" rows="10">
+								<textarea name="introduce" >
 								</textarea>
 						</li>
 					</ul>
