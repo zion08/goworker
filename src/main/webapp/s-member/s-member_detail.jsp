@@ -385,7 +385,7 @@
 				<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 	
 				작성자: <b><%=sid %></b><input type="hidden" name="comment_writerid" value="<%=sid%>"/><br/>
-				<input type="text" size="120" name="comment_content" style="width:460px;height:70px;" placeholder="댓글을 입력해주세요." required>
+				<input type="text" size="120" name="comment_content" style="width:650px;height:70px;" placeholder="댓글을 입력해주세요." required>
 				<input type="submit" value="댓글작성"/>
 			</form>
 		</section>
@@ -425,7 +425,7 @@
 						
 					</td>
 					 
-					<td width="350px">
+					<td width="530px">
 <%						int wid=0; 
 						if(cdto.getComment_level()>0){
 							wid=10*(cdto.getComment_level());%>
