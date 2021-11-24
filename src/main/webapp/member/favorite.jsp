@@ -106,7 +106,7 @@
 						<input type="hidden" name="num" value="<%=pdto.getNum()%>" />
 						<td width="100">프로젝트찾기</td>
 						<td width="50"><%=pdto.getNum()%></td>
-						<td width="300" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"><ahref="/goworker/s-project/s-project_detail.jsp?num=<%=pdto.getNum()%>&pageNum=<%=pageNum%>"><%=pdto.getSubject()%></a></td>
+						<td width="300" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"><a href="/goworker/s-project/s-project_detail.jsp?num=<%=pdto.getNum()%>&pageNum=<%=pageNum%>"><%=pdto.getSubject()%></a></td>
 						<td width="200"><%=pdto.getRegdate()%></td>
 						<td width="60"><input type="submit" value="관심해제"></td>
 					</tr>
