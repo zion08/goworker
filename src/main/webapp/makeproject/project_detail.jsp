@@ -17,54 +17,60 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 
 
-
 <jsp:useBean class = "bean.MakeProjectDTO" id= "dto" />
 <jsp:setProperty property="*" name="dto" />  
+
+<% request.setCharacterEncoding("UTF-8"); %>
 
 
 <title>프로젝트 페이지</title>
 <h2>프로젝트 페이지</h2>
 
 
-<%
- 	request.setCharacterEncoding("UTF-8");
-	String pageNum = request.getParameter("pageNum");
+
+<%	if (sid == null) {
+%>		<script>
+			location.href="../member/login.jsp";
+		</script> 
+<%	} else {
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		String pageNum = request.getParameter("pageNum");
 	
-	MakeProjectDAO dao = new MakeProjectDAO();
-	dao.readCountUp(dto);
-	dto = dao.getContent(dto);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+	
+		MakeProjectDAO dao = new MakeProjectDAO();
+		dao.readCountUp(dto);
+		dto = dao.getContent(dto);
 		
 	
-	// 댓글 수 관련
-	MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
-	int comment_count = 0;
-	int board_num = dto.getNum();
+		// 댓글 수 관련
+		MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
+		int comment_count = 0;
+		int board_num = dto.getNum();
 	
-	comment_count = cd.getCommentCount(board_num);
-	
-	
-	
-	// 랭크에 따른 프로필 사진 변경 메서드
-	MemberDAO mdao = new MemberDAO();
-	String result = mdao.getRank(dto.getId());
+		comment_count = cd.getCommentCount(board_num);
 	
 	
-	// 코멘트 관련
-	int comment_num=0, comment_ref=1, comment_step=0, comment_level=0;
-	if(request.getParameter("comment_num") != null){
-		comment_num=Integer.parseInt(request.getParameter("comment_num"));
-		comment_ref=Integer.parseInt(request.getParameter("comment_ref"));
-		comment_step=Integer.parseInt(request.getParameter("comment_step"));
-		comment_level=Integer.parseInt(request.getParameter("comment_level"));
-	}
+	
+		// rank에 따른 프로필 사진 변경 메서드
+		MemberDAO mdao = new MemberDAO();
+		String result = mdao.getRank(dto.getId());
 	
 	
-	// 댓글 리스트
-	MakeProject_CommentDAO cdao = new MakeProject_CommentDAO();
-	int count = 0;
-	List<MakeProject_CommentDTO> list = null;
+		// 코멘트 관련
+		int comment_num=0, comment_ref=1, comment_step=0, comment_level=0;
+		if(request.getParameter("comment_num") != null){
+			comment_num=Integer.parseInt(request.getParameter("comment_num"));
+			comment_ref=Integer.parseInt(request.getParameter("comment_ref"));
+			comment_step=Integer.parseInt(request.getParameter("comment_step"));
+			comment_level=Integer.parseInt(request.getParameter("comment_level"));
+		}
+	
+	
+		// 댓글 리스트
+		MakeProject_CommentDAO cdao = new MakeProject_CommentDAO();
+		int count = 0;
+		List<MakeProject_CommentDTO> list = null;
 	
 		count = cdao.getCount(); // 전체 글의 갯수
 		if(count > 0){
@@ -295,10 +301,10 @@
  	</tr>
 <%             }
 		   }
-%>
-<%      }
+		}
 	 }
   }
+}
 %>
  </table><br/>
  
