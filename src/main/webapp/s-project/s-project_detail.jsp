@@ -248,21 +248,22 @@
 						<label>위치</label>
 						<span><%=dto.getLocation() %></span>
 					</li>
-					
+					<%	if(dto.getProjectimg() != null) { %>
 					<li id="detail-projectimg">
 						<label>대표 이미지</label>
 						<span>
-<%							if(dto.getProjectimg() != null) { %>
-								<img src = "../uploadFile/projectFile/<%=dto.getProjectimg() %>">
-<%							} else { 
-%>								등록된 이미지가 없습니다.
-<%							} 
-%>						</span>
+						<img src = "../uploadFile/projectFile/<%=dto.getProjectimg() %>">
+						</span>
+					</li>
+					<%}%>
+					<li id="detail-projectdetail">
+						<label>프로젝트 소개</label>
+						<span><%= dto.getProjectDetail() %></span>
 					</li>
 					
-					<li id="detail-projectdetail">
+					<li id="detail-introduce">
 						<label>업무 내용</label>
-						<span><%= dto.getProjectDetail() %></span>
+						<span><%= dto.getIntroduce() %></span>
 					</li>
 					
 					<li>
@@ -320,13 +321,15 @@
 %>			<form action= "s-project_delete.jsp" method="post" align="center">
 				<input type="button" value="수정 하기" onclick="window.location='/goworker/s-project/s-project_update.jsp?num=<%=dto.getNum() %>'" />
 				<input type="submit" value="삭제 하기" onclick="button_event()" />
+				<input type="button" value="목록으로" onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'"/>
 				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 			</form>
 <%			} else {
 %>				<input type="button" value="이메일" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?spnum=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
+				<input type="button" value="목록으로" onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'"/>
 <% 			}				
-%>				<input type="button" value="목록으로" onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'"/>
+%>
 		</section>
 			
 
