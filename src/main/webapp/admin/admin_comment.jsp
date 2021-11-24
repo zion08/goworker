@@ -6,7 +6,7 @@
 <%@ include file = "../include/header.jsp" %>
 
 
-<h2>멤버 관리</h2>
+<h2>댓글 관리</h2>
 <%	
 
 	request.setCharacterEncoding("UTF-8");
