@@ -31,13 +31,13 @@
 						<li id="id">	
 							<label>아이디</label>
 								<span><%=sid%></span>
-							<input type="hidden" name="id" value="<%=sid%>"/>
+							<input type="hidden" name="id" value="<%=sid%>" />
 						</li>
 						
 						<li id=email>
 							<label>이메일</label>
 								<span><%=email%></span>
-								<input type="hidden" name="email">
+								<input type="hidden" name="email" value="<%=email%>" />
 						</li>
 										
 						<li id=phone>
