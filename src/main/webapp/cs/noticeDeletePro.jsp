@@ -11,7 +11,7 @@
 	NoticeDAO dao = new NoticeDAO();
 	String result = dao.deleteNotice(num);
 	if(result != null){
-		String path = request.getRealPath("fileSave");
+		String path = request.getRealPath("uploadFile/csFile");
 		File f = new File(path+"//"+result);
 		f.delete();
 	}

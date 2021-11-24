@@ -54,42 +54,48 @@
 	
 %>
 <section class="section1">
-    <table border="1" width="800px">
+    <table  border=1 width="750px" style="table-layout:fixed">
 
 	<%if(count == 0){%>
 		<tr>
 			<th colspan="6">저장된 글이 없습니다. <br/>본인의 글만 볼수 있습니다.</th>
 		</tr>	
 	<%}else{%>
-	<tr>
-		<th>글번호</th><th>작성자</th><th>제목</th><th>작성일</th><th>조회</th><th>답변진행사항</th>
-	</tr>
+	    <tr>
+		    <th width="70">글번호</th>
+		    <th width="120">작성자</th>
+		    <th width="200">제목</th>
+		    <th width="150">작성일</th>
+		    <th width="70">조회</th>
+		    <th colspan="2">답변진행사항</th>
+	    </tr>
 	<%
 	
-    	for(CsDTO dto : list){%>
-	<tr>
-		<td><%=dto.getNum()%></td>
-		<td><%=dto.getWriter()%></td>
-		<td><a href="csContent.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></td> 	
-		<td><%=dto.getRegdt()%></td>
-		<td><%=dto.getReadcount()%></td>
-		<%
-		Comment_CsDAO cdao = new Comment_CsDAO();
-		int ccount = 0;
-		ccount = cdao.getCommentCount(dto.getNum());
-		if(ccount == 0){%>
-			<td colspan="6">답변진행중</td>
-	    <%}else{%>
-			<td colspan="6">답변완료</td>
-		<%	}%>
-	</tr>		
+    for(CsDTO dto : list){%>
+	    <tr>
+			<th width="70"><%=dto.getNum()%></td>
+			<th width="120"><%=dto.getWriter()%></td>
+			<th width="200"style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"><a href="csContent.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></td> 	
+			<th width="150"><%=dto.getRegdt()%></td>
+			<th width="70"><%=dto.getReadcount()%></td>
+			
+<% //댓글답변 갯수
+	Comment_CsDAO cdao = new Comment_CsDAO();
+	int ccount = 0;
+	ccount = cdao.getCommentCount(dto.getNum());
+	if(ccount == 0){%>
+			<th colspan="2">답변진행중</th>
+	<%}else{%>
+			<th colspan="2">답변완료</th>
+	<%	}%>
+		</tr>		
 <%	}
 }%>
-</table>
+      </table>
 </section>
 
 <section class="section2">
-<%
+<% 
 	if(count > 0){
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
 		int startPage = (currentPage / 10) * 10 + 1;

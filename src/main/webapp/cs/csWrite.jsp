@@ -42,7 +42,7 @@
                 <tr>	
 			      <td width="100px" align="center">내 용</td>
 			      <td width="300px" colspan=3 align="center">
-			      <textarea name="content" cols="60" rows="10" ></textarea></td>
+			        <textarea name="content" cols="60" rows="10" ></textarea></td>
 		        </tr>
 		        <tr>
 		          <td width="100px" align="center">첨부파일</td>

@@ -42,5 +42,10 @@
 	<script>
 		alert("수정되었습니다.");
 		window.location="cs.jsp?num=<%=num%>&pageNum=<%=pageNum%>";
-	</script>
-<%}%>
+		</script>
+		  <%}else { %>
+		  		<script>
+					alert("제목과 내용을 확인해주세요.!");
+					history.go(-1);
+				</script>
+		  <%} %>
