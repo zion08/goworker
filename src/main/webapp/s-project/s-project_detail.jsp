@@ -422,7 +422,7 @@
 				 
 					<tr>
 						<td width="30px" align="center" colspan="4" style="font-size: 12px">
-	 						<img src="image/bestcomment.png" width="25px" height="25px" onclick="window.open('/goworker/s-member/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();"/>
+	 						<img src="image/bestcomment.png" width="25px" height="25px" onclick="window.open('/goworker/s-project/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();"/>
 	 						댓글이 마음에 드셨다면 ♥를 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
 	 					</td>
 		 			</tr>
