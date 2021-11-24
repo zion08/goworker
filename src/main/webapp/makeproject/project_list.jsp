@@ -52,7 +52,7 @@
 	
 	
 	
-	// 좋아요 많은 글 순
+	// 추천 많은 글 순
 	if(best != null){
 		count = dao.getCount();
 		if(count >0){
@@ -66,10 +66,10 @@
 <%-- 기능 버튼 --%>
 <section class="section2">
 <%
-	if(sid != null || cid!=null){
+	if(sid != null){
 %>	
               <a href="project_input.jsp" >[글 작성하기]</a>
-              <a href ="project_list.jsp?best=1" >[좋아요 많은 글]</a>
+              <a href ="project_list.jsp?best=1" >[추천 많은 글]</a>
 <%	}
 %>
 </section>
