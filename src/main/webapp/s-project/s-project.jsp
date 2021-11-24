@@ -352,6 +352,9 @@
 			if((dto.getLocation()).equals("daegu")) {
 				dto.setLocation("대구"); 
 			}
+			if((dto.getLocation()).equals("ulsan")) {
+				dto.setLocation("울산"); 
+			}
 			if((dto.getLocation()).equals("busan")) {
 				dto.setLocation("부산"); 
 			}
