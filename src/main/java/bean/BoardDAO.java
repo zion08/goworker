@@ -273,7 +273,7 @@ public class BoardDAO {
 			if(rs.next()) {
 				result=rs.getString("filename");
 			}
-			pstmt=conn.prepareStatement("delete form board where num=?");
+			pstmt=conn.prepareStatement("delete from board where num=?");
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
