@@ -45,29 +45,34 @@
 	    list = dao.getAllList( start , end );
 		}
 %>
-     <table border="1">
-	<tr>
-		<th>글번호</th><th>작성자</th><th>제목</th> <th>작성일</th><th>조회</th>
-	</tr>
+<section class="section1">
+     <table  border=1 width="800px" style="table-layout:fixed">
+	   <tr>
+		    <th width="70">글번호</th>
+		    <th width="100">작성자</th>
+		    <th width="350">제목</th>
+		    <th width="150">작성일</th>
+		    <th width="70">조회</th>
+	    </tr>
 	<%if(count == 0){%>
 		<tr>
 			<td colspan="6">저장된 글이 없습니다...!!</td>
 		</tr>	
 	<%}else{%>
 	<%
-    	for(NoticeDTO dto : list){%>
-	<tr>
-		<td><%=dto.getNum()%></td>
-		<td><%=dto.getWriter()%></td>
-		<td><a href="/goworker/admin/admin_noticeContent.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></td> 	
-		<td><%=dto.getRegdt()%></td>
-		<td><%=dto.getReadcount()%></td>
+      for(NoticeDTO dto : list){%>
+		<tr>
+			<th width="70"><%=dto.getNum()%></th>
+			<th width="100"><%=dto.getWriter()%></th>
+		    <th width="350"style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"><a href="/goworker/admin/admin_noticeContent.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>"><%=dto.getSubject()%></a></th> 	
+		    <th width="150"><%=dto.getRegdt()%></th>
+			<th width="70"><%=dto.getReadcount()%></th>
 	</tr>		
 <%	}
 }%>
 	</table>
+ </section>
 </section>
-
 
 <section class="section2"> 
 <%
@@ -95,6 +100,7 @@
 
 <section class="section2">
  		<input type="button"  value="글쓰기" onclick="window.location='admin_noticeWrite.jsp' "/>
+ 		<input type="button" value="취소" onclick= "history.go(-1)"/>
 </section>
 
 

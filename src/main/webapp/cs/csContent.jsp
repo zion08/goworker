@@ -14,6 +14,7 @@
 
 <title>문의사항</title>
 <br/>
+
 <%		
       String id = null;
       if(session.getAttribute("sid") != null){
@@ -31,24 +32,32 @@
 	 dto = dao.getContent(dto);
 %>
 <section class="section1">
-	<table border="1" width="535px" >
+	<table border=1  align="center" >
 	    <tr>
-	      <th width = "500px" >작성자 : <%=dto.getWriter() %> </th>
+	      <td align="center"width="90px" height="4"   align="center">작성자</td>
+	      <td align="center">
+	      <%=dto.getWriter() %> </td>
+	      <td align="right" width="200px">
+	      <%=dto.getRegdt() %> </td>
 	    </tr>
 	    <tr>
-	      <th width = "500px" >작성일 : <%=dto.getRegdt() %> </th>
+	      <td align="center"  width="90px" height="4">제목</td>
+	      <td  colspan="2" align="center" style="font-size:18px">
+	      <%=dto.getSubject() %></td>
 	    </tr>
 	    <tr>
-	      <th width = "500px" >제 목 : <%=dto.getSubject() %> </th>
-	    </tr>
+	      <td align="center" width="90px" >내 용</td>
+	       <td colspan="2" >
+			<textarea name="content" id="content"  maxlength="2000px"  
+			style="font-size:14px" cols="62" rows="10"  readonly><%=dto.getContent() %></textarea>	      
+           </td>	    
+	     </tr>
 	    <tr>
-	      <th width = "500px" hight = "300px" >내 용 : <%=dto.getContent() %> </th>	      
-	    </tr>
-	    <tr>
-	   <%if(dto.getFilename() != null){ %>
-	      <th width = "500px">
-		     첨부파일  : <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
-	      </th>				    
+<%      if(dto.getFilename() != null){ %>
+	      <td align="center" width="90px">첨부파일</td>
+	      <td colspan="2" align="center">
+		  <img src="../uploadFile/csFile/<%=dto.getFilename()%>" width = "300px"height="300px">
+	      </td>				    
 	     </tr>
 	<%} %> 
 	</table>
@@ -70,12 +79,11 @@
 	
 %>	
 <%
-        // 로그인된 id 와 글작성자 비교
-	    if(sid != null){
-		if(sid.equals("admin")){%>
-		<section class="section1">	
-
-	<form action="comment/commentPro.jsp" name="writeform" method="get" >
+    // 로그인이 관리자일때
+	if(sid != null){
+    if(rank.equals("admin")){%>
+	  <section class="section1">	
+	    <form action="comment/commentPro.jsp" name="writeform" method="get" >
 			<input type="hidden" name="board_num" value="<%=dto.getNum()%>"/>
 			<input type="hidden" name="comment_num" value="<%=comment_num%>"/>
 			<input type="hidden" name="comment_ref" value="<%=comment_ref%>"/>
@@ -85,18 +93,16 @@
 			
 		<table class="comments" border=1>
 			<tr>
-
-				<td width="60" align="center">작성자</td>
+				<td width="90" align="center">작성자</td>
 				<td width="200px" colspan=3 align="center">
 					<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
 				</td>
-
 			</tr>
 			
 			<tr>	
-				<td width="60px" align="center">내 용</td>
+				<td width="90px" align="center">내 용</td>
 				<td width="300px" colspan=3 align="center">
-					<input type="text" size="100" name="comment_content" id="comment_content" style="width:465px;height:100px;" placeholder="댓글을 입력해주세요." required;></td>
+					<input type="text" size="100" name="comment_content" id="comment_content" style="width:465px;height:100px;" placeholder="댓글을 입력해주세요." required></td>
 			</tr>
 			
 			<tr>
@@ -129,12 +135,12 @@
 %>
 <section class="section1">
 
-	<table class="comments" border="1" width="535px" align="center">
+	<table class="comments" border="1" width="566px" align="center">
 		<tr>
-			<td width="60px">작성자</td>
-			<td width="350px" align="center">내 용</td>
-			<td width="60px" align="center" >작성일</td>
-			<td width="40px" align="center">버튼</td>
+			<td width="60px" align="center">작성자</td>
+ 			<td width="300px" align="center">내용</td>
+ 			<td width="80px" align="center">작성일</td>
+ 			<td width="40px" align="center">버튼</td>
 		</tr>	
 			<tr>	
 				<td align="center">
@@ -161,7 +167,7 @@
 				</td>
 			
  <%   if(sid !=null) {
-         if(sid.equals(cdto.getComment_writerid())||sid.equals("admin")) { %>								
+         if(sid.equals(cdto.getComment_writerid())||rank.equals("admin")) { %>								
 			<td  align="center">
 				<form action="/goworker/cs/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
 					<input type="button" value="수정" onclick="window.open('/goworker/cs/comment/commentUpdate.jsp?comment_num=<%=cdto.getComment_num()%>','update','width=800,height=300');"/>
@@ -179,28 +185,52 @@
 <%       }
 	}
 %>
-      </table><br/>
-    </section>
-</section><br/>
-
+     </table><br/>
+   </section>
+</section>
+<br/>
 <center>
-    <input type="button" value="목록" 
+<form action="csDelete.jsp" method="post" align="center">
+     <input type="button" value="목록" 
 	   onclick=" window.location='cs.jsp?pageNum=<%=pageNum%>' "/>
 
 <%
         
-     // 로그인된 id 와 글작성자 비교
-	 if(sid != null){
-     if(sid.equals(dto.getWriter()) || sid.equals("admin")){
-%>	   <input type="button" value="글수정" onclick=" window.location='csUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
-	   <input type="button" value="글삭제" onclick=" window.location='csDelete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>	
-<%  	  }
-	}
-	if(sid.equals("admin")) {%>
+        // 로그인된 id 와 글작성자 비교 또는 관리자 일때 조건
+	    if(sid != null){
+		if(sid.equals(dto.getWriter()) || rank.equals("admin")){
+%>	
+        <input type="button" value="글수정" onclick=" window.location='csUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
+		<input type="submit" value="글삭제" onclick="button_event()"/>
+			 <input type="hidden" name="num" value="<%=dto.getNum() %>" />
+				</form>	
+<%  	     }
+	   }
+
+
+	if(rank.equals("admin")) {%>
 <input type="button" value="문의사항/관리자" onclick="window.location='/goworker/admin/admin_cs.jsp'" />
 	<%} %>
 </center>
  <br/>
+ 
+   	<script>
+  	function button_event(){
+
+  		if (confirm("정말 삭제하시겠습니까??") == true){ 
+  		    document.form.submit();
+  		    window.loction='/goworker/cs/csDelete.jsp';
+  			} 
+  		}
+ 	
+ 		function comment_removeCheck(){
+ 			if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
+ 				document.form.submit;
+ 				window.location='/goworker/cs/comment/commentDelete.jsp';
+ 			}
+ 		}
+ 	</script>
+ 	
 <%@ include file = "/include/footer.jsp" %>
 
     

@@ -15,7 +15,7 @@
 	if(result ==1) { %>
 		 <script type="text/javascript">
 			alert("삭제 되었습니다.");
-			window.location = "/goworker/admin/admin_smember.jsp";
+			window.location = "/goworker/s-member/s-member.jsp";
 	</script>
 
 	<%} %>

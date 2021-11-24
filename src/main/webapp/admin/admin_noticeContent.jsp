@@ -13,10 +13,8 @@
 <jsp:useBean class="bean.NoticeDTO"  id="dto" />
 <jsp:setProperty property="num" name="dto" />
 
-<head>
 <title>공지사항</title>
-</head>
-<body>
+
 <%		
       String id = null;
       if(session.getAttribute("sid") != null){
@@ -33,40 +31,48 @@
 	  dao.readCountUp(dto);  // 조회수 증가 
 	  dto = dao.getContent(dto);
 %>
- <form>
-   <table class="cs" border=1>
-    <tr>
-      <th width = "500px" align = "center">작성자 : <%=dto.getWriter() %> </th>
-    </tr>
-<tr>
-      <th width = "500px" align = "center">작성일 : <%=dto.getRegdt() %> </th>
-    </tr>
-<tr>
-      <th width = "500px" align = "center">제 목 : <%=dto.getSubject() %> </th>
-    </tr>
-<tr>
-      <th width = "500px" hight = "300px" align = "center">내 용 : <%=dto.getContent() %> </th>
-      
-</tr>
-<tr>
-      <th width = "500px" align = "center">
-      <%if(dto.getFilename() != null){ %>
-	    첨부파일  : <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
-      <%} %> </th>     
-</tr>
-
-</table>
-</form>
-
-<input type="button" value="목록" 
-	   onclick=" window.location='admin_notice.jsp?pageNum=<%=pageNum%>' "/>
-
-<form action="/goworker/cs/noticeDeletePro.jsp" method="post">
-	<input type="hidden" name="pageNum" value=<%=pageNum %> />
+<br/>
+ <section class="section1">	
+	<table border=1  align="center" >
+	    <tr>
+	      <td align="center"width="90px" height="4"   align="center">작성자</td>
+	      <td align="center">
+	      <%=dto.getWriter() %> </td>
+	      <td align="right" width="200px">
+	      <%=dto.getRegdt() %> </td>
+	    </tr>
+	    <tr>
+	      <td align="center"  width="90px" height="4">제목</td>
+	      <td  colspan="2" align="center" style="font-size:18px">
+	      <%=dto.getSubject() %></td>
+	    </tr>
+	    <tr>
+	      <td align="center" width="90px" >내 용</td>
+	       <td colspan="2" >
+			<textarea name="content" id="contenet"  maxlength="2000px"  
+			style="font-size:14px" cols="62" rows="10"  readonly><%=dto.getContent() %></textarea>	      
+           </td>	    
+	     </tr>
+	    <tr>
+<%    if(dto.getFilename() != null){ %>
+	    <td align="center" width="90px">첨부파일</td>
+	      <td colspan="2" align="center">
+		  <img src="../uploadFile/csFile/<%=dto.getFilename()%>" width = "300px"height="300px">
+	      </td>				    
+	     </tr>
+	<%} %>
+		</table>
+  </section><br/>
+<section class="section1">
+   <form action="/goworker/cs/noticeDeletePro.jsp" method="post">
+	   <input type="hidden" name="pageNum" value=<%=pageNum %> />
 	<input type="hidden" name="num" value=<%=dto.getNum() %> />
+	    <input type="button" value="목록" 
+	   onclick=" window.location='admin_notice.jsp?pageNum=<%=pageNum%>' "/>
 		<input type="button" value="글수정" onclick=" window.location='/goworker/cs/noticeUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
 		<input type="submit" value="글삭제" onclick="button_event()"/>	
-</form>
+  </form>
+</section><br/>
 <script>
 function button_event(){
 
@@ -79,5 +85,4 @@ function button_event(){
 	}
 
 </script>
-</body>
 <%@ include file = "../include/footer.jsp" %>
