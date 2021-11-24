@@ -5,31 +5,17 @@
 <%@ page import = "bean.MakeProjectDAO" %>
 <%@ include file = "../include/header.jsp" %>
 
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
-    
 <jsp:useBean class= "bean.MakeProjectDTO"  id="dto" />
 <jsp:setProperty property="*" name="dto" />  
 
 
-<style>
-	textarea {
-		font-size:15px;
-	}
-</style>
-
-
 <title>프로젝트 만들기</title>
+<h2>프로젝트 만들기</h2>
 
 
-<center>
-	<br/>
-	<h3>프로젝트 만들기</h3>
-	<br/>
-	
+<div style=" padding-right: 15px;  padding-left: 15px;  margin-right: auto;  margin-left: auto;" align="center" >	
 	<form action="project_inputPro.jsp" method="post" enctype="multipart/form-data">
-		<table border="1"  cellpadding="0" cellspacing="0" align="center"> 
+		<table border="1"> 
 			<tr>
 				<td alIgn="center" width="50px" height="30px">아이디</td>
 				<td align="center"><%=sid %><input type="hidden" name="id" value="<%=sid%>"/></td>
@@ -40,7 +26,7 @@
        	 	</tr>
        	 	<tr>
         		<td align="center" width="90px">내용</td>
-        		<td><textarea name="content" maxlength="2000px" cols="73px" rows="33px" style="resize: none;"required></textarea></td>
+        		<td><textarea name="content" maxlength="2000px" cols="73px" rows="33px" style="resize: none;font-size:15px"required></textarea></td>
         	</tr>
         	<tr>
         		<td align="center" width="90px">첨부파일</td>
@@ -54,6 +40,6 @@
        		</tr>
 	    </table>
 	</form>
-</center><br/>
+</div><br/>
 
 <%@ include file = "/include/footer.jsp" %>

@@ -14,16 +14,16 @@
 
 <%@ include file = "../include/header.jsp" %>
 
+<link href="style.css" rel="stylesheet" type="text/css">
+
 
 
 <jsp:useBean class = "bean.MakeProjectDTO" id= "dto" />
 <jsp:setProperty property="*" name="dto" />  
 
-<style>
-	textarea {
-		font-size:15px;
-	}
-</style>
+
+<title>프로젝트 페이지</title>
+<h2>프로젝트 페이지</h2>
 
 
 <%
@@ -73,32 +73,33 @@
 	
 %>
 
-<title>프로젝트 페이지</title>
 
 <section class="section1" >
 		<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
 		<input type="hidden" name='pageNum' value="<%=pageNum %>"/>
 
 
-	<br/>
-	<div  align="center"><h3>프로젝트 만들기 페이지</h3></div>
-	<br/>
-	
-	<table border=1  align="center" >
+	<table border=1 >
 			<tr>
 				<td align="center" width="50px" height="70px"   align="center">
 				
-<%			if(result != null){ %>
-<%				if(result.equals("admin")){%>	
+<%			if(result != null){
+				if(result.equals("admin")){
+%>	
 					<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
-				<%} %>
-<%				if(result.equals("manager")){%>				
+<%				}
+%>
+<%				if(result.equals("manager")){
+%>				
 					<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
-				<%} %>
-<%		  		if(result.equals("member")){ %>
+<%				}
+%>
+<%		  		if(result.equals("member")){
+%>
 					<img src="image/image.jpg" width="40px" height="40px" /><br/>
-				<%}
-        	}%>
+<%				}
+        	}
+%>
 					<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
 				</td>
 				<td align="center" width="150px">
@@ -106,7 +107,6 @@
 				</td>
 				<td align="center" width="110px" align="center">
 						<img src="image/view.png" width="25px" height="25x"/><%=dto.getReadcount()%> &emsp;
-						<img src="image/comment.png" width="25px" height="25px" /><%=comment_count %> &emsp;
         				<img src="image/thumbs.png" width="25px" height="25px" /><%=dto.getGood() %>&emsp;
         				<img src="image/thumbs_down.png" width="25px" height="25px" /><%=dto.getDown() %>
         		</td>
@@ -118,25 +118,30 @@
 			<tr>
 				<td align="center" width="90px">내 용</td>
 				<td colspan="2" >
-				<textarea name="content" id="contenet"  maxlength="2000px"  cols="73" rows="33"  style="resize: none;"  readonly><%=dto.getContent() %></textarea>
+				<textarea name="content" id="contenet"  maxlength="2000px"  cols="73" rows="33"  style="resize: none;font-size:15px"  readonly><%=dto.getContent() %></textarea>
 		
 				</td>
 			</tr>
 			<tr>
 				<td align="center" width="90px">첨부파일</td>
-					<%if(dto.getProjectfile() != null){ %>
+<%				if(dto.getProjectfile() != null){
+%>
 						<td colspan="2" align="center">
 						<img src="/goworker/makeproject/<%=dto.getProjectfile() %>"width="600px"height="500px">
-
-					<%}else{ %>
+<%				}else{
+%>
 				<td colspan="2" style="font-size:13px">
 					등록된 첨부파일이 없습니다. 
 				</td>
-					<%} %>
+<%				}
+%>
 			</tr>
 	
-<% if(sid !=null) {
-	if(sid.equals(dto.getId())) { %>
+	
+	
+<% 	if(sid !=null) {
+		if(sid.equals(dto.getId())) {
+%>
             <tr>
             	<td align="center" colspan="3">
                	 	<form action="/goworker/makeproject/project_delete.jsp?num=<%=dto.getNum()%>"  method="post" >
@@ -147,7 +152,8 @@
                 	</form>
                 </td>
             </tr>
-<%	} else {%>
+<%		} else {
+%>
     		<tr>
     			 <td align="center" colspan="3">
                     <input type="button" value="추천!" onclick="window.open('project_Good.jsp?num=<%=dto.getNum()%>','Good','width=300,height=150');window.location.reload();"/>
@@ -157,8 +163,9 @@
        				<input type="button" value="목록" onclick="window.location='/goworker/makeproject/project_list.jsp'"/>
        			</td>
     		</tr>
-    <%} 
- }%>
+<%		} 
+ 	}
+%>
     </table><br/>
 </section>
 
@@ -166,17 +173,14 @@
 
 
 <!-- 댓글 작성 폼 -->
-<section class="section1" >
+<section class="comment_title">
+	<h3>
+		관심있어요 [댓글 수: <%=comment_count %>]
+	</h3>
+	프로젝트에 관심있으신 분은 댓글을 남겨주세요.
+</section>
 
-
-	<table align="center">
-			<tr>
-				<td align="left" colspan="3" width="700px">
-					<h3>▶ 관심있어요</h3>프로젝트에 관심있는 분은 댓글을 남겨주세요.
-				</td>
-			</tr>
-	</table>
-
+<section class="section2" >
 	
 	<form action="/goworker/makeproject/comment/commentPro.jsp" name="commentform" method="post">
 		<input type="hidden" name="board_num" value="<%=dto.getNum()%>"/>
@@ -187,35 +191,21 @@
 		<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 		
 		
-		<table class="comments" width="700px" align="center" border="1">
 <%
 		if(sid == null){
 %>
+	<table class="comments">
 			<tr>
 				<td width="400px" colspan="3" align="center">
 					댓글은 회원만 작성이 가능합니다.<br/>로그인 후, 이용 부탁드립니다.
 				</td>
 			</tr>
-<%		}else{%>
-			<tr>
-				<td width="90px" align="center">작성자</td>
-				<td width="400px" colspan="3" align="center">
-					<%=sid %><input type="hidden" name="comment_writerid" value="<%=sid%>"/>
-				</td>	
-			</tr>
-			<tr>
-				<td width="90px" align="center">내 용</td>
-				<td width="400px" colspan="3" >
-					<input type="text" size="120" name="comment_content" style="width:618px;height:100px;" placeholder="댓글을 입력해주세요." required>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="댓글 작성"/>
-					<input type="reset" value="다시 작성" />
-				</td>
-			</tr>
-		</table>
+	</table>
+<%		}else{
+%>
+			작성자: <b><%=sid %></b><input type="hidden" name="comment_writerid" value="<%=sid%>"/><br/>
+			<input type="text" size="120" name="comment_content" style="width:620px;height:70px;" placeholder="댓글을 입력해주세요." required>
+			<input type="submit" value="댓글작성"/>
 	</form> 
 </section>
 
@@ -224,63 +214,62 @@
 
 
 <!-- 댓글 리스트 -->
+<section class="section1">
+	<table class="comments">
 <%
 		if(count > 0){
 			for(MakeProject_CommentDTO cdto : list) {
 				String comment_result = mdao.getRank(cdto.getComment_writerid());
 %>	
-	
-<section class="section1" >
- 
-	<table class="comments" border="1" width="705px" align="center">
- 
- 	
- 		<tr>
- 			<td width="60px" align="center">작성자</td>
- 			<td width="300px" align="center">내용</td>
- 			<td width="80px" align="center">작성일</td>
- 			<td width="40px" align="center">버튼</td>
- 		</tr>	
-		
 		<tr>
-			<td align="center">
-<%				if(comment_result != null){ %>
-<%					if(comment_result.equals("admin")){%>	
-					<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /></br>	
-				<%} %>
-<%				if(comment_result.equals("manager")){%>				
-					<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /></br/>
-				<%} %>
-<%		  		if(comment_result.equals("member")){ %>
+			<td align="center" width="100px">
+<%				if(comment_result != null){
+					if(comment_result.equals("admin")){
+%>	
+					<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /><br/>	
+<%				}
+%>
+<%				if(comment_result.equals("manager")){
+%>				
+					<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /><br/>
+<%				}
+%>
+<%		  		if(comment_result.equals("member")){
+%>
 					<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"><br/>
-				<%}
-        	}%>
-					<%=cdto.getComment_writerid()%><input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
+<%					}
+        	}
+%>
+					<span class="getid">
+						<%=cdto.getComment_writerid()%>
+						<input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
+						</span><br/>
+					<span class="regdate">
+						<%=sdf.format(cdto.getComment_regdate()) %>
+					</span>
 			</td>
 		
 		
-			<td>
+			<td width="490px">
 <%
 		int wid=0;
 		if(cdto.getComment_level() > 0){
-			wid=10*(cdto.getComment_level());%>	
+			wid=10*(cdto.getComment_level());
+%>	
 				<img src="/goworker/makeproject/image/white.jpg" width="<%=wid %>" height="16">
 				<img src="/goworker/makeproject/image/re.gif">
 <%		}else{
-%>				<img src="/goworker/makeproject/image/white.jpg" width="<%=wid %>" height="16">
+%>
+				<img src="/goworker/makeproject/image/white.jpg" width="<%=wid %>" height="16">
 <%		}
 %>			
-				<%=cdto.getComment_content() %>	
+				<%=cdto.getComment_content() %>		
 		</td>
 		
-		<td align="center" >
-				<%=sdf.format(cdto.getComment_regdate()) %>
-		</td>		
-		
-		
 <% 
-	if(sid !=null) {
-		if(sid.equals(cdto.getComment_writerid())) { %>			
+		if(sid !=null) {
+			if(sid.equals(cdto.getComment_writerid())) {
+%>			
 				
 		<td align="center" >	
 			<form action="/goworker/makeproject/comment/commentDelete.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref() %>"  method="post" >
@@ -290,7 +279,9 @@
 			</form>
 		</td>
 			
-<%		}else{%>
+<%		
+			}else{
+%>
 				<td align="center">
 				<input type="button" value="답글" onclick="window.open('/goworker/makeproject/comment/commentReply.jsp?comment_num=<%=cdto.getComment_num() %>&board_num=<%=dto.getNum() %>&comment_ref=<%=cdto.getComment_ref()%>&comment_step=<%=cdto.getComment_step()%>&comment_level=<%=cdto.getComment_level()%>&page=<%=pageNum %>','reply','width=600,height=300');" />
 				</td>
@@ -298,16 +289,17 @@
 	</tr>
 	<tr>
  		<td width="30px" align="center" colspan="4" style="font-size: 12px">
- 			<img src="/goworker/makeproject/image/bestcomment.png" width="30" height="30" onclick="window.open('/goworker/makeproject/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();" align="center"/>
- 			를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
- 		</td>
+	 		<img src="image/bestcomment.png" width="25px" height="25px" onclick="window.open('/goworker/s-member/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();"/>
+	 		댓글이 마음에 드셨다면 ♥를 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
+	 	</td>
  	</tr>
- 			 <%}
-		 }%>
-
-	 <%}
-	}
-}%>
+<%             }
+		   }
+%>
+<%      }
+	 }
+  }
+%>
  </table><br/>
  
 </section> 

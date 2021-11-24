@@ -264,6 +264,7 @@ hr {
 .search2 {
     width: 705px;
     margin: 0 auto;
+    text-align: center;
 }   
 
 .mInputButton {
@@ -424,12 +425,16 @@ hr {
 
 .getid{
 	font-size:14px;
+	font-weight: bold;
 }
 .regdate{
 	font-size:10px;
 }
 
-
+.comment_title{
+	margin-top:15px;
+	text-align:center;
+}
 
 .searchfor label {
 	width: 6.5vw;

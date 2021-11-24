@@ -330,20 +330,16 @@
 		</section>
 			
 
-		<!-- 댓글 작성 폼 -->
-		<section class="section1">	
 
-			<table border="1" align="center">
-				<tr>
-					<td align="left" colspan="3" width="580px" style="font-size:15px">
+		<!-- 댓글 작성 폼 -->
+		<section class="comment_title">	
 						<h3>
 							▶ 프로젝트 관련 문의 - [작성된 댓글 수: <%=comment_count %>]
 						</h3>
-						프로젝트에 대한 문의사항을 남겨주세요.
-					</td>
-				</tr>	
-			</table>
+							프로젝트에 대한 문의사항을 남겨주세요.
+		</section>
 		
+		<section class="section2">
 			<form action="comment/commentPro.jsp" name="writeform" method="get" >
 				<input type="hidden" name="board_num" value="<%=dto.getNum()%>"/>
 				<input type="hidden" name="comment_num" value="<%=comment_num%>"/>
@@ -352,45 +348,16 @@
 				<input type="hidden" name="comment_level" value="<%=comment_level%>"/>
 				<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 					
-				<table class="comments" border="1" >
-					<tr>
-						<td width="70px" align="center">
-							작성자
-						</td>
-						<td width="200px" colspan=3 align="center">
-							<input type="hidden" name="comment_writerid" value="<%=sid%>"/>
-							<%=sid %>							
-						</td>	
-					</tr>
-					
-					<tr>	
-						<td width="70px" align="center">
-							내 용
-						</td>
-						<td width="300px" colspan=3 align="center">
-							<input type="text" size="130" name="comment_content" id="comment_content" style="width:505px; height:100px;" placeholder="댓글을 입력해주세요." required;>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2 align="center">
-							<input type="submit" value="댓글 쓰기"/>
-							<input type="reset" value="다시 작성"/>
-						</td>
-					</tr>
-				</table>			
+				작성자: <b><%=sid %></b><input type="hidden" name="comment_writerid" value="<%=sid%>"/><br/>
+				<input type="text" size="120" name="comment_content" style="width:650px;height:70px;" placeholder="댓글을 입력해주세요." required>
+				<input type="submit" value="댓글작성"/>
 			</form>
-		 </section>
+		</section>
 
 
 	<!-- 댓글 리스트 -->
 		<section class="section1">
-			<table class="comments" border=1 width="589px" align="center">
-				<tr>
-					<th width="60px" align="center">작성자</th>
-					<th width="350px" align="center">내 용</th>
-					<th width="60px" align="center" >작성일</th>
-					<th width="40px" align="center">버튼</th>
-				</tr>
+			<table class="comments">
 <% 
 				if(count > 0) { 
 					for(Comment_SprojectDTO cdto : list)  {
@@ -398,8 +365,8 @@
 						String comment_result = mdao.getRank(cdto.getComment_writerid());
 %>				
 				<tr>	
-					<td align="center">
-<%						if(comment_result != null) { //등급에 따른 이미지
+					<td align="center" width="100px">
+<%						if(comment_result != null) { 
 							if(comment_result.equals("admin")){
 %>								<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
 <%							} 
@@ -411,27 +378,26 @@
 <%							} 
 						} 
 %>
-						<%=cdto.getComment_writerid() %>
-						<input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
-					</td>
+							<span class="getid">
+								<%=cdto.getComment_writerid() %>
+								<input type="hidden" name="comment_writerid" value="<%=cdto.getComment_writerid() %>" />
+							</span><br/>
+							<span class="regdate">
+								<%=sdf.format(cdto.getComment_regdate()) %>
+							</span>
+						</td>
 				
-					<td>
+					<td width="530px">
 <%						int wid=0; 
 						if(cdto.getComment_level()>0) {
-							// 답글일때에만 Re_level()의 값이 0 이상이다. / 답글일때에만 조건문 수행
 							wid=10*(cdto.getComment_level());
-		 					// 답글 들여쓰기 사이즈(width의 값으로 넣을 변수와 값 저장해서 아래에 대입)
-%>							<img src="image/white.jpg" width="<%=wid%>" height="16">
-				  			<img src="image/re.gif">
+%>								<img src="image/white.jpg" width="<%=wid%>" height="16">
+				  				<img src="image/re.gif">
 <%						} else {
-%>					   		<img src="image/white.jpg" width="<%=wid%>" height="16">	  	 
+%>					   			<img src="image/white.jpg" width="<%=wid%>" height="16">	  	 
 <%						} 
 %>
-						<%=cdto.getComment_content() %>
-					</td>
-					
-					<td align="center">
-						<%=sdf.format(cdto.getComment_regdate()) %>
+							<%=cdto.getComment_content() %>
 					</td>
 	
 <% 
@@ -453,9 +419,9 @@
 				 
 					<tr>
 						<td width="30px" align="center" colspan="4" style="font-size: 12px">
-							<img src="/goworker/s-project/image/bestcomment.png" width="30" height="30" onclick="window.open('/goworker/s-project/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();" align="center"/>
-						 	를 꾸~욱! 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
-				 		</td>
+	 						<img src="image/bestcomment.png" width="25px" height="25px" onclick="window.open('/goworker/s-member/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();"/>
+	 						댓글이 마음에 드셨다면 ♥를 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
+	 					</td>
 		 			</tr>
 <%					} 
 				}
