@@ -261,7 +261,7 @@
 		if(cdto.getComment_level() > 0){
 			wid=10*(cdto.getComment_level());
 %>	
-				<img src="white.jpg" width="<%=wid %>" height="16">
+				<img src="image/white.jpg" width="<%=wid %>" height="16">
 				<img src="image/re.gif">
 <%		}else{
 %>
