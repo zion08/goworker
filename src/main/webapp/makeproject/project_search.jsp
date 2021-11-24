@@ -11,7 +11,7 @@
 
 <%@ include file = "../include/header.jsp" %>
 
-<title>프로젝트만들기 검색 결과페이지</title>
+<title>프로젝트만들기 검색결과 페이지</title>
 <h2>프로젝트 검색결과 페이지</h2>
 
 <%

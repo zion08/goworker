@@ -9,8 +9,8 @@
 <jsp:setProperty property="*" name="dto" />  
 
 
-<title>프로젝트 만들기</title>
-<h2>프로젝트 만들기</h2>
+<title>프로젝트 의뢰 작성 페이지</title>
+<h2>프로젝트 의뢰 작성 페이지</h2>
 
 
 <div style=" padding-right: 15px;  padding-left: 15px;  margin-right: auto;  margin-left: auto;" align="center" >	
