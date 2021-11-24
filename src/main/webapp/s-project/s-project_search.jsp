@@ -353,7 +353,7 @@
 			if((sdto.getLocation()).equals("chungnam")) {
 				sdto.setLocation("충남"); 
 			}
-			if((sdto.getLocation()).equals("deajeon")) {
+			if((sdto.getLocation()).equals("daejeon")) {
 				sdto.setLocation("대전"); 
 			}
 			if((sdto.getLocation()).equals("sejong")) {
