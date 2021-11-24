@@ -32,43 +32,48 @@
 	  dto = dao.getContent(dto);
 %>
  <section class="section1">	
-	 <form>
-	   <table class="cs" border=1>
+	<table border=1  align="center" >
 	    <tr>
-	      <th width = "500px" align = "center">작성자 : <%=dto.getWriter() %> </th>
+	      <td align="center"width="90px" height="4"   align="center">작성자</td>
+	      <td align="center">
+	      <%=dto.getWriter() %> </td>
+	      <td align="right" width="200px">
+	      <%=dto.getRegdt() %> </td>
 	    </tr>
 	    <tr>
-	      <th width = "500px" align = "center">작성일 : <%=dto.getRegdt() %> </th>
+	      <td align="center"  width="90px" height="4">제목</td>
+	      <td  colspan="2" align="center" style="font-size:18px">
+	      <%=dto.getSubject() %></td>
 	    </tr>
 	    <tr>
-	      <th width = "500px" align = "center">제 목 : <%=dto.getSubject() %> </th>
-	    </tr>
+	      <td align="center" width="90px" >내 용</td>
+	       <td colspan="2" >
+			<textarea name="content" id="contenet"  maxlength="2000px"  
+			style="font-size:14px" cols="62" rows="10"  readonly><%=dto.getContent() %></textarea>	      
+           </td>	    
+	     </tr>
 	    <tr>
-	      <th width = "500px" hight = "300px" align = "center">내 용 : <%=dto.getContent() %> </th>
-	      
-	    </tr> 
 <%    if(dto.getFilename() != null){ %>
-	    <tr>
-	      <th width = "500px" align = "center">
-		      첨부파일  : <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
-	      </th>     
-	    </tr>
-	    <%} %>
-      </table>
-    </form>
-
-<input type="button" value="목록" 
-	   onclick=" window.location='notice.jsp?pageNum=<%=pageNum%>' "/>
-
+	    <td align="center" width="90px">첨부파일</td>
+	      <td colspan="2" align="center">
+		  <img src="../uploadFile/csFile/<%=dto.getFilename()%>" width = "300px"height="300px">
+	      </td>				    
+	     </tr>
+	<%} %>
+		</table>
+  </section><br/>	
+ <center>		
+    <input type="button" value="목록" 
+	        onclick=" window.location='notice.jsp?pageNum=<%=pageNum%>' "/>
 <%       
         // 로그인된 id 와 글작성자 비교
         if(sid!=null){
-        if(sid.equals("admin")){
+        if(rank.equals("admin")){
 %>		<input type="button" value="글수정" onclick=" window.location='noticeUpdate.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>
 		<input type="button" value="글삭제" onclick=" window.location='noticeDelete.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>' "/>	
 <%  		}
       	}
 %>
-  </section>
+ </center>
  <br/>
 <%@ include file = "/include/footer.jsp" %> 

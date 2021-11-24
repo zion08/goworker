@@ -7,11 +7,9 @@
     
 <jsp:useBean class="bean.NoticeDTO"  id="dto" />
 <jsp:setProperty property="*" name="dto" />
-<html>
-<head>
+
 <title>공지사항</title>
-</head>
-<body>
+
 <%
      
 	 String pageNum = request.getParameter("pageNum");
@@ -23,29 +21,30 @@
      pageNumber = Integer.parseInt(request.getParameter("pageNumber")); //파라미터는 꼭 이런식으로 바꿔줘야됨
      }
 	%>
-     <form action="/goworker/cs/noticeWritePro.jsp" method="post" enctype="multipart/form-data">
-    	<input type="hidden" name="num" value="<%=dto.getNum() %>" />
-		<input type="hidden" name="pageNum" value="<%=pageNum%>" />
+ <form action="/goworker/cs/noticeWritePro.jsp" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="num" value="<%=dto.getNum() %>" />
+	<input type="hidden" name="pageNum" value="<%=pageNum%>" />
 		
-		<table class="cs" border=1>
-    	<h1>공지사항</h1>
-    			 <input type="hidden" name="writer" value="관리자" />  <br />
-    				 <tr>
+	<table class="cs" border=1>
+      <h1>공지사항</h1>
+    	 <input type="hidden" name="writer" value="관리자" />  <br />
+    		<tr>
 			      <td width ="100px" align ="center">제 목</td>
 			      <th width="300px" colspan=3 align="center">
-    	          <input type="text" name="subject"  />  <br />
+    	          <input type="text" size="70" name="subject"  />  <br />
     	          </th>
     	     </tr>
              <tr>	
 			      <td width="100px" align="center">내 용</td>
 			      <td width="300px" colspan=3 align="center">
-			      <input type="text" size="100" name="content" id="content" style="width:500px;height:100px;" ></td>
+			        <textarea name="content" cols="60" rows="10" ></textarea></td>
 		     </tr>
 		     <tr>
 		          <td width="100px" align="center">첨부파일</td>
 			      <td width="300px" colspan=3 align="center">
     	          <input type="file" name="filename" /></td>
-    	          <tr>   
+    	     </tr>     
+    	     <tr>   
               <%if(dto.getFilename() != null){%> 
     				[<%=dto.getFilename()%>]    
     				<input type="hidden" name="org" value="<%=dto.getFilename()%>" />					
@@ -56,10 +55,9 @@
     	         <input type="submit" value="글쓰기" />
     	    </td>
 		</tr>
-		</table><br/>
-		</form>
-</body>
+	</table>
+ </form><br/>
+
 <%@ include file = "../include/footer.jsp" %>
 
- </html>
     

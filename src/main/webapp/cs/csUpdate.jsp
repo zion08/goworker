@@ -36,39 +36,40 @@
 			   <tr>
 			      <th width ="100px" align = "center">제 목</th>
 			      <th width="300px" colspan=3 align="center">
-	    	          <input type="text" name="subject" value="<%=dto.getSubject() %>" />  <br />
+	    	          <input type="text" size="65" name="subject" value="<%=dto.getSubject() %>" />  <br />
 	   	          </th>
 	    	   </tr>
 	           <tr>	
 			      <td width="100px" align="center">내 용</td>
 			      <td width="300px" colspan=3 align="center">
-				      <input type="text" size="100" name="content" id="content" style="width:500px;height:100px;" value="<%=dto.getContent() %>"></td>
+				      <textarea name="content" id="contenet" maxlength="2000px"  
+			          style="font-size:14px" cols="62" rows="10"><%=dto.getContent() %></textarea>
 			   </tr>
 			   <tr>
 			      <td width="100px" align="center">첨부파일</td>
-	    	      <td width="300px" colspan=3 align="center">  
+	    	      <td colspan="2" align="center">  
 	                <%if(dto.getFilename() != null){%> 
-	    			   <img src="/goworker/fileSave/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
+	    			   <img src="../uploadFile/csFile/<%=dto.getFilename()%>" width = "100px" heigh = "100px">
 	    		    <%}else{%>
 	    				[첨부파일 없음]
 	    		    <%} %>
 	    		       <input type="file" name="filename" /> 
 	    		  </td><br />
 	    		</tr>
-	       </table>	       
-	    	     <td colspan=2 align="center">
-    	            <input type="button" value="목록" onclick=" window.location='cs.jsp?pageNum=<%=pageNum%>' "/>
+	       </table>
+	     <br/>  
+   <section class="section1">	       	       
+      <input type="button" value="목록" onclick=" window.location='cs.jsp?pageNum=<%=pageNum%>' "/>
 
 <%          // 로그인된 id 와 글작성자 비교
       if(sid != null){
-		if(sid.equals(dto.getWriter()) || cid.equals("admin")){
+		if(sid.equals(dto.getWriter()) || rank.equals("admin")){
 %>		<input type="submit" value="수정" />
-		<input type="button" value="삭제" onclick = "csDelete.jsp"/>	
 <%  	}
 	}
-%>
-    	</td>
-    </form>
+%>  
+   </section>
+  </form> 
 </section> 
 <br/>
 <%@ include file = "/include/footer.jsp" %>
