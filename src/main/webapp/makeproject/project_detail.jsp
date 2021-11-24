@@ -47,7 +47,6 @@
 		MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
 		int comment_count = 0;
 		int board_num = dto.getNum();
-	
 		comment_count = cd.getCommentCount(board_num);
 	
 	
@@ -183,7 +182,7 @@
 	<h3>
 		관심있어요 [댓글 수: <%=comment_count %>]
 	</h3>
-	프로젝트에 관심있으신 분은 댓글을 남겨주세요.
+		프로젝트에 관심있으신 분은 댓글을 남겨주세요.
 </section>
 
 <section class="section2" >
@@ -203,7 +202,7 @@
 	<table class="comments">
 			<tr>
 				<td width="400px" colspan="3" align="center">
-					댓글은 회원만 작성이 가능합니다.<br/>로그인 후, 이용 부탁드립니다.
+					댓글은 회원만 작성이 가능합니다. 로그인 후, 이용 부탁드립니다.
 				</td>
 			</tr>
 	</table>
@@ -232,17 +231,17 @@
 <%				if(comment_result != null){
 					if(comment_result.equals("admin")){
 %>	
-					<img src="/goworker/makeproject/image/admin.jpg"  width="40px" height="40px" /><br/>	
+					<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
 <%				}
 %>
 <%				if(comment_result.equals("manager")){
 %>				
-					<img src="/goworker/makeproject/image/manager.jpg"  width="40px" height="40px" /><br/>
+					<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
 <%				}
 %>
 <%		  		if(comment_result.equals("member")){
 %>
-					<img src="/goworker/makeproject/image/image.jpg" width="40px" height="40px"><br/>
+					<img src="image/image.jpg" width="40px" height="40px"><br/>
 <%					}
         	}
 %>
@@ -262,11 +261,11 @@
 		if(cdto.getComment_level() > 0){
 			wid=10*(cdto.getComment_level());
 %>	
-				<img src="/goworker/makeproject/image/white.jpg" width="<%=wid %>" height="16">
-				<img src="/goworker/makeproject/image/re.gif">
+				<img src="image/white.jpg" width="<%=wid %>" height="16">
+				<img src="image/re.gif">
 <%		}else{
 %>
-				<img src="/goworker/makeproject/image/white.jpg" width="<%=wid %>" height="16">
+				<img src="image/white.jpg" width="<%=wid %>" height="16">
 <%		}
 %>			
 				<%=cdto.getComment_content() %>		
@@ -295,7 +294,7 @@
 	</tr>
 	<tr>
  		<td width="30px" align="center" colspan="4" style="font-size: 12px">
-	 		<img src="image/bestcomment.png" width="25px" height="25px" onclick="window.open('/goworker/s-member/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();"/>
+	 		<img src="image/bestcomment.png" width="25px" height="25px" onclick="window.open('/goworker/makeproject/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();"/>
 	 		댓글이 마음에 드셨다면 ♥를 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
 	 	</td>
  	</tr>
