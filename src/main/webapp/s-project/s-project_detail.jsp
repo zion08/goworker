@@ -248,21 +248,22 @@
 						<label>위치</label>
 						<span><%=dto.getLocation() %></span>
 					</li>
-					
+					<%	if(dto.getProjectimg() != null) { %>
 					<li id="detail-projectimg">
 						<label>대표 이미지</label>
 						<span>
-<%							if(dto.getProjectimg() != null) { %>
-								<img src = "../uploadFile/projectFile/<%=dto.getProjectimg() %>">
-<%							} else { 
-%>								등록된 이미지가 없습니다.
-<%							} 
-%>						</span>
+						<img src = "../uploadFile/projectFile/<%=dto.getProjectimg() %>">
+						</span>
+					</li>
+					<%}%>
+					<li id="detail-projectdetail">
+						<label>프로젝트 소개</label>
+						<span><%= dto.getProjectDetail() %></span>
 					</li>
 					
-					<li id="detail-projectdetail">
+					<li id="detail-introduce">
 						<label>업무 내용</label>
-						<span><%= dto.getProjectDetail() %></span>
+						<span><%= dto.getIntroduce() %></span>
 					</li>
 					
 					<li>
