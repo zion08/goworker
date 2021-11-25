@@ -12,8 +12,6 @@
 
 <%@ include file = "../include/header.jsp" %>
 
-<link href="style.css" rel="stylesheet" type="text/css">
-
 <jsp:useBean class = "bean.MakeProjectDTO" id= "dto" />
 <jsp:setProperty property="*" name="dto" />  
 
