@@ -38,7 +38,7 @@
 	
 	String pageSizeStr = request.getParameter("pageSize"); //1개 페이지에 보여줄 컨텐츠(글) 갯수
 	if (pageSizeStr == null) {
-		pageSizeStr = "8";
+		pageSizeStr = "100";
 	} 
 	int pageSize = Integer.parseInt(pageSizeStr);	//1개 페이지에 보여줄 컨텐츠(글)
 	
@@ -185,6 +185,8 @@
 	</form>
 </section>
 
+
+<!-- 검색기능 페이징 구현 에러로 인한 페이지사이즈 조절 블락   
 <form class="pagesize">
 	<select name="pageSize">
 		<option value="8">8개</option>
@@ -193,10 +195,11 @@
 		<option value="20">20개</option>
 		<option value="28">28개</option>
 		<option value="36">36개</option>
+		<option value="60">60개</option>
 	</select>
 	<input type="submit" value="확인" />
 </form>
-
+-->
 <section class="section5">
 <%	
 	//3rd. 컨텐츠(글) 리스트 출력
@@ -414,15 +417,15 @@
 	}
 
 	if (startPage > pageBlock) {
-%>		<a href="s-member.jsp?pageNum=<%= startPage - pageBlock %>">[이전]</a>
+%>		<a href="s-member_search.jsp?pageNum=<%= startPage - pageBlock %>">[이전]</a>
 <%	}
 	
 	for (int i = startPage ; i <= endPage ; i++) {
-%> 		<a href="s-member.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+%> 		<a href="s-member_search.jsp?pageNum=<%=i%>">[<%=i %>] </a>
 <%	}
 	
 	if(endPage < pageCount) {
-%>		<a href="s-member.jsp?pageNum=<%= startPage + pageBlock %>">[다음]</a>
+%>		<a href="s-member_search.jsp?pageNum=<%= startPage + pageBlock %>">[다음]</a>
 <%	}
 %>
 </section>
