@@ -24,6 +24,9 @@
 <%	} else {
 
 		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null){
+			pageNum = "1";
+		}
 		SmemberDAO dao = new SmemberDAO();
 		dao.readCountUp(dto);		// 조회수 1증가
 		dto = dao.getContent(dto);	// 글 내용 가져오기
