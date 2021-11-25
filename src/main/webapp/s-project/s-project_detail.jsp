@@ -12,7 +12,6 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
-<link href="style.css" rel="stylesheet" type="text/css">
 
 <%@ page import = "bean.MemberDAO" %>
 
