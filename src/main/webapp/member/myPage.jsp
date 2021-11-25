@@ -27,6 +27,14 @@
       <input type="submit" value="관심목록" onclick=" window.location='favorite.jsp' "/>
 </div><br/>
 </section>
+<%
+	if(sid == null){
+%>		<script>
+			alert("로그인후 사용가능합니다. ");
+			window.location="login.jsp";
+		</script>
+<%	}else{
+%>
 <%	
 	String pageNum = request.getParameter("pageNum");
 	int pageSize = 5;
@@ -613,6 +621,7 @@
 }else{%>
 	작성된 댓글이 없습니다 .
 <%}
+}
 %> 
 </section>
 <%@ include file = "/include/footer.jsp" %>
