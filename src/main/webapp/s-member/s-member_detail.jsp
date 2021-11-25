@@ -10,7 +10,7 @@
 <%@ page import = "bean.MemberDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
-   
+     
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
 
@@ -468,42 +468,41 @@
 <%					} 
 				}
 			}	
-
-	}
+		}
 %>
-	</table>
-</section>	
+			</table>
+		</section>	
 
 <%@ include file="../include/footer.jsp"%>
 		 	
 
-<script>
-	function comment_removeCheck(){
-		if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
-			document.form.submit;
-			window.location='/goworker/s-member/comment/commentDelete.jsp';
-		}
-	}
-	
-	function button_event(){
-			if (confirm("정말 삭제하시겠습니까??") == true){ 
-			    document.form.submit();
-			    window.loction='/goworker/s-member/s-member_delete.jsp?num=<%= dto.getNum() %>'
-			} else {  
-		    	return;
+	<script>
+		function comment_removeCheck(){
+			if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
+				document.form.submit;
+				window.location='/goworker/s-member/comment/commentDelete.jsp';
 			}
 		}
 	
+		function button_event(){
+				if (confirm("정말 삭제하시겠습니까??") == true){ 
+			 	   document.form.submit();
+			  	  window.loction='/goworker/s-member/s-member_delete.jsp?num=<%= dto.getNum() %>'
+				} else {  
+		    		return;
+				}
+			}
 	
 	
-	var bDisplay = true;
+	
+		var bDisplay = true;
 
-	function doDisplay() {
-		var con = document.getElementById("checkboard");
-		if (con.style.display == 'none') {
-			con.style.display = 'block';
-		} else {
-			con.style.display = 'none';
+		function doDisplay() {
+			var con = document.getElementById("checkboard");
+			if (con.style.display == 'none') {
+				con.style.display = 'block';
+			} else {
+				con.style.display = 'none';
+			}
 		}
-	}
-</script>
+	</script>
