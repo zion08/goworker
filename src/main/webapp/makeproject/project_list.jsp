@@ -16,8 +16,8 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 
 
-<title>프로젝트 만들기</title>
-<h2>프로젝트 만들기</h2>
+<title>프로젝트 의뢰</title>
+<h2>프로젝트 의뢰</h2>
 
 
 <%
