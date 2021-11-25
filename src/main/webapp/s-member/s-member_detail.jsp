@@ -10,9 +10,7 @@
 <%@ page import = "bean.MemberDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
-   
-<link href="style.css" rel="stylesheet" type="text/css">
-   
+     
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
 
