@@ -12,9 +12,12 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
+
 <%@ page import = "bean.MemberDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
+
+
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
