@@ -12,8 +12,6 @@
 
 <%@ include file = "../include/header.jsp" %>
 
-<link href="style.css" rel="stylesheet" type="text/css">
-
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <title>프로젝트 의뢰</title>
