@@ -308,6 +308,7 @@ public class SmemberDAO {
 				sdto.setId(rs.getString("id"));
 				sdto.setField(rs.getString("field"));
 				sdto.setCareer(rs.getString("career"));
+				sdto.setLang(rs.getString("lang"));
 				sdto.setEmploytype(rs.getString("employtype"));
 				sdto.setLocation(rs.getString("location"));
 				sdto.setWorktype(rs.getString("worktype"));
