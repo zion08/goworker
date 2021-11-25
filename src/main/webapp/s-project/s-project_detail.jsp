@@ -61,6 +61,10 @@
 			list = cdao.getComment( dto.getNum() );	
 		}
 		
+		//프로필 사진
+		MemberDAO mbdao = new MemberDAO();
+		String profileimg = mbdao.getProfileImg(sid);
+		
 		//한글패치
 		if((dto.getCareer())==null) {
 			dto.setCareer("미입력");
@@ -262,6 +266,30 @@
 						</span>
 					</li>
 					<%}%>
+					<li>
+						<label>
+							<img src="image/phone.png" width="25px" height="25px" >
+						</label>		
+						<span><%=dto.getPhone() %></span>
+					</li>
+					
+					<li>
+						<label>
+							<img src="image/kakao-talk.png" width="25px" height="25px" >
+						</label>		
+						<span><%=dto.getKakao() %></span>
+					</li>
+					
+					<li>
+						<label>
+							<img src="image/email.png" width="25px" height="25px" >
+						</label>		
+						<span>
+							<a href="mailto:﻿"<%=dto.getEmail() %>><%=dto.getEmail() %>
+							</a>
+						</span>
+					</li>
+					
 					<li id="detail-projectdetail">
 						<label>프로젝트 소개</label>
 						<span><%= dto.getProjectDetail() %></span>

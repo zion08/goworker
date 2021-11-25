@@ -12,6 +12,7 @@
 <jsp:useBean id="spdao" class="bean.SprojectDAO"/>
 <jsp:useBean id="mpdto" class="bean.MakeProjectDTO"/>
 <jsp:useBean id="mpdao" class="bean.MakeProjectDAO"/>
+<jsp:useBean id="mbdao" class="bean.MemberDAO"/>
 <!-- member_search에서 선택한 글 번호 저장. 왜 안되는 것이냐...-->
 <%-- <jsp:setProperty property="smnum" name="smdto" />
 <jsp:setProperty property="spnum" name="spdto" />
@@ -69,19 +70,27 @@
 		sidTarget = (String)session.getAttribute("sidTarget");
 	}
 
-	
-		
 	//보내는 사람 (내 id) 가져오기
 	String sid = (String)session.getAttribute("sid");	
 	
 	//읽음 확인 파라미터 받기
 	String readcheck = (String)request.getParameter("readcheck");
 	session.setAttribute("readcheck", readcheck);
+	
+	//프로필 사진
+	String profileimg = mbdao.getProfileImg(sidTarget);
 %>
 
 <!-- 받는 사람 -->
 <div id="messege-top">
-	<div></div>
+	<div>
+<%		if(profileimg == null){
+%>			<img src = "../img/profileimg_default.png">
+<%		} else {
+%>			<img src = "../uploadFile/profileFile/<%=profileimg%>">
+<%		}
+%>						
+	</div>
 	<span><b><%=sidTarget%></b></span>
 <%	if(field != null) {
 %>		<span><%=field%></span>
@@ -99,7 +108,7 @@
 <!-- 메세지 내용 전송 -->
 <form action="messagePrint.jsp" method="post" target="if" id="messege-send">
 	<input type="text" name="inputMessage">
-	<input type="submit" value="보내기">
+	<input type="submit" value="보내기" onclick="location.reload()">
 </form>
 
 
