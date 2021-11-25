@@ -146,7 +146,7 @@
 				<select name="employtype">
 						<option value="%">전체</option>
 						<option value="sfree">개인 프리랜서</option>
-						<option value="tfree">팀 프리랜서드</option>
+						<option value="tfree">팀 프리랜서</option>
 						<option value="sbusiness">개인 사업자</option>
 						<option value="cbusiness">법인 사업자</option>
 				</select>
@@ -353,7 +353,7 @@
 			if((sdto.getLocation()).equals("chungnam")) {
 				sdto.setLocation("충남"); 
 			}
-			if((sdto.getLocation()).equals("deajeon")) {
+			if((sdto.getLocation()).equals("daejeon")) {
 				sdto.setLocation("대전"); 
 			}
 			if((sdto.getLocation()).equals("sejong")) {
@@ -376,6 +376,9 @@
 			}
 			if((sdto.getLocation()).equals("daegu")) {
 				sdto.setLocation("대구"); 
+			}
+			if((sdto.getLocation()).equals("ulsan")) {
+				sdto.setLocation("울산"); 
 			}
 			if((sdto.getLocation()).equals("busan")) {
 				sdto.setLocation("부산"); 

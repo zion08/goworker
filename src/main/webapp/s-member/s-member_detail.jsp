@@ -10,7 +10,7 @@
 <%@ page import = "bean.MemberDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
-   
+     
 <jsp:useBean class = "bean.SmemberDTO" id= "dto" />
 <jsp:setProperty property="num" name="dto" />  
 
@@ -24,6 +24,9 @@
 <%	} else {
 
 		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null){
+			pageNum = "1";
+		}
 		SmemberDAO dao = new SmemberDAO();
 		dao.readCountUp(dto);		// 조회수 1증가
 		dto = dao.getContent(dto);	// 글 내용 가져오기
@@ -172,7 +175,7 @@
 		if((dto.getLocation()).equals("chungnam")) {
 			dto.setLocation("충남"); 
 		}
-		if((dto.getLocation()).equals("deajeon")) {
+		if((dto.getLocation()).equals("daejeon")) {
 			dto.setLocation("대전"); 
 		}
 		if((dto.getLocation()).equals("sejong")) {
@@ -195,6 +198,9 @@
 		}
 		if((dto.getLocation()).equals("daegu")) {
 			dto.setLocation("대구"); 
+		}
+		if((dto.getLocation()).equals("ulsan")) {
+			dto.setLocation("울산"); 
 		}
 		if((dto.getLocation()).equals("busan")) {
 			dto.setLocation("부산"); 
@@ -462,42 +468,41 @@
 <%					} 
 				}
 			}	
-
-	}
+		}
 %>
-	</table>
-</section>	
+			</table>
+		</section>	
 
 <%@ include file="../include/footer.jsp"%>
 		 	
 
-<script>
-	function comment_removeCheck(){
-		if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
-			document.form.submit;
-			window.location='/goworker/s-member/comment/commentDelete.jsp';
-		}
-	}
-	
-	function button_event(){
-			if (confirm("정말 삭제하시겠습니까??") == true){ 
-			    document.form.submit();
-			    window.loction='/goworker/s-member/s-member_delete.jsp?num=<%= dto.getNum() %>'
-			} else {  
-		    	return;
+	<script>
+		function comment_removeCheck(){
+			if(confirm("삭제 시, 복구가 되지 않습니다. \n 정말로 삭제하시겠습니까??") == true) {
+				document.form.submit;
+				window.location='/goworker/s-member/comment/commentDelete.jsp';
 			}
 		}
 	
+		function button_event(){
+				if (confirm("정말 삭제하시겠습니까??") == true){ 
+			 	   document.form.submit();
+			  	  window.loction='/goworker/s-member/s-member_delete.jsp?num=<%= dto.getNum() %>'
+				} else {  
+		    		return;
+				}
+			}
 	
 	
-	var bDisplay = true;
+	
+		var bDisplay = true;
 
-	function doDisplay() {
-		var con = document.getElementById("checkboard");
-		if (con.style.display == 'none') {
-			con.style.display = 'block';
-		} else {
-			con.style.display = 'none';
+		function doDisplay() {
+			var con = document.getElementById("checkboard");
+			if (con.style.display == 'none') {
+				con.style.display = 'block';
+			} else {
+				con.style.display = 'none';
+			}
 		}
-	}
-</script>
+	</script>

@@ -12,9 +12,12 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %> 
 
+
 <%@ page import = "bean.MemberDAO" %>
 
 <%@ include file = "../include/header.jsp" %>
+
+
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <jsp:useBean class="bean.SprojectDTO" id="dto" />
@@ -176,7 +179,7 @@
 		if((dto.getLocation()).equals("chungnam")) {
 			dto.setLocation("충남"); 
 		}
-		if((dto.getLocation()).equals("deajeon")) {
+		if((dto.getLocation()).equals("daejeon")) {
 			dto.setLocation("대전"); 
 		}
 		if((dto.getLocation()).equals("sejong")) {
@@ -199,6 +202,9 @@
 		}
 		if((dto.getLocation()).equals("daegu")) {
 			dto.setLocation("대구"); 
+		}
+		if((dto.getLocation()).equals("ulsan")) {
+			dto.setLocation("울산"); 
 		}
 		if((dto.getLocation()).equals("busan")) {
 			dto.setLocation("부산"); 
@@ -248,21 +254,22 @@
 						<label>위치</label>
 						<span><%=dto.getLocation() %></span>
 					</li>
-					
+					<%	if(dto.getProjectimg() != null) { %>
 					<li id="detail-projectimg">
 						<label>대표 이미지</label>
 						<span>
-<%							if(dto.getProjectimg() != null) { %>
-								<img src = "../uploadFile/projectFile/<%=dto.getProjectimg() %>">
-<%							} else { 
-%>								등록된 이미지가 없습니다.
-<%							} 
-%>						</span>
+						<img src = "../uploadFile/projectFile/<%=dto.getProjectimg() %>">
+						</span>
+					</li>
+					<%}%>
+					<li id="detail-projectdetail">
+						<label>프로젝트 소개</label>
+						<span><%= dto.getProjectDetail() %></span>
 					</li>
 					
-					<li id="detail-projectdetail">
+					<li id="detail-introduce">
 						<label>업무 내용</label>
-						<span><%= dto.getProjectDetail() %></span>
+						<span><%= dto.getIntroduce() %></span>
 					</li>
 					
 					<li>
@@ -320,13 +327,15 @@
 %>			<form action= "s-project_delete.jsp" method="post" align="center">
 				<input type="button" value="수정 하기" onclick="window.location='/goworker/s-project/s-project_update.jsp?num=<%=dto.getNum() %>'" />
 				<input type="submit" value="삭제 하기" onclick="button_event()" />
+				<input type="button" value="목록으로" onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'"/>
 				<input type="hidden" name="num" value="<%=dto.getNum() %>" />
 			</form>
 <%			} else {
 %>				<input type="button" value="이메일" onclick="window.location='/goworker/s-member/email/mail.jsp?pageNum=<%=pageNum%>'"/>
 				<input type="button" value="메세지" onclick="window.open('../message/message.jsp?spnum=<%=dto.getNum()%>','message','width=355px, height=540px')"/>
+				<input type="button" value="목록으로" onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'"/>
 <% 			}				
-%>				<input type="button" value="목록으로" onclick="window.location='s-project.jsp?pageNum=<%=pageNum%>'"/>
+%>
 		</section>
 			
 
@@ -419,7 +428,7 @@
 				 
 					<tr>
 						<td width="30px" align="center" colspan="4" style="font-size: 12px">
-	 						<img src="image/bestcomment.png" width="25px" height="25px" onclick="window.open('/goworker/s-member/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();"/>
+	 						<img src="image/bestcomment.png" width="25px" height="25px" onclick="window.open('/goworker/s-project/comment/commentGood.jsp?comment_num=<%=cdto.getComment_num() %>','Good','width=300,height=150'); window.location.reload();"/>
 	 						댓글이 마음에 드셨다면 ♥를 눌러주세요!  <b style="font-size:15px"> [<%=cdto.getComment_good() %>]</b>
 	 					</td>
 		 			</tr>

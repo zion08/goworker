@@ -10,65 +10,73 @@
 	if(sid == null){
 %>		<script>
 			alert("로그인후 사용가능합니다. ");
-			window.location="loginForm.jsp";
+			window.location="login.jsp";
 		</script>
 <%	}else{
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getUserInfo(sid);
+		String profileimg = dao.getProfileImg(sid);
 %>
-<section class="section1">
-	<form action="modifyPro.jsp" method="post">
-			<input type="hidden" name="id" value="<%=sid%>" /> 
-	 <table border="1" align="center">
-		<tr>
-			<td>아이디 : <%=sid%> </td>
-		</tr>
-	 	<tr>		
-			<td>email : <%=dto.getEmail()%>
-			<input type="hidden" name="email" value="<%=dto.getEmail()%>"/></td>
-		</tr>
-		</fome>
-		<form action="pw_change.jsp" method="post">
-		<tr>
-	        <td>비밀번호 : <input type="password" name="password" value="<%=dto.getPassword()%>" /></td>
-	    </tr>
-	     <tr>
-	     	<%if(rank.equals("member")) { %>
-		    <td>회원등급 :
-			 <select name = 'rank' >
-				 <option value = "member">멤버</option>
-				 <option value = "manager">매니저</option>
-			 </select>
-			 &emsp; 현재등급 :[ 멤버 ]
-			 </td>
-			 <%} %>
-			 <%if(rank.equals("manager")) { %>
-		    <td>회원등급 :
+<section class="section2">
+  <form action="modifyPro.jsp" method="post" >  
+	 <div class="profile-info" >
+		<ul class="profile-info" >	
+			<li id="profile-img" >
+<%			if(profileimg == null){
+%>				<img src = "../img/profileimg_default.png">
+<%			} else {
+%>				<img src = "../uploadFile/profileFile/<%=profileimg%>">
+<%			     	}
+%>
+	
+	</li>			
+	<li id="id">	
+	    <label>아이디</label>
+			<span><%=sid%></span>
+			<input type="hidden" name="id" value="<%=sid%>"/>
+	</li>
+	<li id=email>
+		<label>이메일</label>
+	    <input  name="email" value="<%=dto.getEmail()%>"/>
+	</li>
+	<li id=password>
+	    <label>비밀번호 </label>
+	    <input type="password" name="password" value="<%=dto.getPassword()%>" />
+    </li>
+    <li id=rank>
+	    <%if(rank.equals("member")) { %>
+		 <label>회원등급</label>
+	      <select name = 'rank' >
+		      <option value = "member">멤버</option>
+		      <option value = "manager">매니저</option>
+		 </select>
+		 &emsp; 현재등급 :[ 멤버 ]
+		 <%} %>
+		<%if(rank.equals("manager")) { %>
+		    <label>회원등급</label>
 			 <select name = 'rank' >
 			  	<option value = "manager">매니저</option>
 				<option value = "member">멤버</option>
 			 </select>
-			 &emsp; 현재등급 :[ 매니저 ]
-			 </td>
-			 <%} %>
-		</tr>        
-	    <tr>           
-	    	<td><input type="submit" value="정보 수정" /></td>
-	 	</tr> 
-	 </table>
-	</form>  	
-	<%}%>
-</section>
-
-<section class="section1">
-	프로필 사진 등록
-	<form action="modifyProImg.jsp" method="post" enctype="multipart/form-data">
+		 &emsp; 현재등급 :[ 매니저 ]
+		  <%} %>
+	  </li>
+	 </ul>
+	  <div style="position:absolute; top:360px; left:800px; ">              
+	     <input type="submit" value="정보 수정"  /> 
+	  </div>           
+     </div>
+  </form>
+ <div style="position:absolute; top:360px; left:390px; ">
+   <form action="modifyProImg.jsp" method="post" enctype="multipart/form-data">
 		<input type="file" name="profileimg" multiple="multiple">
 		<input type="submit" value="확인" />
 	</form>
-
+ </div>
 </section>	
-	
+		  
+<%}%>
+<br/><br/>	
 <%@ include file = "/include/footer.jsp" %>
 
 

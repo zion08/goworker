@@ -11,88 +11,86 @@
 
 <%@ include file = "../include/header.jsp" %>
 
-<title>프로젝트만들기 검색 결과페이지</title>
+<% request.setCharacterEncoding("UTF-8"); %>
+
+
+<title>프로젝트만들기 검색결과 페이지</title>
 <h2>프로젝트 검색결과 페이지</h2>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+		int pageSize = 7;
+	
+		String colum = request.getParameter("colum");
+		String search = request.getParameter("search");
+	
+		String pageNum = request.getParameter("pageNum");
+	
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");
 
-	int pageSize = 5;
-	
-	String colum = request.getParameter("colum");
-	String search = request.getParameter("search");
-	
-	String pageNum = request.getParameter("pageNum");
-	
-	SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH:mm");
-
-	String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("id");
 	
 	
-	if(pageNum == null){
-		pageNum ="1";
-	}
-	
-	int currentPage = Integer.parseInt(pageNum);
-	int startRow = (currentPage-1) * pageSize +1;
-	int endRow = currentPage * pageSize;
-	
-	MakeProjectDAO dao = new MakeProjectDAO();
-	int count = 0;
-	List<MakeProjectDTO> list = null;
-	
-	if(id == null){
-		count = dao.getSearchCount(colum, search);
-		if(count > 0){
-			list = dao.getSearchList(colum, search, startRow, endRow);
+		if(pageNum == null){
+			pageNum ="1";
 		}
-	}
+	
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage-1) * pageSize +1;
+		int endRow = currentPage * pageSize;
+	
+		MakeProjectDAO dao = new MakeProjectDAO();
+		int count = 0;
+		List<MakeProjectDTO> list = null;
+	
+		if(id == null){
+			count = dao.getSearchCount(colum, search);
+			if(count > 0){
+				list = dao.getSearchList(colum, search, startRow, endRow);
+			}
+		}
 	
 	
-	// 댓글 수 출력 기능
-	MakeProjectDTO mdto = new MakeProjectDTO();
-	MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
-	int comment_count = 0;
-	int board_num = mdto.getNum();
-	comment_count = cd.getCommentCount(board_num);
+		// 댓글 수 출력 기능
+		MakeProjectDTO mdto = new MakeProjectDTO();
+		MakeProject_CommentDAO cd = new MakeProject_CommentDAO();	
+		int comment_count = 0;
+		int board_num = mdto.getNum();
+		comment_count = cd.getCommentCount(board_num);
 %>
 
-<%-- 기능 버튼 --%>
-<section class="section2">
+	<%-- 기능 버튼 --%>
+	<section class="section2">
 <%
-	if(sid != null || cid!=null){
-%>	
-                	<a href="project_input.jsp" >[글 작성하기]</a>
-                	<a href ="project_list.jsp?best=1" >[좋아요 많은 글]</a>
-<%	}
-%>
-</section>
+		if(sid != null || cid!=null){
+%>				<a href="project_input.jsp" >[글 작성하기]</a>
+             	<a href ="project_list.jsp?best=1" >[좋아요 많은 글]</a>
+<%		}
+%>	</section>
 
 
     
-<%-- 메인 화면 --%>
-<section class="section1">
-	<table border="1">
-		<tr>
-			<th width="480px">제 목</th>
-			<th width="130px">조 회</th>
-			<th width="100px">작성자</th>
-		</tr>
+	<%-- 메인 화면 --%>
+	<section class="section1">
+		<table border="1">
+			<tr>
+				<th width="480px">제 목</th>
+				<th width="130px">조 회</th>
+				<th width="100px">작성자</th>
+			</tr>
 <%
-	if(count == 0){
+		if(count == 0){
 %>
 			 <tr>
-    				<td align="center" >
-    					게시판에 저장된 글이 없습니다.
-    				</td>
+    			<td align="center" >
+    				게시판에 저장된 글이 없습니다.
+    			</td>
    		 	</tr>
 
-<%	}else{
-		for(MakeProjectDTO dto : list) { 
-			MemberDAO mdao = new MemberDAO();
-			String result = mdao.getRank(dto.getId());
-%>
-        		<tr>
+<%		}else{
+			for(MakeProjectDTO dto : list) { 
+				MemberDAO mdao = new MemberDAO();
+				String result = mdao.getRank(dto.getId());
+%>			<tr>
         		<th width="400px" height="85px" style="font-size:14.5px">
         			<a href="project_detail.jsp?num=<%=dto.getNum()%>&pageNum=<%=pageNum%>">
         			<%=dto.getSubject() %></a> [<%=comment_count %>]
@@ -106,82 +104,77 @@
 <%				if(result != null){
 %>
 <%					if(result.equals("admin")){
-%>	
-						<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
+%>						<img src="image/admin.jpg"  width="40px" height="40px" /><br/>	
 <%					}
 %>
 <%					if(result.equals("manager")){
-%>				
-						<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
+%>						<img src="image/manager.jpg"  width="40px" height="40px" /><br/>
 <%					}
 %>
 <%		  			if(result.equals("member")){
-%>
-						<img src="image/image.jpg" width="40px" height="40px" /><br/>
+%>						<img src="image/image.jpg" width="40px" height="40px" /><br/>
 <%					}
         		}
-%>        			
-        				<span class="getid"><%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>"></span><br/>
-        				<span class="regdate"><%=sdf.format(dto.getReg_date()) %></span>
+%>        				<span class="getid">
+							<%=dto.getId() %><input type="hidden" name="id" value="<%=dto.getId()%>">
+						</span><br/>
+        				<span class="regdate">
+        					<%=sdf.format(dto.getReg_date()) %>
+        				</span>
         		</td>
         	</tr>
-<%				} 
-			}
+<%					} 
+				}
 %>
         </table>
-</section>     	      
+	</section>     	      
 
 
-<%-- 검색 박스 --%>
-<section class="section2">
-	<form action="project_search.jsp" method="post">
-		<select name="colum">
-			<option value="subject">제목</option>
-			<option value="content">프로젝트내용</option>
-			<option value="id">작성자</option>
-		</select>
-			<input type="text" name="search" />
-			<input type="submit" value="검색" />
-	</form>		
-</section>
-
-
-
+	<%-- 검색 박스 --%>
+	<section class="section2">
+		<form action="project_search.jsp" method="post">
+			<select name="colum">
+				<option value="subject">제목</option>
+				<option value="content">프로젝트내용</option>
+				<option value="id">작성자</option>
+			</select>
+				<input type="text" name="search" />
+				<input type="submit" value="검색" />
+		</form>		
+	</section>
 
 
 
-<section class="section2">
+
+
+	<%-- 페이징 처리 --%>
+	<section class="section2">
 <%
-	if(count > 0){
-		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		int startPage = (currentPage / 10)* 10 +1;
-		int pageBlock = 7;
-		int endPage = startPage + pageBlock -1;
-			if(endPage > pageCount) {
-				endPage = pageCount;
-			}
+		if(count > 0){
+			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+			int startPage = (currentPage / 10)* 10 +1;
+			int pageBlock = 7;
+			int endPage = startPage + pageBlock -1;
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
 			
-			if(startPage > 10){
-%>
-				<a href="project_list.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
-<%			}
+				if(startPage > 10){
+%>					<a href="project_list.jsp?pageNum=<%=startPage-10 %>">[이전]</a>
+<%				}
 	
-		for (int i = startPage ; i <= endPage ; i++) {
+				for (int i = startPage ; i <= endPage ; i++) {
+%>					<a href="project_list.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+<%				}
+				if(endPage < pageCount) {
+%>					<a href="project_list.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+<%				}
 %>
-			<a href="project_list.jsp?pageNum=<%=i%>">[<%=i %>] </a>
-<%		}
-	
-		if(endPage < pageCount) {
+<%	 	 }
 %>
-			<a href="project_list.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-<%		}
-%>
-<%	 }
-%>
-</section ><br/>
+	</section ><br/>
 
 
 <%@ include file="../include/footer.jsp"%>
 
-    
     
