@@ -146,7 +146,7 @@
 				<select name="employtype">
 						<option value="%">전체</option>
 						<option value="sfree">개인 프리랜서</option>
-						<option value="tfree">팀 프리랜서드</option>
+						<option value="tfree">팀 프리랜서</option>
 						<option value="sbusiness">개인 사업자</option>
 						<option value="cbusiness">법인 사업자</option>
 				</select>
