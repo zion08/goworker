@@ -177,7 +177,7 @@
 						</li>
 						
 						<li id="pay">
-							<label>예상 급여</label>
+							<label>예상 금액</label>
 								<select name="pay">
 									<option value="100">100만원</option>
 									<option value="200">200만원</option>

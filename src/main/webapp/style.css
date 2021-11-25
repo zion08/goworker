@@ -362,7 +362,7 @@ hr {
 	margin: 30px;
  	display: grid;
   	grid-template-columns: repeat(2, minmax(100px, auto));
-  	grid-template-rows: repeat(4, minmax(auto, 5vh));
+  	grid-template-rows: minmax(auto, 5vh);
   	column-gap:7vh;
   	row-gap: 1vh;
 }
@@ -458,14 +458,23 @@ hr {
 	/* border: 1px solid blue; */	 
 }
 
+
 #messege-top > div {
-	background-image: url('img/profileimg_default.png');
+	width: 75px;
+    height: 75px;
+    display: inline-block;
+}
+
+#messege-top  img {
+	max-width: 100%;
+	height: auto;
+	/* background-image: url('img/profileimg_default.png');
 	background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
     width: 60px;
     height: 60px;
-    display: inline-block;
+    display: inline-block; */
 }
 
 #messege-top * {
@@ -474,7 +483,7 @@ hr {
 
 #messege-content {
 	/* border: 1px solid blue; */
-	margin-top: 5px;
+	/* margin-top: 5px; */
 	width: 100%;
     height: 65vh;	
 }
@@ -578,7 +587,8 @@ hr {
 }
 
 #portfolio input, 
-#projectimg input {
+#projectimg input,
+#subject input {
 	width : 100%;
 } 
 

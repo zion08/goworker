@@ -18,8 +18,7 @@
 		String profileimg = dao.getProfileImg(sid);
 %>
 <section class="section2">
-  <form action="modifyPro.jsp" method="post" >  
-	 <div class="profile-info" >
+  <form action="modifyPro.jsp" method="post" >  	 
 		<ul class="profile-info" >	
 			<li id="profile-img" >
 <%			if(profileimg == null){
@@ -29,51 +28,55 @@
 <%			     	}
 %>
 	
-	</li>			
-	<li id="id">	
-	    <label>아이디</label>
-			<span><%=sid%></span>
-			<input type="hidden" name="id" value="<%=sid%>"/>
-	</li>
-	<li id=email>
-		<label>이메일</label>
-	    <input  name="email" value="<%=dto.getEmail()%>"/>
-	</li>
-	<li id=password>
-	    <label>비밀번호 </label>
-	    <input type="password" name="password" value="<%=dto.getPassword()%>" />
-    </li>
-    <li id=rank>
-	    <%if(rank.equals("member")) { %>
-		 <label>회원등급</label>
-	      <select name = 'rank' >
-		      <option value = "member">멤버</option>
-		      <option value = "manager">매니저</option>
-		 </select>
-		 &emsp; 현재등급 :[ 멤버 ]
-		 <%} %>
-		<%if(rank.equals("manager")) { %>
-		    <label>회원등급</label>
-			 <select name = 'rank' >
-			  	<option value = "manager">매니저</option>
-				<option value = "member">멤버</option>
-			 </select>
-		 &emsp; 현재등급 :[ 매니저 ]
-		  <%} %>
-	  </li>
-	 </ul>
-	  <div style="position:absolute; top:360px; left:800px; ">              
-	     <input type="submit" value="정보 수정"  /> 
-	  </div>           
-     </div>
-  </form>
- <div style="position:absolute; top:360px; left:390px; ">
-   <form action="modifyProImg.jsp" method="post" enctype="multipart/form-data">
-		<input type="file" name="profileimg" multiple="multiple">
-		<input type="submit" value="확인" />
+			</li>			
+			<li id="id">	
+			    <label>아이디</label>
+					<span><%=sid%></span>
+					<input type="hidden" name="id" value="<%=sid%>"/>
+			</li>
+			<li id=email>
+				<label>이메일</label>
+			    <input  name="email" value="<%=dto.getEmail()%>"/>
+			</li>
+			<li id=password>
+			    <label>비밀번호 </label>
+			    <input type="password" name="password" value="<%=dto.getPassword()%>" />
+		    </li>
+		    <li id=rank>
+			    <%if(rank.equals("member")) { %>
+				 <label>회원등급</label>
+			      <select name = 'rank' >
+				      <option value = "member">멤버</option>
+				      <option value = "manager">매니저</option>
+				 </select>
+				 &emsp; 현재등급 :[ 멤버 ]
+				 <%} %>
+				<%if(rank.equals("manager")) { %>
+				    <label>회원등급</label>
+					 <select name = 'rank' >
+					  	<option value = "manager">매니저</option>
+						<option value = "member">멤버</option>
+					 </select>
+				 &emsp; 현재등급 :[ 매니저 ]
+				  <%} %>
+			  </li>
+			  
+			  <li>
+			  </li>
+			  
+			 <li>
+			 	<input type="submit" value="정보 수정"  /> 
+			 </li>
+			 </ul>
 	</form>
- </div>
-</section>	
+</section>
+
+<div style="width: 30%; margin: 0 auto;">
+	<form action="modifyProImg.jsp" method="post" enctype="multipart/form-data">
+			<input type="file" name="profileimg" multiple="multiple"><br/>
+			<input type="submit" value="확인" />
+	</form>
+</div>
 		  
 <%}%>
 <br/><br/>	

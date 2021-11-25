@@ -7,7 +7,6 @@
 
 
 <h2>멤버 관리</h2>
-<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
 
 
 <%	
@@ -40,7 +39,9 @@
 	
 %>
 
-<section>
+<section class="section1">
+<input type="button" value="관리자 홈" onclick="window.location='admin.jsp'" />
+
 	<table border=1 width="1010px">
 		<tr>
 			<th maxwidth="170">아이디</th>
@@ -51,12 +52,14 @@
 			<th width="240">관리</th>
 		</tr>
 	</table>
+
 	<% if(count==0){%>
 	
 	<h2>검색 조건에 맞는 멤버가 없습니다.</h2>
 	
 	<% } %>
-	
+
+
 <% 	if(count>0) {
 	for(MemberDTO dto : list) { %>
 	<div>
@@ -88,27 +91,14 @@
 		</table>
 		
 	</div>
- 
-
-
 
 <%}
 }	
 %>
-<script>
-function button_event(){
+</section>
 
-	if (confirm("정말 삭제하시겠습니까??") == true){ 
-	    document.form.submit();
-	    window.loction='/goworker/admin/admin_memberKick.jsp'
-		} else{  
-	    	return;
-			}
-	}
 
-</script>
-
-<section class="section4">
+<section class="section2">
 <%
 	if (count > 0) {
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -132,7 +122,9 @@ function button_event(){
 <%		}
 	}
 %>
-<input type="button" value="기존목록" onclick="window.location='admin_member.jsp'"/>
+</section>
+
+<section class="section2">
 <form action="admin_memberSearch.jsp" method= "post">
 	<select name = "colum">
 		<option value="id"> 아이디 </option>
@@ -141,6 +133,20 @@ function button_event(){
 	<input type="text" name="search" />
 	<input type="submit" value="검색" />
 </form>
+<input type="button" value="기존목록" onclick="window.location='admin_member.jsp'"/>
 </section>
+
+<script>
+function button_event(){
+
+	if (confirm("정말 삭제하시겠습니까??") == true){ 
+	    document.form.submit();
+	    window.loction='/goworker/admin/admin_memberKick.jsp'
+		} else{  
+	    	return;
+			}
+	}
+
+</script>
 
 <%@ include file = "../include/footer.jsp" %>
