@@ -35,7 +35,7 @@
 	
 	String pageSizeStr = request.getParameter("pageSize"); //1개 페이지에 보여줄 컨텐츠(글) 갯수
 	if (pageSizeStr == null) {
-		pageSizeStr = "8";
+		pageSizeStr = "100";
 	} 
 	int pageSize = Integer.parseInt(pageSizeStr);	//1개 페이지에 보여줄 컨텐츠(글)
 	
@@ -211,7 +211,7 @@
 		</div>
 	</form>
 </section>
-
+<!-- 
 <form class="pagesize">
 	<select name="pageSize">
 		<option value="8">8개</option>
@@ -223,7 +223,7 @@
 	</select>
 	<input type="submit" value="확인" />
 </form>
-
+ -->
 
 <section class="section5">
 <%	
@@ -441,15 +441,15 @@
 	}
 		
 	if (startPage > pageBlock) {
-%>		<a href="s-project.jsp?pageNum=<%= startPage - pageBlock %>">[이전]</a>
+%>		<a href="s-project_search.jsp?pageNum=<%= startPage - pageBlock %>">[이전]</a>
 <%	}
 	
 	for (int i = startPage ; i <= endPage ; i++) {
-%> 		<a href="s-project.jsp?pageNum=<%=i%>">[<%=i %>] </a>
+%> 		<a href="s-project_search.jsp?pageNum=<%=i%>">[<%=i %>] </a>
 <%	}
 	
 	if(endPage < pageCount) {
-%>		<a href="s-project.jsp?pageNum=<%= startPage + pageBlock %>">[다음]</a>
+%>		<a href="s-project_search.jsp?pageNum=<%= startPage + pageBlock %>">[다음]</a>
 <%	}
 %>
 </section>
