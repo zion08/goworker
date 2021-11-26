@@ -258,14 +258,7 @@
 						<label>위치</label>
 						<span><%=dto.getLocation() %></span>
 					</li>
-					<%	if(dto.getProjectimg() != null) { %>
-					<li id="detail-projectimg">
-						<label>대표 이미지</label>
-						<span>
-						<img src = "../uploadFile/projectFile/<%=dto.getProjectimg() %>">
-						</span>
-					</li>
-					<%}%>
+				
 					<li>
 						<label>
 							<img src="image/phone.png" width="25px" height="25px" >
@@ -289,6 +282,21 @@
 							</a>
 						</span>
 					</li>
+					
+					<li id="detail-portfoiloimg">
+						<label>포트폴리오
+							<a href="javascript:doDisplay();">
+								[접기/보기]
+							</a>
+						</label>		
+<%							if(dto.getProjectimg() != null) { 
+%>								<img id="checkboard" src =  "../uploadFile/projectFile/<%=dto.getProjectimg() %>">
+<%							} else { 
+%>								등록된 프로젝트 이미지가 없습니다.
+<%							} 
+%>	
+					</li>
+					
 					
 					<li id="detail-projectdetail">
 						<label>프로젝트 소개</label>
@@ -477,4 +485,16 @@
 				window.location='/goworker/s-project/comment/commentDelete.jsp';
 			}
 		}
+		
+		var bDisplay = true;
+
+		function doDisplay() {
+			var con = document.getElementById("checkboard");
+			if (con.style.display == 'none') {
+				con.style.display = 'block';
+			} else {
+				con.style.display = 'none';
+			}
+		}
+		
 	</script>

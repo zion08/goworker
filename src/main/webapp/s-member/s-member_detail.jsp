@@ -291,6 +291,21 @@
 							</a>
 						</span>
 					</li>
+					
+					<li id="detail-portfoiloimg">
+						<label>포트폴리오
+							<a href="javascript:doDisplay();">
+								[접기/보기]
+							</a>
+						</label>		
+<%							if(dto.getPortfolio() != null) { 
+%>								<img id="checkboard" src = "../uploadFile/portfolioFile/<%=dto.getPortfolio() %>">
+<%							} else { 
+%>								등록된 포트폴리오가 없습니다.
+<%							} 
+%>	
+					</li>
+					
 									
 					<li id="detail-portfoilodetail">
 						<label>포트폴리오 설명</label>		
