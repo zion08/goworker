@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
 <link href="../style.css" rel="stylesheet" type="text/css">
 <jsp:useBean id="headerdao" class="bean.MemberDAO"></jsp:useBean>
-
+<jsp:useBean id="mgdao" class="bean.MessageDAO"/>
 <script language="javascript">  
 	function goUrl(url) {
 		window.location.href  = url;
@@ -24,7 +24,8 @@
 		
 	String rank = headerdao.getRank(sid);
 	
-
+	//안읽은 메세지 갯수
+	int countNewMessage = mgdao.getCountNewMessage(sid);
 %>
 
 
@@ -68,7 +69,7 @@
 
 				<span class="sideicon1">
 					<a href="#" onclick="window.open('../message/messageSave.jsp', 'message', 'width=355px, height=540px');">
-						<img src="../s-member/image/note.png"><p>메세지</p>
+						<img src="../s-member/image/note.png"><p>메세지<span>(<%=countNewMessage%>)</span></p>
 					</a>
 				</span>
 
