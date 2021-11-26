@@ -84,8 +84,8 @@
 <%	}
     	}	
 }%>
-
-
+</section>
+<section class="section1">
 	<%if(count == 0){%>
 		<tr>
 			<th colspan="6">저장된 글이 없습니다. <br/>본인의 글만 볼수 있습니다.</th>
