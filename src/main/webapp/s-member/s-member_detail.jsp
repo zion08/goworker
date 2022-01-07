@@ -210,8 +210,8 @@
 		} 
 		
 		
-%>
-		<title>멤버 상세정보</title>
+%>                                         
+		<title>멤버 상세정보</title>                               
 	
 		<section class="section2">
 			<div class="detail-box">
